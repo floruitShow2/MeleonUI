@@ -1,0 +1,54 @@
+@import '@/styles/layout.less';
+@import '@/styles/theme.less';
+.effects {
+  &-view {
+    box-sizing: border-box;
+    padding: 10px;
+    background-color: @--primary-bg;
+    #flex(column, center, flex-start);
+    &-favorite {
+      width: 100%;
+      margin-bottom: 10px;
+      overflow: hidden;
+      .swiper-item {
+        box-sizing: border-box;
+        padding: 5px;
+        background-color: #ffffff;
+      }
+    }
+    &-content {
+      box-sizing: border-box;
+      width: 100%;
+      height: calc(100% - 150px - 20px);
+      border-radius: 3px;
+      .content-filter {
+        box-sizing: border-box;
+        height: 50px;
+        padding: 5px;
+        // margin-bottom: 10px;
+        #flex(row, center, space-between);
+        .ml-button {
+          #flex(row, center, center);
+          .ml-icon {
+            margin-right: 2px;
+          }
+        }
+      }
+      .content-list {
+        box-sizing: border-box;
+        height: calc(100% - 50px);
+        flex-wrap: wrap;
+        align-content: flex-start;
+        #flex(row, flex-start, flex-start);
+        &-card {
+          box-sizing: border-box;
+          flex: 1;
+          max-width: 50%;
+          height: 150px;
+          padding: 5px;
+          background-color: #ffffff;
+        }
+      }
+    }
+  }
+}

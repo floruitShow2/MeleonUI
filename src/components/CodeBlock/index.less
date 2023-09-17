@@ -1,0 +1,58 @@
+/* components/CodeBlock/index.wxss */
+@import '@/styles/layout.less';
+@import '@/styles/theme.less';
+.code-block {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.2);
+
+  &-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #555555;
+    margin-bottom: 5px;
+  }
+
+  &-description {
+    padding-bottom: 8px;
+    margin-bottom: 8px;
+    border-bottom: solid 1px;
+    border-bottom-color: #dddddd;
+    font-size: 14px;
+    color: #808080;
+  }
+
+  &-demo {
+    width: 100%;
+    margin-bottom: 5px;
+  }
+
+  &-snippet {
+    width: 100%;
+    .tools {
+      margin-bottom: 5px;
+      #flex(row, center, flex-end);
+      &-item {
+        margin-left: 2px;
+        padding: 2px;
+        border-radius: 20px;
+        #flex(row, center, center);
+      }
+      .is-active {
+        background-color: #555555;
+      }
+    }
+    .view {
+      box-sizing: border-box;
+      padding: 10px;
+      font-size: 14px;
+      color: #808080;
+      overflow: auto;
+      background-color: @--primary-bg;
+    }
+  }
+}

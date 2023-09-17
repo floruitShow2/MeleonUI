@@ -1,0 +1,28 @@
+@import '@/styles/theme.less';
+.components-container {
+  background-color: @--primary-bg;
+  &-list {
+    box-sizing: border-box;
+    padding: 10px;
+    overflow: auto;
+    .bar {
+      box-sizing: border-box;
+      width: 100%;
+      height: 50px;
+      line-height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 10px;
+      margin-bottom: 10px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #4a4a4a;
+      background-color: #ffffff;
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
