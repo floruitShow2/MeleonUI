@@ -1,6 +1,7 @@
 export interface TabData {
-  key: string | number
+  value: string | number
   title?: string
   disabled?: boolean
   closable?: boolean
+  icon?: `ml-${string}`
 }

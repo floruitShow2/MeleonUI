@@ -1,25 +1,49 @@
 <template>
-  <view :class="className" :style="themeColors">{{ title }}</view>
+  <slot v-if="globalCtx && globalCtx.activeKey === key" />
 </template>
 
 <script setup lang="ts">
-  import { toRefs, computed } from 'vue'
+  import { toRefs, inject, onMounted } from 'vue'
   import type { PropType } from 'vue'
-  import useTheme from '../../src/hooks/useTheme'
-  import { cs } from '../../utils/property'
+  import { MlTabsGroupInjectionKey } from './context'
 
   const props = defineProps({
+    value: {
+      type: [String, Number],
+      required: true
+    },
     title: {
       type: String,
       default: ''
+    },
+    disabled: {
+      type: Boolean,
+      default: false
+    },
+    closable: {
+      type: Boolean,
+      default: false
+    },
+    icon: {
+      type: String as PropType<`ml-${string}`>,
+      default: ''
     }
   })
-  const emit = defineEmits([])
-  const {} = toRefs(props)
-  const { themeColors } = useTheme()
-  const prefix = 'ml-tab'
-  const className = computed(() => {
-    return cs(prefix)
+
+  const { value: key, title, disabled, closable, icon } = toRefs(props)
+
+  const globalCtx = inject(MlTabsGroupInjectionKey)
+
+  onMounted(() => {
+    if (globalCtx) {
+      globalCtx.addTabItem(key.value, {
+        value: key.value,
+        title: title.value,
+        disabled: disabled.value,
+        closable: closable.value,
+        icon: icon.value
+      })
+    }
   })
 </script>
 

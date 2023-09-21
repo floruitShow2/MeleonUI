@@ -1,0 +1,24 @@
+.ml-tabs-tab {
+  box-sizing: border-box;
+  width: fit-content;
+  padding: 8px 0;
+  margin: 0 12px;
+  line-height: 24px;
+  display: inline-flex;
+  align-items: baseline;
+  &-title {
+    font-size: 14px;
+    line-height: 18px;
+    color: #808080;
+  }
+}
+.ml-tabs-tab-active {
+  .ml-tabs-tab-title {
+    color: var(--primaryColor);
+  }
+}
+.ml-tabs-tab-disabled {
+  .ml-tabs-tab-title {
+    color: var(--infoColorHover);
+  }
+}

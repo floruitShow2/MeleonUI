@@ -17,12 +17,16 @@
             'tools-item': true,
             'is-active': showCode
           }"
-          @click="showCode = !showCode"
         >
-          <MlIcon icon="ml-code-sandbox" :size="18" :color="showCode ? '#FFFFFF' : '#808080'" />
+          <MlIcon
+            icon="ml-code-sandbox"
+            :size="18"
+            :color="showCode ? '#FFFFFF' : '#808080'"
+            @click="onCodeClick"
+          />
         </view>
-        <view class="tools-item" @click="onCopy">
-          <MlIcon icon="ml-copy" :size="18" />
+        <view class="tools-item">
+          <MlIcon icon="ml-copy" :size="18" @click="onCopy" />
         </view>
       </view>
       <view v-if="showCode" class="view">
@@ -45,7 +49,12 @@
   const { code } = toRefs(props)
 
   const showCode = ref(false)
+  const onCodeClick = () => {
+    console.log('1')
+    showCode.value = !showCode.value
+  }
   const onCopy = () => {
+    console.log('2')
     if (showCode.value) uni.setClipboardData({ data: code.value })
   }
 </script>

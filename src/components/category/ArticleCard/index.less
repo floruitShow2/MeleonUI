@@ -1,0 +1,44 @@
+@import '@/styles/layout.less';
+@import '@/styles/theme.less';
+.article-card {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 8px;
+  background-color: #FFFFFF;
+  #flex(row, flex-end, space-between);
+  &-message {
+    flex: 1;
+    color: @--primary-text;
+    #flex(column, flex-start, flex-start);
+    &-title {
+      margin-bottom: 5px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+    &-details {
+      margin-bottom: 5px;
+      font-size: 12px;
+      .author {
+        box-sizing: border-box;
+        padding-right: 8px;
+        margin-right: 8px;
+        border-right: solid 1px;
+        border-color: @--primary-border;
+      }
+    }
+    &-description {
+      font-size: 12px;
+      line-height: 18px;
+      display: -webkit-box; /* 必须结合的属性，将对象作为弹性伸缩盒子模型显示 */
+      -webkit-box-orient: vertical; /* 设置或检索伸缩盒对象的子元素的排列方式 */
+      -webkit-line-clamp: 2; /* 限制在一个块元素显示的文本的行数 */
+      overflow: hidden; /* 溢出隐藏 */
+    }
+  }
+  &-cover {
+    width: 85px;
+    height: 70px;
+    margin-left: 5px;
+    border-radius: 2px;
+  }
+}

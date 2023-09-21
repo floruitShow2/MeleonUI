@@ -8,6 +8,7 @@
         height: `${ui.contentHeight}px`
       }"
     >
+      <!-- 项目列表 -->
       <view class="projects">
         <view class="projects-item" @click="onNavigate('/pages/comMap/index')">
           <view class="projects-item-image">

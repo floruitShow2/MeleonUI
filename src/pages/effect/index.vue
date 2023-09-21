@@ -16,25 +16,29 @@
         </swiper>
       </view>
       <view class="effects-view-content">
-        <view class="content-filter">
-          <text>所有项目</text>
-          <MlButton type="primary" size="mini">
-            <template #icon>
-              <MlIcon icon="ml-filter" :size="16" color="#ffffff" />
-            </template>
-            <text>筛选</text>
-          </MlButton>
-        </view>
-        <view class="content-list">
-          <EffectCard
-            v-for="card in effectsList"
-            :key="card.title"
-            v-bind="card"
-            style="width: 50%"
-            @click="handleCardClick(card)"
-          >
-          </EffectCard>
-        </view>
+        <MlTabs active="loading">
+          <MlTab value="loading" title="Loading">
+            <view class="content-filter">
+              <text>所有项目</text>
+              <MlButton type="primary" size="mini">
+                <template #icon>
+                  <MlIcon icon="ml-filter" :size="16" color="#ffffff" />
+                </template>
+                <text>筛选</text>
+              </MlButton>
+            </view>
+            <view class="content-list">
+              <EffectCard
+                v-for="card in effectsList"
+                :key="card.title"
+                v-bind="card"
+                style="width: 50%"
+                @click="handleCardClick(card)"
+              >
+              </EffectCard>
+            </view>
+          </MlTab>
+        </MlTabs>
       </view>
     </view>
   </view>
@@ -46,6 +50,8 @@
   import MlNavigator from '@/ml-ui/lib/ml-navigator/index.vue'
   import MlIcon from '@/ml-ui/lib/ml-icon/index.vue'
   import MlButton from '@/ml-ui/lib/ml-button/index.vue'
+  import MlTabs from '@/ml-ui/lib/ml-tabs/index.vue'
+  import MlTab from '@/ml-ui/lib/ml-tab/index.vue'
   import EffectCard from './components/EffectCard/index.vue'
   import type { EffectCardType } from './components/EffectCard/type'
 
@@ -71,7 +77,7 @@
       author: 'Meleon',
       views: 1,
       likes: 2,
-      url: '/pages/packageEffects/particle/index'
+      url: '/pages/article/index'
     }
   ])
 
