@@ -63,7 +63,7 @@
       icon: 'ml-tab-article',
       selectIcon: 'ml-tab-article-select',
       label: '专题',
-      key: 'categories',
+      key: 'category',
       path: '/pages/category/index'
     },
     {
@@ -93,7 +93,6 @@
 
   onShow(() => {
     const pages = getCurrentPages()
-    console.log(pages)
     const splitTab = pages[0].route?.split('/')[1]
     activeTab.value = splitTab || ''
   })

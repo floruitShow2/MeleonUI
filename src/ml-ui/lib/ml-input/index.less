@@ -9,7 +9,7 @@
     position: absolute;
     width: 100%;
     font-size: 16px;
-    color: var(--infoColor);
+    color: var(--info-color-6);
     .message {
       border: unset;
       background-color: unset;
@@ -18,23 +18,24 @@
       font-size: 12px;
     }
     .success-message {
-      color: var(--successColor);
+      color: var(--success-color-6);
     }
     .error-message {
-      color: var(--errorColor);
+      color: var(--error-color-6);
     }
   }
   &-wrapper {
     position: relative;
     box-sizing: border-box;
+    width: 100%;
     padding: 0 8px;
     border: solid 1px;
     border-radius: 2px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border-color: var(--infoColor);
-    background-color: var(--infoColor);
+    border-color: var(--info-color-6);
+    background-color: var(--info-color-6);
     box-shadow: 0 0 0 0 var(--primaryColorHover);
     transition: all 0.2s ease;
     overflow: hidden;
@@ -45,12 +46,12 @@
       right: 0;
       bottom: 0;
       opacity: .1;
-      background-color: #00023f;
+      background-color: var(--infor-color-5);
     }
     .input {
       flex: 1;
       font-size: 12px;
-      color: #808080;
+      // color: var(--info-color-6);
     }
     .icon {
       height: 100%;
@@ -116,8 +117,8 @@
   .ml-input-wrapper {
     border-radius: 2px;
     background-color: #FFFFFF;
-    border-color: var(--primaryColor);
-    box-shadow: 0 0 0 4px var(--primaryColorPressed);
+    border-color: var(--primary-color-6);
+    // box-shadow: 0 0 0 4px var(--primary-color-5);
   }
 }
 // disabled

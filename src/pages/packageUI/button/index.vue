@@ -72,6 +72,39 @@
           </view>
         </template>
       </CodeBlock>
+      <!-- 按钮尺寸 -->
+      <CodeBlock :code="templateMap[3].templateCode">
+        <template #title>
+          <text>按钮状态</text>
+        </template>
+        <template #description>
+          <text>
+            按钮状态分为 warning, danger, success 三种，可以与按钮类型同时生效，优先级高于按钮类型。
+          </text>
+        </template>
+        <template #demo>
+          <view class="button-container">
+            <view class="button-container">
+              <MlButton type="primary" size="mini" status="success">Primary</MlButton>
+              <MlButton size="mini" status="success">Secondary</MlButton>
+              <MlButton type="outline" size="mini" status="success">Outline</MlButton>
+              <MlButton type="text" size="mini" status="success">Text</MlButton>
+            </view>
+            <view class="button-container">
+              <MlButton type="primary" size="mini" status="warning">Primary</MlButton>
+              <MlButton size="mini" status="warning">Secondary</MlButton>
+              <MlButton type="outline" size="mini" status="warning">Outline</MlButton>
+              <MlButton type="text" size="mini" status="warning">Text</MlButton>
+            </view>
+            <view class="button-container">
+              <MlButton type="primary" size="mini" status="danger">Primary</MlButton>
+              <MlButton size="mini" status="danger">Secondary</MlButton>
+              <MlButton type="outline" size="mini" status="danger">Outline</MlButton>
+              <MlButton type="text" size="mini" status="danger">Text</MlButton>
+            </view>
+          </view>
+        </template>
+      </CodeBlock>
     </view>
   </view>
 </template>
@@ -130,6 +163,95 @@
   <MlButton type="primary" size="large">
     Large
   </MlButton>
+</view>`
+    },
+    {
+      templateCode: `<view class="button-container">
+    <MlButton
+        type="primary"
+        size="mini"
+        status="success"
+    >
+        Primary
+    </MlButton>
+    <MlButton
+        size="mini"
+        status="success"
+    >
+        Secondary
+    </MlButton>
+    <MlButton
+        type="outline"
+        size="mini"
+        status="success"
+    >
+        Outline
+    </MlButton>
+    <MlButton
+        type="text"
+        size="mini"
+        status="success"
+    >
+        Text
+    </MlButton>
+</view>
+<view class="button-container">
+    <MlButton
+        type="primary"
+        size="mini"
+        status="warning"
+    >
+        Primary
+    </MlButton>
+    <MlButton
+        size="mini"
+        status="warning"
+    >
+        Secondary
+    </MlButton>
+    <MlButton
+        type="outline"
+        size="mini"
+        status="warning"
+    >
+        Outline
+    </MlButton>
+    <MlButton
+        type="text"
+        size="mini"
+        status="warning"
+    >
+        Text
+    </MlButton>
+</view>
+<view class="button-container">
+    <MlButton
+        type="primary"
+        size="mini"
+        status="danger"
+    >
+        Primary
+    </MlButton>
+    <MlButton
+        size="mini"
+        status="danger"
+    >
+        Secondary
+    </MlButton>
+    <MlButton
+        type="outline"
+        size="mini"
+        status="danger"
+    >
+        Outline
+    </MlButton>
+    <MlButton
+        type="text"
+        size="mini"
+        status="danger"
+    >
+        Text
+    </MlButton>
 </view>`
     }
   ])

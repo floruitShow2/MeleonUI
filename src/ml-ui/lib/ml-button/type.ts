@@ -2,6 +2,6 @@ export interface BaseButtonProps {
   shape: 'square' | 'round' | 'circle'
   size: 'mini' | 'small' | 'medium' | 'large'
   type: 'primary' | 'secondary' | 'outline' | 'text'
-  status: 'normal' | 'success' | 'warning' | 'error'
+  status: 'normal' | 'success' | 'warning' | 'danger'
   loading: boolean
 }

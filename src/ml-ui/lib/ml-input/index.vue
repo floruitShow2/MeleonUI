@@ -47,7 +47,7 @@
 </template>
 
 <script setup lang="ts">
-  import { ref, toRefs, getCurrentInstance, computed } from 'vue'
+  import { ref, toRefs, getCurrentInstance, computed, onMounted } from 'vue'
   import type { PropType } from 'vue'
   import { onShow } from '@dcloudio/uni-app'
   import useTheme from '../../src/hooks/useTheme'
@@ -137,6 +137,8 @@
       statusBarHeight,
       customBarHeight
     }
+  })
+  onMounted(() => {
     // 初始化选中状态
     isFocus.value = autoFocus.value
     // 初始化输入框类型
@@ -171,7 +173,7 @@
       .boundingClientRect((data) => {
         const { left = 0, top = 0, height = 0, width = 0 } = Array.isArray(data) ? data[0] : data
         originPosition.value.width = width
-        if (top + height * 2 >= windowHeight - KeyboardHeight) {
+        if (top + height * 2 >= windowHeight - KeyboardHeight && useVirtualInput.value) {
           targetPosition.value = {
             ...targetPosition.value,
             top: 20 + ui.value.statusBarHeight + ui.value.customBarHeight,

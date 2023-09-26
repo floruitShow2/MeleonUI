@@ -6,7 +6,6 @@
 </template>
 
 <script setup>
-  import { ref, computed } from 'vue'
   import MarkdownIt from './lib/markdown-it.min.js'
   import hljs from './lib/highlight/uni-highlight.min.js'
   import './lib/highlight/atom-one-dark.css'
@@ -98,6 +97,9 @@
     // 调整图片
     htmlString = htmlString.replace(/<img/g, `<img class="img"`)
 
+    // 调整小代码块标签
+    htmlString = htmlString.replace(/<code>/g, `<code class="code">`)
+
     // 解决小程序表格边框型失效问题
     htmlString = htmlString.replace(/<table/g, `<table class="table"`)
     htmlString = htmlString.replace(/<tr/g, `<tr class="tr"`)
@@ -137,37 +139,38 @@
 <style lang="less">
   @import '@/styles/layout.less';
   @import '@/styles/theme.less';
-  @text-color: #916c0f;
+  @text-color: #5584b0;
+  @deep-text: #254e7a;
+  @gray-bg: #e1ebf1;
   .ua__markdown {
     font-size: 14px;
     line-height: 1.5;
     word-break: break-all;
     .h1,
-    .h2,
-    .h3 {
+    .h2 {
       position: relative;
       display: flex;
       margin-bottom: 10px;
       padding-bottom: 5px;
-      padding-left: 25px;
       border-radius: 2px;
       letter-spacing: 1px;
       color: @text-color;
-      text-shadow: 1px 1px 1px #af8d35;
-      &:before {
-        content: '';
-        display: flex;
-        position: absolute;
-        left: 0;
-        top: 50%;
-        transform: translateY(-60%);
-        margin: auto;
-        width: 20px;
-        height: 20px;
-        background-size: 20px 20px;
-        background-image: url('@/assets/articles/article-mark.png');
-      }
+      // text-shadow: 1px 1px 1px #af8d35;
+      // &:before {
+      //   content: '';
+      //   display: flex;
+      //   position: absolute;
+      //   left: 0;
+      //   top: 50%;
+      //   transform: translateY(-60%);
+      //   margin: auto;
+      //   width: 20px;
+      //   height: 20px;
+      //   background-size: 20px 20px;
+      //   background-image: url('@/assets/articles/article-mark.png');
+      // }
     }
+    .h3,
     .h4,
     .h5,
     .h6 {
@@ -188,7 +191,7 @@
     }
     .h3 {
       font-size: 16px;
-      border-bottom: 1px solid @text-color;
+      // border-bottom: 1px solid @text-color;
     }
     .h4 {
       font-size: 14px;
@@ -244,7 +247,7 @@
       }
     }
     .strong {
-      color: #c28a00;
+      color: @deep-text;
       font-weight: bolder;
       &:before {
         content: '「';
@@ -254,7 +257,9 @@
       }
     }
     .p {
+      font-size: 12px;
       text-indent: 2em;
+      color: #555555;
     }
     .ol {
       list-style: decimal;
@@ -279,12 +284,11 @@
       color: #2196f3;
       text-decoration: none;
     }
-    hr,
-    ::v-deep .hr {
-      margin-top: 20px;
-      margin-bottom: 20px;
-      border: 0;
-      border-top: 1px solid #e5e5e5;
+    .code {
+      box-sizing: border-box;
+      padding: 4px;
+      border-radius: 2px;
+      background-color: @gray-bg;
     }
 
     .code-block-header__copy {

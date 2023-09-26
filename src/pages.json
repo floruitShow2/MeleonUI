@@ -29,12 +29,6 @@
 			"style": {
 				"navigationStyle": "custom"
 			}
-		},
-		{
-			"path": "pages/article/index",
-			"style": {
-				"navigationStyle": "custom"
-			}
 		}
 	],
 	"subPackages": [
@@ -61,6 +55,12 @@
 				},
 				{
 					"path": "tabs/index",
+					"style": {
+						"navigationStyle": "custom"
+					}
+				},
+				{
+					"path": "tag/index",
 					"style": {
 						"navigationStyle": "custom"
 					}

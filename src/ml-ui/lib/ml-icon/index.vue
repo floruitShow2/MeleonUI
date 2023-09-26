@@ -1,5 +1,5 @@
 <template>
-  <view class="ml-icon" @click="emit('click')">
+  <view :class="className" @click="emit('click')">
     <icon
       :class="['iconfont', icon]"
       :style="{
@@ -13,7 +13,8 @@
 </template>
 
 <script setup lang="ts">
-  import { toRefs } from 'vue'
+  import { toRefs, computed } from 'vue'
+  import { cs } from '../../utils/property'
 
   const props = defineProps({
     icon: {
@@ -31,6 +32,11 @@
   })
   const emit = defineEmits(['click'])
   const { icon, size } = toRefs(props)
+
+  const prefix = 'ml-icon'
+  const className = computed(() => {
+    return cs(prefix, `${prefix}-${icon.value.replace('ml-', '')}`)
+  })
 </script>
 
 <style lang="less">

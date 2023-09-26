@@ -1,6 +1,6 @@
 import themeSettings from './themeSettings'
 import { deepClone, isNotEmptyObject } from '../../utils'
-import { getColorPalette, addColorAlpha } from './color'
+import { getColorPalette } from './color'
 /**
  * 初始化主题配置
  * @param isDark 是否处于暗黑模式
@@ -20,10 +20,10 @@ export function initThemeSetting(
   }
   return settings
 }
-type ColorScene = '' | 'Hover' | 'Pressed' | 'Active'
+type ColorScene = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
 type ThemeColor = Partial<Record<ColorKey, string>>
-export type ColorType = 'primary' | 'info' | 'success' | 'warning' | 'error'
-export type ColorKey = `${ColorType}Color${ColorScene}`
+export type ColorType = 'primary' | 'info' | 'success' | 'warning' | 'danger'
+export type ColorKey = `${ColorType}-color-${ColorScene}`
 
 interface ColorAction {
   scene: ColorScene
@@ -35,16 +35,21 @@ interface ColorAction {
  */
 function getSceneTheme(colors: Record<string, string>) {
   const colorActions: ColorAction[] = [
-    { scene: '', handler: (color) => color },
-    { scene: 'Hover', handler: (color) => getColorPalette(color, 7) },
-    { scene: 'Pressed', handler: (color) => addColorAlpha(color, 0.5) },
-    { scene: 'Active', handler: (color) => getColorPalette(color, 5) }
+    { scene: 1, handler: (color) => getColorPalette(color, 1) },
+    { scene: 2, handler: (color) => getColorPalette(color, 2) },
+    { scene: 3, handler: (color) => getColorPalette(color, 3) },
+    { scene: 4, handler: (color) => getColorPalette(color, 4) },
+    { scene: 5, handler: (color) => getColorPalette(color, 5) },
+    { scene: 6, handler: (color) => getColorPalette(color, 6) },
+    { scene: 7, handler: (color) => getColorPalette(color, 7) },
+    { scene: 8, handler: (color) => getColorPalette(color, 8) },
+    { scene: 9, handler: (color) => getColorPalette(color, 9) }
   ]
 
   const themeColor: ThemeColor = {}
   Object.keys(colors).forEach((ColorType) => {
     colorActions.forEach((action) => {
-      const colorKey: ColorKey = `${ColorType as ColorType}Color${action.scene}`
+      const colorKey: ColorKey = `${ColorType as ColorType}-color-${action.scene}`
       themeColor[colorKey] = action.handler(colors[ColorType])
     })
   })
@@ -52,14 +57,14 @@ function getSceneTheme(colors: Record<string, string>) {
 }
 
 export function getColorsOverride(colors: Record<ColorType, string>) {
-  const { primary, success, warning, error, info } = colors
+  const { primary, success, warning, danger, info } = colors
   return {
     common: getSceneTheme({
       primary,
       info,
       success,
       warning,
-      error
+      danger
     })
   }
 }

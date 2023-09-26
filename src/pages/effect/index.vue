@@ -77,7 +77,7 @@
       author: 'Meleon',
       views: 1,
       likes: 2,
-      url: '/pages/article/index'
+      url: '/pages/packageEffects/particle/index'
     }
   ])
 

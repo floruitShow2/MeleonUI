@@ -32,6 +32,7 @@
   import ArticleCard from '@/components/category/ArticleCard/index.vue'
   import ThreejsList from './articlesList/threejs'
   import VueList from './articlesList/vue'
+  import DesignPatternList from './articlesList/designPattern'
 
   const appStore = useAppStore()
   const wrapperStyle = computed(() => {
@@ -44,7 +45,8 @@
 
   const articlesList = ref<Record<string, Articles.ArticleCard[]>>({
     threejs: ThreejsList,
-    vue: VueList
+    vue: VueList,
+    pattern: DesignPatternList
   })
 
   const handleCardClick = (e: string | number) => {

@@ -15,6 +15,7 @@
       icon="ml-close"
       :size="18"
       :color="iconColor"
+      style="transform: translateY(1px)"
       @click="handleCloseClick(tab)"
     />
   </view>
@@ -54,9 +55,9 @@
 
   const iconColor = computed(() => {
     const { value: key, disabled } = tab.value
-    if (disabled) return themeColors.value['--infoColorHover']
-    if (key === active.value) return themeColors.value['--primaryColor']
-    return '#808080'
+    if (disabled) return themeColors.value['--info-color-7']
+    if (key === active.value) return themeColors.value['--primary-color-6']
+    return themeColors.value['--info-color-9']
   })
 
   const handleTabClick = (selectTab: TabData) => {

@@ -1,0 +1,105 @@
+.ml-tag {
+  display: inline-flex;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 0 8px;
+  border: 1px solid transparent;
+  border-radius: 2px;
+  transition: all 0.2s ease;
+  &-content {
+    flex: 1;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  .ml-input {
+    padding: 0 5px;
+  }
+}
+// type
+.ml-tag-info {
+  color: var(--info-color-8);
+  background-color: var(--info-color-6);
+  &-hover {
+    background-color: var(--info-color-7);
+  }
+}
+.ml-tag-info.ml-tag-plain {
+  background-color: unset;
+  color: var(--info-color-8);
+  border-color: var(--info-color-8);
+}
+.ml-tag-primary {
+  color: var(--primary-color-7);
+  background-color: var(--primary-color-3);
+  &-hover {
+    background-color: var(--primary-color-4);
+  }
+}
+.ml-tag-primary.ml-tag-plain {
+  background-color: unset;
+  color: var(--primary-color-7);
+  border-color: var(--primary-color-7);
+}
+.ml-tag-success {
+  color: var(--success-color-7);
+  background-color: var(--success-color-3);
+  &-hover {
+    background-color: var(--success-color-4);
+  }
+}
+.ml-tag-success.ml-tag-plain {
+  background-color: unset;
+  color: var(--success-color-7);
+  border-color: var(--success-color-7);
+}
+.ml-tag-warning {
+  color: var(--warning-color-7);
+  background-color: var(--warning-color-3);
+  &-hover {
+    background-color: var(--warning-color-4);
+  }
+}
+.ml-tag-warning.ml-tag-plain {
+  background-color: unset;
+  color: var(--warning-color-7);
+  border-color: var(--warning-color-7);
+}
+.ml-tag-danger {
+  color: var(--danger-color-7);
+  background-color: var(--danger-color-3);
+  &-hover {
+    background-color: var(--danger-color-4);
+  }
+}
+.ml-tag-danger.ml-tag-plain {
+  background-color: unset;
+  color: var(--danger-color-7);
+  border-color: var(--danger-color-7);
+}
+
+// size
+.ml-tag-mini {
+  height: 28px;
+  line-height: 26px;
+  font-size: 12px;
+  font-weight: 500;
+}
+.ml-tag-small {
+  height: 32px;
+  line-height: 30px;
+  font-size: 12px;
+  font-weight: 500;
+}
+.ml-tag-medium {
+  height: 36px;
+  line-height: 34px;
+  font-size: 14px;
+  font-weight: 500;
+}
+.ml-tag-large {
+  height: 40px;
+  line-height: 38px;
+  font-size: 14px;
+  font-weight: 500;
+}

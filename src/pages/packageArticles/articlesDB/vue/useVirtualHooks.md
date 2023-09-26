@@ -4,39 +4,39 @@
 
 ##### 	需求：
 
-###### 	避免长列表渲染节点过多导致性能上的损耗。
+​	避免长列表渲染节点过多导致性能上的损耗。
 
 ##### 	功能：
 
-###### 	1. 每次仅截取原始数据的其中一部分渲染对应节点；
+1. 每次仅截取原始数据的其中一部分渲染对应节点；
 
-###### 	2. 用户向下滚动鼠标滚轮的过程中，如果最后一个节点与视口容器产生交叉区域，触发回调将截取的范围【向后】移动；
+2. 用户向下滚动鼠标滚轮的过程中，如果最后一个节点与视口容器产生交叉区域，触发回调将截取的范围【向后】移动；
 
-###### 	3. 同理，如果向上滚动鼠标滚轮期间，第一个节点与视口容器产生交叉区域，触发回调将截取的范围【向前】移动。
+3. 同理，如果向上滚动鼠标滚轮期间，第一个节点与视口容器产生交叉区域，触发回调将截取的范围【向前】移动。
 
 ##### 	核心API：
 
-​	``intersectionObserver``
+​	intersectionObserver
 
 ### 二、hook 功能说明
 
 ##### 	（一）参数说明
 
-###### 			@param -- list 完整的数据源列表
+​	@param -- list 完整的数据源列表
 
-###### 			@param -- rootRef 虚拟列表的容器节点
+​	@param -- rootRef 虚拟列表的容器节点
 
-###### 			@param -- options hook 的配置选项
+​	@param -- options hook 的配置选项
 
 ##### 	（二）返回值说明
 
-###### 			@returns -- {
+​	@returns -- {
 
-###### 				renderList  当前渲染的数据片段
+​			renderList  当前渲染的数据片段
 
-###### 				itemsRef 	数据片段渲染出来的节点信息，需要通过 ref 绑定到虚拟列表的节点上
+​			itemsRef 	数据片段渲染出来的节点信息，需要通过 ref 绑定到虚拟列表的节点上
 
-###### 			}
+​	}
 
 ##### 	（三）类型说明
 
@@ -98,7 +98,10 @@ const computedNums = computed(() => {
 
 ```ts
 const renderList = computed(() => {
-	return list.value.slice(startIdx.value, startIdx.value + computedNums.value.total)
+	return list.value.slice(
+        startIdx.value,
+        startIdx.value + computedNums.value.total
+    )
 })
 ```
 
