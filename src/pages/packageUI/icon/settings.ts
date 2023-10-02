@@ -6,6 +6,20 @@ export default {
   description: '',
   glyphs: [
     {
+      icon_id: '11488125',
+      name: 'seleted',
+      font_class: 'selected',
+      unicode: 'e763',
+      unicode_decimal: 59235
+    },
+    {
+      icon_id: '10678428',
+      name: 'mirror light ctrl',
+      font_class: 'filter',
+      unicode: 'e6e0',
+      unicode_decimal: 59104
+    },
+    {
       icon_id: '5772874',
       name: '复制',
       font_class: 'copy',

@@ -1,4 +1,4 @@
-export function getRect(context: any, selector: string) {
+export function getRect(context: any, selector: string): Promise<Record<string, number>> {
   return new Promise(function (resolve) {
     uni
       .createSelectorQuery()
@@ -13,7 +13,7 @@ export function getRect(context: any, selector: string) {
       })
   })
 }
-export function getAllRect(context: any, selector: string) {
+export function getAllRect(context: any, selector: string): Promise<Record<string, number>[]> {
   return new Promise(function (resolve) {
     uni
       .createSelectorQuery()

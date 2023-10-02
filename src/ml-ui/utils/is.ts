@@ -1,5 +1,8 @@
 const _toString = Object.prototype.toString
 
+export function isNumber(val: unknown): val is number {
+  return _toString.call(val) === '[object Number]'
+}
 export function isArray(val: unknown): val is any[] {
   return _toString.call(val) === '[object Array]'
 }

@@ -54,6 +54,12 @@
 					}
 				},
 				{
+					"path": "inputTag/index",
+					"style": {
+						"navigationStyle": "custom"
+					}
+				},
+				{
 					"path": "tabs/index",
 					"style": {
 						"navigationStyle": "custom"
@@ -61,6 +67,12 @@
 				},
 				{
 					"path": "tag/index",
+					"style": {
+						"navigationStyle": "custom"
+					}
+				},
+				{
+					"path": "select/index",
 					"style": {
 						"navigationStyle": "custom"
 					}

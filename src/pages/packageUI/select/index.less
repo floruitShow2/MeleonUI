@@ -1,0 +1,19 @@
+@import '@/styles/layout.less';
+@import '@/styles/theme.less';
+.select-view {
+  &-wrapper {
+    box-sizing: border-box;
+    padding: 10px;
+    overflow: auto;
+    .select-demo-size {
+      #flex(column, flex-start, flex-start);
+      &-buttons {
+        margin-bottom: 8px;
+        #flex(row, center, flex-start);
+        .ml-button {
+          margin-right: 5px;
+        }
+      }
+    }
+  }
+}

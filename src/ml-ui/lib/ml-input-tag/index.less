@@ -1,0 +1,67 @@
+.ml-input-tag {
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 2px 8px;
+  border: solid 1px;
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-color: var(--info-color-6);
+  background-color: var(--info-color-6);
+  box-shadow: 0 0 0 0 var(--primaryColorHover);
+  transition: all 0.2s ease;
+  overflow: hidden;
+  &-inner {
+    box-sizing: border-box;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    // align-content: flex-start;
+    justify-content: flex-start;
+    &_tag {
+      margin: 2px 4px 2px 0;
+    }
+    &_input {
+      font-size: 14px;
+      color: var(--info-color-8);
+    }
+  }
+}
+// focus
+.is-focus {
+  border-radius: 2px;
+  border-color: var(--primary-color-6);
+  background-color: #FFFFFF;
+}
+// disabled
+.is-disabled {
+  .ml-input-tag-inner {
+    background-color: var(--info-color-6);
+    .ml-input-tag-placeholder {
+      color: var(--info-color-7);
+    }
+  }
+} 
+// size
+.ml-input-tag-mini {
+  .ml-input-tag-inner {
+    min-height: 28px;
+  }
+}
+.ml-input-tag-small {
+  .ml-input-tag-inner {
+    min-height: 32px;
+  }
+}
+.ml-input-tag-medium {
+  .ml-input-tag-inner {
+    min-height: 36px;
+  }
+}
+.ml-input-tag-large {
+  .ml-input-tag-inner {
+    min-height: 40px;
+  }
+}

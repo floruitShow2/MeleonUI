@@ -11,7 +11,7 @@
         width: useVirtualInput && isOverlayShow ? ui.screenWidth - 20 + 'px' : '100%',
         zIndex: useVirtualInput && isOverlayShow ? 101 : 1
       }"
-      @click="onInputFocus"
+      @click="changeFocusStyle"
     >
       <view v-if="disabled && isOverlayShow" class="overlay" />
       <view v-if="prefixIcon.length !== 0" class="icon prefix-icon">
@@ -27,8 +27,9 @@
         :focus="isFocus"
         :placeholder="placeholder"
         placeholder-class="ml-input-placeholder"
-        :disabled="readonly || disabled"
-        @blur="onInputBlur"
+        :disabled="disabled"
+        @focus="changeFocusStyle"
+        @blur="changeBlurStyle"
         @input="onInput"
       />
       <view class="icon suffix-icon" @click="showPwd">
@@ -49,11 +50,11 @@
   import { ref, toRefs, getCurrentInstance, computed, onMounted } from 'vue'
   import type { PropType } from 'vue'
   import { onShow } from '@dcloudio/uni-app'
-  import useTheme from '../../src/hooks/useTheme'
-  import MlIcon from '../ml-icon/index.vue'
-  import { cs } from '../../utils/property'
-  import { generateDeviceUI } from '../../utils/rect'
-  import { convertToNumber } from '../../utils/format'
+  import useTheme from '../../../src/hooks/useTheme'
+  import MlIcon from '../../ml-icon/index.vue'
+  import { cs } from '../../../utils/property'
+  import { generateDeviceUI } from '../../../utils/rect'
+  import { convertToNumber } from '../../../utils/format'
   import type { MlInputStatus } from './type'
 
   const props = defineProps({
@@ -82,10 +83,6 @@
       type: Boolean,
       default: false
     },
-    readonly: {
-      type: Boolean,
-      default: false
-    },
     disabled: {
       type: Boolean,
       default: false
@@ -106,7 +103,6 @@
     max,
     autoFocus,
     useVirtualInput,
-    readonly,
     disabled,
     message,
     validator
@@ -164,6 +160,11 @@
   const animationData = ref<any>({})
 
   const changeFocusStyle = (e: FocusEvent) => {
+    if (disabled.value) {
+      e.preventDefault()
+      return
+    }
+    isFocus.value = true
     const { height: KeyboardHeight } = e.detail as unknown as { height: number }
     const { windowHeight } = ui.value
     const query = uni.createSelectorQuery().in(instance)
@@ -197,14 +198,6 @@
         }
       })
       .exec()
-  }
-  const onInputFocus = (e: FocusEvent) => {
-    if (disabled.value) {
-      e.preventDefault()
-      return
-    }
-    isFocus.value = true
-    changeFocusStyle(e)
     emit('focus')
   }
 
@@ -215,13 +208,11 @@
   }
 
   const status = ref<MlInputStatus>('info')
-  const onInputBlur = (e: FocusEvent) => {
-    if (e) e.preventDefault()
-    if (readonly.value) {
-      isFocus.value = false
+  const changeBlurStyle = (e: FocusEvent) => {
+    if (disabled.value) {
+      e.preventDefault()
       return
     }
-    if (disabled.value || !e) return
     let { value } = e.detail as unknown as { value: string | number }
     if (type.value === 'number') {
       const numMin = convertToNumber(min.value, 'lower')
@@ -231,9 +222,34 @@
         value = numValue < numMin ? numMin : numValue > numMax ? numMax : value
       }
     }
+    // const numValue = +formatValue
+    // let status: string = 'normal'
     if (validator?.value) {
       status.value = validator.value.call(instance, value)
     }
+    // if (this.properties.funcList && this.properties.funcList.validator) {
+    //   status = this.data.funcList.validator.call(this, formatValue)
+    //   const borderColor = status === 'normal'
+    //     ? '#808080'
+    //     : status === 'success'
+    //       ? this.data.themeColors?.successColor
+    //       : this.data.themeColors?.errorColor
+    //   this.setData({
+    //     input_value: formatValue,
+    //     resultStatus: status,
+    //     borderColor
+    //   })
+    //   if (status !== '') {
+    //     this.animate('.input-title', [
+    //       { top: 0 }, { top: '-16px' }
+    //     ], 200)
+    //   }
+    // } else {
+    //   this.setData({
+    //     borderColor: '#808080',
+    //     input_value: formatValue
+    //   })
+    // }
     if (useVirtualInput.value) {
       const animation = uni.createAnimation({
         duration: 200
@@ -253,11 +269,6 @@
     e.preventDefault()
     inputType.value = inputType.value === 'password' ? 'text' : 'password'
   }
-
-  defineExpose({
-    changeFocusStyle,
-    onInputBlur
-  })
 </script>
 
 <style lang="less">

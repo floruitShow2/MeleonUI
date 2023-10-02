@@ -40,11 +40,12 @@
     size: { type: String as PropType<MlDesign.Size>, default: 'small' },
     modelValue: { type: String, required: true },
     plain: { type: Boolean, default: false },
+    bordered: { type: Boolean, default: false },
     closable: { type: Boolean, default: false },
     checkable: { type: Boolean, default: false },
     editable: { type: Boolean, default: false }
   })
-  const { modelValue, type, size, closable, checkable, editable, plain } = toRefs(props)
+  const { modelValue, type, size, closable, checkable, editable, plain, bordered } = toRefs(props)
 
   const emit = defineEmits(['update:modelValue', 'click', 'close'])
 
@@ -53,7 +54,8 @@
   const className = computed(() => {
     return cs(prefix, [`${prefix}-${type.value}`, `${prefix}-${size.value}`], {
       [`${prefix}-closable`]: closable.value,
-      [`${prefix}-plain`]: plain.value
+      [`${prefix}-plain`]: plain.value,
+      [`${prefix}-bordered`]: bordered.value
     })
   })
   const hoverClassName = computed(() => {

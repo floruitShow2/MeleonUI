@@ -42,7 +42,8 @@
     const { tabbarHeight, bottomBarHeight, screenWidth } = appStore.appSize
     return {
       height: `${tabbarHeight + bottomBarHeight}px`,
-      width: `${screenWidth}px`
+      width: `${screenWidth}px`,
+      paddingBottom: `${bottomBarHeight}px`
     }
   })
 
