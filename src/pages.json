@@ -7,7 +7,7 @@
 			}
 		},
 		{
-			"path": "pages/category/index",
+			"path": "pages/articles/index",
 			"style": {
 				"navigationStyle": "custom"
 			}
@@ -19,13 +19,13 @@
 			}
 		},
 		{
-			"path": "pages/comMap/index",
+			"path": "pages/componentList/index",
 			"style": {
 				"navigationStyle": "custom"
 			}
 		},
 		{
-			"path": "pages/effect/index",
+			"path": "pages/chart/index",
 			"style": {
 				"navigationStyle": "custom"
 			}
@@ -80,10 +80,10 @@
 			]
 		},
 		{
-			"root": "pages/packageEffects",
+			"root": "pages/packageChart",
 			"pages": [
 				{
-					"path": "particle/index",
+					"path": "detail/index",
 					"style": {
 						"navigationStyle": "custom"
 					}
@@ -93,6 +93,12 @@
 		{
 			"root": "pages/packageArticles",
 			"pages": [
+				{
+					"path": "category/index",
+					"style": {
+						"navigationStyle": "custom"
+					}
+				},
 				{
 					"path": "detail/index",
 					"style": {
@@ -120,7 +126,7 @@
 				"text": "我的"
 			},
 			{
-				"pagePath": "pages/category/index",
+				"pagePath": "pages/articles/index",
 				"text": "专题"
 			}
 		]

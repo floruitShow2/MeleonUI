@@ -10,17 +10,17 @@
     >
       <!-- 项目列表 -->
       <view class="projects">
-        <view class="projects-item" @click="onNavigate('/pages/comMap/index')">
+        <view class="projects-item" @click="onNavigate('/pages/componentList/index')">
           <view class="projects-item-image">
             <image class="image" src="../../assets/home/MeleonUI.png" mode="aspectFit" />
           </view>
           <text class="projects-item-label">组件库</text>
         </view>
-        <view class="projects-item" @click="onNavigate('/pages/effect/index')">
+        <view class="projects-item" @click="onNavigate('/pages/chart/index')">
           <view class="projects-item-image">
             <MlIcon icon="ml-effect" :size="26" />
           </view>
-          <text class="projects-item-label">动效库</text>
+          <text class="projects-item-label">图表库</text>
         </view>
       </view>
     </view>

@@ -1,0 +1,17 @@
+{
+    "id": "basic-drag",
+    "name": "basic-drag拖拽排序",
+    "displayName": "basic-drag拖拽排序",
+    "version": "2.2.3",
+    "description": "basic-drag是基于uniapp开发的拖拽排序组件，可自定义设置每列展示数量，仅需绑定v-model即可实现拖拽，且值自动同步，开箱即用。",
+    "keywords": [
+        "uniapp",
+        "drag"
+    ],
+    "dcloudext": {
+        "category": [
+            "前端组件",
+            "通用组件"
+        ]
+    }
+}

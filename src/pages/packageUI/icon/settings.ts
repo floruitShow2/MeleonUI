@@ -6,6 +6,13 @@ export default {
   description: '',
   glyphs: [
     {
+      icon_id: '702307',
+      name: 'drag',
+      font_class: 'drag',
+      unicode: 'e7d0',
+      unicode_decimal: 59344
+    },
+    {
       icon_id: '11488125',
       name: 'seleted',
       font_class: 'selected',

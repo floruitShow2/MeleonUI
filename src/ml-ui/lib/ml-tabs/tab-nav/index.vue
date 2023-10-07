@@ -5,6 +5,7 @@
       :scroll-x="true"
       :scroll-with-animation="scrollWithAnimation"
       :scroll-left="scrollLeft"
+      :show-scrollbar="false"
     >
       <!-- tab list -->
       <Tab
@@ -98,9 +99,10 @@
     scrollLeft.value = lineOffsetLeft - wrapperRect.width / 2
     underlineStyle.value = {
       width: `${rect.width}px`,
+      // width: '20px',
       opacity: 1,
       transition: scrollWithAnimation.value ? 'all 0.3s ease' : 'none',
-      transform: 'translateX(' + lineOffsetLeft + 'px)'
+      transform: 'translateX(' + lineOffsetLeft + 'px) translateY(-5px)'
     }
   }
 

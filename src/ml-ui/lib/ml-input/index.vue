@@ -59,7 +59,7 @@
   const props = defineProps({
     modelValue: {
       type: String,
-      required: true
+      default: ''
     },
     size: { type: String as PropType<MlDesign.Size>, default: 'small' },
     type: { type: String, default: 'text' },
@@ -203,8 +203,10 @@
       e.preventDefault()
       return
     }
-    isFocus.value = true
-    changeFocusStyle(e)
+    if (!readonly.value) {
+      isFocus.value = true
+      changeFocusStyle(e)
+    }
     emit('focus')
   }
 

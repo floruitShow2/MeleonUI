@@ -1,14 +1,8 @@
-.content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  .text-area {
-    display: flex;
-    justify-content: center;
-    .title {
-	  font-size: 36rpx;
-	  color: #8f8f94;
-    }
+@import '@/styles/layout.less';
+@import '@/styles/theme.less';
+.profile-view {
+  background: linear-gradient(135deg,#c1ebff, #e7f5fc);
+  &-wrapper {
+    #flex(row, center, center);
   }
 }

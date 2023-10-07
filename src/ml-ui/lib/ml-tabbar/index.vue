@@ -64,8 +64,8 @@
       icon: 'ml-tab-article',
       selectIcon: 'ml-tab-article-select',
       label: '专题',
-      key: 'category',
-      path: '/pages/category/index'
+      key: 'articles',
+      path: '/pages/articles/index'
     },
     {
       icon: 'ml-plus',

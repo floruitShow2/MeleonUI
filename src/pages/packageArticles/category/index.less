@@ -1,0 +1,44 @@
+@import '@/styles/layout.less';
+@import '@/styles/theme.less';
+.acticle-category {
+  &-wrapper {
+    box-sizing: border-box;
+    padding: 10px 0;
+    #flex(column, flex-start, flex-start);
+    &-category {
+      width: 100%;
+      #flex(column, flex-start, flex-start);
+      .title-container {
+        box-sizing: border-box;
+        padding: 0 10px;
+        width: 100%;
+        height: 100%;
+        margin-bottom: 5px;
+        #flex(row, center, space-between);
+        .title {
+          font-size: 14px;
+          color: @--primary-text;
+        }
+      }
+      .category-container {
+        box-sizing: border-box;
+        position: relative;
+        width: 100%;
+        flex-wrap: wrap;
+        align-content: flex-start;
+        #flex(row, flex-start, center);
+        .ml-button {
+          width: 100%;
+          margin: 0 16px 8px 0;
+        }
+      }
+    }
+    .inactive {
+      .category-container {
+        box-sizing: border-box;
+        padding: 0 10px;
+        justify-content: flex-start;
+      }
+    }
+  }
+}

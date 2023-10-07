@@ -36,12 +36,16 @@
     loading: {
       type: Boolean,
       default: false
+    },
+    disabled: {
+      type: Boolean,
+      default: false
     }
   })
   const emit = defineEmits(['click'])
 
   const { slots } = getCurrentInstance()!
-  const { size, shape, type, status, loading } = toRefs(props)
+  const { size, shape, type, status, loading, disabled } = toRefs(props)
 
   const { themeColors } = useTheme()
 
@@ -56,16 +60,21 @@
         `${prefix}-${status.value}`
       ],
       {
+        [`${prefix}-disabled`]: disabled.value,
         [`${prefix}-only-icon`]: slots['icon'] !== undefined && !slots['default']
       }
     )
   })
   const hoverClassName = computed(() => {
-    return cs([`${prefix}-${type.value}-hover`, `${prefix}-${status.value}-hover`])
+    return cs(
+      loading.value || disabled.value
+        ? []
+        : [`${prefix}-${type.value}-hover`, `${prefix}-${status.value}-hover`]
+    )
   })
 
   const handleClick = (e: MouseEvent) => {
-    if (loading.value) {
+    if (loading.value || disabled.value) {
       e.preventDefault()
       return
     }

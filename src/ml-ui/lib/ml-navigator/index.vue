@@ -46,6 +46,7 @@
         /> -->
       </view>
       <view
+        v-if="$slots.icon"
         class="ml-navigator-iconBg"
         :style="{
           height: `${sizes.customBarHeight}px`

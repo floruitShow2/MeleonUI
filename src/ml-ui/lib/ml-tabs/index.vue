@@ -1,9 +1,12 @@
 <template>
   <view :class="className" :style="themeColors">
-    <view class="ml-tabs_nav">
+    <view :class="`${prefix}_nav`">
       <TabNav :tabs="sortedTabs" :active-key="activeKey" />
+      <view v-if="$slots.right" :class="`${prefix}_nav-right`">
+        <slot name="right" />
+      </view>
     </view>
-    <view class="ml-tabs_content">
+    <view :class="`${prefix}_content`">
       <slot />
     </view>
   </view>

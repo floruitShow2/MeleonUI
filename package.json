@@ -52,6 +52,8 @@
     "@dcloudio/uni-mp-toutiao": "3.0.0-3081220230817001",
     "@dcloudio/uni-mp-weixin": "3.0.0-3081220230817001",
     "@dcloudio/uni-quickapp-webview": "3.0.0-3081220230817001",
+    "echarts": "^5.4.3",
+    "mpvue-echarts": "^0.3.2",
     "pinia": "^2.0.23",
     "vue": "^3.2.45",
     "vue-i18n": "^9.1.9"
