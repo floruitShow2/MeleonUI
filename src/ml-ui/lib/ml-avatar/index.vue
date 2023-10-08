@@ -1,7 +1,6 @@
 <template>
   <view :class="className" :style="{ ...themeColors, ...outerStyle }">
-    <image v-if="imgUrl" :class="`${prefixCls}-iamge`" :src="imgUrl" alt="" />
-    <view v-else :class="`${prefixCls}-text`" :style="textStyle">
+    <view :class="`${prefixCls}-text`" :style="textStyle">
       <slot />
     </view>
   </view>
@@ -17,10 +16,6 @@
   import { avatarGroupInjectionKey } from './context'
 
   const props = defineProps({
-    imgUrl: {
-      type: String,
-      default: ''
-    },
     size: {
       type: Number,
       default: 32
@@ -30,23 +25,36 @@
       default: 'square'
     }
   })
-  const { size, shape, imgUrl } = toRefs(props)
+  const { size, shape } = toRefs(props)
 
   const emit = defineEmits([])
   const { themeColors } = useTheme()
   const prefixCls = 'ml-avatar'
+  const groupCtx = inject(avatarGroupInjectionKey, null)
 
-  const groupCtx = inject(avatarGroupInjectionKey)
-  const index = ref(1)
+  const className = computed(() =>
+    cs(prefixCls, [
+      groupCtx ? `${prefixCls}-${groupCtx.globalShape}` : `${prefixCls}-${shape.value}`
+    ])
+  )
+
+  const index = ref(-1)
 
   const outerStyle = computed(() => {
-    const style: Record<string, any> = {
+    let style: Record<string, any> = {
       width: `${size.value}px`,
       height: `${size.value}px`
     }
 
     if (groupCtx) {
-      style.zIndex = groupCtx.total - index.value
+      style = {
+        width: `${groupCtx.globalSize}px`,
+        height: `${groupCtx.globalSize}px`,
+        zIndex: groupCtx.total - index.value,
+        display: groupCtx.maxCount < index.value ? 'none' : 'flex',
+        marginLeft:
+          index.value === 1 ? 0 : `-${groupCtx.offset === 0 ? size.value / 2 : groupCtx.offset}px`
+      }
     }
 
     return style
@@ -54,9 +62,7 @@
 
   const textStyle = ref<Record<string, any>>({})
   const instance = getCurrentInstance()
-  console.log(instance)
   const autoFixFontSizeHanlder = async () => {
-    if (imgUrl.value) return
     const itemRect = await getRect(instance, `.${prefixCls}`)
     const wrapperRect = await getRect(instance, `.${prefixCls}-text`)
     if (!itemRect || !wrapperRect) return
@@ -68,10 +74,9 @@
     }
   }
 
-  const className = computed(() => cs(prefixCls, `${prefixCls}-${shape.value}`))
-
   onMounted(() => {
     autoFixFontSizeHanlder()
+    if (groupCtx) index.value = groupCtx.getAvatarId()
   })
 </script>
 

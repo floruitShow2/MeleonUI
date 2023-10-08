@@ -48,6 +48,12 @@
 					}
 				},
 				{
+					"path": "avatar/index",
+					"style": {
+						"navigationStyle": "custom"
+					}
+				},
+				{
 					"path": "input/index",
 					"style": {
 						"navigationStyle": "custom"

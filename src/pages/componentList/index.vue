@@ -39,6 +39,7 @@
   const componentList = ref<ComponentItemType[]>([
     { name: 'ml-icon', path: '/pages/packageUI/icon/index' },
     { name: 'ml-button', path: '/pages/packageUI/button/index' },
+    { name: 'ml-avatar', path: '/pages/packageUI/avatar/index' },
     { name: 'ml-input', path: '/pages/packageUI/input/index' },
     { name: 'ml-input-tag', path: '/pages/packageUI/inputTag/index' },
     { name: 'ml-tabs', path: '/pages/packageUI/tabs/index' },
