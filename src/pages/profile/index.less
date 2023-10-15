@@ -1,8 +1,90 @@
 @import '@/styles/layout.less';
 @import '@/styles/theme.less';
 .profile-view {
-  background: linear-gradient(135deg,#c1ebff, #e7f5fc);
+  background: linear-gradient(135deg,#d8e7fb, #f5f8fa);
   &-wrapper {
-    #flex(row, center, center);
+    box-sizing: border-box;
+    padding: 10px;
+    overflow: auto;
+    #flex(column, flex-start, flex-start);
+    &-header {
+      position: relative;
+      box-sizing: border-box;
+      width: 100%;
+      padding: 10px;
+      border-radius: 5px;
+      background-color: #FFFFFF;
+      #flex(row, center, flex-start);
+      .header-message {
+        margin-left: 8px;
+        #flex(column, flex-start, center);
+        .username {
+          font-size: 14px;
+          color: @--heavy-text;
+        }
+        .description {
+          font-size: 12px;
+          color: @--lighter-text;
+        }
+      }
+      .ml-button {
+        position: absolute;
+        top: 50%;
+        right: 10px;
+        transform: translateY(-50%);
+      }
+    }
+    &-statistics {
+      box-sizing: border-box;
+      width: 100%;
+      height: 80px;
+      // padding: 0 15px;
+      #flex(row, center, space-between);
+      .statistic-item {
+        width: 25%;
+        #flex(column, center, center);
+        &-num {
+          font-size: 20px;
+          color: @--heavy-text;
+        }
+        &-label {
+          font-size: 12px;
+          color: @--lighter-text;
+        }
+      }
+    }
+    &-card {
+      width: 100%;
+      height: 200px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      overflow: hidden;
+      background-color: #FFFFFF;
+    }
+    &-settings {
+      width: 100%;
+      border-radius: 5px;
+      overflow: hidden;
+      #flex(column, center, flex-start);
+      .setting-item {
+        box-sizing: border-box;
+        padding: 10px 8px;
+        width: 100%;
+        // border-radius: 3px;
+        background-color: #FFFFFF;
+        #flex(row, center, space-between);
+        &_left {
+          #flex(row, center, flex-start);
+          .title {
+            margin-left: 3px;
+            font-size: 14px;
+            color: @--primary-text;
+          }
+        }
+        &_right {
+          #flex(row, center, flex-end);
+        }
+      }
+    }
   }
 }

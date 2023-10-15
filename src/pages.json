@@ -54,6 +54,12 @@
 					}
 				},
 				{
+					"path": "checkbox/index",
+					"style": {
+						"navigationStyle": "custom"
+					}
+				},
+				{
 					"path": "input/index",
 					"style": {
 						"navigationStyle": "custom"
@@ -82,6 +88,12 @@
 					"style": {
 						"navigationStyle": "custom"
 					}
+				},
+				{
+					"path": "countTo/index",
+					"style": {
+						"navigationStyle": "custom"
+					}
 				}
 			]
 		},
@@ -107,6 +119,17 @@
 				},
 				{
 					"path": "detail/index",
+					"style": {
+						"navigationStyle": "custom"
+					}
+				}
+			]
+		},
+		{
+			"root": "pages/packageSettings",
+			"pages": [
+				{
+					"path": "lang/index",
 					"style": {
 						"navigationStyle": "custom"
 					}

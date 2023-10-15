@@ -9,6 +9,6 @@ export interface AvatarGroupContext {
   getAvatarId: () => number
 }
 
-const avatarGroupInjectionKey: InjectionKey<AvatarGroupContext> = Symbol('WsAvatarGroup')
+const avatarGroupInjectionKey: InjectionKey<AvatarGroupContext> = Symbol('ml-avatar-group')
 
 export { avatarGroupInjectionKey }

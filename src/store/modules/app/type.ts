@@ -1,5 +1,6 @@
 export interface AppState {
   theme: string
+  locale: 'zh-CN' | 'en-US'
   ui: {
     // 屏幕宽度
     screenWidth: number

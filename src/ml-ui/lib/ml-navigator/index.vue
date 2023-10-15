@@ -85,7 +85,7 @@
 
   const props = defineProps({
     // 导航栏背景色
-    backgroundColor: { type: String, default: '#338cff' },
+    backgroundColor: { type: String, default: '#FFFFFF' },
     // 导航栏标题
     title: { type: String, default: '' },
     // 导航栏颜色
