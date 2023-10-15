@@ -6,6 +6,20 @@ export default {
   description: '',
   glyphs: [
     {
+      icon_id: '12865674',
+      name: 'night',
+      font_class: 'night',
+      unicode: 'e6ef',
+      unicode_decimal: 59119
+    },
+    {
+      icon_id: '12865690',
+      name: 'day',
+      font_class: 'day',
+      unicode: 'e6f1',
+      unicode_decimal: 59121
+    },
+    {
       icon_id: '702307',
       name: 'drag',
       font_class: 'drag',

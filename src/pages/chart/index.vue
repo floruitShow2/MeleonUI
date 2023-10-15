@@ -14,7 +14,7 @@
         :class="`${prefix}-container-card`"
         @click="() => handleEchartsClick(icon.name)"
       >
-        <MlIcon :icon="icon.fontClass" :size="44" />
+        <MlColorIcon :icon="icon.fontClass" :size="44" />
         <text class="card-label">{{ icon.name }}</text>
       </view>
     </view>
@@ -26,7 +26,7 @@
   import { useAppStore } from '@/store'
   import EchartsIcon from '@/common/echarts.icon'
   import MlNavigator from '@/ml-ui/lib/ml-navigator/index.vue'
-  import MlIcon from '@/ml-ui/lib/ml-icon/index.vue'
+  import MlColorIcon from '@/ml-ui/lib/ml-colorIcon/index.vue'
 
   const appStore = useAppStore()
   const wrapperStyle = computed(() => {

@@ -18,7 +18,7 @@
         </view>
         <view class="projects-item" @click="onNavigate('/pages/chart/index')">
           <view class="projects-item-image">
-            <MlIcon icon="ml-effect" :size="26" />
+            <MlColorIcon icon="ml-effect" :size="26" />
           </view>
           <text class="projects-item-label">图表库</text>
         </view>
@@ -32,7 +32,7 @@
   import { ref, computed } from 'vue'
   import { useAppStore } from '@/store'
   import MlNavigator from '@/ml-ui/lib/ml-navigator/index.vue'
-  import MlIcon from '@/ml-ui/lib/ml-icon/index.vue'
+  import MlColorIcon from '@/ml-ui/lib/ml-colorIcon/index.vue'
   import MlTabbar from '@/ml-ui/lib/ml-tabbar/index.vue'
 
   const appStore = useAppStore()

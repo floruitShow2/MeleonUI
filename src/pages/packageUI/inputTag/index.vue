@@ -68,10 +68,10 @@
       <!-- 禁用 -->
       <CodeBlock :code="templateMap[2].templateCode">
         <template #title>
-          <text>禁用状态</text>
+          <text>标签类型</text>
         </template>
         <template #description>
-          <text>通过设置 disabled 属性来禁用用户操作</text>
+          <text>通过设置 tag-type 属性来控制标签的类型，默认为 primary</text>
         </template>
         <template #demo>
           <MlInputTag

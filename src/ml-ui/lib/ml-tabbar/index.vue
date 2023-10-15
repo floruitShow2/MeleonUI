@@ -10,7 +10,7 @@
       }"
       @click="onTabClick(option)"
     >
-      <MlIcon
+      <MlColorIcon
         :icon="activeTab === option.key ? option.selectIcon : option.icon"
         :size="22"
         :color="option.type === 'main' ? '#FFFFFF' : '#808080'"
@@ -26,7 +26,7 @@
   import { useAppStore } from '@/store'
   import { cs } from '@/utils/property'
   import type { TabbarOptionType } from './type'
-  import MlIcon from '../ml-icon/index.vue'
+  import MlColorIcon from '../ml-colorIcon/index.vue'
 
   // const props = defineProps<{
   //   options: TabbarOptionType[]

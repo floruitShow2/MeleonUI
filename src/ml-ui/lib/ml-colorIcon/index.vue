@@ -41,5 +41,5 @@
 
 <style lang="less">
   @import './index.less';
-  @import './icon.less';
+  @import './colorIcon.less';
 </style>

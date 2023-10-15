@@ -45,7 +45,8 @@
     { name: 'ml-tabs', path: '/pages/packageUI/tabs/index' },
     { name: 'ml-tag', path: '/pages/packageUI/tag/index' },
     { name: 'ml-select', path: '/pages/packageUI/select/index' },
-    { name: 'ml-checkbox', path: '../../package-WsUI/pages/checkbox/checkbox' },
+    { name: 'ml-checkbox', path: '/pages/packageUI/checkbox/index' },
+    { name: 'ml-count-to', path: '/pages/packageUI/countTo/index' },
     { name: 'ml-swiper-cell', path: '../../package-WsUI/pages/swiperCell/swiperCell' },
     { name: 'ml-table', path: '../../package-WsUI/pages/table/table' },
     { name: 'ml-timeline', path: '../../package-WsUI/pages/timeline/timeline' }

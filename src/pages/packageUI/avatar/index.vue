@@ -1,7 +1,7 @@
 <template>
   <view class="avatar-view">
     <MlNavigator
-      title="MlAvatar"
+      title="Profile"
       has-back
       icon-color="#FFFFFF"
       title-color="#FFFFFF"

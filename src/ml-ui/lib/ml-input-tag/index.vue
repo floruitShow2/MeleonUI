@@ -77,7 +77,7 @@
     },
     readonly: {
       type: Boolean,
-      default: true
+      default: false
     },
     disabled: {
       type: Boolean,
@@ -167,7 +167,9 @@
     isFocus.value = false
     emit('blur', e)
   }
-  const onInputConfirm = (e: FocusEvent) => {}
+  const onInputConfirm = (e: FocusEvent) => {
+    console.log(e)
+  }
 
   defineExpose({
     onInputBlur
