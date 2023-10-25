@@ -1,7 +1,7 @@
 <template>
   <view :class="className" @click="emit('click')">
     <icon
-      :class="['iconfont', icon]"
+      :class="['ml-color-icon', icon]"
       :style="{
         color,
         fontSize: `${size}px`,
@@ -39,7 +39,7 @@
   })
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
   @import './index.less';
   @import './colorIcon.less';
 </style>

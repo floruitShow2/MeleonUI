@@ -1,7 +1,7 @@
 export default {
   id: '4118979',
   name: 'MeleonUI',
-  font_family: 'iconfont',
+  font_family: 'ml-icon',
   css_prefix_text: 'ml-',
   description: '',
   glyphs: [

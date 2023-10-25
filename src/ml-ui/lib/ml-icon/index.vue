@@ -1,7 +1,7 @@
 <template>
-  <view :class="className" @click="emit('click')">
+  <view :class="className" @click="handleIconClick">
     <icon
-      :class="['iconfont', icon]"
+      :class="['ml-icon', icon]"
       :style="{
         color,
         fontSize: `${size}px`,
@@ -37,9 +37,14 @@
   const className = computed(() => {
     return cs(prefix, `${prefix}-${icon.value.replace('ml-', '')}`)
   })
+
+  const handleIconClick = (e: MouseEvent) => {
+    e.preventDefault()
+    emit('click', e)
+  }
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
   @import './index.less';
   @import './icon.less';
 </style>

@@ -80,7 +80,7 @@
       selectIcon: 'ml-tab-idea-select',
       label: '发现',
       key: 'discovery',
-      path: ''
+      path: '/pages/discovery/index'
     },
     {
       icon: 'ml-tab-my',
@@ -102,6 +102,7 @@
     const { path, key } = option
     if (!path) return
     activeTab.value = key
+    console.log(path)
     uni.switchTab({
       url: path
     })

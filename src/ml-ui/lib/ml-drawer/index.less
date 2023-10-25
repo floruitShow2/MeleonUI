@@ -1,0 +1,52 @@
+.ml-drawer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    box-sizing: border-box;
+    background-color: rgba(0, 0, 0, 0.2);
+    z-index: 1001;
+    &-wrapper {
+        box-sizing: border-box;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        background-color: #ffffff;
+        transition: all 0.2s ease;
+        &-header {
+            box-sizing: border-box;
+            padding: 5px 8px;
+            width: 100%;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 16px;
+            color: var(--info-color-8);
+            border-bottom: solid 1px var(--info-color-6);
+        }
+        &-content {
+            flex: 1;
+            box-sizing: border-box;
+            width: 100%;
+            padding: 10px;
+            font-size: 14px;
+            color: var(--info-color-8);
+        }
+        &-footer {
+            box-sizing: border-box;
+            padding: 5px 8px;
+            width: 100%;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            border-top: solid 1px var(--info-color-6);
+        }
+    }
+}
