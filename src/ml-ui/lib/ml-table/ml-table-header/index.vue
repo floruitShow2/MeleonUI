@@ -1,6 +1,6 @@
 <template>
   <view :class="className" :style="themeColors">
-    <view class="fixed-header">
+    <view class="fixed-headers">
       <view
         v-for="fixedColumn in storeEntityStates.fixedColumns"
         :key="fixedColumn.columnId"
@@ -12,10 +12,16 @@
       <view
         v-for="(nfColumn, nfIdx) in storeEntityStates.notFixedColumns"
         :key="nfColumn.columnId"
-        :class="['custom-table__column', nfColumn.columnId]"
+        :class="[
+          'ml-table-header__column',
+          `ml-table-header__column--${useGet(storeEntityStates, 'size', 'small')}`,
+          nfColumn.columnId
+        ]"
         :style="{
           width: `${nfColumn.width}px`,
-          borderRight: storeEntityStates.border ? 'solid 1px #DDDDDD' : '',
+          borderLeft:
+            storeEntityStates.border && nfIdx === 0 ? 'solid 1px var(--info-color-6)' : '',
+          borderRight: storeEntityStates.border ? 'solid 1px var(--info-color-6)' : '',
           ...getCellStyle(nfIdx)
         }"
       >
@@ -33,10 +39,10 @@
   import { MlTableInjectionKey } from '../context'
   import useTheme from '../../../src/hooks/useTheme'
   import { cs } from '../../../utils/property'
+  import { useGet } from '../../../utils/func'
   import { generateDeviceUI } from '../../../utils/rect'
   import type StateWatcher from '../../ml-table-column/store'
   import type { ColumnSettingType, WatcherStatesType } from '../../ml-table-column/interface'
-
   import type { TableCellType } from '../ml-table-body/type'
 
   // const props = defineProps({})

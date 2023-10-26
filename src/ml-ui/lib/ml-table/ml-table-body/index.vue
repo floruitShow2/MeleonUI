@@ -18,14 +18,11 @@
         <view class="text">Loading...</view>
       </view>
     </template>
-    <view
-      v-if="storeEntityStates.data && storeEntityStates.data.length !== 0"
-      class="ml-table-body__wrapper"
-    >
+    <view v-if="useGet(storeEntityStates, 'data.length', 0) !== 0" class="ml-table-body__wrapper">
       <view
         v-for="(row, index) in storeEntityStates.data"
         :key="index"
-        class="ml-table-body__wrapper-row"
+        :class="tableRowCls"
         :style="generateRowStyle(storeEntityStates.stripe || false, index)"
         catchtap="rowTap"
         catchlongpress="rowLongPress"
@@ -38,11 +35,14 @@
             :class="['custom-table__column', column.columnId]"
             :style="{
               width: `${column.width}px`,
-              borderRight: storeEntityStates.border ? 'solid 1px #DDDDDD' : '',
+              borderLeft:
+                storeEntityStates.border && columnIdx === 0 ? 'solid 1px var(--info-color-6)' : '',
+              borderRight: storeEntityStates.border ? 'solid 1px var(--info-color-6)' : '',
               ...getCellStyle(index, columnIdx)
             }"
           >
-            {{ column.property && row[column.property] }}
+            <slot :column="column" :row="row" :row-index="index" :column-index="columnIdx"></slot>
+            <!-- <text>{{ column.property && row[column.property] }}</text> -->
             <!-- <view
                 v-if="!column.custom || column.nodeType.length === 0 }}"
                 class="column-text"
@@ -101,6 +101,7 @@
   import type { PropType, ComponentInternalInstance } from 'vue'
   import useTheme from '../../../src/hooks/useTheme'
   import { cs } from '../../../utils/property'
+  import { useGet } from '../../../utils/func'
   import { generateDeviceUI } from '../../../utils/rect'
   import { MlTableInjectionKey } from '../context'
   import type { TableCellType, TableMeshStyle } from './type'
@@ -112,9 +113,12 @@
 
   const emit = defineEmits([])
   const { themeColors } = useTheme()
-  const prefix = 'ml-ml-ml-table-body'
-  const className = computed(() => {
-    return cs(prefix)
+  const prefix = 'ml-table-body'
+  const tableRowCls = computed(() => {
+    return cs(
+      `${prefix}__wrapper-row`,
+      `${prefix}__wrapper-row--${useGet(storeEntityStates.value, 'size', 'small')}`
+    )
   })
 
   const globalCtx = inject(MlTableInjectionKey)
@@ -203,7 +207,7 @@
     return rowStyle
   }
 
-  // 计算 ml-ml-table-body 的高度
+  // 计算 ml-table-body 的高度
   const heightStyle = ref({ height: '' })
   const generateHeight = (store: StateWatcher) => {
     const height = store.states.height

@@ -22,7 +22,7 @@ interface TableEntityType {
   stripe: boolean
   loading: boolean
   height: number
-  customEmpty: boolean
+  size: MlDesign.Size
   refresherEnabled: boolean
   refresherInterval: number
 }

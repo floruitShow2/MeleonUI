@@ -1,11 +1,9 @@
 <template>
-  <view :class="className" :style="themeColors"> </view>
+  <slot />
 </template>
 
 <script setup lang="ts">
-  import { toRefs, computed, onMounted, inject } from 'vue'
-  import useTheme from '../../src/hooks/useTheme'
-  import { cs } from '../../utils/property'
+  import { toRefs, onMounted, inject } from 'vue'
   import { useCompose } from '../../utils/func'
   import { ForcedProperty, type ColumnSettingType } from './interface/config'
   import { MlTableInjectionKey } from '../ml-table/context'
@@ -22,12 +20,6 @@
     minWidth: { type: Number, default: 0 }
   })
   const { label, prop, nodeType, width, minWidth, custom } = toRefs(props)
-
-  const { themeColors } = useTheme()
-  const prefix = 'ml-table-column'
-  const className = computed(() => {
-    return cs(prefix)
-  })
 
   // 获取 ml-table 组件注入的变量
   const globalContext = inject(MlTableInjectionKey)
