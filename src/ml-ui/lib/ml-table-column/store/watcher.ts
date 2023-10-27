@@ -12,7 +12,7 @@ const flattenColumns: (columns: ColumnSettingType[]) => ColumnSettingType[] = (c
   return res
 }
 export class Watcher {
-  states: WatcherStatesType
+  readonly states: WatcherStatesType
   observerList: Observer[]
   // ml-table 组件的实例
   $table?: any
@@ -21,7 +21,9 @@ export class Watcher {
       data: [],
       _columns: [],
       fixedColumns: [],
+      fixedColumnsLength: 0,
       notFixedColumns: [],
+      notFixedColumnsLength: 0,
       originColumns: [],
       fixedLeafColumns: [],
       fixedLeafColumnLength: 0
@@ -33,8 +35,17 @@ export class Watcher {
     const _columns = states._columns || []
     // those columns which do not set the 'fixed' property
     // 未展开的列数据
-    states.fixedColumns = _columns.filter((column) => column.fixed || column.fixed === 'left')
+    states.fixedColumns = _columns
+      .filter((column) => column.fixed !== undefined)
+      .map((item) => {
+        return {
+          ...item,
+          width: item.width === 0 ? 80 : item.width
+        }
+      })
+    states.fixedColumnsLength = states.fixedColumns.length
     states.notFixedColumns = _columns.filter((column) => !column.fixed)
+    states.notFixedColumnsLength = states.notFixedColumns.length
     states.originColumns = [...states.fixedColumns, ...states.notFixedColumns]
     // 展开后的列数据
     states.fixedLeafColumns = flattenColumns(states.fixedColumns)

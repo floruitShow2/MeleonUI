@@ -1,5 +1,5 @@
 <template>
-  <view class="button-view">
+  <view class="table-view">
     <MlNavigator
       title="MlButton"
       has-back
@@ -7,21 +7,30 @@
       title-color="#FFFFFF"
       background-color="#7A98B3"
     />
-    <view class="button-view-wrapper" :style="wrapperStyle">
+    <view class="table-view-wrapper" :style="wrapperStyle">
       <!-- 基础用法 -->
       <CodeBlock :code="templateMap[0].templateCode">
         <template #title>
           <text>基础用法</text>
         </template>
         <template #description>
-          <text> 基础用法，绑定 visible 属性控制 drawer 的显示/隐藏 </text>
+          <text> 基础用法，支持数据渲染、表格布局及节点自定义等功能 </text>
         </template>
         <template #demo>
-          <view class="button-container">
-            <MlTable :data="tableData" size="large" border stripe :loading="false">
+          <view class="table-container">
+            <MlTable
+              :data="tableData"
+              size="mini"
+              stripe
+              border
+              :height="200"
+              :loading="false"
+              :row-style="genRowStyle"
+              :column-style="genColumnStyle"
+            >
               <template #cell="{ column, row }">
                 <block v-if="column.property === 'gender'">
-                  <MlTag :model-value="row[column.property]" type="primary"></MlTag>
+                  <MlTag :model-value="row[column.property]" type="primary" size="mini"></MlTag>
                 </block>
                 <block v-else-if="column.property === 'age'">
                   <MlCountTo
@@ -32,7 +41,8 @@
                 </block>
                 <text v-else>{{ column.property && row[column.property] }}</text>
               </template>
-              <MlTableColumn prop="name" label="姓名"></MlTableColumn>
+              <MlTableColumn type="index" fixed="left"></MlTableColumn>
+              <MlTableColumn prop="name" label="姓名" fixed></MlTableColumn>
               <MlTableColumn prop="age" label="年龄"></MlTableColumn>
               <MlTableColumn prop="gender" label="性别"></MlTableColumn>
             </MlTable>
@@ -61,10 +71,6 @@
       height: `${contentHeight + tabbarHeight + bottomBarHeight}px`
     }
   })
-
-  const printScope = (e: any) => {
-    console.log('z', e)
-  }
 
   const templateMap = ref([
     {
@@ -102,6 +108,18 @@
       gender: 'male'
     }
   ]
+
+  const genRowStyle = (e: { rowIdx: number }) => {
+    return {
+      height: '53px',
+      backgroundColor: e.rowIdx % 2 === 0 ? 'var(--primary-color-6)' : 'var(--success-color-6)'
+    }
+  }
+  const genColumnStyle = (e: { columnIdx: number }) => {
+    return {
+      width: e.columnIdx === 0 ? '120px' : ''
+    }
+  }
 </script>
 
 <style lang="less">

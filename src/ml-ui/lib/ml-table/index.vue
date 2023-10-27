@@ -1,28 +1,107 @@
 <template>
   <view :class="className" :style="themeColors">
     <!-- 表格主题加载动画 -->
-    <view v-if="useGet(globalConstants, 'store.states.loading')" class="loading-overlay">
+    <view v-if="useGet<boolean>(globalConstants, 'store.states.loading')" class="loading-overlay">
       <view class="loader" />
     </view>
     <view class="hidden-columns"><slot /></view>
     <view class="table-header">
-      <MlTableHeader />
+      <scroll-view
+        :scroll-x="true"
+        :scroll-left="scrollLeftOffset"
+        :enable-flex="true"
+        class="ml-table-header"
+        @scroll="onTableBodyScroll"
+      >
+        <view class="ml-table-header__wrapper" :style="{ ...fixedPaddingOffset }">
+          <view
+            v-for="(nfColumn, nfIdx) in storeEntityStates.notFixedColumns"
+            :key="nfColumn.columnId"
+            :class="[
+              'ml-table-header__column',
+              `ml-table-header__column--${useGet(storeEntityStates, 'size', 'small')}`,
+              nfColumn.columnId
+            ]"
+            :style="{
+              width: `${nfColumn.width}px`,
+              borderRight:
+                storeEntityStates.border &&
+                (useGet(storeEntityStates, 'notFixedColumns.length', 0) as number) !== nfIdx + 1
+                  ? 'solid 1px var(--info-color-6)'
+                  : '',
+              ...(
+                useGet(storeEntityStates, 'columnStyle', () => {}) as TableEntityType['columnStyle']
+              )({ columnIdx: nfIdx, column: nfColumn })
+            }"
+          >
+            <text v-if="nfColumn.label">{{ nfColumn.label }}</text>
+            <text v-else-if="nfColumn.type === 'index'">序号</text>
+          </view>
+        </view>
+      </scroll-view>
+      <view class="ml-table-header-left-fixed__wrapper">
+        <view
+          v-for="(fColumn, nfIdx) in storeEntityStates.fixedColumns?.filter(
+            (column) => column.fixed === 'left'
+          )"
+          :key="fColumn.columnId"
+          :class="[
+            'ml-table-header__column',
+            `ml-table-header__column--${useGet(storeEntityStates, 'size', 'small')}`,
+            fColumn.columnId
+          ]"
+          :style="{
+            width: `${fColumn.width}px`,
+            borderRight:
+              storeEntityStates.border &&
+              (useGet(storeEntityStates, 'notFixedColumns.length', 0) as number) !== nfIdx + 1
+                ? 'solid 1px var(--info-color-6)'
+                : ''
+          }"
+        >
+          <text v-if="fColumn.label">{{ fColumn.label }}</text>
+          <text v-else-if="fColumn.type === 'index'">序号</text>
+        </view>
+      </view>
+      <view class="ml-table-header-right-fixed__wrapper">
+        <view
+          v-for="(fColumn, nfIdx) in storeEntityStates.fixedColumns?.filter(
+            (column) => column.fixed === 'right'
+          )"
+          :key="fColumn.columnId"
+          :class="[
+            'ml-table-header__column',
+            `ml-table-header__column--${useGet(storeEntityStates, 'size', 'small')}`,
+            fColumn.columnId
+          ]"
+          :style="{
+            width: `${fColumn.width}px`,
+            borderRight:
+              storeEntityStates.border &&
+              (useGet(storeEntityStates, 'notFixedColumns.length', 0) as number) !== nfIdx + 1
+                ? 'solid 1px var(--info-color-6)'
+                : ''
+          }"
+        >
+          <text v-if="fColumn.label">{{ fColumn.label }}</text>
+          <text v-else-if="fColumn.type === 'index'">序号</text>
+        </view>
+      </view>
     </view>
     <view class="table-body">
       <view
         v-if="useGet(globalConstants, 'store.states.data.length') === 0"
         class="empty-status"
         :style="{
-          height: `${useGet(globalConstants, 'store.states.height')}px`
+          height: useGet(globalConstants, 'store.states.height')
+            ? `${useGet(globalConstants, 'store.states.height', 0)}px`
+            : ''
         }"
       >
         <slot name="empty">
           <text>暂无数据</text>
         </slot>
       </view>
-      <!-- <MlTableBody v-slot="slotScope">
-        <slot name="body" :scope="slotScope" />
-      </MlTableBody> -->
       <scroll-view
         v-else
         :enable-flex="true"
@@ -31,10 +110,14 @@
         refresher-default-style="none"
         :scroll-y="true"
         :scroll-x="true"
+        :scroll-left="scrollLeftOffset"
         class="ml-table-body"
-        :style="{ ...heightStyle, ...themeColors }"
+        :style="{
+          height: `${useGet(globalConstants, 'store.states.height')}px`
+        }"
         bindrefresherrefresh="onRefreshing"
         bindrefresherrestore="onRefresherRestore"
+        @scroll="onTableBodyScroll"
       >
         <!-- 下拉刷新加载动画 -->
         <template #refresher>
@@ -43,16 +126,22 @@
             <view class="text">Loading...</view>
           </view>
         </template>
-        <view class="ml-table-body__wrapper">
+        <view class="ml-table-body__wrapper" :style="{ ...fixedPaddingOffset }">
           <view
             v-for="(row, index) in storeEntityStates.data"
             :key="index"
             :class="tableRowCls"
-            :style="generateRowStyle(storeEntityStates.stripe || false, index)"
+            :style="{
+              backgroundColor:
+                useGet(storeEntityStates, 'stripe', false) && index % 2 !== 0 ? '#F7F7F7' : '',
+              ...(useGet(storeEntityStates, 'rowStyle', () => {}) as TableEntityType['rowStyle'])({
+                rowIdx: index,
+                row
+              })
+            }"
             catchtap="rowTap"
             catchlongpress="rowLongPress"
           >
-            <view class="table-columns fixed-columns"></view>
             <view class="table-columns not-fixed-columns">
               <view
                 v-for="(column, columnIdx) in storeEntityStates.notFixedColumns"
@@ -61,13 +150,23 @@
                 :style="{
                   width: `${column.width}px`,
                   borderLeft:
-                    storeEntityStates.border && columnIdx === 0
+                    storeEntityStates.border && columnIdx !== 0
                       ? 'solid 1px var(--info-color-6)'
                       : '',
-                  borderRight: storeEntityStates.border ? 'solid 1px var(--info-color-6)' : '',
-                  ...getCellStyle(index, columnIdx)
+                  ...getCellStyle(index, columnIdx),
+                  ...(
+                    useGet(
+                      storeEntityStates,
+                      'columnStyle',
+                      () => {}
+                    ) as TableEntityType['columnStyle']
+                  )({ columnIdx, column }),
+                  ...(
+                    useGet(storeEntityStates, 'cellStyle', () => {}) as TableEntityType['cellStyle']
+                  )({ rowIdx: index, row, columnIdx, column })
                 }"
               >
+                <text v-if="column.type === 'index'">{{ index + 1 }}</text>
                 <slot
                   name="cell"
                   :column="column"
@@ -77,22 +176,93 @@
                 >
                   <text>{{ column.property && row[column.property] }}</text>
                 </slot>
-
-                <!-- <view
-                v-if="!column.custom || column.nodeType.length === 0 }}"
-                class="column-text"
-                ></view
-              >
-              <template
-                is="{{ row_data.settings.control_type ? row_data.settings.control_type : nf_column.nodeType }}"
-                wx:else
-                data="{{row_data, nf_column, idx, nf_idx, add_to_parent, tableMesh}}"
-              /> -->
               </view>
             </view>
           </view>
         </view>
       </scroll-view>
+      <view class="ml-table-body-left-fixed__wrapper">
+        <view
+          v-for="(row, index) in storeEntityStates.data"
+          :key="index"
+          :class="tableRowCls"
+          :style="{
+            backgroundColor:
+              useGet(storeEntityStates, 'stripe', false) && index % 2 !== 0 ? '#F7F7F7' : '',
+            ...(useGet(storeEntityStates, 'rowStyle', () => {}) as TableEntityType['rowStyle'])({
+              rowIdx: index,
+              row
+            })
+          }"
+        >
+          <view class="table-columns">
+            <view
+              v-for="(column, columnIdx) in storeEntityStates.fixedColumns?.filter(
+                (column) => column.fixed === 'left'
+              )"
+              :key="column.columnId"
+              :class="['custom-table__column', 'fixed-table__column', column.columnId]"
+              :style="{
+                width: `${column.width}px`,
+                borderLeft:
+                  storeEntityStates.border && columnIdx !== 0 ? 'solid 1px var(--info-color-6)' : ''
+              }"
+            >
+              <text v-if="column.type === 'index'">{{ index + 1 }}</text>
+              <slot
+                name="fixedCell"
+                :column="column"
+                :row="row"
+                :row-index="index"
+                :column-index="columnIdx"
+              >
+                <text>{{ column.property && row[column.property] }}</text>
+              </slot>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="ml-table-body-right-fixed__wrapper">
+        <view
+          v-for="(row, index) in storeEntityStates.data"
+          :key="index"
+          :class="tableRowCls"
+          :style="{
+            backgroundColor:
+              useGet(storeEntityStates, 'stripe', false) && index % 2 !== 0 ? '#F7F7F7' : '',
+            ...(useGet(storeEntityStates, 'rowStyle', () => {}) as TableEntityType['rowStyle'])({
+              rowIdx: index,
+              row
+            })
+          }"
+        >
+          <view class="table-columns">
+            <view
+              v-for="(column, columnIdx) in storeEntityStates.fixedColumns?.filter(
+                (column) => column.fixed === 'right'
+              )"
+              :key="column.columnId"
+              :class="['custom-table__column', 'fixed-table__column', column.columnId]"
+              :style="{
+                width: `${column.width}px`,
+                borderLeft:
+                  storeEntityStates.border && columnIdx !== 0 ? 'solid 1px var(--info-color-6)' : ''
+              }"
+            >
+              <text v-if="column.type === 'index'">{{ index + 1 }}</text>
+              <slot
+                name="fixedCell"
+                :column="column"
+                :row="row"
+                :row-index="index"
+                :column-index="columnIdx"
+              >
+                <text>{{ column.property && row[column.property] }}</text>
+              </slot>
+            </view>
+          </view>
+        </view>
+      </view>
     </view>
     <view class="table-footer"></view>
   </view>
@@ -102,10 +272,9 @@
   import { ref, computed, provide, getCurrentInstance, reactive, toRefs, watch } from 'vue'
   import type { PropType, ComponentInternalInstance } from 'vue'
   import { MlTableInjectionKey } from './context'
-  import MlTableHeader from './ml-table-header/index.vue'
   import useTheme from '../../src/hooks/useTheme'
   import { cs } from '../../utils/property'
-  import { generateDeviceUI } from '../../utils/rect'
+  import { generateDeviceUI, getRect } from '../../utils/rect'
   import { useDebounce, useDeepClone, useGet } from '../../utils/func'
   import { createStore } from '../ml-table-column/store/helper'
   import type StateWatcher from '../ml-table-column/store'
@@ -114,6 +283,7 @@
     Observer,
     type ColumnSettingType,
     type TableMeshStyle,
+    type TableEntityType,
     type TableCellType,
     type WatcherStatesType
   } from '../ml-table-column/interface'
@@ -136,20 +306,29 @@
       type: String as PropType<MlDesign.Size>,
       default: 'small'
     },
-    height: { type: Number, default: 0 },
+    height: { type: Number },
     refresherEnabled: { type: Boolean, default: false },
     refresherInterval: {
       type: Number,
       default: 1000
+    },
+    rowStyle: {
+      type: Function as PropType<TableEntityType['rowStyle']>
+    },
+    columnStyle: {
+      type: Function as PropType<TableEntityType['columnStyle']>
+    },
+    cellStyle: {
+      type: Function as PropType<TableEntityType['cellStyle']>
     }
   })
 
-  const { size } = toRefs(props)
+  const { size, border } = toRefs(props)
   const emit = defineEmits([])
   const { themeColors } = useTheme()
   const prefix = 'ml-table'
   const className = computed(() => {
-    return cs(prefix, [`${prefix}-${size.value}`])
+    return cs(prefix, [`${prefix}-${size.value}`], { [`${prefix}-border`]: border.value })
   })
 
   let tableIdSeed = 1
@@ -192,20 +371,23 @@
   const tableMesh = ref<TableMeshStyle>([])
   const { screenWidth } = generateDeviceUI().ui
 
-  const computeColumnWidth = (remain_width: number) => {
+  const computeColumnWidth = async (remainWidth: number) => {
     // if (!globalCtx) return
-    if (remain_width === 0) remain_width = screenWidth
+    if (remainWidth === 0) {
+      const { width } = await getRect(instance, '.ml-table')
+      remainWidth = width ?? screenWidth
+    }
     const { notFixedColumns } = storeEntityStates.value
     if (!notFixedColumns) return
     let notSetWidthNum = 0
     const widthList = notFixedColumns.map((item: ColumnSettingType) => {
-      let column_width: number = item.width === undefined ? 0 : item.width
-      if (column_width === 0) notSetWidthNum++
-      else remain_width -= column_width
-      return column_width
+      let columnWidth: number = item.width === undefined ? 0 : item.width
+      if (columnWidth === 0) notSetWidthNum++
+      else remainWidth -= columnWidth
+      return columnWidth
     })
     if (notSetWidthNum !== 0) {
-      const final_width = remain_width / notSetWidthNum
+      const final_width = remainWidth / notSetWidthNum
       widthList.forEach((item: number, index: number) => {
         let width = item
         if (width === 0) width = final_width
@@ -213,6 +395,19 @@
       })
     }
   }
+
+  const fixedPaddingOffset = computed(() => {
+    let paddingLeft: number = 0
+    let paddingRight: number = 0
+    useGet<ColumnSettingType[]>(storeEntityStates.value, 'fixedColumns', []).forEach((column) => {
+      if (column.fixed === 'left') paddingLeft += column.width ?? 0
+      else if (column.fixed === 'right') paddingRight += column.width ?? 0
+    })
+    return {
+      paddingLeft: `${paddingLeft}px`,
+      paddingRight: `${paddingRight}px`
+    }
+  })
 
   const generateTableMesh = (rows: number, columns: number) => {
     const lastRows = tableMesh.value.length
@@ -260,20 +455,6 @@
       // this.invokeFuncList(funcList)
     })
   }
-  const generateRowStyle = (stripe: boolean, index: number) => {
-    let rowStyle = ''
-    if (stripe) {
-      rowStyle += index % 2 !== 0 ? 'background-color: #F7F7F7;' : ''
-    }
-    return rowStyle
-  }
-
-  // 计算 ml-table-body 的高度
-  const heightStyle = ref({ height: '' })
-  const generateHeight = (store: StateWatcher) => {
-    const height = store.states.height
-    heightStyle.value.height = height && height !== 0 ? `height: ${height}px;` : ''
-  }
 
   watch(
     () => props,
@@ -289,10 +470,20 @@
     if (!store) return
     globalConstants.store = store.getStore()
     storeEntityStates.value = globalConstants.store.states
-    generateHeight(globalConstants.store)
     rowRender(globalConstants.store)
   }
   tableObserver.update = useDebounce(newUpdate, { delay: 1000 })
+
+  const scrollLeftOffset = ref<number>(0)
+  // const onTableBodyScroll = useThrottle(
+  //   (e: { detail: { scrollLeft: number } }) => {
+  //     scrollLeftOffset.value = e.detail.scrollLeft
+  //   },
+  //   { delay: 1000 / 60 }
+  // )
+  const onTableBodyScroll = (e: { detail: { scrollLeft: number } }) => {
+    scrollLeftOffset.value = e.detail.scrollLeft
+  }
 
   provide(MlTableInjectionKey, {
     tableId,

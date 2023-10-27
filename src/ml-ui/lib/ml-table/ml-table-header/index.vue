@@ -19,14 +19,19 @@
         ]"
         :style="{
           width: `${nfColumn.width}px`,
-          borderLeft:
-            storeEntityStates.border && nfIdx === 0 ? 'solid 1px var(--info-color-6)' : '',
-          borderRight: storeEntityStates.border ? 'solid 1px var(--info-color-6)' : '',
-          ...getCellStyle(nfIdx)
+          borderRight:
+            storeEntityStates.border &&
+            (useGet(storeEntityStates, 'notFixedColumns.length', 0) as number) !== nfIdx + 1
+              ? 'solid 1px var(--info-color-6)'
+              : '',
+          ...getCellStyle(nfIdx),
+          ...(useGet(storeEntityStates, 'columnStyle', () => {}) as TableEntityType['columnStyle'])(
+            { columnIdx: nfIdx, column: nfColumn }
+          )
         }"
       >
         <text v-if="nfColumn.label">{{ nfColumn.label }}</text>
-        <text v-else-if="nfColumn.nodeType === 'index'">序号</text>
+        <text v-else-if="nfColumn.type === 'index'">序号</text>
       </view>
     </view>
     <!-- <view class="right-fixed-columns"></view> -->
@@ -42,7 +47,11 @@
   import { useGet } from '../../../utils/func'
   import { generateDeviceUI } from '../../../utils/rect'
   import type StateWatcher from '../../ml-table-column/store'
-  import type { ColumnSettingType, WatcherStatesType } from '../../ml-table-column/interface'
+  import type {
+    ColumnSettingType,
+    WatcherStatesType,
+    TableEntityType
+  } from '../../ml-table-column/interface'
   import type { TableCellType } from '../ml-table-body/type'
 
   // const props = defineProps({})

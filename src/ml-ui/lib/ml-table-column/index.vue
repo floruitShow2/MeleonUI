@@ -4,6 +4,7 @@
 
 <script setup lang="ts">
   import { toRefs, onMounted, inject } from 'vue'
+  import type { PropType } from 'vue'
   import { useCompose } from '../../utils/func'
   import { ForcedProperty, type ColumnSettingType } from './interface/config'
   import { MlTableInjectionKey } from '../ml-table/context'
@@ -15,11 +16,15 @@
       type: Boolean,
       default: false
     },
-    nodeType: { type: String },
+    type: { type: String as PropType<ColumnSettingType['type']> },
     width: { type: Number, default: 0 },
-    minWidth: { type: Number, default: 0 }
+    minWidth: { type: Number, default: 0 },
+    fixed: {
+      type: [Boolean, String] as PropType<boolean | 'left' | 'right'>,
+      default: false
+    }
   })
-  const { label, prop, nodeType, width, minWidth, custom } = toRefs(props)
+  const { label, prop, type, width, minWidth, custom, fixed } = toRefs(props)
 
   // 获取 ml-table 组件注入的变量
   const globalContext = inject(MlTableInjectionKey)
@@ -30,24 +35,14 @@
   }
   const mergePropsData = (propsList: ColumnSettingType[]) => {
     return propsList.reduce((accu: ColumnSettingType, next: ColumnSettingType) => {
-      // if (Array.isArray(next)) {
-      //   next.forEach((item) => {
-      //     accu[item as keyof ColumnSettingType] = props[item]
-      //     //   this.data[item]
-      //     //     ? this.data[item]
-      //     //     : this.properties[item]
-      //   })
-      // } else {
-      //   accu = { ...accu, ...next }
-      // }
       return { ...accu, ...next }
     }, {})
   }
   const setColumnForcedProps = (column: ColumnSettingType): ColumnSettingType => {
     // 根据 column 的类型，禁止开发者对部分属性的设置
-    const type = column.type
-    if (type) {
-      const source = ForcedProperty[type]
+    const columnType = column.type
+    if (columnType) {
+      const source = ForcedProperty[columnType]
       type SourceKey = keyof typeof source
       Object.keys(source).forEach((key) => {
         const forcedValue = source[key as SourceKey]
@@ -77,12 +72,21 @@
     // 准备好完整的 props 配置项
     const defaults: ColumnSettingType = {
       columnId,
-      property: prop.value,
       width: width?.value,
       minWidth: minWidth?.value
     }
-    const basicProps = { label: label.value }
-    const customProps = { custom: custom.value, nodeType: nodeType?.value }
+    const basicProps = { label: label.value, property: prop.value }
+    const customProps = {
+      custom: custom.value,
+      type: type?.value,
+      fixed: (() => {
+        if (typeof fixed.value === 'boolean') {
+          return fixed.value ? 'right' : undefined
+        } else {
+          return fixed.value
+        }
+      })()
+    }
     let columnConfig = mergePropsData([defaults, basicProps, customProps])
     // 通过 compose 函数链式调用多个函数，并将处理结果赋值给 columnConfig
     const chainsFunc = useCompose(setColumnWidth, setColumnForcedProps)

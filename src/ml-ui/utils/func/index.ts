@@ -26,6 +26,30 @@ export const useDebounce = (fn: AnyFunction, options?: DebounceOptions) => {
     )
   }
 }
+// 节流
+export const useThrottle = (fn: AnyFunction, options?: DebounceOptions) => {
+  let timeout: number | null = null
+  let previous = 0
+  const delay = options?.delay ?? 500
+
+  const throttled = <T>(...args: T[]) => {
+    const now = Date.now()
+    if (previous && now < previous + delay) {
+      if (timeout) {
+        clearTimeout(timeout)
+      }
+      timeout = setTimeout(() => {
+        previous = now
+        fn(...args)
+      }, delay)
+    } else {
+      previous = now
+      fn(...args)
+    }
+  }
+
+  return throttled
+}
 
 // 深拷贝
 export const useDeepClone: <T>(target: T) => T = (target) => {
@@ -52,16 +76,15 @@ export const useDeepClone: <T>(target: T) => T = (target) => {
   }
   return temp
 }
-export function useGet<T>(source: Record<string, any>, path: string, defaultValue?: T) {
+export function useGet<T>(source: Record<string, any>, path: string, defaultValue?: any): T {
   // a[3].b -> a.3.b
   const paths = path.replace(/\[(\d+)\]/g, '.$1').split('.')
   let result = source
   for (const p of paths) {
     result = result[p]
     if (result === undefined) {
-      console.log(result, p, source)
       return defaultValue
     }
   }
-  return result as unknown
+  return result as T
 }
