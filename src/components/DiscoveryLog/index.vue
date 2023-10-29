@@ -8,7 +8,18 @@
       </view>
     </view>
     <view :class="`${prefix}-content`">
-      <p class="description">{{ content }}</p>
+      <p
+        :class="{
+          description: true,
+          'hidden-content': !showAllContent
+        }"
+        @click="showAllContent = !showAllContent"
+      >
+        {{ content }}
+      </p>
+      <!-- <MlButton type="text" size="mini" style="padding: 0">{{
+        showAllContent ? '收起' : '展开'
+      }}</MlButton> -->
     </view>
     <view :class="`${prefix}-images`">
       <view v-for="idx in images" :key="idx" class="images-item"></view>
@@ -21,10 +32,11 @@
 </template>
 
 <script setup lang="ts">
-  import { toRefs, computed } from 'vue'
+  import { ref, toRefs, computed } from 'vue'
   import type { PropType } from 'vue'
   import { cs } from '@/utils/property'
   import { formatToDateTime } from '@/utils/time'
+  import MlButton from '@/ml-ui/lib/ml-button/index.vue'
 
   const props = defineProps({
     publisher: {
@@ -51,6 +63,8 @@
   const className = computed(() => {
     return cs(prefix)
   })
+
+  const showAllContent = ref<boolean>(false)
 </script>
 
 <style lang="less">

@@ -1,12 +1,13 @@
 <template>
   <view :class="className" @click="handleIconClick">
     <icon
-      :class="['ml-icon', icon]"
+      :class="['ml-icon-inner', icon]"
       :style="{
         color,
         fontSize: `${size}px`,
         width: `${size}px`,
-        height: `${size}px`
+        height: `${size}px`,
+        lineHeight: `${size}px`
       }"
     />
   </view>

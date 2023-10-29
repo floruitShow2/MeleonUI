@@ -52,6 +52,7 @@ module.exports = {
     '@typescript-eslint/no-empty-function': 1,
     '@typescript-eslint/no-explicit-any': 0,
     '@typescript-eslint/no-this-alias': 0,
+    '@typescript-eslint/no-var-requires': 0,
     'import/extensions': [
       2,
       'ignorePackages',

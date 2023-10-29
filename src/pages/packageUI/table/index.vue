@@ -25,8 +25,12 @@
               border
               :height="200"
               :loading="false"
+              :refresher-enabled="true"
+              :refresher-interval="2000"
               :row-style="genRowStyle"
               :column-style="genColumnStyle"
+              @row-click="onRowClick"
+              @cell-click="onCellClick"
             >
               <template #cell="{ column, row }">
                 <block v-if="column.property === 'gender'">
@@ -119,6 +123,13 @@
     return {
       width: e.columnIdx === 0 ? '120px' : ''
     }
+  }
+
+  const onRowClick = (...args: any[]) => {
+    console.log('row clicked', args)
+  }
+  const onCellClick = (...args: any[]) => {
+    console.log('cell clicked', args)
   }
 </script>
 

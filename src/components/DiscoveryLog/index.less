@@ -24,12 +24,19 @@
     &-content {
         margin-bottom: 8px;
         overflow: auto;
+        #flex(row, flex-end, flex-end);
         .description {
             word-break: break-all;
             font-size: 14px;
             text-indent: 16px;
             line-height: 22px;
             color: @--primary-text;
+        }
+        .hidden-content {
+            overflow: hidden; /*超出部分隐藏*/
+            display: -webkit-box; /*将元素设为盒子伸缩模型显示*/
+            -webkit-box-orient: vertical; /*伸缩方向设为垂直方向*/
+            -webkit-line-clamp: 3; /*超出3行隐藏，并显示省略号*/
         }
     }
     &-images {

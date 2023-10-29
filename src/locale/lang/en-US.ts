@@ -1,3 +1,4 @@
+import HomeLocale from '@/pages/home/locale/en-US'
 import ProfileLocale from '@/pages/profile/locale/en-US'
 
 const defaultLocale = {
@@ -7,6 +8,7 @@ const defaultLocale = {
 
 const enUS = {
   ...defaultLocale,
+  ...HomeLocale,
   ...ProfileLocale
 }
 export default enUS

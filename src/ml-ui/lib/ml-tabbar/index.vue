@@ -67,14 +67,14 @@
       key: 'articles',
       path: '/pages/articles/index'
     },
-    {
-      icon: 'ml-plus',
-      selectIcon: '',
-      label: '',
-      key: 'center',
-      path: '',
-      type: 'main'
-    },
+    // {
+    //   icon: 'ml-plus',
+    //   selectIcon: '',
+    //   label: '',
+    //   key: 'center',
+    //   path: '',
+    //   type: 'main'
+    // },
     {
       icon: 'ml-tab-idea',
       selectIcon: 'ml-tab-idea-select',

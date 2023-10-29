@@ -3,7 +3,6 @@
     <MlNavigator
       title="discovery"
       title-color="#FFFFFF"
-      has-back
       icon-color="#FFFFFF"
       background-color="#7A98B3"
     />
@@ -17,7 +16,7 @@
         :images="log.imageNums"
       >
         <template #avatar>
-          <MlAvatar :size="44" shape="circle">
+          <MlAvatar :size="36" shape="circle">
             <image src="@/assets/home/avatar.png" mode="widthFix" />
           </MlAvatar>
         </template>

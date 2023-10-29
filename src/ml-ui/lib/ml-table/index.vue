@@ -105,8 +105,8 @@
       <scroll-view
         v-else
         :enable-flex="true"
-        :refresher-enabled="storeEntityStates.refresherEnabled"
-        refresher-triggered="{{trigger}}"
+        :refresher-enabled="useGet(storeEntityStates, 'refresherEnabled', false)"
+        :refresher-triggered="refresherTrigger"
         refresher-default-style="none"
         :scroll-y="true"
         :scroll-x="true"
@@ -118,6 +118,7 @@
         bindrefresherrefresh="onRefreshing"
         bindrefresherrestore="onRefresherRestore"
         @scroll="onTableBodyScroll"
+        @refresherrefresh="onStartRefresh"
       >
         <!-- 下拉刷新加载动画 -->
         <template #refresher>
@@ -139,8 +140,7 @@
                 row
               })
             }"
-            catchtap="rowTap"
-            catchlongpress="rowLongPress"
+            @click="($event) => onRowClick(row, index, $event)"
           >
             <view class="table-columns not-fixed-columns">
               <view
@@ -153,7 +153,7 @@
                     storeEntityStates.border && columnIdx !== 0
                       ? 'solid 1px var(--info-color-6)'
                       : '',
-                  ...getCellStyle(index, columnIdx),
+                  // ...getCellStyle(index, columnIdx),
                   ...(
                     useGet(
                       storeEntityStates,
@@ -165,6 +165,7 @@
                     useGet(storeEntityStates, 'cellStyle', () => {}) as TableEntityType['cellStyle']
                   )({ rowIdx: index, row, columnIdx, column })
                 }"
+                @click="($event) => onCellClick(row, index, column, columnIdx, $event)"
               >
                 <text v-if="column.type === 'index'">{{ index + 1 }}</text>
                 <slot
@@ -282,9 +283,7 @@
   import {
     Observer,
     type ColumnSettingType,
-    type TableMeshStyle,
     type TableEntityType,
-    type TableCellType,
     type WatcherStatesType
   } from '../ml-table-column/interface'
 
@@ -324,20 +323,28 @@
   })
 
   const { size, border } = toRefs(props)
-  const emit = defineEmits([])
+  const emit = defineEmits(['rowClick', 'cellClick'])
+
   const { themeColors } = useTheme()
   const prefix = 'ml-table'
   const className = computed(() => {
     return cs(prefix, [`${prefix}-${size.value}`], { [`${prefix}-border`]: border.value })
   })
 
+  // 创建 ml-table 标识符
   let tableIdSeed = 1
   let columnIdSeed = 1
   const tableId = 'ml-table__' + tableIdSeed++
-  const tableObserver = new Observer('table')
+
+  const getColumnId = () => {
+    return tableId + '_column_' + columnIdSeed++
+  }
 
   const instance = getCurrentInstance()
+
+  // 初始化 store 实例和 state 实例
   const storeEntity = createStore(instance, {})
+  const tableObserver = new Observer('table')
   storeEntity.addObserver(tableObserver)
   const globalConstants = reactive<{
     store: StateWatcher
@@ -356,9 +363,40 @@
     }
   }
 
-  const getColumnId = () => {
-    return tableId + '_column_' + columnIdSeed++
+  const rowRender = () => {
+    const query = uni.createSelectorQuery().in(instance)
+    query.select('.table-body').boundingClientRect()
+    query.exec((res) => {
+      if (res[0] === null) return
+      // 基于父容器宽度计算列宽
+      computeColumnWidth(res[0].width)
+    })
   }
+
+  watch(
+    () => props,
+    (newVal) => {
+      setStoreData({ ...useDeepClone(newVal), tableId })
+    },
+    { immediate: true, deep: true }
+  )
+
+  // 重写 update 函数，监听发布方事件广播行为
+  const newUpdate = () => {
+    const { store } = globalConstants
+    if (!store) return
+    globalConstants.store = store.getStore()
+    storeEntityStates.value = globalConstants.store.states
+    rowRender()
+  }
+  tableObserver.update = useDebounce(newUpdate, { delay: 1000 })
+
+  provide(MlTableInjectionKey, {
+    tableId,
+    storeEntity: globalConstants.store,
+    table: globalConstants.table,
+    getColumnId
+  })
 
   const rowPrefix = 'ml-table-body'
   const tableRowCls = computed(() => {
@@ -368,7 +406,6 @@
     )
   })
 
-  const tableMesh = ref<TableMeshStyle>([])
   const { screenWidth } = generateDeviceUI().ui
 
   const computeColumnWidth = async (remainWidth: number) => {
@@ -409,88 +446,35 @@
     }
   })
 
-  const generateTableMesh = (rows: number, columns: number) => {
-    const lastRows = tableMesh.value.length
-    const lastColumns = tableMesh.value[0] ? tableMesh.value[0].length : 0
-    if (lastColumns === columns && lastRows === rows) return tableMesh.value
-    // 注意，由于每个元素都是引用类型，创建数组时需要避免存储的是同一个元素的地址值
-    const mesh: TableMeshStyle = new Array(rows).fill('').map(() => {
-      return new Array(columns).fill('').map(() => {
-        const column: TableCellType = { style: {}, tagStyle: '' }
-        return column
-      })
-    })
-    return mesh
-  }
-  const getCellStyle = (rowIdx: number, columnIdx: number) => {
-    const rows = tableMesh.value.length
-    const columns = (tableMesh.value[0] || []).length
-    if (rowIdx >= rows || columnIdx >= columns) return {}
-    return tableMesh.value[rowIdx][columnIdx].style
-  }
-
-  const rowRender = (store: StateWatcher) => {
-    const query = uni.createSelectorQuery().in(instance)
-    query.select('.table-body').boundingClientRect()
-    query.exec((res) => {
-      if (res[0] === null) return
-      // const { funcList } = store.states
-      // 基于父容器宽度计算列宽
-      computeColumnWidth(res[0].width)
-      // 生成样式矩阵
-      const rows = (store.states.data || []).length
-      const columns = (store.states.notFixedColumns || []).length
-      tableMesh.value = generateTableMesh(rows, columns)
-      // 更新 states 以及 mesh 数据
-      // this.setData({
-      //   states: store.states,
-      //   add_to_parent:
-      //     store.states.refresher_enabled !== undefined ? store.states.refresher_enabled : false,
-      //   refresher_interval:
-      //     store.states.refresher_interval !== undefined ? store.states.refresher_interval : false,
-      //   tableMesh: mesh
-      // })
-      // 执行传入的自定义函数
-      // if (!funcList) return
-      // this.invokeFuncList(funcList)
-    })
-  }
-
-  watch(
-    () => props,
-    (newVal) => {
-      setStoreData({ ...useDeepClone(newVal), tableId })
-    },
-    { immediate: true, deep: true }
-  )
-
-  // 重写 update 函数，监听发布方事件广播行为
-  const newUpdate = () => {
-    const { store } = globalConstants
-    if (!store) return
-    globalConstants.store = store.getStore()
-    storeEntityStates.value = globalConstants.store.states
-    rowRender(globalConstants.store)
-  }
-  tableObserver.update = useDebounce(newUpdate, { delay: 1000 })
-
   const scrollLeftOffset = ref<number>(0)
-  // const onTableBodyScroll = useThrottle(
-  //   (e: { detail: { scrollLeft: number } }) => {
-  //     scrollLeftOffset.value = e.detail.scrollLeft
-  //   },
-  //   { delay: 1000 / 60 }
-  // )
   const onTableBodyScroll = (e: { detail: { scrollLeft: number } }) => {
     scrollLeftOffset.value = e.detail.scrollLeft
   }
 
-  provide(MlTableInjectionKey, {
-    tableId,
-    storeEntity: globalConstants.store,
-    table: globalConstants.table,
-    getColumnId
-  })
+  const refresherTrigger = ref<boolean>(false)
+  const onStartRefresh = () => {
+    refresherTrigger.value = true
+    const refreshInterval = useGet<number>(storeEntityStates.value, 'refresherInterval', 500)
+    setTimeout(() => {
+      refresherTrigger.value = false
+    }, refreshInterval)
+  }
+
+  // 事件机制
+  const onRowClick = (row: any, rowIndex: number, e: MouseEvent) => {
+    e.preventDefault()
+    emit('rowClick', { row, rowIndex, $event: e })
+  }
+  const onCellClick = (
+    row: any,
+    rowIndex: number,
+    column: ColumnSettingType,
+    columnIndex: number,
+    e: MouseEvent
+  ) => {
+    e.preventDefault()
+    emit('cellClick', { row, rowIndex, column, columnIndex, $event: e })
+  }
 </script>
 
 <style lang="less">
