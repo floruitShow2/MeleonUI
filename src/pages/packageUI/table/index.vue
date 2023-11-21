@@ -27,8 +27,7 @@
               :loading="false"
               :refresher-enabled="true"
               :refresher-interval="2000"
-              :row-style="genRowStyle"
-              :column-style="genColumnStyle"
+              style="width: 100%"
               @row-click="onRowClick"
               @cell-click="onCellClick"
             >

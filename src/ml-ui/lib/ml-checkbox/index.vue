@@ -29,7 +29,6 @@
   const globalCtx = inject(checkboxGroupInjectionKey, null)
 
   const className = computed(() => {
-    // console.log(globalCtx && globalCtx.getDisabledList())
     return cs(prefix, {
       [`${prefix}-disabled`]:
         disabled.value ||

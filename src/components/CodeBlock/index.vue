@@ -50,11 +50,9 @@
 
   const showCode = ref(false)
   const onCodeClick = () => {
-    console.log('1')
     showCode.value = !showCode.value
   }
   const onCopy = () => {
-    console.log('2')
     if (showCode.value) uni.setClipboardData({ data: code.value })
   }
 </script>

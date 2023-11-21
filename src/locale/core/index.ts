@@ -17,7 +17,6 @@ export class LocaleCore {
     this.initLocale(options)
   }
   $t(key: string) {
-    console.log(key, this)
     switch (this.locale) {
       case 'zh-CN':
         return this.zhCN[key] || ''
@@ -31,7 +30,6 @@ export class LocaleCore {
     this.locale = value
   }
   getLocale() {
-    console.log(this.locale)
     return this.locale === 'zh-CN' ? this.zhCN : this.enUS
   }
   setLocale(options: LocaleCoreOptionsType) {
@@ -45,6 +43,5 @@ export class LocaleCore {
       this.zhCN = { ...this.zhCN, ...(messages['zh-CN'] || {}) }
       this.enUS = { ...this.enUS, ...(messages['en-US'] || {}) }
     }
-    console.log(this)
   }
 }

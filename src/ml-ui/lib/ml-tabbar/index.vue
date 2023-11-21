@@ -102,7 +102,6 @@
     const { path, key } = option
     if (!path) return
     activeTab.value = key
-    console.log(path)
     uni.switchTab({
       url: path
     })

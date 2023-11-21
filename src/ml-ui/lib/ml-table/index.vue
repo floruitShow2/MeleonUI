@@ -39,6 +39,7 @@
           </view>
         </view>
       </scroll-view>
+      <!-- 左侧固定列 -->
       <view class="ml-table-header-left-fixed__wrapper">
         <view
           v-for="(fColumn, nfIdx) in storeEntityStates.fixedColumns?.filter(
@@ -63,6 +64,7 @@
           <text v-else-if="fColumn.type === 'index'">序号</text>
         </view>
       </view>
+      <!-- 右侧固定列 -->
       <view class="ml-table-header-right-fixed__wrapper">
         <view
           v-for="(fColumn, nfIdx) in storeEntityStates.fixedColumns?.filter(
@@ -89,6 +91,7 @@
       </view>
     </view>
     <view class="table-body">
+      <!-- 空状态 -->
       <view
         v-if="useGet(globalConstants, 'store.states.data.length') === 0"
         class="empty-status"
@@ -102,6 +105,7 @@
           <text>暂无数据</text>
         </slot>
       </view>
+      <!-- 常规列 -->
       <scroll-view
         v-else
         :enable-flex="true"
@@ -118,7 +122,7 @@
         bindrefresherrefresh="onRefreshing"
         bindrefresherrestore="onRefresherRestore"
         @scroll="onTableBodyScroll"
-        @refresherrefresh="onStartRefresh"
+        @refresherrefresh="onTableBodyRefresh"
       >
         <!-- 下拉刷新加载动画 -->
         <template #refresher>
@@ -182,6 +186,7 @@
           </view>
         </view>
       </scroll-view>
+      <!-- 左侧固定列 -->
       <view class="ml-table-body-left-fixed__wrapper">
         <view
           v-for="(row, index) in storeEntityStates.data"
@@ -189,7 +194,7 @@
           :class="tableRowCls"
           :style="{
             backgroundColor:
-              useGet(storeEntityStates, 'stripe', false) && index % 2 !== 0 ? '#F7F7F7' : '',
+              useGet(storeEntityStates, 'stripe', false) && index % 2 !== 0 ? '#F7F7F7' : '#FFFFFF',
             ...(useGet(storeEntityStates, 'rowStyle', () => {}) as TableEntityType['rowStyle'])({
               rowIdx: index,
               row
@@ -223,6 +228,7 @@
           </view>
         </view>
       </view>
+      <!-- 右侧固定列 -->
       <view class="ml-table-body-right-fixed__wrapper">
         <view
           v-for="(row, index) in storeEntityStates.data"
@@ -230,7 +236,7 @@
           :class="tableRowCls"
           :style="{
             backgroundColor:
-              useGet(storeEntityStates, 'stripe', false) && index % 2 !== 0 ? '#F7F7F7' : '',
+              useGet(storeEntityStates, 'stripe', false) && index % 2 !== 0 ? '#F7F7F7' : '#FFFFFF',
             ...(useGet(storeEntityStates, 'rowStyle', () => {}) as TableEntityType['rowStyle'])({
               rowIdx: index,
               row
@@ -452,7 +458,7 @@
   }
 
   const refresherTrigger = ref<boolean>(false)
-  const onStartRefresh = () => {
+  const onTableBodyRefresh = () => {
     refresherTrigger.value = true
     const refreshInterval = useGet<number>(storeEntityStates.value, 'refresherInterval', 500)
     setTimeout(() => {

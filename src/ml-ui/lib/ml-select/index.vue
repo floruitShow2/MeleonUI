@@ -257,7 +257,6 @@
   const handleSearch = (query: MlOptionProps['value']) => {
     hiddenList.value = options.value
       .filter((option) => {
-        console.log(query, option.value)
         if (typeof option.value === 'string') {
           return option.label.indexOf(query.toString()) === -1
         } else {

@@ -14,7 +14,6 @@ class StateWatcher extends Watcher {
         Object.keys(payload).forEach((key) => {
           states[key] = payload[key]
         })
-        console.log(states)
       },
       insertColumns: function (states, column, index) {
         const array = states._columns
@@ -44,7 +43,6 @@ class StateWatcher extends Watcher {
     return this
   }
   getStates() {
-    console.log(this.states.size)
     return this.states
   }
   // 观察者模式，实现广播事件的发布与监听

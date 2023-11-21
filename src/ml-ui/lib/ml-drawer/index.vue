@@ -114,7 +114,6 @@
   })
 
   const handleCloseDrawer = (e: MouseEvent) => {
-    console.log(e)
     emit('close')
     emit('update:visible', false)
   }

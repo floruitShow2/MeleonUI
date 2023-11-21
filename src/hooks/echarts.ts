@@ -92,9 +92,6 @@ export function useEcharts(
 
   const initialSize = { width: 0, height: 0 }
   const sizes = computed(() => {
-    if (domRef.value) {
-      console.log(domRef.value)
-    }
     return {
       width: 150,
       height: 150

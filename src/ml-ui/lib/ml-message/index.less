@@ -1,0 +1,91 @@
+#item-style {
+    padding: 5px 12px;
+    max-width: 60vw;
+    min-width: 120px;
+    margin-top: 10px;
+    font-size: 14px;
+    line-height: 20px;
+    border: solid 1px;
+    opacity: 0;
+    pointer-events: all;
+    color: var(--primary-color-6);
+    border-color: var(--primary-color-4);
+    background-color: var(--primary-color-2);
+    box-shadow: 2px 2px 8px 0 rgba(155, 155, 155, 0.2);
+    transition: all 0.2s ease;
+}
+
+.ml-message {
+    pointer-events: none;
+    &-top__wrapper {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        z-index: 9999;
+    }
+    &-bottom__wrapper {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        z-index: 9999;
+    }
+
+    &-item {
+        #item-style();
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        &--closable {
+            justify-content: space-between;
+        }
+        &--content {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+        }
+    }
+
+    .is-info {
+        color: var(--info-color-8);
+        border-color: var(--info-color-4);
+        background-color: var(--info-color-2);
+    }
+    .is-success {
+        color: var(--success-color-6);
+        border-color: var(--success-color-3);
+        background-color: var(--success-color-2);
+    }
+    .is-warning {
+        color: var(--warning-color-6);
+        border-color: var(--warning-color-3);
+        background-color: var(--warning-color-2);
+    }
+    .is-danger {
+        color: var(--danger-color-6);
+        border-color: var(--danger-color-3);
+        background-color: var(--danger-color-2);
+    }
+}
+
+@keyframes slide-in {
+    from {
+        opacity: 0;
+        transform: translateY(100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

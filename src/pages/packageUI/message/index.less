@@ -1,14 +1,23 @@
 @import '@/styles/layout.less';
 @import '@/styles/theme.less';
-.table-view {
+.message-view {
   &-wrapper {
     box-sizing: border-box;
     padding: 10px;
     overflow: auto;
-    .table-container {
+    .button-container {
       flex-wrap: wrap;
       align-content: flex-start;
       #flex(row, center, flex-start);
+      .ml-button {
+        margin: 0 8px 8px 0;
+      }
+    }
+    .duration-container {
+      #flex(column, flex-start, center);
+      .ml-input {
+        margin-bottom: 8px;
+      }
     }
   }
 }

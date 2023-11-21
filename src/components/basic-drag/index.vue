@@ -145,7 +145,6 @@
             key: Math.random() + index
           }
         })
-        console.log(this.list)
         this.cloneList = this.deepCopy(this.list)
       },
 

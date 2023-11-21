@@ -49,12 +49,12 @@
     { name: 'ml-count-to', path: '/pages/packageUI/countTo/index' },
     { name: 'ml-drawer', path: '/pages/packageUI/drawer/index' },
     { name: 'ml-table', path: '/pages/packageUI/table/index' },
+    { name: 'ml-message', path: '/pages/packageUI/message/index' },
     { name: 'ml-swiper-cell', path: '../../package-WsUI/pages/swiperCell/swiperCell' },
     { name: 'ml-timeline', path: '../../package-WsUI/pages/timeline/timeline' }
   ])
 
   const onNavigate = (item: ComponentItemType) => {
-    console.log(item)
     uni.navigateTo({
       url: item.path
     })

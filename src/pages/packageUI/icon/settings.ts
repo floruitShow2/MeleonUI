@@ -6,6 +6,48 @@ export default {
   description: '',
   glyphs: [
     {
+      icon_id: '8106223',
+      name: 'cancel',
+      font_class: 'close--circle',
+      unicode: 'e698',
+      unicode_decimal: 59032
+    },
+    {
+      icon_id: '8106241',
+      name: 'information',
+      font_class: 'info--circle',
+      unicode: 'e6a5',
+      unicode_decimal: 59045
+    },
+    {
+      icon_id: '8106248',
+      name: 'selection',
+      font_class: 'selection--circle',
+      unicode: 'e6a6',
+      unicode_decimal: 59046
+    },
+    {
+      icon_id: '11992738',
+      name: 'github',
+      font_class: 'github',
+      unicode: 'e6a9',
+      unicode_decimal: 59049
+    },
+    {
+      icon_id: '18531280',
+      name: 'right arrow',
+      font_class: 'arrow-right--line',
+      unicode: 'e701',
+      unicode_decimal: 59137
+    },
+    {
+      icon_id: '38175316',
+      name: 'right arrow',
+      font_class: 'arrow-left--line',
+      unicode: 'e87f',
+      unicode_decimal: 59519
+    },
+    {
       icon_id: '12865674',
       name: 'night',
       font_class: 'night',

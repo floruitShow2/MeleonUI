@@ -35,6 +35,12 @@
 			"style": {
 				"navigationStyle": "custom"
 			}
+		},
+		{
+			"path": "pages/webview/index",
+			"style": {
+				"navigationStyle": "custom"
+			}
 		}
 	],
 	"subPackages": [
@@ -109,6 +115,12 @@
 				},
 				{
 					"path": "table/index",
+					"style": {
+						"navigationStyle": "custom"
+					}
+				},
+				{
+					"path": "message/index",
 					"style": {
 						"navigationStyle": "custom"
 					}

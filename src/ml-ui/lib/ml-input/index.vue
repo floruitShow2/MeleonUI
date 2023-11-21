@@ -58,7 +58,7 @@
 
   const props = defineProps({
     modelValue: {
-      type: String,
+      type: [String, Number],
       default: ''
     },
     size: { type: String as PropType<MlDesign.Size>, default: 'small' },

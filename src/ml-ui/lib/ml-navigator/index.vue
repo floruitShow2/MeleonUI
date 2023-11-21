@@ -31,19 +31,6 @@
         <template v-for="tool in toolBox" :key="tool">
           <MlIcon :icon="tool.icon" :color="tool.color" @click="switchToPage(tool)" />
         </template>
-
-        <!-- <van-icon
-          wx:for="{{toolBox}}"
-          wx:key="index"
-          wx:for-item="tool"
-          class="van-icon"
-          name="{{tool.icon}}"
-          color="{{tool.color}}"
-          bindtap="switchToPage"
-          data-type="{{tool.type}}"
-          data-delta="{{tool.delta}}"
-          data-pageurl="{{tool.pageUrl}}"
-        /> -->
       </view>
       <view
         v-if="$slots.icon"
@@ -56,7 +43,6 @@
       </view>
       <!-- 标题 -->
       <view
-        v-if="title"
         class="ml-navigator-title"
         :style="{
           left: `${sizes.screenWidth * 0.5}px`,
@@ -64,10 +50,11 @@
           color: `${titleColor}`
         }"
       >
-        {{ title }}
+        <slot v-if="$slots.default" />
+        <text v-else>{{ title }}</text>
       </view>
       <!-- 搜索 -->
-      <view wx:else class="search" :style="{ height: `${sizes.customBarHeight}px` }">
+      <view v-if="$slots.search" class="search" :style="{ height: `${sizes.customBarHeight}px` }">
         <slot name="search"></slot>
       </view>
     </view>
@@ -155,7 +142,6 @@
   })
 
   const returnPrePage = () => {
-    console.log('aaa')
     uni.navigateBack({
       delta: 1
     })

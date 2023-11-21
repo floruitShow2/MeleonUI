@@ -1,10 +1,14 @@
 <template>
   <view class="home-view">
+    <!-- 导航栏 -->
     <MlNavigator
       :title="$t('home.navigation.title')"
       title-color="#FFFFFF"
       background-color="#7A98B3"
-    />
+    >
+      <!-- <image class="image" src="../../assets/home/MeleonUI.png" mode="aspectFit" /> -->
+    </MlNavigator>
+    <!-- 主体 -->
     <view
       class="home-view-content"
       :style="{
@@ -12,31 +16,55 @@
         height: `${ui.contentHeight}px`
       }"
     >
-      <!-- 项目列表 -->
-      <view class="projects">
-        <view class="projects-item" @click="onNavigate('/pages/componentList/index')">
-          <view class="projects-item-image">
-            <image class="image" src="../../assets/home/MeleonUI.png" mode="aspectFit" />
-          </view>
-          <text class="projects-item-label">{{ $t('home.tools.component') }}</text>
+      <view class="home-view-content_hero">
+        <view class="tagline">
+          <text>MeleonUI</text>
+          <text>微信小程序前端组件库</text>
         </view>
-        <view class="projects-item" @click="onNavigate('/pages/chart/index')">
-          <view class="projects-item-image">
-            <MlColorIcon icon="ml-effect" :size="26" />
-          </view>
-          <text class="projects-item-label">{{ $t('home.tools.chart') }}</text>
+        <view class="desc"> {{ $t('home.hero.desc') }} </view>
+        <view class="actions">
+          <MlButton type="primary" @click="onNavigate('/pages/componentList/index')">
+            {{ $t('home.hero.actions') }}
+            <MlIcon icon="ml-arrow-right--line" color="#FFFFFF" />
+          </MlButton>
+          <MlButton
+            type="secondary"
+            status="normal"
+            @click="copyLinkUrl('https://github.com/floruitShow2/MeleonUI')"
+          >
+            <template #icon>
+              <MlIcon icon="ml-github" />
+            </template>
+            Github
+          </MlButton>
         </view>
       </view>
+      <view class="home-view-content_features">
+        <view v-for="feature in features" :key="feature.title" class="feature">
+          <view class="feature-header">
+            {{ feature.title }}
+          </view>
+          <view class="feature-desc">
+            {{ feature.desc }}
+          </view>
+        </view>
+      </view>
+      <view class="home-view-content_copyrights">
+        <text>Released under the MIT License.</text>
+        <text>Copyright © 2023-present Meleon</text>
+      </view>
     </view>
+    <!-- 分页栏 -->
     <MlTabbar />
   </view>
 </template>
 
 <script setup lang="ts">
-  import { ref, computed, onMounted } from 'vue'
+  import { ref, reactive, computed, onMounted } from 'vue'
   import { useAppStore } from '@/store'
   import MlNavigator from '@/ml-ui/lib/ml-navigator/index.vue'
-  import MlColorIcon from '@/ml-ui/lib/ml-colorIcon/index.vue'
+  import MlIcon from '@/ml-ui/lib/ml-icon/index.vue'
+  import MlButton from '@/ml-ui/lib/ml-button/index.vue'
   import MlTabbar from '@/ml-ui/lib/ml-tabbar/index.vue'
 
   const appStore = useAppStore()
@@ -47,6 +75,21 @@
 
   const onNavigate = (url: string) => {
     uni.navigateTo({ url })
+  }
+
+  const copyLinkUrl = (url: string) => {
+    uni.setClipboardData({
+      data: url,
+      showToast: false,
+      success: () => {
+        // 显示自定义提示
+        uni.showToast({
+          title: '链接复制成功',
+          duration: 1000,
+          icon: 'none'
+        })
+      }
+    })
   }
 
   onMounted(async () => {
@@ -62,6 +105,25 @@
       }
     })
   })
+
+  const features = reactive([
+    {
+      title: '💡功能丰富',
+      desc: '目前已实现 12+ 个功能组件的基本功能编写，后续不定期更新组件或功能'
+    },
+    {
+      title: '📦开箱即用',
+      desc: '在API风格上，MeleonUI 与市面上常见 Web 端组件库的 API 风格基本保持一致，上手容易，无需负担额外的学习成本'
+    },
+    {
+      title: '🔑类型安全',
+      desc: '使用 Typescript 编写，开发时可自动推断类型，为用户提供更好的开发体验'
+    },
+    {
+      title: '🔌可扩展性',
+      desc: '使用 Typescript 编写，开发时可自动推断类型，为用户提供更好的开发体验'
+    }
+  ])
 </script>
 
 <style lang="less">

@@ -1,5 +1,5 @@
 export default {
   'home.navigation.title': 'Home',
-  'home.tools.component': 'MeleonUI',
-  'home.tools.chart': 'Echarts'
+  'home.hero.desc': 'Welcome to experience and make your valuable suggestions',
+  'home.hero.actions': 'Start'
 }
