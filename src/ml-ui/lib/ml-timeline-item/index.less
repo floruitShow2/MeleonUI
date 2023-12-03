@@ -1,0 +1,178 @@
+@prefix: ~'ml-timeline-item';
+@linePrefix: ~'ml-timeline-item-dot-line';
+
+.ml-timeline-item {
+  width: 100%     ;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+
+  // 左侧点、线
+  &-dot-wrapper {
+    width: 20px;
+    margin-right: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  &-dot-content {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  &-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: var(--primary-color-6);
+  }
+
+  .@{linePrefix} {
+    border-width: 1px;
+    border-color: var(--info-color-6);
+  }
+  .@{linePrefix}-dotted {
+    border-style: dotted;
+  }
+  .@{linePrefix}-dashed {
+    border-style: dashed;
+  }
+  .@{linePrefix}-solid {
+    border-style: solid;
+  }
+
+  // 右侧内容
+  &-content-wrapper {
+    box-sizing: border-box;
+    width: calc(100% - 20px);
+    padding-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+
+  &-label {
+    width: 100%;
+    height: 20px;
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    font-size: 14px;
+    color: var(--info-color-8);
+  }
+
+  &-content {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 8px 5px;
+    border-radius: 2px;
+    font-size: 14px;
+    color: var(--info-color-9);
+    background-color: #ffffff;
+    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.1);
+  }
+}
+
+.@{prefix}-vertical-right {
+  position: relative;
+  .@{prefix}-dot-wrapper {
+    position: absolute;
+    right: 0;
+    left: unset;
+    margin-right: 0;
+  }
+  .@{prefix}-content-wrapper {
+    padding-right: 10px;
+    .@{prefix}-label {
+      justify-content: flex-end;
+    }
+    .@{prefix}-content {
+      text-align: right;
+    }
+  }
+}
+.@{prefix}-vertical-alternate-right {
+  position: relative;
+  .@{prefix}-dot-wrapper {
+    position: absolute;
+    left: 50%;
+    right: unset;
+    margin: 0;
+  }
+  .@{prefix}-content-wrapper {
+    position: relative;
+    left: 50%;
+    width: 50%;
+    margin-left: 22px;
+    padding-right: 22px;
+    .@{prefix}-label {
+      justify-content: flex-start;
+    }
+    .@{prefix}-content {
+      text-align: left;
+    }
+  }
+}
+.@{prefix}-vertical-alternate-left {
+  position: relative;
+  .@{prefix}-dot-wrapper {
+    position: absolute;
+    left: 50%;
+    right: unset;
+    margin: 0;
+  }
+  .@{prefix}-content-wrapper {
+    left: 50%;
+    width: 50%;
+    .@{prefix}-label {
+      justify-content: flex-end;
+    }
+    .@{prefix}-content {
+      text-align: right;
+    }
+  }
+}
+
+.is-primary {
+  .ml-timeline-item-dot-content {
+    background-color: var(--primary-color-6);
+  }
+}
+
+.is-success {
+  .ml-timeline-item-dot-content {
+    background-color: var(--success-color-6);
+  }
+}
+
+.is-warning {
+  .ml-timeline-item-dot-content {
+    background-color: var(--warning-color-6);
+  }
+}
+
+.is-danger {
+  .ml-timeline-item-dot-content {
+    background-color: var(--error-color-6);
+  }
+}
+
+.is-dashed {
+  .ml-timeline-item-dot-line {
+    border-left: dashed 1px;
+    border-color: var(--info-color-6);
+  }
+}
+
+.is-dotted {
+  .ml-timeline-item-dot-line {
+    border-left: dotted 1px;
+    border-color: var(--info-color-6);
+  }
+}

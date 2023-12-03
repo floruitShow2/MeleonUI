@@ -12,7 +12,7 @@
 <script setup lang="ts">
   import { ref, reactive, toRefs, computed, provide } from 'vue'
   import type { PropType } from 'vue'
-  import { avatarGroupInjectionKey } from '../ml-avatar/context'
+  import { avatarGroupInjectionKey } from './context'
   import useTheme from '../../src/hooks/useTheme'
   import { cs } from '../../utils/property'
   import type { BaseAvatarProps } from '../ml-avatar/type'

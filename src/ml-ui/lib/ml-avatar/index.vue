@@ -13,7 +13,7 @@
   import { cs } from '../../utils/property'
   import { getRect } from '../../utils/rect'
   import type { BaseAvatarProps } from './type'
-  import { avatarGroupInjectionKey } from './context'
+  import { avatarGroupInjectionKey } from '../ml-avatar-group/context'
 
   const props = defineProps({
     size: {

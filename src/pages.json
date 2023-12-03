@@ -124,6 +124,18 @@
 					"style": {
 						"navigationStyle": "custom"
 					}
+				},
+				{
+					"path": "timeline/index",
+					"style": {
+						"navigationStyle": "custom"
+					}
+				},
+				{
+					"path": "progress/index",
+					"style": {
+						"navigationStyle": "custom"
+					}
 				}
 			]
 		},

@@ -13,7 +13,7 @@
   import type { PropType } from 'vue'
   import useTheme from '../../src/hooks/useTheme'
   import { cs } from '../../utils/property'
-  import { checkboxGroupInjectionKey } from './context'
+  import { checkboxGroupInjectionKey } from '../ml-checkbox-group/context'
 
   const props = defineProps({
     checked: { type: Boolean, default: false },
@@ -32,15 +32,16 @@
     return cs(prefix, {
       [`${prefix}-disabled`]:
         disabled.value ||
-        (globalCtx ? globalCtx.getDisabledList().includes(modelValue.value) : false)
+        (globalCtx ? globalCtx.getDisabledList().includes(modelValue.value) : false),
+      [`${prefix}-underGroup`]: globalCtx !== null
     })
   })
   const inputClassName = computed(() => {
     return cs(`${prefix}__input`, {
-      [`${prefix}-checked`]: globalCtx
+      [`${prefix}__input-checked`]: globalCtx
         ? globalCtx.getCheckedList().includes(modelValue.value)
         : checked.value,
-      [`${prefix}-indeterminate`]: indeterminate.value
+      [`${prefix}__input-indeterminate`]: indeterminate.value
     })
   })
 

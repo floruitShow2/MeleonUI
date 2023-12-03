@@ -15,7 +15,7 @@ interface DebounceOptions {
   delay: number
 }
 export const useDebounce = (fn: AnyFunction, options?: DebounceOptions) => {
-  let timer: number | null = null
+  let timer: NodeJS.Timeout | null = null
   return function <T>(...args: T[]) {
     if (timer) clearTimeout(timer)
     timer = setTimeout(
@@ -28,7 +28,7 @@ export const useDebounce = (fn: AnyFunction, options?: DebounceOptions) => {
 }
 // 节流
 export const useThrottle = (fn: AnyFunction, options?: DebounceOptions) => {
-  let timeout: number | null = null
+  let timeout: NodeJS.Timeout | null = null
   let previous = 0
   const delay = options?.delay ?? 500
 
@@ -82,7 +82,7 @@ export function useGet<T>(source: Record<string, any>, path: string, defaultValu
   let result = source
   for (const p of paths) {
     result = result[p]
-    if (result === undefined) {
+    if (result === undefined || result === null) {
       return defaultValue
     }
   }

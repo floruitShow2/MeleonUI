@@ -5,12 +5,12 @@
 </template>
 
 <script setup lang="ts">
-  import { ref, toRefs, computed, provide, reactive, onMounted } from 'vue'
+  import { ref, toRefs, computed, provide, reactive } from 'vue'
   import type { PropType } from 'vue'
   import useTheme from '../../src/hooks/useTheme'
   import { cs } from '../../utils/property'
   import { deepClone } from '../../utils/format'
-  import { checkboxGroupInjectionKey } from '../ml-checkbox/context'
+  import { checkboxGroupInjectionKey } from './context'
   import type { BaseCheckboxGroupProps } from './type'
 
   const props = defineProps({
