@@ -42,6 +42,8 @@ module.exports = {
     // Vue: Add extra rules
     'vue/custom-event-name-casing': [2, 'camelCase'],
     'vue/no-v-text': 1,
+    'vue/no-v-html': 0,
+    'vue/no-v-text-v-html-on-component': 0,
     'vue/padding-line-between-blocks': 1,
     'vue/require-direct-export': 1,
     'vue/multi-word-component-names': 0,

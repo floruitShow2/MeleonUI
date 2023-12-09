@@ -4,3 +4,8 @@ export interface SettingItemType {
   key: string
   path?: string
 }
+
+export interface SettingsGroupType {
+  title: string
+  settings: SettingItemType[]
+}

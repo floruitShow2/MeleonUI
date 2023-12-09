@@ -12,12 +12,21 @@
           <image src="@/assets/home/avatar.png" mode="widthFix" />
         </MlAvatar>
         <view class="header-message">
-          <text class="username">Meleon</text>
+          <view class="username">
+            Meleon
+            <MlTag
+              model-value="@前端开发"
+              type="primary"
+              size="mini"
+              plain
+              :bordered="false"
+            ></MlTag>
+          </view>
           <text class="description">Keep your face to the sunshine</text>
         </view>
         <MlButton type="primary" size="mini" shape="round">Edit</MlButton>
       </view>
-      <view :class="`${prefix}-wrapper-statistics`">
+      <!-- <view :class="`${prefix}-wrapper-statistics`">
         <view v-for="(v, k) in statistics" :key="k" class="statistic-item">
           <MlCountTo
             :from="0"
@@ -28,21 +37,23 @@
           />
           <text class="statistic-item-label">{{ $t(`profile.statistics.${k}`) }}</text>
         </view>
-      </view>
-      <view :class="`${prefix}-wrapper-card`"></view>
+      </view> -->
       <view :class="`${prefix}-wrapper-settings`">
-        <view
-          v-for="setting in settings"
-          :key="setting.key"
-          class="setting-item"
-          @click="() => handleSettingClick(setting)"
-        >
-          <view class="setting-item_left">
-            <MlIcon :icon="setting.icon" :size="22" style="transform: translateY(1px)" />
-            <text class="title">{{ setting.label }}</text>
-          </view>
-          <view class="setting-item_right">
-            <MlIcon icon="ml-arrow-right" :size="16" style="transform: translateY(1px)" />
+        <view v-for="group in settingsGroup" :key="group.title" class="settings-group">
+          <view class="settings-group-title">{{ $t(group.title) }}</view>
+          <view
+            v-for="setting in group.settings"
+            :key="setting.key"
+            class="settings-group-item"
+            @click="() => handleSettingClick(setting)"
+          >
+            <view class="settings-group-item_left">
+              <MlIcon :icon="setting.icon" :size="22" style="transform: translateY(1px)" />
+              <text class="title">{{ $t(setting.label) }}</text>
+            </view>
+            <view class="settings-group-item_right">
+              <MlIcon icon="ml-arrow-right" :size="16" style="transform: translateY(1px)" />
+            </view>
           </view>
         </view>
       </view>
@@ -59,8 +70,9 @@
   import MlAvatar from '@/ml-ui/lib/ml-avatar/index.vue'
   import MlButton from '@/ml-ui/lib/ml-button/index.vue'
   import MlIcon from '@/ml-ui/lib/ml-icon/index.vue'
-  import MlCountTo from '@/ml-ui/lib/ml-count-to/index.vue'
-  import type { SettingItemType } from './interface'
+  import MlTag from '@/ml-ui/lib/ml-tag/index.vue'
+  import type { SettingsGroupType, SettingItemType } from './interface'
+
   const appStore = useAppStore()
   const wrapperStyle = computed(() => {
     const { screenWidth, contentHeight } = appStore.appSize
@@ -71,24 +83,29 @@
   })
   const prefix = 'profile-view'
 
-  const statistics: Record<string, number> = {
-    components: 10,
-    echarts: 2,
-    articles: 3,
-    logs: 2
-  }
+  // const statistics: Record<string, number> = {
+  //   components: 10,
+  //   echarts: 2,
+  //   articles: 3,
+  //   logs: 2
+  // }
 
-  const settings = ref<SettingItemType[]>([
+  const settingsGroup = ref<SettingsGroupType[]>([
     {
-      icon: 'ml-setting',
-      label: '多语言',
-      key: 'lang',
-      path: '/pages/packageSettings/lang/index'
-    },
-    {
-      icon: 'ml-day',
-      label: '主题',
-      key: 'theme'
+      title: 'profile.settings.group.general',
+      settings: [
+        {
+          icon: 'ml-setting',
+          label: 'profile.settings.lang',
+          key: 'lang',
+          path: '/pages/packageSettings/lang/index'
+        }
+        // {
+        //   icon: 'ml-day',
+        //   label: '主题',
+        //   key: 'theme'
+        // }
+      ]
     }
   ])
   const handleSettingClick = (item: SettingItemType) => {

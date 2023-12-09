@@ -3,5 +3,7 @@ export default {
   'profile.statistics.components': 'components',
   'profile.statistics.echarts': 'echarts',
   'profile.statistics.articles': 'articles',
-  'profile.statistics.logs': 'logs'
+  'profile.statistics.logs': 'logs',
+  'profile.settings.group.general': 'General',
+  'profile.settings.lang': 'Language'
 }

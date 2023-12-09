@@ -1,5 +1,7 @@
 <template>
   <view class="home-view">
+    <!-- 消息提示 -->
+    <MlMessage ref="messageRef" />
     <!-- 导航栏 -->
     <MlNavigator
       :title="$t('home.navigation.title')"
@@ -24,10 +26,10 @@
         <view class="desc"> {{ $t('home.hero.desc') }} </view>
         <view class="actions">
           <MlButton type="primary" @click="onNavigate('/pages/componentList/index')">
-            {{ $t('home.hero.actions') }}
+            {{ $t('home.actions.start') }}
             <MlIcon icon="ml-arrow-right--line" color="#FFFFFF" />
           </MlButton>
-          <MlButton
+          <!-- <MlButton
             type="secondary"
             status="normal"
             @click="copyLinkUrl('https://github.com/floruitShow2/MeleonUI')"
@@ -36,8 +38,25 @@
               <MlIcon icon="ml-github" />
             </template>
             Github
+          </MlButton> -->
+          <MlButton
+            type="secondary"
+            status="normal"
+            @click="onNavigate('/pages/packageHome/logger/index')"
+          >
+            {{ $t('home.actions.logger') }}
           </MlButton>
         </view>
+        <!-- <view class="sub-actions">
+          <view class="current-version">
+            当前版本:
+            <text>{{ '1.0.6' }}</text>
+          </view>
+          <MlButton type="text" @click="onNavigate('/pages/packageHome/logger/index')">
+            更新日志
+          </MlButton>
+          <MlButton type="text" disabled> 项目说明 </MlButton>
+        </view> -->
       </view>
       <view class="home-view-content_features">
         <view v-for="feature in features" :key="feature.title" class="feature">
@@ -49,10 +68,10 @@
           </view>
         </view>
       </view>
-      <view class="home-view-content_copyrights">
+      <!-- <view class="home-view-content_copyrights">
         <text>Released under the MIT License.</text>
         <text>Copyright © 2023-present Meleon</text>
-      </view>
+      </view> -->
     </view>
     <!-- 分页栏 -->
     <MlTabbar />
@@ -65,6 +84,7 @@
   import MlNavigator from '@/ml-ui/lib/ml-navigator/index.vue'
   import MlIcon from '@/ml-ui/lib/ml-icon/index.vue'
   import MlButton from '@/ml-ui/lib/ml-button/index.vue'
+  import MlMessage from '@/ml-ui/lib/ml-message/index.vue'
   import MlTabbar from '@/ml-ui/lib/ml-tabbar/index.vue'
 
   const appStore = useAppStore()
@@ -72,6 +92,8 @@
   const ui = computed(() => {
     return appStore.appSize
   })
+
+  const messageRef = ref<InstanceType<typeof MlMessage>>()
 
   const onNavigate = (url: string) => {
     uni.navigateTo({ url })
@@ -83,11 +105,13 @@
       showToast: false,
       success: () => {
         // 显示自定义提示
-        uni.showToast({
-          title: '链接复制成功',
-          duration: 1000,
-          icon: 'none'
-        })
+        if (messageRef.value) {
+          messageRef.value.primary({
+            content: 'github 链接已复制，可前往浏览器打开',
+            duration: 3000
+          })
+        }
+        uni.hideToast()
       }
     })
   }

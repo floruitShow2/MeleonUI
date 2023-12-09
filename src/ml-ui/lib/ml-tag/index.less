@@ -1,3 +1,11 @@
+@primary: ~'ml-tag-primary';
+@info: ~'ml-tag-info';
+@success: ~'ml-tag-success';
+@warning: ~'ml-tag-warning';
+@danger: ~'ml-tag-danger';
+@plain: ~'ml-tag-plain';
+@bordered: ~'ml-tag-bordered';
+
 .ml-tag {
   display: inline-flex;
   align-items: center;
@@ -18,79 +26,91 @@
 }
 
 // type
-.ml-tag-info {
+.@{info} {
   color: var(--info-color-8);
   background-color: var(--info-color-6);
   &-hover {
     background-color: var(--info-color-7);
   }
 }
-.ml-tag-info.ml-tag-plain {
+.@{info}.@{plain} {
   background-color: unset;
   color: var(--info-color-8);
+}
+.@{info}.@{plain}.@{bordered} {
   border-color: var(--info-color-8);
 }
-.ml-tag-info.ml-tag-bordered {
+.@{info}.@{bordered} {
   border-color: var(--info-color-8);
 }
-.ml-tag-primary {
+.@{primary} {
   color: var(--primary-color-7);
   background-color: var(--primary-color-3);
   &-hover {
     background-color: var(--primary-color-4);
   }
 }
-.ml-tag-primary.ml-tag-plain {
+.@{primary}.@{plain} {
   background-color: unset;
   color: var(--primary-color-7);
+}
+.@{primary}.@{plain}.@{bordered} {
+  background-color: unset;
+  color: var(--primary-color-7);
+}
+.@{primary}.@{bordered} {
   border-color: var(--primary-color-7);
 }
-.ml-tag-primary.ml-tag-bordered {
-  border-color: var(--primary-color-7);
-}
-.ml-tag-success {
+.@{success} {
   color: var(--success-color-7);
   background-color: var(--success-color-3);
   &-hover {
     background-color: var(--success-color-4);
   }
 }
-.ml-tag-success.ml-tag-plain {
+.@{success}.@{plain} {
   background-color: unset;
   color: var(--success-color-7);
+}
+.@{success}.@{plain}.@{bordered} {
   border-color: var(--success-color-7);
 }
-.ml-tag-success.ml-tag-bordered {
+.@{success}.@{bordered} {
   border-color: var(--success-color-7);
 }
-.ml-tag-warning {
+.@{warning} {
   color: var(--warning-color-7);
   background-color: var(--warning-color-3);
   &-hover {
     background-color: var(--warning-color-4);
   }
 }
-.ml-tag-warning.ml-tag-plain {
+.@{warning}.@{plain} {
   background-color: unset;
   color: var(--warning-color-7);
+}
+.@{warning}.@{plain}.@{bordered} {
   border-color: var(--warning-color-7);
 }
-.ml-tag-warning.ml-tag-bordered {
+.@{warning}.@{bordered} {
   border-color: var(--warning-color-7);
 }
-.ml-tag-danger {
+.@{danger} {
   color: var(--danger-color-7);
   background-color: var(--danger-color-3);
   &-hover {
     background-color: var(--danger-color-4);
   }
 }
-.ml-tag-danger.ml-tag-plain {
+.@{danger}.@{plain} {
   background-color: unset;
   color: var(--danger-color-7);
   border-color: var(--danger-color-7);
 }
-.ml-tag-danger.ml-tag-bordered {
+.@{danger}.@{plain}.@{bordered} {
+  border-color: var(--danger-color-7);
+}
+.@{danger}.@{bordered} {
   border-color: var(--danger-color-7);
 }
 

@@ -2,6 +2,7 @@
 	"pages": [
 		{
 			"path": "pages/home/index",
+			"name": "首页",
 			"style": {
 				"navigationStyle": "custom"
 			}
@@ -35,15 +36,20 @@
 			"style": {
 				"navigationStyle": "custom"
 			}
-		},
-		{
-			"path": "pages/webview/index",
-			"style": {
-				"navigationStyle": "custom"
-			}
 		}
 	],
 	"subPackages": [
+		{
+			"root": "pages/packageHome",
+			"pages": [
+				{
+					"path": "logger/index",
+					"style": {
+						"navigationStyle": "custom"
+					}
+				}
+			]
+		},
 		{
 			"root": "pages/packageUI",
 			"pages": [

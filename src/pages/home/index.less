@@ -3,7 +3,7 @@
 .home-view {
   &-content {
     box-sizing: border-box;
-    padding: 10px 30px;
+    padding: 10px 20px;
     background-color: @--module-bg;
     overflow: auto;
     &_hero {
@@ -25,13 +25,26 @@
       .desc {
         width: 100%;
         margin: 20px 0;
-        font-size: 16px;
+        font-size: 14px;
         text-align: center;
         color: @--primary-text;
         #flex(row, center, center);
       }
       .actions {
+        margin-bottom: 5px;
         #flex(row, center, space-around);
+      }
+      .sub-actions {
+        #flex(row, center, space-around);
+        .current-version {
+          font-size: 14px;
+          color: @--primary-text;
+          #flex(row, baseline, center);
+          text {
+            margin-left: 4px;
+            color: @--primary-blue;
+          }
+        }
       }
     }
     &_features {

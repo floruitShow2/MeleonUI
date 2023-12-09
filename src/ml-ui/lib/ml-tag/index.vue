@@ -40,7 +40,7 @@
     size: { type: String as PropType<MlDesign.Size>, default: 'small' },
     modelValue: { type: String, required: true },
     plain: { type: Boolean, default: false },
-    bordered: { type: Boolean, default: false },
+    bordered: { type: Boolean, default: true },
     closable: { type: Boolean, default: false },
     checkable: { type: Boolean, default: false },
     editable: { type: Boolean, default: false }

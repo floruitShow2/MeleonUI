@@ -112,6 +112,7 @@
   import MlIcon from '@/ml-ui/lib/ml-icon/index.vue'
   import MlButton from '@/ml-ui/lib/ml-button/index.vue'
   import CodeBlock from '@/components/CodeBlock/index.vue'
+
   const appStore = useAppStore()
   const wrapperStyle = computed(() => {
     const { screenWidth, contentHeight, tabbarHeight, bottomBarHeight } = appStore.appSize
