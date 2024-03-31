@@ -61,6 +61,7 @@
         "optimization" : {
             "subPackages" : true
         },
+        "libVersion": "latest",
         "lazyCodeLoading": "requiredComponents"
     },
     "mp-alipay" : {

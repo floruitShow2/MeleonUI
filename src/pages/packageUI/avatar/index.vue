@@ -112,7 +112,6 @@
   import { ref, computed } from 'vue'
   import { useAppStore } from '@/store'
   import MlNavigator from '@/ml-ui/lib/ml-navigator/index.vue'
-  import MlIcon from '@/ml-ui/lib/ml-icon/index.vue'
   import MlAvatar from '@/ml-ui/lib/ml-avatar/index.vue'
   import MlAvatarGroup from '@/ml-ui/lib/ml-avatar-group/index.vue'
   import CodeBlock from '@/components/CodeBlock/index.vue'

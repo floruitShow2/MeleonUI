@@ -8,18 +8,12 @@
       </view>
       <view :class="`${prefix}-message-description`">{{ description }}</view>
     </view>
-    <image
-      :class="`${prefix}-cover`"
-      mode="aspectFill"
-      src="../../../assets/articles//article-cover1.jpg"
-      alt=""
-    />
+    <image :class="`${prefix}-cover`" mode="aspectFill" alt="" />
   </view>
 </template>
 
 <script setup lang="ts">
   import { toRefs, computed } from 'vue'
-  import type { PropType } from 'vue'
   import { cs } from '@/utils/property'
   import { formatTimeAgo } from '@/utils/time'
 

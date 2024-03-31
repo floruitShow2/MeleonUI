@@ -116,19 +116,19 @@
     })
   }
 
-  onMounted(async () => {
-    uni.request({
-      url: 'http://localhost:3000/api/user/login',
-      method: 'POST',
-      data: {
-        username: 'meleon',
-        password: '232000'
-      },
-      complete: (res) => {
-        console.log(res)
-      }
-    })
-  })
+  // onMounted(async () => {
+  //   uni.request({
+  //     url: 'http://localhost:3000/api/user/login',
+  //     method: 'POST',
+  //     data: {
+  //       username: 'meleon',
+  //       password: '232000'
+  //     },
+  //     complete: (res) => {
+  //       console.log(res)
+  //     }
+  //   })
+  // })
 
   const features = reactive([
     {
@@ -137,7 +137,7 @@
     },
     {
       title: '📦开箱即用',
-      desc: '在API风格上，MeleonUI 与市面上常见 Web 端组件库的 API 风格基本保持一致，上手容易，无需负担额外的学习成本'
+      desc: '在 API 风格上，MeleonUI 与市面上常见 Web 端组件库的 API 风格基本保持一致，上手容易，无需负担额外的学习成本'
     },
     {
       title: '🔑类型安全',
@@ -145,7 +145,7 @@
     },
     {
       title: '🔌可扩展性',
-      desc: '使用 Typescript 编写，开发时可自动推断类型，为用户提供更好的开发体验'
+      desc: '保证组件功能的最小粒度，开发者可根据不同的业务需求，自由组合或二次封装组件'
     }
   ])
 </script>
