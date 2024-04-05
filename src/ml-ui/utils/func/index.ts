@@ -76,6 +76,7 @@ export const useDeepClone: <T>(target: T) => T = (target) => {
   }
   return temp
 }
+
 export function useGet<T>(source: Record<string, any>, path: string, defaultValue?: any): T {
   // a[3].b -> a.3.b
   const paths = path.replace(/\[(\d+)\]/g, '.$1').split('.')

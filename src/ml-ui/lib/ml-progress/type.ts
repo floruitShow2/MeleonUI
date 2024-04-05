@@ -20,6 +20,10 @@ export interface BaseMlProgressProps {
 
   // 样式相关配置
   /**
+   * @description 尺寸
+   */
+  size: MlDesign.Size
+  /**
    * @description 进度条长度
    */
   width: number
@@ -35,7 +39,7 @@ export interface BaseMlProgressProps {
   /**
    * @description 激活状态线段颜色
    */
-  color: string
+  color: string | Record<string, string>
   /**
    * @description 背景颜色
    */

@@ -14,9 +14,7 @@
           <text>基础用法</text>
         </template>
         <template #description>
-          <text>
-            简单的进度条。
-          </text>
+          <text> 简单的进度条。 </text>
         </template>
         <template #demo>
           <view class="button-container">
@@ -39,9 +37,7 @@
           <text>进度条状态</text>
         </template>
         <template #description>
-          <text>
-            通过 status 指定进度条状态
-          </text>
+          <text> 通过 status 指定进度条状态 </text>
         </template>
         <template #demo>
           <view class="button-container">
@@ -53,6 +49,23 @@
             <MlProgress :percent="templateMap[1].percent" status="success" />
             <MlProgress :percent="templateMap[1].percent" status="warning" />
             <MlProgress :percent="templateMap[1].percent" status="danger" />
+          </view>
+        </template>
+      </CodeBlock>
+      <!-- 环形进度条 -->
+      <CodeBlock :code="templateMap[2].templateCode">
+        <template #title>
+          <text>环形进度条</text>
+        </template>
+        <template #description>
+          <text> 设置 type="circle" 将会展示环形进度条。 </text>
+        </template>
+        <template #demo>
+          <view class="progress-wrapper">
+            <MlProgress :percent="0" type="circle" status="primary" />
+            <MlProgress :percent="0.25" type="circle" status="success" />
+            <MlProgress :percent="0.5" type="circle" status="warning" />
+            <MlProgress :percent="0.75" type="circle" status="danger" />
           </view>
         </template>
       </CodeBlock>
@@ -89,6 +102,15 @@
     },
     {
       percent: 0.1,
+      templateCode: `<MlProgress :percent="templateMap[0].percent" :width="120" />
+<MlProgress :percent="templateMap[0].percent">
+  <template #text="{ percent, decimal }">
+    <text>进度 {{ (percent * 100).toFixed(decimal) }}%</text>
+  </template>
+</MlProgress>`
+    },
+    {
+      percent: 0.25,
       templateCode: `<MlProgress :percent="templateMap[0].percent" :width="120" />
 <MlProgress :percent="templateMap[0].percent">
   <template #text="{ percent, decimal }">

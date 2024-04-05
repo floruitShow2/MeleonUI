@@ -10,7 +10,6 @@
 
 <script setup lang="ts">
   import { toRefs, computed, inject, onMounted } from 'vue'
-  import type { PropType } from 'vue'
   import useTheme from '../../src/hooks/useTheme'
   import { cs } from '../../utils/property'
   import { checkboxGroupInjectionKey } from '../ml-checkbox-group/context'

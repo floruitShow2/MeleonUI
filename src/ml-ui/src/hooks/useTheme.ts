@@ -2,8 +2,8 @@ import { computed } from 'vue'
 import { initThemeSetting, getColorsOverride } from '../theme/index'
 import type { ColorType, ColorKey } from '../theme/index'
 
-export default function useTheme(theme?: Record<string, string>) {
-  const { themeColor, otherColor } = initThemeSetting(theme || {})
+export default function useTheme(theme?: Record<string, string>, isDark = false) {
+  const { themeColor, otherColor } = initThemeSetting(theme || {}, isDark)
   const params: Record<ColorType, string> = {
     primary: themeColor,
     ...otherColor
