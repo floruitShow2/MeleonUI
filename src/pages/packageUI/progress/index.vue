@@ -61,11 +61,39 @@
           <text> 设置 type="circle" 将会展示环形进度条。 </text>
         </template>
         <template #demo>
+          <view class="button-container">
+            <MlButton type="primary" @click="handlePlus(2)"> 加 10% </MlButton>
+            <MlButton type="secondary" @click="handleSub(2)"> 减 10% </MlButton>
+          </view>
           <view class="progress-wrapper">
-            <MlProgress :percent="0" type="circle" status="primary" />
-            <MlProgress :percent="0.25" type="circle" status="success" />
-            <MlProgress :percent="0.5" type="circle" status="warning" />
-            <MlProgress :percent="0.75" type="circle" status="danger" />
+            <MlProgress :percent="templateMap[2].percent" type="circle" status="primary" />
+            <MlProgress :percent="templateMap[2].percent" type="circle" status="success" />
+            <MlProgress :percent="templateMap[2].percent" type="circle" status="warning" />
+            <MlProgress :percent="templateMap[2].percent" type="circle" status="danger" />
+          </view>
+        </template>
+      </CodeBlock>
+      <!-- 环形进度条 -->
+      <CodeBlock :code="templateMap[3].templateCode">
+        <template #title>
+          <text>进度条尺寸</text>
+        </template>
+        <template #description>
+          <text> 通过 size 设置进度条的大小。 </text>
+        </template>
+        <template #demo>
+          <view class="button-container">
+            <MlButton :type="curSize === 'small' ? 'primary' : 'secondary'" @click="() => changeSize('small')"> Small </MlButton>
+            <MlButton :type="curSize === 'medium' ? 'primary' : 'secondary'" @click="() => changeSize('medium')"> Medium </MlButton>
+            <MlButton :type="curSize === 'large' ? 'primary' : 'secondary'" @click="() => changeSize('large')"> Large </MlButton>
+          </view>
+          <view>
+            <MlProgress :percent="templateMap[3].percent" :size="curSize" status="primary" />
+            <MlProgress :percent="templateMap[3].percent" :size="curSize" status="success" />
+          </view>
+          <view class="progress-wrapper">
+            <MlProgress :percent="templateMap[3].percent" type="circle" :size="curSize" status="primary" />
+            <MlProgress :percent="templateMap[3].percent" type="circle" :size="curSize" status="success" />
           </view>
         </template>
       </CodeBlock>
@@ -110,7 +138,16 @@
 </MlProgress>`
     },
     {
-      percent: 0.25,
+      percent: 0.1,
+      templateCode: `<MlProgress :percent="templateMap[0].percent" :width="120" />
+<MlProgress :percent="templateMap[0].percent">
+  <template #text="{ percent, decimal }">
+    <text>进度 {{ (percent * 100).toFixed(decimal) }}%</text>
+  </template>
+</MlProgress>`
+    },
+    {
+      percent: 0.75,
       templateCode: `<MlProgress :percent="templateMap[0].percent" :width="120" />
 <MlProgress :percent="templateMap[0].percent">
   <template #text="{ percent, decimal }">
@@ -138,6 +175,21 @@
       }
       templateMap.value.splice(index, 1, newItem)
     }
+  }
+
+  const curSize = ref<MlDesign.Size>('small')
+  const changeSize = (size: MlDesign.Size) => {
+    curSize.value = size
+  }
+
+  const handleDrawStart = () => {
+    console.log('start')
+  }
+  const handleDrawEnd = (progress: number) => {
+    console.log('progress', progress)
+  }
+  const handleDrawProgress = () => {
+    console.log('end')
   }
 </script>
 

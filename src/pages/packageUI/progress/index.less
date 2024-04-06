@@ -5,13 +5,18 @@
     box-sizing: border-box;
     padding: 10px;
     overflow: auto;
+    .button-container,
     .progress-wrapper {
+      width: 100%;
       flex-wrap: wrap;
       align-content: flex-start;
       #flex(row, center, flex-start);
       .ml-button {
         margin: 0 8px 8px 0;
       }
+    }
+    .progress-wrapper {
+      gap: 20px
     }
   }
 }

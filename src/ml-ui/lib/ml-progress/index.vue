@@ -1,5 +1,6 @@
 <template>
   <view :class="className" :style="themeColors">
+    <!-- ml-progress-line -->
     <template v-if="type === 'line'">
       <view :class="`${prefixLine}`" :style="themeColors">
         <view :class="`${prefixLine}-wrapper`" :style="style">
@@ -13,31 +14,39 @@
         </view>
       </view>
     </template>
-    <view v-else :class="prefixCircle">
-      <div
-        :class="`${prefixCircle}-wrapper`"
-        :style="{ width: `${computedWidth}px`, height: `${computedWidth}px` }"
-      >
-        <canvas
-          :class="`${prefixCircle}-wrapper-bar-buffer`"
-          :canvas-id="canvasBufferId"
-          :id="canvasBufferId"
-          :style="{
-            width: `${computedWidth}px`,
-            height: `${computedWidth}px`
-          }"
-        ></canvas>
-        <canvas
-          :class="`${prefixCircle}-wrapper-bar`"
-          :canvas-id="canvasId"
-          :id="canvasId"
-          :style="{
-            width: `${computedWidth}px`,
-            height: `${computedWidth}px`
-          }"
-        ></canvas>
-      </div>
-    </view>
+    <!-- ml-progress-circle -->
+    <template v-else>
+      <view :class="prefixCircle">
+        <view
+          :class="`${prefixCircle}-wrapper`"
+          :style="{ width: `${computedWidth}px`, height: `${computedWidth}px` }"
+        >
+          <canvas
+            :class="`${prefixCircle}-wrapper-bar-buffer`"
+            :canvas-id="canvasBufferId"
+            :id="canvasBufferId"
+            :style="{
+              width: `${computedWidth}px`,
+              height: `${computedWidth}px`
+            }"
+          ></canvas>
+          <canvas
+            :class="`${prefixCircle}-wrapper-bar`"
+            :canvas-id="canvasId"
+            :id="canvasId"
+            :style="{
+              width: `${computedWidth}px`,
+              height: `${computedWidth}px`
+            }"
+          ></canvas>
+          <view v-if="showText" :class="`${[prefixCircle]}-wrapper-text`">
+            <slot name="text" :percent="percent" :decimal="decimal">
+              {{ text }}
+            </slot>
+          </view>
+        </view>
+      </view>
+    </template>
   </view>
 </template>
 
@@ -61,10 +70,8 @@
     mini: 4,
     small: 3,
     medium: 4,
-    large: 4
+    large: 6
   }
-
-  let ML_PROGRESS_SEED = 0
 
   const props = defineProps({
     type: {
@@ -92,7 +99,7 @@
     },
     strokeWidth: {
       type: Number,
-      default: 4
+      default: 0
     },
     status: {
       type: String as PropType<BaseMlProgressProps['status']>,
@@ -110,7 +117,6 @@
   const { type, percent, decimal, size, width, strokeWidth, color, trackColor, status } =
     toRefs(props)
 
-  const emit = defineEmits([])
   const { themeColors } = useTheme()
 
   const instance = getCurrentInstance()
@@ -127,8 +133,7 @@
 
   // 进度条线段粗细
   const computedStrokeWidth = computed(
-    () =>
-      strokeWidth.value ??
+    () => strokeWidth.value ||
       (size.value === 'mini' ? computedWidth.value / 2 : DEFAULT_STROKE_WIDTH[size.value])
   )
 
@@ -169,7 +174,7 @@
     return {
       ...style,
       '--bar-color': formatedColor.value,
-      height: `${strokeWidth.value}px`,
+      height: `${computedStrokeWidth.value}px`,
       backgroundColor: trackColor.value
     }
   })
@@ -200,6 +205,8 @@
   /**
    * ml-progress-circle
    */
+  let ML_PROGRESS_SEED = (Math.random() * Math.pow(10, 8)).toFixed(0)
+  
   const canvasId = computed(() => {
     return `${prefixCircle}-canvas-${ML_PROGRESS_SEED}`
   })
@@ -207,12 +214,15 @@
     return `${prefixCircle}-canvas-buffer-${ML_PROGRESS_SEED}`
   })
 
+  // 记录上次绘制时的进度值，下次绘制起始点从该进度开始
   const oldPercent = ref(0)
+  const setOldPercent = (val: number) => {
+    oldPercent.value = val
+  }
 
   const drawProgressBuffer = () => {
     const ctx = uni.createCanvasContext(canvasBufferId.value, instance)
     ctx.setLineWidth(computedStrokeWidth.value)
-    console.log(trackColor.value)
     ctx.setStrokeStyle(trackColor.value)
 
     ctx.beginPath()
@@ -236,7 +246,9 @@
     ctx.setStrokeStyle(formatedColor.value)
 
     if (percent.value === 0) {
+      console.log('aaa')
       ctx.draw()
+      setOldPercent(0)
       return
     }
 
@@ -253,11 +265,17 @@
       // 每次递增百分之一
       progress += 0.01
       // 如果新增后的值，大于需要设置的值百分比值，停止继续增加
-      if (progress > percent.value) return
+      if (progress > percent.value) {
+        setOldPercent(percent.value)
+        return
+      }
     } else {
       // 同理于上面
       progress -= 0.01
-      if (progress < percent.value) return
+      if (progress < percent.value) {
+        setOldPercent(percent.value)
+        return
+      }
     }
     setTimeout(() => {
       drawProgressBar(progress)
@@ -271,6 +289,10 @@
   })
 
   watch(percent, () => {
+    drawProgressBar(oldPercent.value)
+  })
+  watch(size, () => {
+    setOldPercent(0)
     drawProgressBar(oldPercent.value)
   })
 </script>
