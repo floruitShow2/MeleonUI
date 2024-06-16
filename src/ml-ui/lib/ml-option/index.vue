@@ -21,7 +21,7 @@
   import type { PropType } from 'vue'
   import type { MlOptionProps } from './type'
   import { MlSelectGroupInjectionKey } from './context'
-  import useTheme from '../../src/hooks/useTheme'
+  import useTheme from '../../hooks/useTheme/useTheme'
   import { cs } from '../../utils/property'
   import MlIcon from '../ml-icon/index.vue'
 

@@ -30,7 +30,7 @@
   import { toRefs, computed } from 'vue'
   import type { PropType, CSSProperties } from 'vue'
   import { isNumber } from '@/ml-ui/utils'
-  import useTheme from '../../src/hooks/useTheme'
+  import useTheme from '../../hooks/useTheme/useTheme'
   import { cs } from '../../utils/property'
   import { generateDeviceUI } from '../../utils/rect'
   import MlIcon from '../ml-icon/index.vue'

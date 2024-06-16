@@ -83,17 +83,42 @@
         </template>
         <template #demo>
           <view class="button-container">
-            <MlButton :type="curSize === 'small' ? 'primary' : 'secondary'" @click="() => changeSize('small')"> Small </MlButton>
-            <MlButton :type="curSize === 'medium' ? 'primary' : 'secondary'" @click="() => changeSize('medium')"> Medium </MlButton>
-            <MlButton :type="curSize === 'large' ? 'primary' : 'secondary'" @click="() => changeSize('large')"> Large </MlButton>
+            <MlButton
+              :type="curSize === 'small' ? 'primary' : 'secondary'"
+              @click="() => changeSize('small')"
+            >
+              Small
+            </MlButton>
+            <MlButton
+              :type="curSize === 'medium' ? 'primary' : 'secondary'"
+              @click="() => changeSize('medium')"
+            >
+              Medium
+            </MlButton>
+            <MlButton
+              :type="curSize === 'large' ? 'primary' : 'secondary'"
+              @click="() => changeSize('large')"
+            >
+              Large
+            </MlButton>
           </view>
           <view>
             <MlProgress :percent="templateMap[3].percent" :size="curSize" status="primary" />
             <MlProgress :percent="templateMap[3].percent" :size="curSize" status="success" />
           </view>
           <view class="progress-wrapper">
-            <MlProgress :percent="templateMap[3].percent" type="circle" :size="curSize" status="primary" />
-            <MlProgress :percent="templateMap[3].percent" type="circle" :size="curSize" status="success" />
+            <MlProgress
+              :percent="templateMap[3].percent"
+              type="circle"
+              :size="curSize"
+              status="primary"
+            />
+            <MlProgress
+              :percent="templateMap[3].percent"
+              type="circle"
+              :size="curSize"
+              status="success"
+            />
           </view>
         </template>
       </CodeBlock>

@@ -13,7 +13,7 @@
   import { ref, reactive, toRefs, computed, provide } from 'vue'
   import type { PropType } from 'vue'
   import { avatarGroupInjectionKey } from './context'
-  import useTheme from '../../src/hooks/useTheme'
+  import useTheme from '../../hooks/useTheme/useTheme'
   import { cs } from '../../utils/property'
   import type { BaseAvatarProps } from '../ml-avatar/type'
 

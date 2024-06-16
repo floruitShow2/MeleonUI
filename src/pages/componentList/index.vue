@@ -52,6 +52,7 @@
     { name: 'ml-message', path: '/pages/packageUI/message/index' },
     { name: 'ml-timeline', path: '/pages/packageUI/timeline/index' },
     { name: 'ml-progress', path: '/pages/packageUI/progress/index' },
+    { name: 'ml-cell', path: '/pages/packageUI/cell/index' },
     { name: 'ml-swiper-cell', path: '../../package-WsUI/pages/swiperCell/swiperCell' }
   ])
 

@@ -52,7 +52,7 @@
 
 <script setup lang="ts">
   import { ref, toRefs, computed, watch, onMounted, getCurrentInstance } from 'vue'
-  import useTheme from '../../src/hooks/useTheme'
+  import useTheme from '../../hooks/useTheme/useTheme'
   import { cs } from '../../utils/property'
   import { isObject } from '../../utils/is'
   import STATUS_MAP from '../../constants/status'
@@ -133,7 +133,8 @@
 
   // 进度条线段粗细
   const computedStrokeWidth = computed(
-    () => strokeWidth.value ||
+    () =>
+      strokeWidth.value ||
       (size.value === 'mini' ? computedWidth.value / 2 : DEFAULT_STROKE_WIDTH[size.value])
   )
 
@@ -206,7 +207,7 @@
    * ml-progress-circle
    */
   let ML_PROGRESS_SEED = (Math.random() * Math.pow(10, 8)).toFixed(0)
-  
+
   const canvasId = computed(() => {
     return `${prefixCircle}-canvas-${ML_PROGRESS_SEED}`
   })

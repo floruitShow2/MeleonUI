@@ -12,7 +12,7 @@
   import { computed, toRefs, getCurrentInstance } from 'vue'
   import type { PropType } from 'vue'
   import type { BaseButtonProps } from './type'
-  import useTheme from '../../src/hooks/useTheme'
+  import useTheme from '../../hooks/useTheme/useTheme'
   import { cs } from '../../utils/property'
   import MlIcon from '../ml-icon/index.vue'
 
@@ -82,6 +82,6 @@
   }
 </script>
 
-<style lang="less">
+<style scoped lang="less">
   @import './index.less';
 </style>

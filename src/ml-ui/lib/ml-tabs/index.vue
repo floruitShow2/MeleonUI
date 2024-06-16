@@ -15,7 +15,7 @@
 <script setup lang="ts">
   import { ref, toRefs, computed, getCurrentInstance, onMounted, provide, reactive } from 'vue'
   import type { PropType } from 'vue'
-  import useTheme from '../../src/hooks/useTheme'
+  import useTheme from '../../hooks/useTheme/useTheme'
   import { cs } from '../../utils/property'
   import TabNav from './tab-nav/index.vue'
   import { MlTabsGroupInjectionKey } from '../ml-tab/context'

@@ -1,6 +1,6 @@
 import { computed } from 'vue'
-import { initThemeSetting, getColorsOverride } from '../theme/index'
-import type { ColorType, ColorKey } from '../theme/index'
+import { initThemeSetting, getColorsOverride } from './index'
+import type { ColorType, ColorKey } from './index'
 
 export default function useTheme(theme?: Record<string, string>, isDark = false) {
   const { themeColor, otherColor } = initThemeSetting(theme || {}, isDark)

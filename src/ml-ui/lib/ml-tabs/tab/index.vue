@@ -25,7 +25,7 @@
   import { toRefs, computed } from 'vue'
   import type { PropType } from 'vue'
   import MlIcon from '../../ml-icon/index.vue'
-  import useTheme from '../../../src/hooks/useTheme'
+  import useTheme from '../../../hooks/useTheme/useTheme'
   import { cs } from '../../../utils/property'
   import type { TabData } from '../../ml-tab/type'
 

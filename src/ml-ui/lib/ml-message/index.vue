@@ -67,7 +67,7 @@
 
 <script setup lang="ts">
   import { toRefs, computed, getCurrentInstance, reactive } from 'vue'
-  import useTheme from '../../src/hooks/useTheme'
+  import useTheme from '../../hooks/useTheme/useTheme'
   import { cs } from '../../utils/property'
   import { generateDeviceUI } from '../../utils/rect'
   import MlIcon from '../ml-icon/index.vue'

@@ -279,7 +279,7 @@
   import { ref, computed, provide, getCurrentInstance, reactive, toRefs, watch } from 'vue'
   import type { PropType, ComponentInternalInstance } from 'vue'
   import { MlTableInjectionKey } from './context'
-  import useTheme from '../../src/hooks/useTheme'
+  import useTheme from '../../hooks/useTheme/useTheme'
   import { cs } from '../../utils/property'
   import { generateDeviceUI, getRect } from '../../utils/rect'
   import { useDebounce, useDeepClone, useGet } from '../../utils/func'
@@ -327,11 +327,12 @@
       type: Function as PropType<TableEntityType['cellStyle']>
     }
   })
-
   const { size, border } = toRefs(props)
+
   const emit = defineEmits(['rowClick', 'cellClick'])
 
   const { themeColors } = useTheme()
+
   const prefix = 'ml-table'
   const className = computed(() => {
     return cs(prefix, [`${prefix}-${size.value}`], { [`${prefix}-border`]: border.value })
@@ -350,7 +351,7 @@
 
   // 初始化 store 实例和 state 实例
   const storeEntity = createStore(instance, {})
-  const tableObserver = new Observer('table')
+  const tableObserver = new Observer(tableId)
   storeEntity.addObserver(tableObserver)
   const globalConstants = reactive<{
     store: StateWatcher

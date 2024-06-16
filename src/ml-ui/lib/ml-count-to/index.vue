@@ -13,7 +13,7 @@
 <script setup lang="ts">
   import { ref, unref, toRefs, computed, onMounted } from 'vue'
   import type { PropType } from 'vue'
-  import useTheme from '../../src/hooks/useTheme'
+  import useTheme from '../../hooks/useTheme/useTheme'
   import { cs } from '../../utils/property'
   import Tween from '../../utils/tween'
 

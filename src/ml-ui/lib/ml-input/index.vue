@@ -49,7 +49,7 @@
   import { ref, toRefs, getCurrentInstance, computed, onMounted } from 'vue'
   import type { PropType } from 'vue'
   import { onShow } from '@dcloudio/uni-app'
-  import useTheme from '../../src/hooks/useTheme'
+  import useTheme from '../../hooks/useTheme/useTheme'
   import MlIcon from '../ml-icon/index.vue'
   import { cs } from '../../utils/property'
   import { generateDeviceUI } from '../../utils/rect'
@@ -218,7 +218,7 @@
 
   const status = ref<MlInputStatus>('info')
   const onInputBlur = (e: FocusEvent) => {
-    if (e) e.preventDefault()
+    // if (e) e.preventDefault()
     if (readonly.value) {
       isFocus.value = false
       return

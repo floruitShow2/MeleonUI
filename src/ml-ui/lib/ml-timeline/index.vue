@@ -7,7 +7,7 @@
 <script setup lang="ts">
   import { ref, toRefs, computed, provide, getCurrentInstance } from 'vue'
   import type { PropType } from 'vue'
-  import useTheme from '../../src/hooks/useTheme'
+  import useTheme from '../../hooks/useTheme/useTheme'
   import { cs } from '../../utils/property'
   import { getRect } from '../../utils/rect'
   import type { MlTimelineProps } from './type'

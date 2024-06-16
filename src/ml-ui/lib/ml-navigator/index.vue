@@ -110,7 +110,8 @@
     right: 0
   })
   onShow(() => {
-    const { screenWidth, statusBarHeight, menuButtonWidth, customBarHeight } = generateDeviceUI().ui
+    const { ui, menuButton } = generateDeviceUI()
+    const { screenWidth, statusBarHeight, menuButtonWidth, customBarHeight } = ui
 
     sizes.value = {
       screenWidth,
@@ -119,10 +120,9 @@
       customBarHeight
     }
 
-    const menuMessage = uni.getMenuButtonBoundingClientRect()
     menuPosition.value = {
-      left: menuMessage.left,
-      right: menuMessage.right
+      left: menuButton.left,
+      right: menuButton.right
     }
   })
 

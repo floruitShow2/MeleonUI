@@ -69,7 +69,7 @@
   import MlIcon from '../ml-icon/index.vue'
   import { MlSelectGroupInjectionKey } from '../ml-option/context'
   import type { MlOptionProps } from '../ml-option/type'
-  import useTheme from '../../src/hooks/useTheme'
+  import useTheme from '../../hooks/useTheme/useTheme'
   import { cs } from '../../utils/property'
   import { getRect, generateDeviceUI } from '../../utils/rect'
 

@@ -17,7 +17,7 @@ class StateWatcher extends Watcher {
       },
       insertColumns: function (states, column, index) {
         const array = states._columns
-        if (array !== undefined) {
+        if (array[index] !== undefined) {
           array.splice(index - 1, 0, column)
         } else {
           array.push(column)

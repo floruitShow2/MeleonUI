@@ -37,7 +37,7 @@
 <script setup lang="ts">
   import { ref, toRefs, computed } from 'vue'
   import type { PropType } from 'vue'
-  import useTheme from '../../src/hooks/useTheme'
+  import useTheme from '../../hooks/useTheme/useTheme'
   import { cs } from '../../utils/property'
   import MlTag from '../ml-tag/index.vue'
   import { getValueData } from './utils'
@@ -155,11 +155,12 @@
   }
   const onInputChange = (e: Event) => {
     const { value } = e.target as unknown as { value: string }
-    setInputWidth(value.length * 10)
+    setInputWidth(value.length * 16)
   }
   const onInputBlur = (e: FocusEvent) => {
+    console.log(e)
     if (disabled.value) return
-    if (e) e.preventDefault()
+    if (e && e.preventDefault) e.preventDefault()
     if (readonly.value) {
       isFocus.value = false
       return

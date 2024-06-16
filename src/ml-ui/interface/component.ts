@@ -1,4 +1,4 @@
-import type { ColorKey } from '../src/theme/index'
+import type { ColorKey } from '../hooks/useTheme/index'
 
 // Base Component
 export interface MlComponent {
