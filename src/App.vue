@@ -5,12 +5,16 @@
   import { AppStorageKeys } from '@/common'
   import type { AppState } from './store/modules/app/type'
   onLaunch(async () => {
-    const appStore = useAppStore()
-    // 更新设备尺寸
-    appStore.updateDeviceUI()
-    // 更新语言包
-    const locale = await getStorage(AppStorageKeys['locale'])
-    appStore.toggleLocale((locale as AppState['locale'] | null) || 'zh-CN')
+    try {
+      const appStore = useAppStore()
+      // 更新设备尺寸
+      appStore.updateDeviceUI()
+      // 更新语言包
+      const locale = await getStorage(AppStorageKeys['locale'])
+      appStore.toggleLocale((locale as AppState['locale'] | null) || 'zh-CN')
+    } catch (err) {
+      console.log(err)
+    }
   })
   onShow(async () => {
     console.log('App Show')

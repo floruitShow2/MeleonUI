@@ -11,26 +11,26 @@
 <script setup lang="ts">
   import { computed, toRefs, getCurrentInstance } from 'vue'
   import type { PropType } from 'vue'
-  import type { BaseButtonProps } from './type'
-  import useTheme from '../../hooks/useTheme/useTheme'
-  import { cs } from '../../utils/property'
-  import MlIcon from '../ml-icon/index.vue'
+  import type { ButtonProps } from './index.interface'
+  import useTheme from '~/hooks/useTheme/useTheme'
+  import { cs } from '~/utils/property'
+  import MlIcon from '~/lib/ml-icon/index.vue'
 
   const props = defineProps({
     type: {
-      type: String as PropType<BaseButtonProps['type']>,
+      type: String as PropType<ButtonProps['type']>,
       default: 'secondary'
     },
     size: {
-      type: String as PropType<BaseButtonProps['size']>,
+      type: String as PropType<ButtonProps['size']>,
       default: 'small'
     },
     shape: {
-      type: String as PropType<BaseButtonProps['shape']>,
+      type: String as PropType<ButtonProps['shape']>,
       default: 'square'
     },
     status: {
-      type: String as PropType<BaseButtonProps['status']>,
+      type: String as PropType<ButtonProps['status']>,
       default: 'normal'
     },
     loading: {

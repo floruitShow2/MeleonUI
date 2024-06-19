@@ -1,6 +1,6 @@
-export interface BaseButtonProps {
+export interface ButtonProps {
   shape: 'square' | 'round' | 'circle'
-  size: 'mini' | 'small' | 'medium' | 'large'
+  size: MlDesign.Size
   type: 'primary' | 'secondary' | 'outline' | 'text'
   status: 'normal' | 'success' | 'warning' | 'danger'
   loading: boolean

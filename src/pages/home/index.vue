@@ -1,80 +1,82 @@
 <template>
   <view class="home-view">
-    <!-- 消息提示 -->
-    <MlMessage ref="messageRef" />
-    <!-- 导航栏 -->
-    <MlNavigator
-      :title="$t('home.navigation.title')"
-      title-color="#FFFFFF"
-      background-color="#7A98B3"
-    >
-      <!-- <image class="image" src="../../assets/home/MeleonUI.png" mode="aspectFit" /> -->
-    </MlNavigator>
-    <!-- 主体 -->
-    <view
-      class="home-view-content"
-      :style="{
-        width: `${ui.screenWidth}px`,
-        height: `${ui.contentHeight}px`
-      }"
-    >
-      <view class="home-view-content_hero">
-        <view class="tagline">
-          <text>MeleonUI</text>
-          <text>微信小程序前端组件库</text>
-        </view>
-        <view class="desc"> {{ $t('home.hero.desc') }} </view>
-        <view class="actions">
-          <MlButton type="primary" @click="onNavigate('/pages/componentList/index')">
-            {{ $t('home.actions.start') }}
-            <MlIcon icon="ml-arrow-right--line" color="#FFFFFF" />
-          </MlButton>
-          <!-- <MlButton
-            type="secondary"
-            status="normal"
-            @click="copyLinkUrl('https://github.com/floruitShow2/MeleonUI')"
-          >
-            <template #icon>
-              <MlIcon icon="ml-github" />
-            </template>
-            Github
-          </MlButton> -->
-          <MlButton
-            type="secondary"
-            status="normal"
-            @click="onNavigate('/pages/packageHome/logger/index')"
-          >
-            {{ $t('home.actions.logger') }}
-          </MlButton>
-        </view>
-        <!-- <view class="sub-actions">
-          <view class="current-version">
-            当前版本:
-            <text>{{ '1.0.6' }}</text>
+    <ml-config-provider :themes="themes">
+      <!-- 消息提示 -->
+      <MlMessage ref="messageRef" />
+      <!-- 导航栏 -->
+      <MlNavigator
+        :title="$t('home.navigation.title')"
+        title-color="#FFFFFF"
+        background-color="#7A98B3"
+      >
+        <!-- <image class="image" src="../../assets/home/MeleonUI.png" mode="aspectFit" /> -->
+      </MlNavigator>
+      <!-- 主体 -->
+      <view
+        class="home-view-content"
+        :style="{
+          width: `${ui.screenWidth}px`,
+          height: `${ui.contentHeight}px`
+        }"
+      >
+        <view class="home-view-content_hero">
+          <view class="tagline">
+            <text>MeleonUI</text>
+            <text>微信小程序前端组件库</text>
           </view>
-          <MlButton type="text" @click="onNavigate('/pages/packageHome/logger/index')">
-            更新日志
-          </MlButton>
-          <MlButton type="text" disabled> 项目说明 </MlButton>
+          <view class="desc"> {{ $t('home.hero.desc') }} </view>
+          <view class="actions">
+            <ml-button type="primary" @click="onNavigate('/pages/componentList/index')">
+              {{ $t('home.actions.start') }}
+              <MlIcon icon="ml-arrow-right--line" color="#FFFFFF" />
+            </ml-button>
+            <!-- <MlButton
+              type="secondary"
+              status="normal"
+              @click="copyLinkUrl('https://github.com/floruitShow2/MeleonUI')"
+            >
+              <template #icon>
+                <MlIcon icon="ml-github" />
+              </template>
+              Github
+            </MlButton> -->
+            <MlButton
+              type="secondary"
+              status="normal"
+              @click="onNavigate('/pages/packageHome/logger/index')"
+            >
+              {{ $t('home.actions.logger') }}
+            </MlButton>
+          </view>
+          <!-- <view class="sub-actions">
+            <view class="current-version">
+              当前版本:
+              <text>{{ '1.0.6' }}</text>
+            </view>
+            <MlButton type="text" @click="onNavigate('/pages/packageHome/logger/index')">
+              更新日志
+            </MlButton>
+            <MlButton type="text" disabled> 项目说明 </MlButton>
+          </view> -->
+        </view>
+        <view class="home-view-content_features">
+          <view v-for="feature in features" :key="feature.title" class="feature">
+            <view class="feature-header">
+              {{ feature.title }}
+            </view>
+            <view class="feature-desc">
+              {{ feature.desc }}
+            </view>
+          </view>
+        </view>
+        <!-- <view class="home-view-content_copyrights">
+          <text>Released under the MIT License.</text>
+          <text>Copyright © 2023-present Meleon</text>
         </view> -->
       </view>
-      <view class="home-view-content_features">
-        <view v-for="feature in features" :key="feature.title" class="feature">
-          <view class="feature-header">
-            {{ feature.title }}
-          </view>
-          <view class="feature-desc">
-            {{ feature.desc }}
-          </view>
-        </view>
-      </view>
-      <!-- <view class="home-view-content_copyrights">
-        <text>Released under the MIT License.</text>
-        <text>Copyright © 2023-present Meleon</text>
-      </view> -->
-    </view>
-    <!-- 分页栏 -->
-    <MlTabbar />
+      <!-- 分页栏 -->
+      <MlTabbar />
+    </ml-config-provider>
   </view>
 </template>
 
@@ -82,12 +84,17 @@
   import { ref, reactive, computed, onMounted } from 'vue'
   import { useAppStore } from '@/store'
   import MlNavigator from '@/ml-ui/lib/ml-navigator/index.vue'
-  import MlIcon from '@/ml-ui/lib/ml-icon/index.vue'
-  import MlButton from '@/ml-ui/lib/ml-button/index.vue'
+  // import MlIcon from '@/ml-ui/lib/ml-icon/index.vue'
   import MlMessage from '@/ml-ui/lib/ml-message/index.vue'
   import MlTabbar from '@/ml-ui/lib/ml-tabbar/index.vue'
+  // import type { ConfigProviderProps } from '~/lib/ml-config-provider/index.interface'
 
   const appStore = useAppStore()
+
+  const themes = {
+    primary: '#D74B4B',
+    test: '#94DFE0'
+  }
 
   const ui = computed(() => {
     return appStore.appSize

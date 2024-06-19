@@ -3,7 +3,7 @@ const fs = require('fs')
 
 const { rootPath, packagePath } = require('./dirname')
 
-function copyPackage() {
+function copyPackage( ) {
     const rootPackageJsonPath = path.join(rootPath, 'package.json')
     let rootJsonData = fs.readFileSync(rootPackageJsonPath, 'utf-8')
     rootJsonData = JSON.parse(rootJsonData)
@@ -13,8 +13,12 @@ function copyPackage() {
     jsonData = JSON.parse(jsonData)
 
     jsonData.version = rootJsonData.version
+    // jsonData.dependencies = rootJsonData.dependencies
+    // jsonData.devDependencies = rootJsonData.devDependencies
 
     fs.writeFileSync(packageJsonPath, JSON.stringify(jsonData, '', 4))
 }
 
-module.exports = copyPackage
+module.exports = {
+    copyPackage
+}

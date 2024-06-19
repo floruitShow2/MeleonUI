@@ -12,7 +12,7 @@
   import useTheme from '../../hooks/useTheme/useTheme'
   import { cs } from '../../utils/property'
   import { getRect } from '../../utils/rect'
-  import type { BaseAvatarProps } from './type'
+  import type { AvatarProps } from './type'
   import { avatarGroupInjectionKey } from '../ml-avatar-group/context'
 
   const props = defineProps({
@@ -21,7 +21,7 @@
       default: 32
     },
     shape: {
-      type: String as PropType<BaseAvatarProps['shape']>,
+      type: String as PropType<AvatarProps['shape']>,
       default: 'square'
     }
   })

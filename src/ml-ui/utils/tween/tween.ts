@@ -15,7 +15,7 @@ export class Tween {
 
   time!: number
   elapsed: number = 0
-  timer: number | null
+  timer: NodeJS.Timeout | null
 
   precision: Record<string, number> = {}
   // 存储实时更新的值
@@ -128,7 +128,7 @@ export class Tween {
       this.update()
       this.timer = this.requestAnimationFrame(tick)
       if (this.finished) {
-        this.cancelAnimationFrame(this.timer)
+        this.cancelAnimationFrame(Number(this.timer))
         this.timer = null
       }
     }
@@ -136,7 +136,7 @@ export class Tween {
   }
 
   stop() {
-    if (this.timer) this.cancelAnimationFrame(this.timer)
+    if (this.timer) this.cancelAnimationFrame(Number(this.timer))
     this.timer = null
   }
 }

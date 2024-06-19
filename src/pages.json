@@ -217,5 +217,10 @@
 				"text": "专题"
 			}
 		]
+	},
+	"easycom": {
+		"custom": {
+			"^ml-(.*)": "@/ml-ui/lib/ml-$1/index.vue"
+		}
 	}
 }

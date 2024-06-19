@@ -15,7 +15,7 @@
   import { avatarGroupInjectionKey } from './context'
   import useTheme from '../../hooks/useTheme/useTheme'
   import { cs } from '../../utils/property'
-  import type { BaseAvatarProps } from '../ml-avatar/type'
+  import type { AvatarProps } from '../ml-avatar/type'
 
   const props = defineProps({
     disabled: {
@@ -35,11 +35,10 @@
       default: 0
     },
     shape: {
-      type: String as PropType<BaseAvatarProps['shape']>,
+      type: String as PropType<AvatarProps['shape']>,
       default: 'square'
     }
   })
-  const emit = defineEmits([])
   const { disabled, maxCount, size, offset, shape } = toRefs(props)
   const { themeColors } = useTheme()
   const prefix = 'ml-avatar-group'

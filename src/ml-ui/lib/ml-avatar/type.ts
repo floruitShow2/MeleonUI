@@ -1,3 +1,3 @@
-export interface BaseAvatarProps {
+export interface AvatarProps {
   shape: 'circle' | 'square'
 }

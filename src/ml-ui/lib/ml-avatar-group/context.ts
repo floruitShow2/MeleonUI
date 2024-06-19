@@ -1,11 +1,11 @@
 import type { InjectionKey } from 'vue'
-import type { BaseAvatarProps } from './type'
+import type { AvatarProps } from '../ml-avatar/type'
 export interface AvatarGroupContext {
   total: number
   offset: number
   maxCount: number
   globalSize: number
-  globalShape: BaseAvatarProps['shape']
+  globalShape: AvatarProps['shape']
   getAvatarId: () => number
 }
 
