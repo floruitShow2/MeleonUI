@@ -10,8 +10,7 @@
 
 <script setup lang="ts">
   import { toRefs, computed, inject, onMounted } from 'vue'
-  import useTheme from '../../hooks/useTheme/useTheme'
-  import { cs } from '../../utils/property'
+  import { useTheme, cs } from '@meleon/uni-ui/index'
   import { checkboxGroupInjectionKey } from '../ml-checkbox-group/context'
 
   const props = defineProps({
@@ -21,11 +20,14 @@
     value: { type: [String, Number], default: '' }
   })
   const { checked, indeterminate, disabled, value: modelValue } = toRefs(props)
-  const emit = defineEmits(['update:checked'])
-  const { themeColors } = useTheme()
-  const prefix = 'ml-checkbox'
 
+  const emit = defineEmits(['update:checked'])
+
+  const { themeColors } = useTheme()
+  
   const globalCtx = inject(checkboxGroupInjectionKey, null)
+
+  const prefix = 'ml-checkbox'
 
   const className = computed(() => {
     return cs(prefix, {

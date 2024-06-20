@@ -20,11 +20,11 @@
         </template>
         <template #demo>
           <view class="avatar-container">
-            <MlAvatar>Meleon</MlAvatar>
-            <MlAvatar>Jeram blazeri</MlAvatar>
-            <MlAvatar shape="circle">
+            <ml-avatar>Meleon</ml-avatar>
+            <ml-avatar>Jeram blazeri</ml-avatar>
+            <ml-avatar shape="circle">
               <image src="@/assets/home/avatar.png" mode="widthFix" />
-            </MlAvatar>
+            </ml-avatar>
           </view>
         </template>
       </CodeBlock>
@@ -42,16 +42,16 @@
         </template>
         <template #demo>
           <view class="avatar-container">
-            <MlAvatar :size="28">Meleon</MlAvatar>
-            <MlAvatar :size="32">Meleon</MlAvatar>
-            <MlAvatar :size="36">Meleon</MlAvatar>
-            <MlAvatar :size="40">Meleon</MlAvatar>
+            <ml-avatar :size="28">Meleon</ml-avatar>
+            <ml-avatar :size="32">Meleon</ml-avatar>
+            <ml-avatar :size="36">Meleon</ml-avatar>
+            <ml-avatar :size="40">Meleon</ml-avatar>
           </view>
           <view class="avatar-container">
-            <MlAvatar :size="28" shape="circle">Meleon</MlAvatar>
-            <MlAvatar :size="32" shape="circle">Meleon</MlAvatar>
-            <MlAvatar :size="36" shape="circle">Meleon</MlAvatar>
-            <MlAvatar :size="40" shape="circle">Meleon</MlAvatar>
+            <ml-avatar :size="28" shape="circle">Meleon</ml-avatar>
+            <ml-avatar :size="32" shape="circle">Meleon</ml-avatar>
+            <ml-avatar :size="36" shape="circle">Meleon</ml-avatar>
+            <ml-avatar :size="40" shape="circle">Meleon</ml-avatar>
           </view>
         </template>
       </CodeBlock>
@@ -61,22 +61,22 @@
         </template>
         <template #description>
           <text>
-            使用 MlAvatarGroup 可以使用头像组功能，可通过 size 指定头像的大小，通过 offset 指定
+            使用 ml-avatar-group 可以使用头像组功能，可通过 size 指定头像的大小，通过 offset 指定
             Avatar 的偏移量。
           </text>
         </template>
         <template #demo>
           <view class="avatar-container">
-            <MlAvatarGroup :size="36" :offset="10">
-              <MlAvatar>Meleon</MlAvatar>
-              <MlAvatar>Aliee</MlAvatar>
-              <MlAvatar>Bob</MlAvatar>
-            </MlAvatarGroup>
-            <MlAvatarGroup :size="36" :offset="10" shape="circle">
-              <MlAvatar>Meleon</MlAvatar>
-              <MlAvatar>Aliee</MlAvatar>
-              <MlAvatar>Bob</MlAvatar>
-            </MlAvatarGroup>
+            <ml-avatar-group :size="36" :offset="10">
+              <ml-avatar>Meleon</ml-avatar>
+              <ml-avatar>Aliee</ml-avatar>
+              <ml-avatar>Bob</ml-avatar>
+            </ml-avatar-group>
+            <ml-avatar-group :size="36" :offset="10" shape="circle">
+              <ml-avatar>Meleon</ml-avatar>
+              <ml-avatar>Aliee</ml-avatar>
+              <ml-avatar>Bob</ml-avatar>
+            </ml-avatar-group>
           </view>
         </template>
       </CodeBlock>
@@ -89,18 +89,18 @@
         </template>
         <template #demo>
           <view class="avatar-container">
-            <MlAvatarGroup :max-count="2">
-              <MlAvatar>Meleon</MlAvatar>
-              <MlAvatar>Aliee</MlAvatar>
-              <MlAvatar>Bob</MlAvatar>
-              <MlAvatar>Civil</MlAvatar>
-            </MlAvatarGroup>
-            <MlAvatarGroup :max-count="2" :offset="20" shape="circle">
-              <MlAvatar>Meleon</MlAvatar>
-              <MlAvatar>Aliee</MlAvatar>
-              <MlAvatar>Bob</MlAvatar>
-              <MlAvatar>Civil</MlAvatar>
-            </MlAvatarGroup>
+            <ml-avatar-group :max-count="2">
+              <ml-avatar>Meleon</ml-avatar>
+              <ml-avatar>Aliee</ml-avatar>
+              <ml-avatar>Bob</ml-avatar>
+              <ml-avatar>Civil</ml-avatar>
+            </ml-avatar-group>
+            <ml-avatar-group :max-count="2" :offset="20" shape="circle">
+              <ml-avatar>Meleon</ml-avatar>
+              <ml-avatar>Aliee</ml-avatar>
+              <ml-avatar>Bob</ml-avatar>
+              <ml-avatar>Civil</ml-avatar>
+            </ml-avatar-group>
           </view>
         </template>
       </CodeBlock>
@@ -112,8 +112,6 @@
   import { ref, computed } from 'vue'
   import { useAppStore } from '@/store'
   import MlNavigator from '@/ml-ui/lib/ml-navigator/index.vue'
-  import MlAvatar from '@/ml-ui/lib/ml-avatar/index.vue'
-  import MlAvatarGroup from '@/ml-ui/lib/ml-avatar-group/index.vue'
   import CodeBlock from '@/components/CodeBlock/index.vue'
 
   const appStore = useAppStore()
@@ -127,51 +125,51 @@
 
   const templateMap = ref([
     {
-      templateCode: `<MlAvatar>Meleon</MlAvatar>
-<MlAvatar>Jeram blazeri</MlAvatar>
-<MlAvatar shape="circle">
+      templateCode: `<ml-avatar>Meleon</ml-avatar>
+<ml-avatar>Jeram blazeri</ml-avatar>
+<ml-avatar shape="circle">
   <image src="@/assets/home/avatar.png" mode="widthFix" />
-</MlAvatar>`
+</ml-avatar>`
     },
     {
       templateCode: `<view class="avatar-container">
-  <MlAvatar :size="28">Meleon</MlAvatar>
-  <MlAvatar :size="32">Meleon</MlAvatar>
-  <MlAvatar :size="36">Meleon</MlAvatar>
-  <MlAvatar :size="40">Meleon</MlAvatar>
+  <ml-avatar :size="28">Meleon</ml-avatar>
+  <ml-avatar :size="32">Meleon</ml-avatar>
+  <ml-avatar :size="36">Meleon</ml-avatar>
+  <ml-avatar :size="40">Meleon</ml-avatar>
 </view>
 <view class="avatar-container">
-  <MlAvatar :size="28" shape="circle">Meleon</MlAvatar>
-  <MlAvatar :size="32" shape="circle">Meleon</MlAvatar>
-  <MlAvatar :size="36" shape="circle">Meleon</MlAvatar>
-  <MlAvatar :size="40" shape="circle">Meleon</MlAvatar>
+  <ml-avatar :size="28" shape="circle">Meleon</ml-avatar>
+  <ml-avatar :size="32" shape="circle">Meleon</ml-avatar>
+  <ml-avatar :size="36" shape="circle">Meleon</ml-avatar>
+  <ml-avatar :size="40" shape="circle">Meleon</ml-avatar>
 </view>`
     },
     {
-      templateCode: `<MlAvatarGroup :size="36" :offset="10">
-  <MlAvatar>Meleon</MlAvatar>
-  <MlAvatar>Aliee</MlAvatar>
-  <MlAvatar>Bob</MlAvatar>
-</MlAvatarGroup>
-<MlAvatarGroup :size="36" :offset="10" shape="circle">
-  <MlAvatar>Meleon</MlAvatar>
-  <MlAvatar>Aliee</MlAvatar>
-  <MlAvatar>Bob</MlAvatar>
-</MlAvatarGroup>`
+      templateCode: `<ml-avatar-group :size="36" :offset="10">
+  <ml-avatar>Meleon</ml-avatar>
+  <ml-avatar>Aliee</ml-avatar>
+  <ml-avatar>Bob</ml-avatar>
+</ml-avatar-group>
+<ml-avatar-group :size="36" :offset="10" shape="circle">
+  <ml-avatar>Meleon</ml-avatar>
+  <ml-avatar>Aliee</ml-avatar>
+  <ml-avatar>Bob</ml-avatar>
+</ml-avatar-group>`
     },
     {
-      templateCode: `<MlAvatarGroup :max-count="2">
-  <MlAvatar>Meleon</MlAvatar>
-  <MlAvatar>Aliee</MlAvatar>
-  <MlAvatar>Bob</MlAvatar>
-  <MlAvatar>Civil</MlAvatar>
-</MlAvatarGroup>
-<MlAvatarGroup :max-count="2" :offset="20" shape="circle">
-  <MlAvatar>Meleon</MlAvatar>
-  <MlAvatar>Aliee</MlAvatar>
-  <MlAvatar>Bob</MlAvatar>
-  <MlAvatar>Civil</MlAvatar>
-</MlAvatarGroup>`
+      templateCode: `<ml-avatar-group :max-count="2">
+  <ml-avatar>Meleon</ml-avatar>
+  <ml-avatar>Aliee</ml-avatar>
+  <ml-avatar>Bob</ml-avatar>
+  <ml-avatar>Civil</ml-avatar>
+</ml-avatar-group>
+<ml-avatar-group :max-count="2" :offset="20" shape="circle">
+  <ml-avatar>Meleon</ml-avatar>
+  <ml-avatar>Aliee</ml-avatar>
+  <ml-avatar>Bob</ml-avatar>
+  <ml-avatar>Civil</ml-avatar>
+</ml-avatar-group>`
     }
   ])
 </script>

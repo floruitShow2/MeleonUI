@@ -55,7 +55,7 @@
   import useTheme from '../../hooks/useTheme/useTheme'
   import { cs } from '../../utils/property'
   import { isObject } from '../../utils/is'
-  import STATUS_MAP from '../../constants/status'
+  import { MlStatusEnum } from '@meleon/uni-ui/index'
   import type { PropType } from 'vue'
   import type { BaseMlProgressProps } from './type'
 
@@ -151,7 +151,7 @@
 
     return color.value && !isObject(color.value)
       ? color.value
-      : genColor(STATUS_MAP[computedStatus.value])
+      : genColor(MlStatusEnum[computedStatus.value])
   })
 
   const className = computed(() => {

@@ -1,1 +1,5 @@
 export * from './is'
+export * from './func'
+export * from './number'
+export * from './property'
+export * from './tween'

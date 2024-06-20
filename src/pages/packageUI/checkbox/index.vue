@@ -18,14 +18,14 @@
         </template>
         <template #demo>
           <view class="checkbox-container">
-            <MlCheckbox v-model:checked="checked1">Radio</MlCheckbox>
-            <MlCheckbox indeterminate>Radio</MlCheckbox>
-            <MlCheckbox v-model:checked="checked1" disabled>Radio</MlCheckbox>
+            <ml-checkbox v-model:checked="checked1">Radio</ml-checkbox>
+            <ml-checkbox indeterminate>Radio</ml-checkbox>
+            <ml-checkbox v-model:checked="checked1" disabled>Radio</ml-checkbox>
           </view>
           <view class="checkbox-container">
-            <MlCheckbox v-model:checked="checked1">
+            <ml-checkbox v-model:checked="checked1">
               <MlTag model-value="Radio2" size="mini"></MlTag>
-            </MlCheckbox>
+            </ml-checkbox>
           </view>
         </template>
       </CodeBlock>
@@ -42,22 +42,22 @@
         </template>
         <template #demo>
           <view class="checkbox-container">
-            <MlCheckboxGroup v-model:checked-list="checked2">
-              <MlCheckbox value="A">RadioA</MlCheckbox>
-              <MlCheckbox value="B">RadioB</MlCheckbox>
-              <MlCheckbox value="C">RadioC</MlCheckbox>
-              <MlCheckbox value="D">RadioD</MlCheckbox>
-              <MlCheckbox value="E">RadioE</MlCheckbox>
-            </MlCheckboxGroup>
+            <ml-checkbox-group v-model:checked-list="checked2">
+              <ml-checkbox value="A">RadioA</ml-checkbox>
+              <ml-checkbox value="B">RadioB</ml-checkbox>
+              <ml-checkbox value="C">RadioC</ml-checkbox>
+              <ml-checkbox value="D">RadioD</ml-checkbox>
+              <ml-checkbox value="E">RadioE</ml-checkbox>
+            </ml-checkbox-group>
           </view>
           <view class="checkbox-container">
-            <MlCheckboxGroup v-model:checked-list="checked3" mode="multi" :max="3" :min="1">
-              <MlCheckbox value="A">RadioA</MlCheckbox>
-              <MlCheckbox value="B">RadioB</MlCheckbox>
-              <MlCheckbox value="C">RadioC</MlCheckbox>
-              <MlCheckbox value="D">RadioD</MlCheckbox>
-              <MlCheckbox value="E">RadioE</MlCheckbox>
-            </MlCheckboxGroup>
+            <ml-checkbox-group v-model:checked-list="checked3" mode="multi" :max="3" :min="1">
+              <ml-checkbox value="A">RadioA</ml-checkbox>
+              <ml-checkbox value="B">RadioB</ml-checkbox>
+              <ml-checkbox value="C">RadioC</ml-checkbox>
+              <ml-checkbox value="D">RadioD</ml-checkbox>
+              <ml-checkbox value="E">RadioE</ml-checkbox>
+            </ml-checkbox-group>
           </view>
         </template>
       </CodeBlock>
@@ -71,13 +71,13 @@
         </template>
         <template #demo>
           <view class="checkbox-container">
-            <MlCheckboxGroup v-model:checked-list="checked4" direction="vertical">
-              <MlCheckbox value="A">RadioA</MlCheckbox>
-              <MlCheckbox value="B">RadioB</MlCheckbox>
-              <MlCheckbox value="C">RadioC</MlCheckbox>
-              <MlCheckbox value="D">RadioD</MlCheckbox>
-              <MlCheckbox value="E">RadioE</MlCheckbox>
-            </MlCheckboxGroup>
+            <ml-checkbox-group v-model:checked-list="checked4" direction="vertical">
+              <ml-checkbox value="A">RadioA</ml-checkbox>
+              <ml-checkbox value="B">RadioB</ml-checkbox>
+              <ml-checkbox value="C">RadioC</ml-checkbox>
+              <ml-checkbox value="D">RadioD</ml-checkbox>
+              <ml-checkbox value="E">RadioE</ml-checkbox>
+            </ml-checkbox-group>
           </view>
         </template>
       </CodeBlock>
@@ -89,10 +89,7 @@
   import { ref, computed, watch } from 'vue'
   import { useAppStore } from '@/store'
   import MlNavigator from '@/ml-ui/lib/ml-navigator/index.vue'
-  import MlIcon from '@/ml-ui/lib/ml-icon/index.vue'
   import MlTag from '@/ml-ui/lib/ml-tag/index.vue'
-  import MlCheckbox from '@/ml-ui/lib/ml-checkbox/index.vue'
-  import MlCheckboxGroup from '@/ml-ui/lib/ml-checkbox-group/index.vue'
   import CodeBlock from '@/components/CodeBlock/index.vue'
 
   const appStore = useAppStore()

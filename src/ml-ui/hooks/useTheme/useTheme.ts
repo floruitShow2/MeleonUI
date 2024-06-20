@@ -1,5 +1,5 @@
 import { computed, inject } from 'vue'
-import { configProviderInjectionKey } from '~/lib/ml-config-provider/context'
+import { configProviderInjectionKey } from '@meleon/uni-ui/lib/ml-config-provider/context'
 import { initThemeSetting, getColorsOverride } from './index'
 import type { ColorType, ColorKey } from './index'
 

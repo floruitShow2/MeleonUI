@@ -1,5 +1,5 @@
 import type { InjectionKey } from 'vue'
-import type { AvatarProps } from '../ml-avatar/type'
+import type { AvatarProps } from '../ml-avatar/index.interface'
 export interface AvatarGroupContext {
   total: number
   offset: number

@@ -7,11 +7,9 @@
 <script setup lang="ts">
   import { ref, toRefs, computed, provide, reactive } from 'vue'
   import type { PropType } from 'vue'
-  import useTheme from '../../hooks/useTheme/useTheme'
-  import { cs } from '../../utils/property'
-  import { useDeepClone } from '~/utils/func'
+  import { useTheme, useDeepClone, cs } from '@meleon/uni-ui/index'
   import { checkboxGroupInjectionKey } from './context'
-  import type { BaseCheckboxGroupProps } from './type'
+  import type { CheckboxGroupProps } from './index.interface'
 
   const props = defineProps({
     checkedList: {
@@ -27,17 +25,20 @@
       default: Infinity
     },
     direction: {
-      type: String as PropType<BaseCheckboxGroupProps['direction']>,
+      type: String as PropType<CheckboxGroupProps['direction']>,
       default: 'horizontal'
     },
     mode: {
-      type: String as PropType<BaseCheckboxGroupProps['mode']>,
+      type: String as PropType<CheckboxGroupProps['mode']>,
       default: 'single'
     }
   })
   const { checkedList, min, max, mode, direction } = toRefs(props)
+
   const emit = defineEmits(['update:checkedList'])
+  
   const { themeColors } = useTheme()
+  
   const prefix = 'ml-checkbox-group'
   const className = computed(() => {
     return cs(prefix, [`${prefix}-${direction.value}`])

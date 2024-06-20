@@ -12,10 +12,10 @@
 <script setup lang="ts">
   import { ref, reactive, toRefs, computed, provide } from 'vue'
   import type { PropType } from 'vue'
+  import useTheme from '@meleon/uni-ui/hooks/useTheme/useTheme'
+  import { cs } from '@meleon/uni-ui/utils/property'
   import { avatarGroupInjectionKey } from './context'
-  import useTheme from '../../hooks/useTheme/useTheme'
-  import { cs } from '../../utils/property'
-  import type { AvatarProps } from '../ml-avatar/type'
+  import type { AvatarProps } from '../ml-avatar/index.interface'
 
   const props = defineProps({
     disabled: {
@@ -39,7 +39,7 @@
       default: 'square'
     }
   })
-  const { disabled, maxCount, size, offset, shape } = toRefs(props)
+  const { maxCount, size, offset, shape } = toRefs(props)
   const { themeColors } = useTheme()
   const prefix = 'ml-avatar-group'
   const className = computed(() => {

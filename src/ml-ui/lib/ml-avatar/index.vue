@@ -9,10 +9,10 @@
 <script setup lang="ts">
   import { ref, toRefs, computed, inject, onMounted, getCurrentInstance } from 'vue'
   import type { PropType } from 'vue'
-  import useTheme from '../../hooks/useTheme/useTheme'
-  import { cs } from '../../utils/property'
-  import { getRect } from '../../utils/rect'
-  import type { AvatarProps } from './type'
+  import useTheme from '@meleon/uni-ui/hooks/useTheme/useTheme'
+  import { cs } from '@meleon/uni-ui/utils/property'
+  import { getRect } from '@meleon/uni-ui/utils/rect'
+  import type { AvatarProps } from './index.interface'
   import { avatarGroupInjectionKey } from '../ml-avatar-group/context'
 
   const props = defineProps({
@@ -27,7 +27,6 @@
   })
   const { size, shape } = toRefs(props)
 
-  const emit = defineEmits([])
   const { themeColors } = useTheme()
   const prefixCls = 'ml-avatar'
   const groupCtx = inject(avatarGroupInjectionKey, null)
@@ -38,6 +37,9 @@
     ])
   )
 
+  /**
+   * @description 在 ml-avatar-group 中的当前 ml-avatar 的索引
+   */
   const index = ref(-1)
 
   const outerStyle = computed(() => {
@@ -62,6 +64,9 @@
 
   const textStyle = ref<Record<string, any>>({})
   const instance = getCurrentInstance()
+  /**
+   * @description 自动调整字体大小
+   */
   const autoFixFontSizeHanlder = async () => {
     const itemRect = await getRect(instance, `.${prefixCls}`)
     const wrapperRect = await getRect(instance, `.${prefixCls}-text`)
