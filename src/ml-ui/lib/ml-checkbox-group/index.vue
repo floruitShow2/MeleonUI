@@ -9,7 +9,7 @@
   import type { PropType } from 'vue'
   import useTheme from '../../hooks/useTheme/useTheme'
   import { cs } from '../../utils/property'
-  import { deepClone } from '../../utils/format'
+  import { useDeepClone } from '~/utils/func'
   import { checkboxGroupInjectionKey } from './context'
   import type { BaseCheckboxGroupProps } from './type'
 
@@ -63,7 +63,7 @@
   }
   // 更新 checkedList
   const updateCheckedList = (value: string | number) => {
-    let list = deepClone(checkedList.value)
+    let list = useDeepClone(checkedList.value)
     if (mode.value === 'single') list = list[0] === value ? [] : [value]
     else {
       const findIdx = list.findIndex((li) => li === value)

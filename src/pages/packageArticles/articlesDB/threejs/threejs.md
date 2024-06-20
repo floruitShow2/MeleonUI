@@ -75,7 +75,7 @@ onMouseLeave() {
 ```ts
 // 当点击分组的 显示|隐藏 图标后，除了隐藏模型本身，还需要将其子图层全部变灰
 // 使用 DFS算法 生成图层层级关系
-const copiedLayers = deepClone(this.totalLayers)
+const copiedLayers = useDeepClone(this.totalLayers)
 function DFS(layers: LayersType, target: string, res: string[] = []): void {
   const keys = Object.keys(layers)
   for (let i = 0; i < keys.length; i++) {

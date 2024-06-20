@@ -35,7 +35,7 @@ export interface BaseMlProgressProps {
   /**
    * @description 进度条状态
    */
-  status: MlDesign.Type
+  status: MlDesign.Status
   /**
    * @description 激活状态线段颜色
    */

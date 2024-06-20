@@ -1,4 +1,4 @@
-const statusMap: Record<MlDesign.Type, string> = {
+const statusMap: Record<MlDesign.Status, string> = {
   primary: 'var(--primary-color-6)',
   info: 'var(--info-color-8)',
   warning: 'var(--warning-color-6)',

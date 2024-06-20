@@ -1,5 +1,6 @@
 import themeSettings from './themeSettings'
-import { deepClone, isNotEmptyObject } from '../../utils'
+import { isNotEmptyObject } from '~/utils'
+import { useDeepClone } from '~/utils/func'
 import { getColorPalette } from './color'
 /**
  * 初始化主题配置
@@ -10,7 +11,7 @@ export function initThemeSetting(
   customColors: Record<string, string> = {},
   isDark: boolean = false
 ) {
-  const settings = deepClone(themeSettings)
+  const settings = useDeepClone(themeSettings)
   if (customColors && isNotEmptyObject(customColors)) {
     const { primary, ...resetColors } = customColors
     const { themeColor, otherColor } = themeSettings

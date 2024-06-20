@@ -36,7 +36,7 @@
   import { cs } from '../../utils/property'
 
   const props = defineProps({
-    type: { type: String as PropType<MlDesign.Type>, default: 'info' },
+    type: { type: String as PropType<MlDesign.Status>, default: 'info' },
     size: { type: String as PropType<MlDesign.Size>, default: 'small' },
     modelValue: { type: String, required: true },
     plain: { type: Boolean, default: false },

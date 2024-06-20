@@ -6,6 +6,7 @@ import type { ColorType, ColorKey } from './index'
 export default function useTheme(themes?: Record<ColorType, string>, isDark = false) {
   // 接收全局注入的主题配置
   const globalCtx = inject(configProviderInjectionKey, null)
+
   const { themeColor, otherColor } = initThemeSetting(
     { ...(globalCtx?.themes || {}), ...(themes || {}) },
     isDark

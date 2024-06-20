@@ -54,7 +54,7 @@
   import MlIcon from '../../ml-icon/index.vue'
   import { cs } from '../../../utils/property'
   import { generateDeviceUI } from '../../../utils/rect'
-  import { convertToNumber } from '../../../utils/format'
+  import { convertToNumber } from '../../../utils/number'
   import type { MlInputStatus } from './type'
 
   const props = defineProps({

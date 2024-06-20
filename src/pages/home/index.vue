@@ -81,19 +81,18 @@
 </template>
 
 <script setup lang="ts">
-  import { ref, reactive, computed, onMounted } from 'vue'
+  import { ref, reactive, computed } from 'vue'
   import { useAppStore } from '@/store'
   import MlNavigator from '@/ml-ui/lib/ml-navigator/index.vue'
   // import MlIcon from '@/ml-ui/lib/ml-icon/index.vue'
   import MlMessage from '@/ml-ui/lib/ml-message/index.vue'
   import MlTabbar from '@/ml-ui/lib/ml-tabbar/index.vue'
-  // import type { ConfigProviderProps } from '~/lib/ml-config-provider/index.interface'
+  import type { ConfigProviderProps } from '~/lib/ml-config-provider/index.interface'
 
   const appStore = useAppStore()
 
-  const themes = {
-    primary: '#D74B4B',
-    test: '#94DFE0'
+  const themes: ConfigProviderProps['themes'] = {
+    primary: '#D74B4B'
   }
 
   const ui = computed(() => {

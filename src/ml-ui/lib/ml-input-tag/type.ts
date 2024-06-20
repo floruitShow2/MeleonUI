@@ -1,6 +1,6 @@
 export interface BaseInputTagProps {
   size: MlDesign.Size
-  tagType: MlDesign.Type
+  tagType: MlDesign.Status
 }
 
 export interface TagData {

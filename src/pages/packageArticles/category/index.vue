@@ -73,9 +73,9 @@
   import { ref, computed, onMounted } from 'vue'
   import { useAppStore } from '@/store'
   import MlNavigator from '@/ml-ui/lib/ml-navigator/index.vue'
-  import BasicDrag from '@/components/basic-drag/index.vue'
   import MlButton from '@/ml-ui/lib/ml-button/index.vue'
   import MlIcon from '@/ml-ui/lib/ml-icon/index.vue'
+  import BasicDrag from '@/components/basic-drag/index.vue'
 
   const appStore = useAppStore()
   const wrapperStyle = computed(() => {
