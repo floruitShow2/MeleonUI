@@ -9,7 +9,7 @@
     <view id="drawer" :class="`${prefix}-wrapper`" :style="styles.drawerStyle" @click.stop>
       <view :class="`${prefix}-wrapper-header`">
         <slot name="title">标题</slot>
-        <MlIcon icon="ml-close" :size="22" @click="handleCloseDrawer" />
+        <MlIcon name="ml-close" :size="22" @click="handleCloseDrawer" />
       </view>
       <view :class="`${prefix}-wrapper-content`">
         <slot />
@@ -29,13 +29,11 @@
 <script setup lang="ts">
   import { toRefs, computed } from 'vue'
   import type { PropType, CSSProperties } from 'vue'
-  import { isNumber } from '@/ml-ui/utils'
-  import useTheme from '../../hooks/useTheme/useTheme'
-  import { cs } from '../../utils/property'
-  import { generateDeviceUI } from '../../utils/rect'
+  import { isNumber, cs, generateDeviceUI } from '@meleon/uni-ui/utils'
+  import { useTheme } from '@meleon/uni-ui/hooks'
   import MlIcon from '../ml-icon/index.vue'
   import MlButton from '../ml-button/index.vue'
-  import type { BaseMlDrawerProps } from './type'
+  import type { DrawerProps } from './index.interface'
 
   const props = defineProps({
     hasNav: {
@@ -47,7 +45,7 @@
       required: true
     },
     placement: {
-      type: String as PropType<BaseMlDrawerProps['placement']>,
+      type: String as PropType<DrawerProps['placement']>,
       default: 'right'
     },
     width: {
@@ -85,7 +83,7 @@
   const styles = computed(() => {
     const { statusBarHeight, customBarHeight, bottomBarHeight } = generateDeviceUI().ui
     const radiusValue = isNumber(radius.value) ? `${radius.value}px` : radius.value
-    const radiusMap: Record<BaseMlDrawerProps['placement'], string> = {
+    const radiusMap: Record<DrawerProps['placement'], string> = {
       top: `0 0 ${radiusValue} ${radiusValue}`,
       right: `${radiusValue} 0 0 ${radiusValue}`,
       bottom: `${radiusValue} ${radiusValue} 0 0`,

@@ -278,13 +278,18 @@
 <script setup lang="ts">
   import { ref, computed, provide, getCurrentInstance, reactive, toRefs, watch } from 'vue'
   import type { PropType, ComponentInternalInstance } from 'vue'
+  import { useTheme } from '@meleon/uni-ui/hooks'
+  import {
+    cs,
+    getRect,
+    generateDeviceUI,
+    useGet,
+    useDebounce,
+    useDeepClone
+  } from '@meleon/uni-ui/utils'
   import { MlTableInjectionKey } from './context'
-  import useTheme from '../../hooks/useTheme/useTheme'
-  import { cs } from '../../utils/property'
-  import { generateDeviceUI, getRect } from '../../utils/rect'
-  import { useDebounce, useDeepClone, useGet } from '../../utils/func'
-  import { createStore } from '../ml-table-column/store/helper'
   import type StateWatcher from '../ml-table-column/store'
+  import { createStore } from '../ml-table-column/store/helper'
   // 为 table 组件创建【观察者】角色，并将其添加到【发布方】的观察者列表中
   import {
     Observer,
@@ -335,7 +340,13 @@
 
   const prefix = 'ml-table'
   const className = computed(() => {
-    return cs(prefix, [`${prefix}-${size.value}`], { [`${prefix}-border`]: border.value })
+    return cs(
+      prefix,
+      [`${prefix}-${size.value}`],
+      {
+        [`${prefix}-border`]: border.value
+      }
+    )
   })
 
   // 创建 ml-table 标识符

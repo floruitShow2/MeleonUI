@@ -1,14 +1,14 @@
 <template>
   <view class="message-view">
     <MlNavigator
-      title="MlMessage"
+      title="ml-message"
       has-back
       icon-color="#FFFFFF"
       title-color="#FFFFFF"
       background-color="#7A98B3"
     />
     <view class="message-view-wrapper" :style="wrapperStyle">
-      <MlMessage ref="messageRef" />
+      <ml-message ref="messageRef" />
       <!-- 基础用法 -->
       <CodeBlock :code="templateMap[0].templateCode">
         <template #title>
@@ -21,17 +21,17 @@
         </template>
         <template #demo>
           <view class="button-container">
-            <MlButton type="primary" @click="showMessage('primary')">Primary</MlButton>
-            <MlButton type="primary" status="success" @click="showMessage('success')">
+            <ml-button type="primary" @click="showMessage('primary')">Primary</ml-button>
+            <ml-button type="primary" status="success" @click="showMessage('success')">
               Success
-            </MlButton>
-            <MlButton type="primary" status="warning" @click="showMessage('warning')">
+            </ml-button>
+            <ml-button type="primary" status="warning" @click="showMessage('warning')">
               Warning
-            </MlButton>
-            <MlButton type="primary" status="danger" @click="showMessage('danger')">
+            </ml-button>
+            <ml-button type="primary" status="danger" @click="showMessage('danger')">
               Danger
-            </MlButton>
-            <MlButton type="secondary" @click="showMessage('info')">Info</MlButton>
+            </ml-button>
+            <ml-button type="secondary" @click="showMessage('info')">Info</ml-button>
           </view>
         </template>
       </CodeBlock>
@@ -47,16 +47,16 @@
         </template>
         <template #demo>
           <view class="button-container">
-            <MlButton type="primary" @click="showMessagePosition('primary')">Primary</MlButton>
-            <MlButton type="primary" status="success" @click="showMessagePosition('success')">
+            <ml-button type="primary" @click="showMessagePosition('primary')">Primary</ml-button>
+            <ml-button type="primary" status="success" @click="showMessagePosition('success')">
               Success
-            </MlButton>
-            <MlButton type="primary" status="warning" @click="showMessagePosition('warning')">
+            </ml-button>
+            <ml-button type="primary" status="warning" @click="showMessagePosition('warning')">
               Warning
-            </MlButton>
-            <MlButton type="primary" status="danger" @click="showMessagePosition('danger')">
+            </ml-button>
+            <ml-button type="primary" status="danger" @click="showMessagePosition('danger')">
               Danger
-            </MlButton>
+            </ml-button>
           </view>
         </template>
       </CodeBlock>
@@ -72,8 +72,8 @@
         </template>
         <template #demo>
           <view class="duration-container">
-            <MlInput v-model:model-value="duration" size="mini" />
-            <MlButton type="primary" @click="showMessageDuration">Primary</MlButton>
+            <ml-input v-model:model-value="duration" size="mini" />
+            <ml-button type="primary" @click="showMessageDuration">Primary</ml-button>
           </view>
         </template>
       </CodeBlock>
@@ -89,7 +89,7 @@
         </template>
         <template #demo>
           <view class="button-container">
-            <MlButton type="primary" @click="showMessageClosable">Primary</MlButton>
+            <ml-button type="primary" @click="showMessageClosable">Primary</ml-button>
           </view>
         </template>
       </CodeBlock>
@@ -100,10 +100,8 @@
 <script setup lang="ts">
   import { ref, computed } from 'vue'
   import { useAppStore } from '@/store'
+  import type { MessageInstance, MessageOptions } from '@/ml-ui'
   import MlNavigator from '@/ml-ui/lib/ml-navigator/index.vue'
-  import MlButton from '@/ml-ui/lib/ml-button/index.vue'
-  import MlInput from '@/ml-ui/lib/ml-input/index.vue'
-  import MlMessage from '@/ml-ui/lib/ml-message/index.vue'
   import CodeBlock from '@/components/CodeBlock/index.vue'
 
   const appStore = useAppStore()
@@ -115,12 +113,12 @@
     }
   })
 
-  const messageRef = ref<InstanceType<typeof MlMessage>>()
+  const messageRef = ref<MessageInstance>()
 
   const idx = ref(1)
 
-  const showMessage = (type: 'primary' | 'info' | 'success' | 'danger' | 'warning') => {
-    if (!messageRef.value) return
+  const showMessage = (type: MessageOptions['type']) => {
+    if (!messageRef.value || !type) return
     messageRef.value[type]({
       content: type + idx.value++,
       duration: 2000
@@ -156,10 +154,10 @@
     {
       title: '基础用法',
       desc: '用来显示「成功、警告、消息、错误」类的操作反馈, 用于主动操作后的反馈提示',
-      templateCode: `<MlMessage ref="messageRef" />
+      templateCode: `<ml-message ref="messageRef" />
 
 const messageRef = ref<
-  InstanceType<typeof MlMessage>
+  InstanceType<typeof ml-message>
 >()
 
 const idx = ref(1)

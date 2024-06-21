@@ -23,11 +23,11 @@
 
   const emit = defineEmits(['update:checked'])
 
+  const prefix = 'ml-checkbox'
+
   const { themeColors } = useTheme()
   
   const globalCtx = inject(checkboxGroupInjectionKey, null)
-
-  const prefix = 'ml-checkbox'
 
   const className = computed(() => {
     return cs(prefix, {

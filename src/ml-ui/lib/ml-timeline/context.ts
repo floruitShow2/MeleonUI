@@ -1,11 +1,11 @@
 import type { InjectionKey, Ref } from 'vue'
-import type { MlTimelineProps } from './type'
+import type { TimelineProps } from './index.interface'
 
 export interface TimelineContext {
-  mode: Ref<MlTimelineProps['mode']>
+  mode: Ref<TimelineProps['mode']>
   total: Ref<number>
   reverse: Ref<boolean>
-  direction: Ref<MlTimelineProps['direction']>
+  direction: Ref<TimelineProps['direction']>
   getTimelineItemIndex: () => number
   getTimeLineRect: () => Promise<Record<string, number>>
 }

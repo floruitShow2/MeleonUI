@@ -2,7 +2,7 @@
   <view :class="className" :style="themeColors" @click.self="() => handleTabClick(tab)">
     <MlIcon
       v-if="tab.icon"
-      :icon="tab.icon"
+      :name="tab.icon"
       :size="16"
       :color="iconColor"
       style="transform: translateY(1px)"
@@ -12,7 +12,7 @@
     </span>
     <MlIcon
       v-if="tab.closable"
-      icon="ml-close"
+      name="ml-close"
       :size="18"
       :color="iconColor"
       style="transform: translateY(1px)"
@@ -27,7 +27,7 @@
   import MlIcon from '../../ml-icon/index.vue'
   import useTheme from '../../../hooks/useTheme/useTheme'
   import { cs } from '../../../utils/property'
-  import type { TabData } from '../../ml-tab/type'
+  import type { TabData } from '../../ml-tab/index.interface'
 
   const props = defineProps({
     tab: {

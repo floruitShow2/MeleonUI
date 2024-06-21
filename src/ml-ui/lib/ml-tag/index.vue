@@ -11,7 +11,7 @@
     <MlIcon
       v-if="closable"
       class="icon"
-      icon="ml-close"
+      name="ml-close"
       :size="mapIconSize[size]"
       style="transform: translateY(1px)"
       @click.stop="handleHideTag"
@@ -30,10 +30,10 @@
 <script setup lang="ts">
   import { ref, toRefs, computed } from 'vue'
   import type { PropType } from 'vue'
+  import { useTheme } from '@meleon/uni-ui/hooks'
+  import { cs } from '@meleon/uni-ui/utils'
   import MlIcon from '../ml-icon/index.vue'
   import MlInput from '../ml-input/index.vue'
-  import useTheme from '../../hooks/useTheme/useTheme'
-  import { cs } from '../../utils/property'
 
   const props = defineProps({
     type: { type: String as PropType<MlDesign.Status>, default: 'info' },

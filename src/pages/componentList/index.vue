@@ -15,7 +15,7 @@
     >
       <view v-for="item in componentList" :key="item.name" class="bar" @click="onNavigate(item)">
         {{ item.name }}
-        <MlIcon icon="ml-arrow-right" color="#808080" />
+        <MlIcon name="ml-arrow-right" color="#808080" />
       </view>
     </view>
   </view>

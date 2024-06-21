@@ -9,7 +9,7 @@
     <MlIcon
       v-if="isOptionActive"
       class="ml-icon"
-      icon="ml-selected"
+      name="ml-selected"
       :size="16"
       :color="themeColors['--primary-color-7']"
     />
@@ -17,12 +17,11 @@
 </template>
 
 <script setup lang="ts">
-  import { ref, toRefs, computed, inject, onMounted } from 'vue'
-  import type { PropType } from 'vue'
-  import type { MlOptionProps } from './type'
+  import { toRefs, computed, inject, onMounted } from 'vue'
+  import { useTheme } from '@meleon/uni-ui/hooks'
+  import { cs } from '@meleon/uni-ui/utils'
   import { MlSelectGroupInjectionKey } from './context'
-  import useTheme from '../../hooks/useTheme/useTheme'
-  import { cs } from '../../utils/property'
+  import type { OptionProps } from './index.interface'
   import MlIcon from '../ml-icon/index.vue'
 
   const props = defineProps({
@@ -58,13 +57,13 @@
     )
   })
 
-  // MlOptionProps 从 props 中收集的参数信息
+  // OptionProps 从 props 中收集的参数信息
   const optionProps = computed(() => {
     return {
       label: label.value,
       value: value.value,
       disabled: disabled.value
-    } as MlOptionProps
+    } as OptionProps
   })
 
   const globalCtx = inject(MlSelectGroupInjectionKey)

@@ -7,11 +7,9 @@
 <script setup lang="ts">
   import { ref, toRefs, computed, provide, getCurrentInstance } from 'vue'
   import type { PropType } from 'vue'
-  import useTheme from '../../hooks/useTheme/useTheme'
-  import { cs } from '../../utils/property'
-  import { getRect } from '../../utils/rect'
-  import type { MlTimelineProps } from './type'
-
+  import { useTheme } from '@meleon/uni-ui/hooks'
+  import { cs, getRect } from '@meleon/uni-ui/utils'
+  import type { TimelineProps } from './index.interface'
   import { timelineInjectionKey } from './context'
 
   const props = defineProps({
@@ -20,11 +18,11 @@
       default: false
     },
     direction: {
-      type: String as PropType<MlTimelineProps['direction']>,
+      type: String as PropType<TimelineProps['direction']>,
       default: 'vertical'
     },
     mode: {
-      type: String as PropType<MlTimelineProps['mode']>,
+      type: String as PropType<TimelineProps['mode']>,
       default: 'left'
     }
   })

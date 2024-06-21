@@ -1,7 +1,5 @@
 <template>
-  <view :class="className" :style="themeColors">
-    <slot />
-  </view>
+  <slot />
 </template>
 
 <script setup lang="ts">
@@ -37,12 +35,8 @@
 
   const emit = defineEmits(['update:checkedList'])
   
-  const { themeColors } = useTheme()
-  
   const prefix = 'ml-checkbox-group'
-  const className = computed(() => {
-    return cs(prefix, [`${prefix}-${direction.value}`])
-  })
+  console.log(prefix)
 
   const totalList = ref<Array<string | number>>([])
   // 传递给 ml-checkbox 的组件，

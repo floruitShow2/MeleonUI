@@ -48,11 +48,11 @@
             @click="() => handleSettingClick(setting)"
           >
             <view class="settings-group-item_left">
-              <MlIcon :icon="setting.icon" :size="22" style="transform: translateY(1px)" />
+              <MlIcon :name="setting.icon" :size="22" style="transform: translateY(1px)" />
               <text class="title">{{ $t(setting.label) }}</text>
             </view>
             <view class="settings-group-item_right">
-              <MlIcon icon="ml-arrow-right" :size="16" style="transform: translateY(1px)" />
+              <MlIcon name="ml-arrow-right" :size="16" style="transform: translateY(1px)" />
             </view>
           </view>
         </view>

@@ -52,12 +52,11 @@
 
 <script setup lang="ts">
   import { ref, toRefs, computed, watch, onMounted, getCurrentInstance } from 'vue'
-  import useTheme from '../../hooks/useTheme/useTheme'
-  import { cs } from '../../utils/property'
-  import { isObject } from '../../utils/is'
-  import { MlStatusEnum } from '@meleon/uni-ui/index'
   import type { PropType } from 'vue'
-  import type { BaseMlProgressProps } from './type'
+  import { useTheme } from '@meleon/uni-ui/hooks'
+  import { cs, isObject } from '@meleon/uni-ui/utils'
+  import { MlStatusEnum } from '@meleon/uni-ui/constants'
+  import type { ProgressProps } from './index.interface'
 
   const DEFAULT_WIDTH: Record<MlDesign.Size, number> = {
     mini: 16,
@@ -75,7 +74,7 @@
 
   const props = defineProps({
     type: {
-      type: String as PropType<BaseMlProgressProps['type']>,
+      type: String as PropType<ProgressProps['type']>,
       default: 'line'
     },
     percent: {
@@ -91,7 +90,7 @@
       default: true
     },
     size: {
-      type: String as PropType<BaseMlProgressProps['size']>,
+      type: String as PropType<ProgressProps['size']>,
       default: 'small'
     },
     width: {
@@ -102,7 +101,7 @@
       default: 0
     },
     status: {
-      type: String as PropType<BaseMlProgressProps['status']>,
+      type: String as PropType<ProgressProps['status']>,
       default: 'primary'
     },
     color: {

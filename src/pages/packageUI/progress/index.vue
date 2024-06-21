@@ -1,7 +1,7 @@
 <template>
   <view class="progress-view">
     <MlNavigator
-      title="MlProgress"
+      title="ml-progress"
       has-back
       icon-color="#FFFFFF"
       title-color="#FFFFFF"
@@ -18,16 +18,16 @@
         </template>
         <template #demo>
           <view class="button-container">
-            <MlButton type="primary" @click="handlePlus(0)"> 加 10% </MlButton>
-            <MlButton type="secondary" @click="handleSub(0)"> 减 10% </MlButton>
+            <ml-button type="primary" @click="handlePlus(0)"> 加 10% </ml-button>
+            <ml-button type="secondary" @click="handleSub(0)"> 减 10% </ml-button>
           </view>
           <view>
-            <MlProgress :percent="templateMap[0].percent" :width="120" />
-            <MlProgress :percent="templateMap[0].percent">
+            <ml-progress :percent="templateMap[0].percent" :width="120" />
+            <ml-progress :percent="templateMap[0].percent">
               <template #text="{ percent, decimal }">
                 <text>进度 {{ (percent * 100).toFixed(decimal) }}%</text>
               </template>
-            </MlProgress>
+            </ml-progress>
           </view>
         </template>
       </CodeBlock>
@@ -41,14 +41,14 @@
         </template>
         <template #demo>
           <view class="button-container">
-            <MlButton type="primary" @click="handlePlus(1)"> 加 10% </MlButton>
-            <MlButton type="secondary" @click="handleSub(1)"> 减 10% </MlButton>
+            <ml-button type="primary" @click="handlePlus(1)"> 加 10% </ml-button>
+            <ml-button type="secondary" @click="handleSub(1)"> 减 10% </ml-button>
           </view>
           <view>
-            <MlProgress :percent="templateMap[1].percent" status="primary" />
-            <MlProgress :percent="templateMap[1].percent" status="success" />
-            <MlProgress :percent="templateMap[1].percent" status="warning" />
-            <MlProgress :percent="templateMap[1].percent" status="danger" />
+            <ml-progress :percent="templateMap[1].percent" status="primary" />
+            <ml-progress :percent="templateMap[1].percent" status="success" />
+            <ml-progress :percent="templateMap[1].percent" status="warning" />
+            <ml-progress :percent="templateMap[1].percent" status="danger" />
           </view>
         </template>
       </CodeBlock>
@@ -62,14 +62,14 @@
         </template>
         <template #demo>
           <view class="button-container">
-            <MlButton type="primary" @click="handlePlus(2)"> 加 10% </MlButton>
-            <MlButton type="secondary" @click="handleSub(2)"> 减 10% </MlButton>
+            <ml-button type="primary" @click="handlePlus(2)"> 加 10% </ml-button>
+            <ml-button type="secondary" @click="handleSub(2)"> 减 10% </ml-button>
           </view>
           <view class="progress-wrapper">
-            <MlProgress :percent="templateMap[2].percent" type="circle" status="primary" />
-            <MlProgress :percent="templateMap[2].percent" type="circle" status="success" />
-            <MlProgress :percent="templateMap[2].percent" type="circle" status="warning" />
-            <MlProgress :percent="templateMap[2].percent" type="circle" status="danger" />
+            <ml-progress :percent="templateMap[2].percent" type="circle" status="primary" />
+            <ml-progress :percent="templateMap[2].percent" type="circle" status="success" />
+            <ml-progress :percent="templateMap[2].percent" type="circle" status="warning" />
+            <ml-progress :percent="templateMap[2].percent" type="circle" status="danger" />
           </view>
         </template>
       </CodeBlock>
@@ -83,37 +83,37 @@
         </template>
         <template #demo>
           <view class="button-container">
-            <MlButton
+            <ml-button
               :type="curSize === 'small' ? 'primary' : 'secondary'"
               @click="() => changeSize('small')"
             >
               Small
-            </MlButton>
-            <MlButton
+            </ml-button>
+            <ml-button
               :type="curSize === 'medium' ? 'primary' : 'secondary'"
               @click="() => changeSize('medium')"
             >
               Medium
-            </MlButton>
-            <MlButton
+            </ml-button>
+            <ml-button
               :type="curSize === 'large' ? 'primary' : 'secondary'"
               @click="() => changeSize('large')"
             >
               Large
-            </MlButton>
+            </ml-button>
           </view>
           <view>
-            <MlProgress :percent="templateMap[3].percent" :size="curSize" status="primary" />
-            <MlProgress :percent="templateMap[3].percent" :size="curSize" status="success" />
+            <ml-progress :percent="templateMap[3].percent" :size="curSize" status="primary" />
+            <ml-progress :percent="templateMap[3].percent" :size="curSize" status="success" />
           </view>
           <view class="progress-wrapper">
-            <MlProgress
+            <ml-progress
               :percent="templateMap[3].percent"
               type="circle"
               :size="curSize"
               status="primary"
             />
-            <MlProgress
+            <ml-progress
               :percent="templateMap[3].percent"
               type="circle"
               :size="curSize"
@@ -130,8 +130,6 @@
   import { ref, computed } from 'vue'
   import { useAppStore } from '@/store'
   import MlNavigator from '@/ml-ui/lib/ml-navigator/index.vue'
-  import MlButton from '@/ml-ui/lib/ml-button/index.vue'
-  import MlProgress from '@/ml-ui/lib/ml-progress/index.vue'
   import CodeBlock from '@/components/CodeBlock/index.vue'
 
   const appStore = useAppStore()
@@ -146,39 +144,39 @@
   const templateMap = ref([
     {
       percent: 0.1,
-      templateCode: `<MlProgress :percent="templateMap[0].percent" :width="120" />
-<MlProgress :percent="templateMap[0].percent">
+      templateCode: `<ml-progress :percent="templateMap[0].percent" :width="120" />
+<ml-progress :percent="templateMap[0].percent">
   <template #text="{ percent, decimal }">
     <text>进度 {{ (percent * 100).toFixed(decimal) }}%</text>
   </template>
-</MlProgress>`
+</ml-progress>`
     },
     {
       percent: 0.1,
-      templateCode: `<MlProgress :percent="templateMap[0].percent" :width="120" />
-<MlProgress :percent="templateMap[0].percent">
+      templateCode: `<ml-progress :percent="templateMap[0].percent" :width="120" />
+<ml-progress :percent="templateMap[0].percent">
   <template #text="{ percent, decimal }">
     <text>进度 {{ (percent * 100).toFixed(decimal) }}%</text>
   </template>
-</MlProgress>`
+</ml-progress>`
     },
     {
       percent: 0.1,
-      templateCode: `<MlProgress :percent="templateMap[0].percent" :width="120" />
-<MlProgress :percent="templateMap[0].percent">
+      templateCode: `<ml-progress :percent="templateMap[0].percent" :width="120" />
+<ml-progress :percent="templateMap[0].percent">
   <template #text="{ percent, decimal }">
     <text>进度 {{ (percent * 100).toFixed(decimal) }}%</text>
   </template>
-</MlProgress>`
+</ml-progress>`
     },
     {
       percent: 0.75,
-      templateCode: `<MlProgress :percent="templateMap[0].percent" :width="120" />
-<MlProgress :percent="templateMap[0].percent">
+      templateCode: `<ml-progress :percent="templateMap[0].percent" :width="120" />
+<ml-progress :percent="templateMap[0].percent">
   <template #text="{ percent, decimal }">
     <text>进度 {{ (percent * 100).toFixed(decimal) }}%</text>
   </template>
-</MlProgress>`
+</ml-progress>`
     }
   ])
 

@@ -1,7 +1,7 @@
 <template>
   <view :class="className" @click="emit('click')">
     <icon
-      :class="['ml-color-icon', icon]"
+      :class="['ml-color-icon', name]"
       :style="{
         color,
         fontSize: `${size}px`,
@@ -14,10 +14,10 @@
 
 <script setup lang="ts">
   import { toRefs, computed } from 'vue'
-  import { cs } from '../../utils/property'
+  import { cs } from '@meleon/uni-ui/utils'
 
   const props = defineProps({
-    icon: {
+    name: {
       type: String,
       required: true
     },
@@ -31,11 +31,11 @@
     }
   })
   const emit = defineEmits(['click'])
-  const { icon, size } = toRefs(props)
+  const { name, size } = toRefs(props)
 
   const prefix = 'ml-icon'
   const className = computed(() => {
-    return cs(prefix, `${prefix}-${icon.value.replace('ml-', '')}`)
+    return cs(prefix, `${prefix}-${name.value.replace('ml-', '')}`)
   })
 </script>
 

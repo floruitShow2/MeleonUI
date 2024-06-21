@@ -15,7 +15,7 @@
     >
       <view v-if="disabled && isOverlayShow" class="overlay" />
       <view v-if="prefixIcon.length !== 0" class="icon prefix-icon">
-        <MlIcon v-if="prefixIcon.length !== 0" :icon="prefixIcon" color="#808080" />
+        <MlIcon v-if="prefixIcon.length !== 0" :name="prefixIcon" color="#808080" />
       </view>
       <view v-if="$slots['prefix']" class="icon prefix-icon">
         <slot name="prefix" />
@@ -35,10 +35,10 @@
         <slot v-if="$slots['suffix']" name="suffix" />
         <MlIcon
           v-else-if="type === 'password'"
-          :icon="inputType !== 'password' ? 'ml-eye' : 'ml-eye-close'"
+          :name="inputType !== 'password' ? 'ml-eye' : 'ml-eye-close'"
           color="#808080"
         />
-        <MlIcon v-else-if="suffixIcon.length !== 0" :icon="suffixIcon" color="#808080" />
+        <MlIcon v-else-if="suffixIcon.length !== 0" :name="suffixIcon" color="#808080" />
       </view>
     </view>
     <view v-if="useVirtualInput && isOverlayShow" class="ml-virtual-overlay" @click.stop />
@@ -49,12 +49,10 @@
   import { ref, toRefs, getCurrentInstance, computed, onMounted } from 'vue'
   import type { PropType } from 'vue'
   import { onShow } from '@dcloudio/uni-app'
-  import useTheme from '../../hooks/useTheme/useTheme'
+  import { useTheme } from '@meleon/uni-ui/hooks'
+  import { cs, generateDeviceUI, convertToNumber } from '@meleon/uni-ui/utils'
+  import type { MlInputStatus } from './index.interface'
   import MlIcon from '../ml-icon/index.vue'
-  import { cs } from '../../utils/property'
-  import { generateDeviceUI } from '../../utils/rect'
-  import { convertToNumber } from '../../utils/number'
-  import type { MlInputStatus } from './type'
 
   const props = defineProps({
     modelValue: {

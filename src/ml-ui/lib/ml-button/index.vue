@@ -1,7 +1,7 @@
 <template>
   <view :class="className" :hover-class="hoverClassName" :style="themeColors" @click="handleClick">
     <view v-if="loading || $slots['icon']" :class="`${prefix}-icon`">
-      <MlIcon v-if="loading" icon="ml-loading" />
+      <MlIcon v-if="loading" name="ml-loading" />
       <slot v-else name="icon" />
     </view>
     <slot />

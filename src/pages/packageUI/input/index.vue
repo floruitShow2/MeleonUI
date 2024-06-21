@@ -1,7 +1,7 @@
 <template>
   <view class="input-view">
     <MlNavigator
-      title="MlInput"
+      title="ml-input"
       has-back
       icon-color="#FFFFFF"
       title-color="#FFFFFF"
@@ -17,7 +17,7 @@
           <text>ml-input 组件的基础用法，可使用键盘输入</text>
         </template>
         <template #demo>
-          <MlInput v-model:model-value="templateMap[0].modelValue" placeholder="提示文字可自定义" />
+          <ml-input v-model:model-value="templateMap[0].modelValue" placeholder="提示文字可自定义" />
         </template>
       </CodeBlock>
       <!-- 尺寸控制 -->
@@ -31,12 +31,12 @@
         <template #demo>
           <view class="input-demo-size">
             <view class="input-demo-size-buttons">
-              <MlButton size="mini" @click="inputSize = 'mini'">Mini</MlButton>
-              <MlButton size="mini" @click="inputSize = 'small'">Small</MlButton>
-              <MlButton size="mini" @click="inputSize = 'medium'">Medium</MlButton>
-              <MlButton size="mini" @click="inputSize = 'large'">Large</MlButton>
+              <ml-button size="mini" @click="inputSize = 'mini'">Mini</ml-button>
+              <ml-button size="mini" @click="inputSize = 'small'">Small</ml-button>
+              <ml-button size="mini" @click="inputSize = 'medium'">Medium</ml-button>
+              <ml-button size="mini" @click="inputSize = 'large'">Large</ml-button>
             </view>
-            <MlInput
+            <ml-input
               v-model:model-value="templateMap[1].modelValue"
               :size="inputSize"
               style="width: 100%"
@@ -55,27 +55,27 @@
         <template #demo>
           <view class="input-demo-fix">
             <!-- 添加前缀 -->
-            <MlInput
+            <ml-input
               v-model:model-value="templateMap[2].modelValue"
               :size="inputSize"
               style="width: 100%"
             >
               <template #prefix>
-                <MlIcon icon="ml-search" :size="18" />
+                <ml-icon name="ml-search" :size="18" />
               </template>
-            </MlInput>
+            </ml-input>
             <!-- 添加后缀 -->
-            <MlInput
+            <ml-input
               v-model:model-value="templateMap[2].modelValue"
               :size="inputSize"
               style="width: 100%"
             >
               <template #suffix>
-                <MlIcon icon="ml-setting" :size="18" />
+                <ml-icon name="ml-setting" :size="18" />
               </template>
-            </MlInput>
+            </ml-input>
             <!-- type 为 password 时，添加默认后缀 -->
-            <MlInput
+            <ml-input
               v-model:model-value="templateMap[2].modelValue"
               type="password"
               style="width: 100%"
@@ -92,7 +92,7 @@
           <text>通过设置 disabled 属性来禁用用户操作</text>
         </template>
         <template #demo>
-          <MlInput
+          <ml-input
             v-model:model-value="templateMap[3].modelValue"
             disabled
             :size="inputSize"
@@ -108,9 +108,6 @@
   import { ref, computed } from 'vue'
   import { useAppStore } from '@/store'
   import MlNavigator from '@/ml-ui/lib/ml-navigator/index.vue'
-  import MlInput from '@/ml-ui/lib/ml-input/index.vue'
-  import MlIcon from '@/ml-ui/lib/ml-icon/index.vue'
-  import MlButton from '@/ml-ui/lib/ml-button/index.vue'
   import CodeBlock from '@/components/CodeBlock/index.vue'
 
   const appStore = useAppStore()
@@ -125,14 +122,14 @@
   const templateMap = ref([
     {
       modelValue: '',
-      templateCode: `<MlInput
+      templateCode: `<ml-input
   v-model:model-value="modelValue"
   placeholder="提示文字可自定义"
 />`
     },
     {
       modelValue: '',
-      templateCode: `<MlInput
+      templateCode: `<ml-input
   v-model:model-value="modelValue"
   size="mini"
 />`
@@ -140,31 +137,31 @@
     {
       modelValue: '',
       templateCode: `<!-- 添加前缀 -->
-<MlInput
+<ml-input
   v-model:model-value="modelValue"
   :size="inputSize"
   style="width: 100%"
 >
   <template #prefix>
-    <MlIcon icon="ml-search" :size="18" />
+    <ml-icon name="ml-search" :size="18" />
   </template>
-</MlInput>
+</ml-input>
 
 
 <!-- 添加后缀 -->
-<MlInput
+<ml-input
   v-model:model-value="modelValue"
   :size="inputSize"
   style="width: 100%"
 >
   <template #suffix>
-    <MlIcon icon="ml-setting" :size="18" />
+    <ml-icon name="ml-setting" :size="18" />
   </template>
-</MlInput>
+</ml-input>
 
 
 <!-- type 为 password 时，添加默认后缀 -->
-<MlInput
+<ml-input
   v-model:model-value="modelValue"
   type="password"
   style="width: 100%"
@@ -172,7 +169,7 @@
     },
     {
       modelValue: '',
-      templateCode: `<MlInput
+      templateCode: `<ml-input
   v-model:model-value="modelValue"
   disabled
   :size="inputSize"

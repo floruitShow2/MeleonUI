@@ -1,12 +1,12 @@
 import type { InjectionKey } from 'vue'
-import type { MlOptionProps } from './type'
+import type { OptionProps } from './index.interface'
 
 export interface MlSelectGroupContext {
-  getSelectedList: () => MlOptionProps[]
-  getHiddenList: () => Array<MlOptionProps['value']>
+  getSelectedList: () => OptionProps[]
+  getHiddenList: () => Array<OptionProps['value']>
   getTriggerRect: () => Record<string, number>
-  addOption: (option: MlOptionProps) => void
-  selectOption: (option: MlOptionProps) => void
+  addOption: (option: OptionProps) => void
+  selectOption: (option: OptionProps) => void
 }
 
 const MlSelectGroupInjectionKey: InjectionKey<MlSelectGroupContext> = Symbol('MlSelect')

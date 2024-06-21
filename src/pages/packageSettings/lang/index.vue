@@ -15,7 +15,7 @@
         @click="selectedLocale = locale"
       >
         <text>{{ label }}</text>
-        <MlIcon v-show="selectedLocale === locale" icon="ml-selected" :size="22" color="#A0E548" />
+        <MlIcon v-show="selectedLocale === locale" name="ml-selected" :size="22" color="#A0E548" />
       </view>
       <MlButton type="primary" size="medium" style="width: 100%" @click="handleLocaleChange">
         确认选择

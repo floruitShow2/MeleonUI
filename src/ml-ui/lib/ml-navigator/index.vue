@@ -10,7 +10,7 @@
       <!-- 图标 -->
       <MlIcon
         v-if="hasBack"
-        icon="ml-arrow-left"
+        name="ml-arrow-left"
         :color="iconColor"
         :size="20"
         style="margin-right: 10px"
@@ -29,7 +29,7 @@
               => 'navigator' : 跳转到指定路径
         -->
         <template v-for="tool in toolBox" :key="tool">
-          <MlIcon :icon="tool.icon" :color="tool.color" @click="switchToPage(tool)" />
+          <MlIcon :name="tool.icon" :color="tool.color" @click="switchToPage(tool)" />
         </template>
       </view>
       <view
@@ -68,7 +68,7 @@
   import { generateDeviceUI } from '@/utils/device'
   import { cs } from '@/utils/property'
   import MlIcon from '../ml-icon/index.vue'
-  import type { ToolType } from './type'
+  import type { NavigatorProps, NavigatorToolEntity } from './index.interface'
 
   const props = defineProps({
     // 导航栏背景色
@@ -80,11 +80,7 @@
     // 是否返回按钮
     hasBack: {
       type: Boolean,
-      default: false,
-      observer(newVal: boolean) {
-        if (newVal === undefined) newVal = true
-        return newVal
-      }
+      default: false
     },
     // 图标颜色
     iconColor: { type: String, default: '#555555' },
@@ -94,7 +90,7 @@
     // icon => 基于 vant-ui 组件库，名称从文档提供中自选
     // color => 图标颜色
     // type => 类型限制为 return 和 navigator, 'return' 提供返回层数 delta，'navigator' 提供目标路径 path
-    toolBox: { type: Array as PropType<ToolType[]>, default: () => [] }
+    toolBox: { type: Array as PropType<NavigatorProps['toolBox']>, default: () => [] }
   })
 
   const { title, hasBack, toolBox, iconColor, backgroundColor } = toRefs(props)
@@ -147,7 +143,7 @@
     })
   }
 
-  const switchToPage = (tool: ToolType) => {
+  const switchToPage = (tool: NavigatorToolEntity) => {
     const { type, delta, path } = tool
     if (type === 'return' && delta) {
       uni.navigateBack({

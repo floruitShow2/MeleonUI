@@ -27,10 +27,9 @@
 <script setup lang="ts">
   import { ref, toRefs, computed, onMounted, getCurrentInstance, inject, watch } from 'vue'
   import type { PropType } from 'vue'
-  import useTheme from '../../hooks/useTheme/useTheme'
-  import { cs } from '../../utils/property'
-  import { getRect } from '../../utils/rect'
-  import type { MlTimelineItemProps } from './type'
+  import { useTheme } from '@meleon/uni-ui/hooks'
+  import { cs, getRect } from '@meleon/uni-ui/utils'
+  import type { TimelineItemProps } from './index.interface'
   import { timelineInjectionKey } from '../ml-timeline/context'
 
   const props = defineProps({
@@ -39,11 +38,11 @@
       default: ''
     },
     lineType: {
-      type: String as PropType<MlTimelineItemProps['lineType']>,
+      type: String as PropType<TimelineItemProps['lineType']>,
       default: 'solid'
     },
     lineStyle: {
-      type: Object as PropType<MlTimelineItemProps['lineStyle']>,
+      type: Object as PropType<TimelineItemProps['lineStyle']>,
       default: () => ({})
     }
   })

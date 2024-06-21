@@ -14,7 +14,7 @@
         :class="`${prefix}-container-card`"
         @click="() => handleEchartsClick(icon.name)"
       >
-        <MlColorIcon :icon="icon.fontClass" :size="44" />
+        <MlColorIcon :name="icon.fontClass" :size="44" />
         <text class="card-label">{{ icon.name }}</text>
       </view>
     </view>

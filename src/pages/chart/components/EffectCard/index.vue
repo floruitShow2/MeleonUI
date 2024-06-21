@@ -6,11 +6,11 @@
     </view>
     <view class="effect-card-views">
       <view class="item">
-        <MlIcon icon="ml-eye" :size="16" />
+        <MlIcon name="ml-eye" :size="16" />
         <text>{{ views }}</text>
       </view>
       <view class="item">
-        <MlIcon icon="ml-like" :size="16" />
+        <MlIcon name="ml-like" :size="16" />
         <text>{{ likes }}</text>
       </view>
     </view>

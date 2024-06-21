@@ -29,7 +29,7 @@
     </span>
     <view class="icon suffix-icon">
       <slot v-if="$slots['suffix']" name="suffix" />
-      <!-- <MlIcon v-else-if="suffixIcon.length !== 0" :icon="suffixIcon" color="#808080" /> -->
+      <!-- <MlIcon v-else-if="suffixIcon.length !== 0" :name="suffixIcon" color="#808080" /> -->
     </view>
   </view>
 </template>
@@ -37,11 +37,11 @@
 <script setup lang="ts">
   import { ref, toRefs, computed } from 'vue'
   import type { PropType } from 'vue'
-  import useTheme from '../../hooks/useTheme/useTheme'
-  import { cs } from '../../utils/property'
-  import MlTag from '../ml-tag/index.vue'
+  import { useTheme } from '@meleon/uni-ui/hooks'
+  import { cs } from '@meleon/uni-ui/utils'
   import { getValueData } from './utils'
-  import type { TagData, BaseInputTagProps } from './type'
+  import type { TagData, InputTagProps } from './index.interface'
+  import MlTag from '../ml-tag/index.vue'
 
   const DEFAULT_FIELD_NAMES = {
     value: 'value',
@@ -68,11 +68,11 @@
       default: () => ({})
     },
     size: {
-      type: String as PropType<BaseInputTagProps['size']>,
+      type: String as PropType<InputTagProps['size']>,
       default: 'small'
     },
     tagType: {
-      type: String as PropType<BaseInputTagProps['tagType']>,
+      type: String as PropType<InputTagProps['tagType']>,
       default: 'primary'
     },
     readonly: {

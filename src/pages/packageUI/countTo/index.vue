@@ -1,7 +1,7 @@
 <template>
   <view class="count-to-view">
     <MlNavigator
-      title="MlButton"
+      title="ml-button"
       has-back
       icon-color="#FFFFFF"
       title-color="#FFFFFF"
@@ -21,8 +21,8 @@
         </template>
         <template #demo>
           <view class="count-to-container">
-            <MlScrollNum :from="0" :to="36241250.44" />
-            <MlScrollNum :from="0" :to="36241250.44" show-seperator />
+            <ml-count-to :from="0" :to="36241250.44" />
+            <ml-count-to :from="0" :to="36241250.44" show-seperator />
           </view>
         </template>
       </CodeBlock>
@@ -38,31 +38,29 @@
         </template>
         <template #demo>
           <view class="count-to-container">
-            <MlScrollNum :from="0" :to="1250.44" animation :animation-duration="5000" />
-            <MlScrollNum :from="0" :to="36241250.44" animation show-seperator />
+            <ml-count-to :from="0" :to="1250.44" animation :animation-duration="5000" />
+            <ml-count-to :from="0" :to="36241250.44" animation show-seperator />
           </view>
         </template>
       </CodeBlock>
       <!-- 前后缀 -->
       <CodeBlock :code="templateMap[2].templateCode">
         <template #title>
-          <text>按钮尺寸</text>
+          <text>数值前后缀</text>
         </template>
         <template #description>
           <text>
-            按钮分为 mini、small、medium、large
-            四种尺寸。高度分别为：28px、32px、36px、40px。推荐（默认）尺寸为
-            medium。可在不同场景及不同业务需求选择适合尺寸
+            分别提供了 prefix 和 suffix 插槽来设置数值的前缀和后缀
           </text>
         </template>
         <template #demo>
           <view class="count-to-container">
-            <MlScrollNum :from="0" :to="1250.44" animation :animation-duration="5000">
+            <ml-count-to :from="0" :to="1250.44" animation :animation-duration="5000">
               <template #prefix>
-                <MlIcon icon="ml-arrow-up" />
+                <MlIcon name="ml-arrow-up" />
               </template>
-            </MlScrollNum>
-            <MlScrollNum
+            </ml-count-to>
+            <ml-count-to
               :from="0"
               :to="1250.44"
               animation
@@ -72,24 +70,22 @@
               <template #suffix>
                 <text>%</text>
               </template>
-            </MlScrollNum>
+            </ml-count-to>
           </view>
         </template>
       </CodeBlock>
       <CodeBlock :code="templateMap[2].templateCode">
         <template #title>
-          <text>按钮尺寸</text>
+          <text>手动触发</text>
         </template>
         <template #description>
           <text>
-            按钮分为 mini、small、medium、large
-            四种尺寸。高度分别为：28px、32px、36px、40px。推荐（默认）尺寸为
-            medium。可在不同场景及不同业务需求选择适合尺寸
+            可以选择手动触发动画，组件暴露了 start、pause、restart 方法共用户使用
           </text>
         </template>
         <template #demo>
           <view class="count-to-container">
-            <MlScrollNum
+            <ml-count-to
               ref="countToRef"
               :from="0"
               :to="1250.44"
@@ -99,15 +95,15 @@
               <template #suffix>
                 <text>%</text>
               </template>
-            </MlScrollNum>
+            </ml-count-to>
             <view class="button-list">
-              <MlButton type="primary" size="mini" @click="handleStartClick"> start </MlButton>
-              <MlButton type="primary" size="mini" status="danger" @click="handlePauseClick">
+              <ml-button type="primary" size="mini" @click="handleStartClick"> start </ml-button>
+              <ml-button type="primary" size="mini" status="danger" @click="handlePauseClick">
                 pause
-              </MlButton>
-              <MlButton type="primary" size="mini" status="success" @click="handleRestartClick">
+              </ml-button>
+              <ml-button type="primary" size="mini" status="success" @click="handleRestartClick">
                 restart
-              </MlButton>
+              </ml-button>
             </view>
           </view>
         </template>
@@ -121,8 +117,6 @@
   import { useAppStore } from '@/store'
   import MlNavigator from '@/ml-ui/lib/ml-navigator/index.vue'
   import MlIcon from '@/ml-ui/lib/ml-icon/index.vue'
-  import MlButton from '@/ml-ui/lib/ml-button/index.vue'
-  import MlScrollNum from '@/ml-ui/lib/ml-count-to/index.vue'
   import CodeBlock from '@/components/CodeBlock/index.vue'
 
   const appStore = useAppStore()

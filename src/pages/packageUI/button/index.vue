@@ -42,11 +42,11 @@
             <MlButton type="primary" shape="round">Round</MlButton>
             <MlButton type="primary" shape="square">
               <template #icon>
-                <MlIcon icon="ml-plus" color="#FFFFFF" />
+                <MlIcon name="ml-plus" color="#FFFFFF" />
               </template>
             </MlButton>
             <MlButton type="primary" shape="circle">
-              <MlIcon icon="ml-plus" color="#FFFFFF" />
+              <MlIcon name="ml-plus" color="#FFFFFF" />
             </MlButton>
           </view>
         </template>
@@ -141,11 +141,11 @@
   <MlButton type="primary" shape="round">Round</MlButton>
   <MlButton type="primary" shape="square">
     <template #icon>
-      <MlIcon icon="ml-plus" color="#FFFFFF" />
+      <MlIcon name="ml-plus" color="#FFFFFF" />
     </template>
   </MlButton>
   <MlButton type="primary" shape="circle">
-    <MlIcon icon="ml-plus" color="#FFFFFF" />
+    <MlIcon name="ml-plus" color="#FFFFFF" />
   </MlButton>
 </view>`
     },

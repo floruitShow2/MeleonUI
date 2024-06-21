@@ -14,7 +14,7 @@
       >
         <view :class="`${prefix}-item--content`">
           <MlIcon
-            :icon="iconsMap[message.type || 'primary'].icon"
+            :name="iconsMap[message.type || 'primary'].icon"
             :size="20"
             :color="iconsMap[message.type || 'primary'].color"
             style="margin-right: 5px"
@@ -23,7 +23,7 @@
         </view>
         <MlIcon
           v-if="message.closable"
-          icon="ml-close"
+          name="ml-close"
           :size="18"
           color="#999999"
           style="margin-left: 5px"
@@ -45,7 +45,7 @@
       >
         <view :class="`${prefix}-item--content`">
           <MlIcon
-            :icon="iconsMap[message.type || 'primary'].icon"
+            :name="iconsMap[message.type || 'primary'].icon"
             :size="20"
             :color="iconsMap[message.type || 'primary'].color"
             style="margin-right: 5px"
@@ -54,7 +54,7 @@
         </view>
         <MlIcon
           v-if="message.closable"
-          icon="ml-close"
+          name="ml-close"
           :size="18"
           color="#999999"
           style="margin-left: 5px"
@@ -67,12 +67,11 @@
 
 <script setup lang="ts">
   import { toRefs, computed, getCurrentInstance, reactive } from 'vue'
-  import useTheme from '../../hooks/useTheme/useTheme'
-  import { cs } from '../../utils/property'
-  import { generateDeviceUI } from '../../utils/rect'
+  import { useTheme } from '@meleon/uni-ui/hooks'
+  import { cs, generateDeviceUI } from '@meleon/uni-ui/utils'
+  import MlMessage from './MlMessage'
+  import type { MessageOptions } from './index.interface'
   import MlIcon from '../ml-icon/index.vue'
-  import MessageInstance from './index'
-  import type { MlMessageOptions } from './type'
 
   const props = defineProps({
     duration: {
@@ -106,7 +105,7 @@
   })
 
   const instance = getCurrentInstance()
-  const messageInstance = new MessageInstance(instance)
+  const messageInstance = new MlMessage(instance)
 
   const messagesAtTop = computed(() =>
     messageInstance.messages.value.filter((item) => item.position === 'top')
@@ -115,14 +114,14 @@
     messageInstance.messages.value.filter((item) => item.position === 'bottom')
   )
 
-  const DefaultOptions = computed<Partial<MlMessageOptions>>(() => {
+  const DefaultOptions = computed<Partial<MessageOptions>>(() => {
     return {
       position: 'top',
       duration: duration.value
     }
   })
 
-  const handleCloseMessage = (message: MlMessageOptions) => {
+  const handleCloseMessage = (message: MessageOptions) => {
     messageInstance.remove(message)
   }
 
@@ -149,19 +148,19 @@
       color: 'var(--danger-color-6)'
     }
   })
-  const primary = (options: MlMessageOptions) => {
+  const primary = (options: MessageOptions) => {
     messageInstance.add({ ...DefaultOptions.value, ...options, type: 'primary' })
   }
-  const info = (options: MlMessageOptions) => {
+  const info = (options: MessageOptions) => {
     messageInstance.add({ ...DefaultOptions.value, ...options, type: 'info' })
   }
-  const success = (options: MlMessageOptions) => {
+  const success = (options: MessageOptions) => {
     messageInstance.add({ ...DefaultOptions.value, ...options, type: 'success' })
   }
-  const warning = (options: MlMessageOptions) => {
+  const warning = (options: MessageOptions) => {
     messageInstance.add({ ...DefaultOptions.value, ...options, type: 'warning' })
   }
-  const danger = (options: MlMessageOptions) => {
+  const danger = (options: MessageOptions) => {
     messageInstance.add({ ...DefaultOptions.value, ...options, type: 'danger' })
   }
 

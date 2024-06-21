@@ -1,5 +1,5 @@
 import { isNumber, isObject } from '../../utils/is'
-import type { TagData } from './type'
+import type { TagData } from './index.interface'
 
 export const getValueData = (value: Array<string | number | TagData>): TagData[] => {
   const result: TagData[] = []

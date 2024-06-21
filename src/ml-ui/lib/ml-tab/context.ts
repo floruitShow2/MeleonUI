@@ -1,5 +1,5 @@
 import type { InjectionKey } from 'vue'
-import type { TabData } from './type'
+import type { TabData } from './index.interface'
 
 export interface MlTabsGroupContext {
   activeKey: string | number

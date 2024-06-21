@@ -1,4 +1,4 @@
-export interface BaseInputTagProps {
+export interface InputTagProps {
   size: MlDesign.Size
   tagType: MlDesign.Status
 }

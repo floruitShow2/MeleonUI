@@ -11,7 +11,7 @@
       @click="onTabClick(option)"
     >
       <MlColorIcon
-        :icon="activeTab === option.key ? option.selectIcon : option.icon"
+        :name="activeTab === option.key ? option.selectIcon : option.icon"
         :size="22"
         :color="option.type === 'main' ? '#FFFFFF' : '#808080'"
       />
@@ -20,6 +20,7 @@
   </view>
 </template>
 
+<!-- 底部导航栏，暂不暴露出去 -->
 <script setup lang="ts">
   import { ref, computed } from 'vue'
   import { onShow } from '@dcloudio/uni-app'

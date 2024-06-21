@@ -1,7 +1,7 @@
 <template>
   <view :class="className" @click="handleIconClick">
     <icon
-      :class="['ml-icon-inner', icon]"
+      :class="cs('ml-icon-inner', name)"
       :style="{
         color,
         fontSize: `${size}px`,
@@ -18,7 +18,7 @@
   import { cs } from '../../utils/property'
 
   const props = defineProps({
-    icon: {
+    name: {
       type: String,
       required: true
     },
@@ -32,11 +32,11 @@
     }
   })
   const emit = defineEmits(['click'])
-  const { icon, size } = toRefs(props)
+  const { name, size } = toRefs(props)
 
   const prefix = 'ml-icon'
   const className = computed(() => {
-    return cs(prefix, `${prefix}-${icon.value.replace('ml-', '')}`)
+    return cs(prefix, `${prefix}-${name.value.replace('ml-', '')}`)
   })
 
   const handleIconClick = (e: MouseEvent) => {

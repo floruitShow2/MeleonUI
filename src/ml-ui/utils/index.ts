@@ -1,5 +1,6 @@
 export * from './is'
 export * from './func'
+export * from './rect'
 export * from './number'
 export * from './property'
-export * from './tween'
+export { default as Tween } from './tween'

@@ -16,13 +16,13 @@
           <text>标签页的基本使用方法。</text>
         </template>
         <template #demo>
-          <MlTabs active="a">
-            <MlTab value="a" title="标签1">内容1</MlTab>
-            <MlTab value="b" title="标签2">内容2</MlTab>
-            <MlTab value="c" title="标签3">内容3</MlTab>
-            <MlTab value="d" title="标签4">内容4</MlTab>
-            <MlTab value="e" title="标签5">内容5</MlTab>
-          </MlTabs>
+          <ml-tabs active="a">
+            <ml-tab value="a" title="标签1">内容1</ml-tab>
+            <ml-tab value="b" title="标签2">内容2</ml-tab>
+            <ml-tab value="c" title="标签3">内容3</ml-tab>
+            <ml-tab value="d" title="标签4">内容4</ml-tab>
+            <ml-tab value="e" title="标签5">内容5</ml-tab>
+          </ml-tabs>
         </template>
       </CodeBlock>
       <CodeBlock :code="templateMap[1].templateCode">
@@ -33,13 +33,13 @@
           <text>通过设置 disabled 和 closable 属性来控制每个tab</text>
         </template>
         <template #demo>
-          <MlTabs active="a">
-            <MlTab value="a" title="标签1" closable>内容1</MlTab>
-            <MlTab value="b" title="标签2" disabled>内容2</MlTab>
-            <MlTab value="c" title="标签3" disabled closable>内容3</MlTab>
-            <MlTab value="d" title="标签4">内容4</MlTab>
-            <MlTab value="e" title="标签5">内容5</MlTab>
-          </MlTabs>
+          <ml-tabs active="a">
+            <ml-tab value="a" title="标签1" closable>内容1</ml-tab>
+            <ml-tab value="b" title="标签2" disabled>内容2</ml-tab>
+            <ml-tab value="c" title="标签3" disabled closable>内容3</ml-tab>
+            <ml-tab value="d" title="标签4">内容4</ml-tab>
+            <ml-tab value="e" title="标签5">内容5</ml-tab>
+          </ml-tabs>
         </template>
       </CodeBlock>
       <CodeBlock :code="templateMap[2].templateCode">
@@ -50,13 +50,13 @@
           <text>通过设置 scroll-with-animation 属性控制切换动画，默认开启</text>
         </template>
         <template #demo>
-          <MlTabs active="a" :scroll-with-animation="false">
-            <MlTab value="a" title="标签1">内容1</MlTab>
-            <MlTab value="b" title="标签2">内容2</MlTab>
-            <MlTab value="c" title="标签3">内容3</MlTab>
-            <MlTab value="d" title="标签4">内容4</MlTab>
-            <MlTab value="e" title="标签5">内容5</MlTab>
-          </MlTabs>
+          <ml-tabs active="a" :scroll-with-animation="false">
+            <ml-tab value="a" title="标签1">内容1</ml-tab>
+            <ml-tab value="b" title="标签2">内容2</ml-tab>
+            <ml-tab value="c" title="标签3">内容3</ml-tab>
+            <ml-tab value="d" title="标签4">内容4</ml-tab>
+            <ml-tab value="e" title="标签5">内容5</ml-tab>
+          </ml-tabs>
         </template>
       </CodeBlock>
       <CodeBlock :code="templateMap[2].templateCode">
@@ -64,16 +64,16 @@
           <text>添加 Icon</text>
         </template>
         <template #description>
-          <text>在 MlTab 组件上添加图标名称，目前必须使用 MlIcon 库内的图标，以 “ml-” 开头</text>
+          <text>在 ml-tab 组件上添加图标名称，目前必须使用 MlIcon 库内的图标，以 “ml-” 开头</text>
         </template>
         <template #demo>
-          <MlTabs active="a">
-            <MlTab value="a" title="标签1" icon="ml-setting">内容1</MlTab>
-            <MlTab value="b" title="标签2">内容2</MlTab>
-            <MlTab value="c" title="标签3">内容3</MlTab>
-            <MlTab value="d" title="标签4">内容4</MlTab>
-            <MlTab value="e" title="标签5">内容5</MlTab>
-          </MlTabs>
+          <ml-tabs active="a">
+            <ml-tab value="a" title="标签1" name="ml-setting">内容1</ml-tab>
+            <ml-tab value="b" title="标签2">内容2</ml-tab>
+            <ml-tab value="c" title="标签3">内容3</ml-tab>
+            <ml-tab value="d" title="标签4">内容4</ml-tab>
+            <ml-tab value="e" title="标签5">内容5</ml-tab>
+          </ml-tabs>
         </template>
       </CodeBlock>
     </view>
@@ -85,8 +85,6 @@
   import { useAppStore } from '@/store'
   import CodeBlock from '@/components/CodeBlock/index.vue'
   import MlNavigator from '@/ml-ui/lib/ml-navigator/index.vue'
-  import MlTab from '@/ml-ui/lib/ml-tab/index.vue'
-  import MlTabs from '@/ml-ui/lib/ml-tabs/index.vue'
 
   const appStore = useAppStore()
   const wrapperStyle = computed(() => {
@@ -99,29 +97,29 @@
 
   const templateMap = ref([
     {
-      templateCode: `<MlTabs active="a" :scroll-with-animation="true">
-  <MlTab value="a" title="标签1">内容1</MlTab>
-  <MlTab value="b" title="标签2">内容2</MlTab>
-  <MlTab value="c" title="标签3">内容3</MlTab>
-  <MlTab value="d" title="标签4">内容4</MlTab>
-  <MlTab value="e" title="标签5">内容5</MlTab>
-</MlTabs>`
+      templateCode: `<ml-tabs active="a" :scroll-with-animation="true">
+  <ml-tab value="a" title="标签1">内容1</ml-tab>
+  <ml-tab value="b" title="标签2">内容2</ml-tab>
+  <ml-tab value="c" title="标签3">内容3</ml-tab>
+  <ml-tab value="d" title="标签4">内容4</ml-tab>
+  <ml-tab value="e" title="标签5">内容5</ml-tab>
+</ml-tabs>`
     },
     {
-      templateCode: `<MlTabs active="a">
-  <MlTab value="a" title="标签1" closable>内容1</MlTab>
-  <MlTab value="b" title="标签2" disabled>内容2</MlTab>
-  <MlTab value="c" title="标签3" disabled closable>内容3</MlTab>
-  <MlTab value="d" title="标签4">内容4</MlTab>
-  <MlTab value="e" title="标签5">内容5</MlTab>
-</MlTabs>`
+      templateCode: `<ml-tabs active="a">
+  <ml-tab value="a" title="标签1" closable>内容1</ml-tab>
+  <ml-tab value="b" title="标签2" disabled>内容2</ml-tab>
+  <ml-tab value="c" title="标签3" disabled closable>内容3</ml-tab>
+  <ml-tab value="d" title="标签4">内容4</ml-tab>
+  <ml-tab value="e" title="标签5">内容5</ml-tab>
+</ml-tabs>`
     },
     {
-      templateCode: `<MlTabs active="a" :scroll-with-animation="false">
-  <MlTab value="a" title="标签1">内容1</MlTab>
-  <MlTab value="b" title="标签2">内容2</MlTab>
-  <MlTab value="c" title="标签3">内容3</MlTab>
-</MlTabs>`
+      templateCode: `<ml-tabs active="a" :scroll-with-animation="false">
+  <ml-tab value="a" title="标签1">内容1</ml-tab>
+  <ml-tab value="b" title="标签2">内容2</ml-tab>
+  <ml-tab value="c" title="标签3">内容3</ml-tab>
+</ml-tabs>`
     }
   ])
 </script>

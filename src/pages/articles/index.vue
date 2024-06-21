@@ -4,7 +4,7 @@
       <template #search>
         <MlInput readonly size="mini" style="width: 100%" @focus="handleSearchFocus">
           <template #prefix>
-            <MlIcon icon="ml-search" :size="14" />
+            <MlIcon name="ml-search" :size="14" />
           </template>
         </MlInput>
       </template>
@@ -12,7 +12,7 @@
     <view class="category-view-wrapper" :style="wrapperStyle">
       <MlTabs active="threejs">
         <template #right>
-          <MlIcon icon="ml-filter" :size="18" @click="handleTabFilter" />
+          <MlIcon name="ml-filter" :size="18" @click="handleTabFilter" />
         </template>
         <MlTab v-for="(articles, tab) in articlesList" :key="tab" :value="tab" :title="tab">
           <ArticleCard

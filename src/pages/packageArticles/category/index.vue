@@ -34,7 +34,7 @@
                 {{ element.label }}
                 <MlIcon
                   v-show="allowDrag"
-                  icon="ml-close"
+                  name="ml-close"
                   :size="16"
                   @click.stop="handleItemClose(element)"
                 />
@@ -61,7 +61,7 @@
             @click.stop="handleItemAdd(item)"
           >
             {{ item.label }}
-            <MlIcon v-show="allowDrag" icon="ml-plus" :size="16"></MlIcon>
+            <MlIcon v-show="allowDrag" name="ml-plus" :size="16"></MlIcon>
           </MlButton>
         </view>
       </view>

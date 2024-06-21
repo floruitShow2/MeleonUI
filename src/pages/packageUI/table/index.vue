@@ -18,7 +18,7 @@
         </template>
         <template #demo>
           <view class="table-container">
-            <MlTable
+            <ml-table
               :data="tableData"
               size="mini"
               stripe
@@ -33,22 +33,22 @@
             >
               <template #cell="{ column, row }">
                 <block v-if="column.property === 'gender'">
-                  <MlTag :model-value="row[column.property]" type="primary" size="mini"></MlTag>
+                  <ml-tag :model-value="row[column.property]" type="primary" size="mini"></ml-tag>
                 </block>
                 <block v-else-if="column.property === 'age'">
-                  <MlCountTo
+                  <ml-count-to
                     :to="row[column.property]"
                     animation
                     :value-style="{ fontSize: '14px', color: 'var(--info-color-8)' }"
-                  ></MlCountTo>
+                  ></ml-count-to>
                 </block>
                 <text v-else>{{ column.property && row[column.property] }}</text>
               </template>
-              <MlTableColumn type="index" fixed="left"></MlTableColumn>
-              <MlTableColumn prop="name" label="姓名" fixed></MlTableColumn>
-              <MlTableColumn prop="age" label="年龄"></MlTableColumn>
-              <MlTableColumn prop="gender" label="性别"></MlTableColumn>
-            </MlTable>
+              <ml-table-column type="index" fixed="left"></ml-table-column>
+              <ml-table-column prop="name" label="姓名" fixed></ml-table-column>
+              <ml-table-column prop="age" label="年龄"></ml-table-column>
+              <ml-table-column prop="gender" label="性别"></ml-table-column>
+            </ml-table>
           </view>
         </template>
       </CodeBlock>
@@ -60,10 +60,6 @@
   import { ref, computed } from 'vue'
   import { useAppStore } from '@/store'
   import MlNavigator from '@/ml-ui/lib/ml-navigator/index.vue'
-  import MlTableColumn from '@/ml-ui/lib/ml-table-column/index.vue'
-  import MlTable from '@/ml-ui/lib/ml-table/index.vue'
-  import MlTag from '@/ml-ui/lib/ml-tag/index.vue'
-  import MlCountTo from '@/ml-ui/lib/ml-count-to/index.vue'
   import CodeBlock from '@/components/CodeBlock/index.vue'
 
   const appStore = useAppStore()

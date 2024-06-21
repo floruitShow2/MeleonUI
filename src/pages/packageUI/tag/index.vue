@@ -16,10 +16,10 @@
           <text>标签的基本用法</text>
         </template>
         <template #demo>
-          <MlTag model-value="标签1" />
-          <MlTag model-value="标签2" />
-          <MlTag model-value="标签3" />
-          <MlTag model-value="标签4" closable />
+          <ml-tag model-value="标签1" />
+          <ml-tag model-value="标签2" />
+          <ml-tag model-value="标签3" />
+          <ml-tag model-value="标签4" closable />
         </template>
       </CodeBlock>
       <CodeBlock :code="templateMap[1].templateCode">
@@ -31,18 +31,18 @@
         </template>
         <template #demo>
           <view class="tags-container">
-            <MlTag model-value="标签1" />
-            <MlTag model-value="标签2" type="primary" />
-            <MlTag model-value="标签3" type="success" />
-            <MlTag model-value="标签4" type="warning" />
-            <MlTag model-value="标签5" type="danger" />
+            <ml-tag model-value="标签1" />
+            <ml-tag model-value="标签2" type="primary" />
+            <ml-tag model-value="标签3" type="success" />
+            <ml-tag model-value="标签4" type="warning" />
+            <ml-tag model-value="标签5" type="danger" />
           </view>
           <view class="tags-container">
-            <MlTag model-value="标签1" plain />
-            <MlTag model-value="标签2" type="primary" plain />
-            <MlTag model-value="标签3" type="success" plain />
-            <MlTag model-value="标签4" type="warning" plain />
-            <MlTag model-value="标签5" type="danger" plain />
+            <ml-tag model-value="标签1" plain />
+            <ml-tag model-value="标签2" type="primary" plain />
+            <ml-tag model-value="标签3" type="success" plain />
+            <ml-tag model-value="标签4" type="warning" plain />
+            <ml-tag model-value="标签5" type="danger" plain />
           </view>
         </template>
       </CodeBlock>
@@ -57,10 +57,10 @@
           >
         </template>
         <template #demo>
-          <MlTag model-value="标签1" size="mini" />
-          <MlTag model-value="标签2" size="small" />
-          <MlTag model-value="标签3" size="medium" />
-          <MlTag model-value="标签4" size="large" />
+          <ml-tag model-value="标签1" size="mini" />
+          <ml-tag model-value="标签2" size="small" />
+          <ml-tag model-value="标签3" size="medium" />
+          <ml-tag model-value="标签4" size="large" />
         </template>
       </CodeBlock>
       <CodeBlock :code="templateMap[3].templateCode">
@@ -71,21 +71,21 @@
           <text>可通过 icon 插槽在标签中加入图标。</text>
         </template>
         <template #demo>
-          <MlTag model-value="标签1">
+          <ml-tag model-value="标签1">
             <template #icon>
-              <MlIcon icon="ml-donework" :size="14" />
+              <MlIcon name="ml-donework" :size="14" />
             </template>
-          </MlTag>
-          <MlTag model-value="标签2">
+          </ml-tag>
+          <ml-tag model-value="标签2">
             <template #icon>
-              <MlIcon icon="ml-mark" :size="14" />
+              <MlIcon name="ml-mark" :size="14" />
             </template>
-          </MlTag>
-          <MlTag model-value="标签3">
+          </ml-tag>
+          <ml-tag model-value="标签3">
             <template #icon>
-              <MlIcon icon="ml-delete" :size="14" />
+              <MlIcon name="ml-delete" :size="14" />
             </template>
-          </MlTag>
+          </ml-tag>
         </template>
       </CodeBlock>
       <CodeBlock :code="templateMap[4].templateCode">
@@ -98,9 +98,9 @@
           <view>editable: 点击后标签会切换成 input 输入框，可修改标签内容 </view>
         </template>
         <template #demo>
-          <MlTag model-value="标签1" closable @close="hanldeTagClose" />
-          <MlTag model-value="标签2" checkable @click="hanldeTagClick" />
-          <MlTag v-model:model-value="tagValue" editable />
+          <ml-tag model-value="标签1" closable @close="hanldeTagClose" />
+          <ml-tag model-value="标签2" checkable @click="hanldeTagClick" />
+          <ml-tag v-model:model-value="tagValue" editable />
         </template>
       </CodeBlock>
     </view>
@@ -112,7 +112,6 @@
   import { useAppStore } from '@/store'
   import CodeBlock from '@/components/CodeBlock/index.vue'
   import MlNavigator from '@/ml-ui/lib/ml-navigator/index.vue'
-  import MlTag from '@/ml-ui/lib/ml-tag/index.vue'
   import MlIcon from '@/ml-ui/lib/ml-icon/index.vue'
 
   const appStore = useAppStore()
@@ -126,54 +125,54 @@
 
   const templateMap = ref([
     {
-      templateCode: `<MlTag model-value="标签1" />
-<MlTag model-value="标签2" />
-<MlTag model-value="标签3" />
-<MlTag model-value="标签4" closable />`
+      templateCode: `<ml-tag model-value="标签1" />
+<ml-tag model-value="标签2" />
+<ml-tag model-value="标签3" />
+<ml-tag model-value="标签4" closable />`
     },
     {
       templateCode: `<view class="tags-container">
-  <MlTag model-value="标签1" />
-  <MlTag model-value="标签2" type="primary" />
-  <MlTag model-value="标签3" type="success" />
-  <MlTag model-value="标签4" type="warning" />
-  <MlTag model-value="标签5" type="danger" />
+  <ml-tag model-value="标签1" />
+  <ml-tag model-value="标签2" type="primary" />
+  <ml-tag model-value="标签3" type="success" />
+  <ml-tag model-value="标签4" type="warning" />
+  <ml-tag model-value="标签5" type="danger" />
 </view>
 <view class="tags-container">
-  <MlTag model-value="标签1" plain />
-  <MlTag model-value="标签2" type="primary" plain />
-  <MlTag model-value="标签3" type="success" plain />
-  <MlTag model-value="标签4" type="warning" plain />
-  <MlTag model-value="标签5" type="danger" plain />
+  <ml-tag model-value="标签1" plain />
+  <ml-tag model-value="标签2" type="primary" plain />
+  <ml-tag model-value="标签3" type="success" plain />
+  <ml-tag model-value="标签4" type="warning" plain />
+  <ml-tag model-value="标签5" type="danger" plain />
 </view>`
     },
     {
-      templateCode: `<MlTag model-value="标签1" size="mini" />
-<MlTag model-value="标签2" size="small" />
-<MlTag model-value="标签3" size="medium" />
-<MlTag model-value="标签4" size="large" />`
+      templateCode: `<ml-tag model-value="标签1" size="mini" />
+<ml-tag model-value="标签2" size="small" />
+<ml-tag model-value="标签3" size="medium" />
+<ml-tag model-value="标签4" size="large" />`
     },
     {
-      templateCode: `<MlTag model-value="标签1">
+      templateCode: `<ml-tag model-value="标签1">
   <template #icon>
-    <MlIcon icon="ml-donework" :size="14" />
+    <MlIcon name="ml-donework" :size="14" />
   </template>
-</MlTag>
-<MlTag model-value="标签2">
+</ml-tag>
+<ml-tag model-value="标签2">
   <template #icon>
-    <MlIcon icon="ml-mark" :size="14" />
+    <MlIcon name="ml-mark" :size="14" />
   </template>
-</MlTag>
-<MlTag model-value="标签3">
+</ml-tag>
+<ml-tag model-value="标签3">
   <template #icon>
-    <MlIcon icon="ml-delete" :size="14" />
+    <MlIcon name="ml-delete" :size="14" />
   </template>
-</MlTag>`
+</ml-tag>`
     },
     {
-      templateCode: `<MlTag model-value="标签1" closable @close="hanldeTagClose" />
-<MlTag model-value="标签2" checkable @click="hanldeTagClick" />
-<MlTag v-model:model-value="tagValue" editable />
+      templateCode: `<ml-tag model-value="标签1" closable @close="hanldeTagClose" />
+<ml-tag model-value="标签2" checkable @click="hanldeTagClick" />
+<ml-tag v-model:model-value="tagValue" editable />
 
 const tagValue = ref('可编辑内容')
 const hanldeTagClose = (value: string) => {

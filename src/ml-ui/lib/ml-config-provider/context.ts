@@ -1,5 +1,5 @@
 import type { InjectionKey } from 'vue'
-import type { ColorType } from '~/hooks/useTheme'
+import type { ColorType } from '@meleon/uni-ui/hooks'
 
 export interface ConfigProviderContext {
   themes: Record<ColorType, string>

@@ -9,7 +9,7 @@
     />
     <view class="icon-view-wrapper" :style="wrapperStyle">
       <view v-for="icon in icons" :key="icon" class="icon-item">
-        <MlIcon :icon="icon" :size="24" color="#808080" />
+        <ml-icon :name="icon" :size="24" color="#808080" />
         <text class="icon-name">{{ icon }}</text>
       </view>
     </view>
@@ -20,7 +20,6 @@
   import { ref, computed } from 'vue'
   import { useAppStore } from '@/store'
   import MlNavigator from '@/ml-ui/lib/ml-navigator/index.vue'
-  import MlIcon from '@/ml-ui/lib/ml-icon/index.vue'
   import IconSettings from './settings'
 
   const appStore = useAppStore()

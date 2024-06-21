@@ -1,4 +1,4 @@
-export interface BaseMlProgressProps {
+export interface ProgressProps {
   /**
    * @description 进度条类型
    */

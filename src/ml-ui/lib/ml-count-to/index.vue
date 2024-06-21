@@ -13,9 +13,7 @@
 <script setup lang="ts">
   import { ref, unref, toRefs, computed, onMounted } from 'vue'
   import type { PropType } from 'vue'
-  import useTheme from '../../hooks/useTheme/useTheme'
-  import { cs } from '../../utils/property'
-  import Tween from '../../utils/tween'
+  import { useTheme, cs, Tween } from '@meleon/uni-ui/index'
 
   const props = defineProps({
     from: {
@@ -47,8 +45,6 @@
     }
   })
   const { from, to, animation, showSeperator, animationDuration } = toRefs(props)
-
-  const emit = defineEmits([])
 
   const { themeColors } = useTheme()
   const prefix = 'ml-count-to'

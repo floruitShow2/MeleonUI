@@ -18,15 +18,15 @@
             'is-active': showCode
           }"
         >
-          <MlIcon
-            icon="ml-code-sandbox"
+          <ml-icon
+            name="ml-code-sandbox"
             :size="18"
             :color="showCode ? '#FFFFFF' : '#808080'"
             @click="onCodeClick"
           />
         </view>
         <view class="tools-item">
-          <MlIcon icon="ml-copy" :size="18" @click="onCopy" />
+          <ml-icon name="ml-copy" :size="18" @click="onCopy" />
         </view>
       </view>
       <view v-if="showCode" class="view">
@@ -38,7 +38,6 @@
 
 <script setup lang="ts">
   import { ref, toRefs } from 'vue'
-  import MlIcon from '@/ml-ui/lib/ml-icon/index.vue'
 
   const props = defineProps({
     code: {

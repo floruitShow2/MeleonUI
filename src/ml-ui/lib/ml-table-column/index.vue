@@ -5,7 +5,7 @@
 <script setup lang="ts">
   import { toRefs, onMounted, inject } from 'vue'
   import type { PropType } from 'vue'
-  import { useCompose } from '../../utils/func'
+  import { useCompose } from '@meleon/uni-ui/utils'
   import { ForcedProperty, type ColumnSettingType } from './interface/config'
   import { MlTableInjectionKey } from '../ml-table/context'
 

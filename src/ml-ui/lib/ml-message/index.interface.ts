@@ -1,8 +1,8 @@
-export interface BaseMlMessageProps {
+export interface MessageProps {
   duration: number
 }
 
-export interface MlMessageOptions {
+export interface MessageOptions {
   id?: string | number
   type?: 'primary' | 'info' | 'success' | 'danger' | 'warning'
   content: string

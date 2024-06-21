@@ -13,7 +13,7 @@
         @blur="onInputBlur"
       >
         <template #suffix>
-          <MlIcon :icon="isMenuUnfold ? 'ml-arrow-down' : 'ml-arrow-up'" color="#808080" />
+          <MlIcon :name="isMenuUnfold ? 'ml-arrow-down' : 'ml-arrow-up'" color="#808080" />
         </template>
       </MlInputTag>
     </template>
@@ -33,7 +33,7 @@
         @blur="onInputBlur"
       >
         <template #suffix>
-          <MlIcon :icon="isMenuUnfold ? 'ml-arrow-down' : 'ml-arrow-up'" color="#808080" />
+          <MlIcon :name="isMenuUnfold ? 'ml-arrow-down' : 'ml-arrow-up'" color="#808080" />
         </template>
       </MlInput>
     </template>
@@ -53,7 +53,7 @@
         @click.stop="handleSelectItem(option)"
       >
         {{ option.label }}
-        <MlIcon class="ml-icon" icon="ml-success" />
+        <MlIcon class="ml-icon" name="ml-success" />
       </view> -->
     </scroll-view>
     <view v-if="isMenuUnfold" :class="`${prefix}-menu-mask`" @click.stop="onInputBlur" />
@@ -63,20 +63,19 @@
 <script setup lang="ts">
   import { ref, toRefs, computed, provide, getCurrentInstance, onMounted, watch } from 'vue'
   import type { PropType } from 'vue'
-  import type { BaseSelectProps, Direction } from './type'
+  import { useTheme } from '@meleon/uni-ui/hooks'
+  import { cs, getRect, generateDeviceUI } from '@meleon/uni-ui/utils'
+  import type { SelectProps } from './index.interface'
+  import MlIcon from '../ml-icon/index.vue'
   import MlInput from '../ml-input/index.vue'
   import MlInputTag from '../ml-input-tag/index.vue'
-  import MlIcon from '../ml-icon/index.vue'
   import { MlSelectGroupInjectionKey } from '../ml-option/context'
-  import type { MlOptionProps } from '../ml-option/type'
-  import useTheme from '../../hooks/useTheme/useTheme'
-  import { cs } from '../../utils/property'
-  import { getRect, generateDeviceUI } from '../../utils/rect'
+  import type { OptionProps } from '../ml-option/index.interface'
 
   const props = defineProps({
     // select-menu relative
     modelValue: {
-      type: [String, Array] as PropType<MlOptionProps['value'] | MlOptionProps['value'][]>,
+      type: [String, Array] as PropType<OptionProps['value'] | OptionProps['value'][]>,
       required: true
     },
     width: {
@@ -84,7 +83,7 @@
       value: 0
     },
     placeholder: { type: String, default: '请选择' },
-    size: { type: String as PropType<BaseSelectProps['size']>, value: 'small' },
+    size: { type: String as PropType<SelectProps['size']>, value: 'small' },
     multiple: { type: Boolean, default: false },
     maxTagCount: { type: Number, default: 0 },
     filterable: { type: Boolean, default: false },
@@ -130,15 +129,15 @@
   })
 
   // options 映射
-  const optionsMap = ref<Map<number | string | symbol, MlOptionProps>>(new Map())
+  const optionsMap = ref<Map<number | string | symbol, OptionProps>>(new Map())
   const options = computed(() => {
     return Array.from(optionsMap.value.values())
   })
-  const addOption = (option: MlOptionProps) => {
+  const addOption = (option: OptionProps) => {
     optionsMap.value.set(option.value, option)
     initSelectedList(modelValue.value)
   }
-  const selectOption = (option: MlOptionProps) => {
+  const selectOption = (option: OptionProps) => {
     const findIdx = selectedList.value.findIndex((item) => item.value === option.value)
     if (findIdx !== -1) {
       selectedList.value.splice(findIdx, 1)
@@ -148,7 +147,7 @@
     emit('update:model-value', selectedValue.value)
   }
 
-  const selectedList = ref<MlOptionProps[]>([])
+  const selectedList = ref<OptionProps[]>([])
   const selectedLabel = ref<string[]>([])
 
   watch(
@@ -165,7 +164,7 @@
   })
   // 初始化绑定值
   const inputValue = ref('')
-  const initSelectedList = (values: MlOptionProps['value'] | MlOptionProps['value'][]) => {
+  const initSelectedList = (values: OptionProps['value'] | OptionProps['value'][]) => {
     selectedList.value = []
     const arr = !Array.isArray(values) ? [values] : values
     arr.forEach((item) => {
@@ -200,13 +199,13 @@
 
   const isMenuUnfold = ref<boolean>(false)
   const menuStyle = ref('')
-  const menuDirection = ref<Direction>('top')
-  const handleSelectItem = (option: MlOptionProps) => {}
+  const menuDirection = ref<SelectProps['direction']>('top')
+  const handleSelectItem = (option: OptionProps) => {}
   const handleDeleteTag = () => {}
 
   // 下拉菜单动画
   const menuAnimationData = ref<any>({})
-  const executeMenuAnimate = (time: number, direction: Direction) => {
+  const executeMenuAnimate = (time: number, direction: SelectProps['direction']) => {
     const animation = uni.createAnimation({
       duration: time,
       timingFunction: 'linear',
@@ -253,8 +252,8 @@
   }
 
   // filterable 筛选不符合条件的选项
-  const hiddenList = ref<Array<MlOptionProps['value']>>([])
-  const handleSearch = (query: MlOptionProps['value']) => {
+  const hiddenList = ref<Array<OptionProps['value']>>([])
+  const handleSearch = (query: OptionProps['value']) => {
     hiddenList.value = options.value
       .filter((option) => {
         if (typeof option.value === 'string') {

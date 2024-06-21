@@ -1,7 +1,7 @@
 <template>
   <view class="button-view">
     <MlNavigator
-      title="MlButton"
+      title="ml-button"
       has-back
       icon-color="#FFFFFF"
       title-color="#FFFFFF"
@@ -18,10 +18,10 @@
         </template>
         <template #demo>
           <view class="button-container">
-            <MlButton type="primary" @click="templateMap[0].modelVisible = true">
+            <ml-button type="primary" @click="templateMap[0].modelVisible = true">
               打开弹窗
-            </MlButton>
-            <MlDrawer v-model:visible="templateMap[0].modelVisible" />
+            </ml-button>
+            <ml-drawer v-model:visible="templateMap[0].modelVisible" />
           </view>
         </template>
       </CodeBlock>
@@ -36,12 +36,12 @@
         </template>
         <template #demo>
           <view class="button-container">
-            <MlButton type="primary" @click="() => handlePlacement('right')">right</MlButton>
-            <MlButton type="primary" @click="() => handlePlacement('left')">left</MlButton>
-            <MlButton type="primary" @click="() => handlePlacement('top')">top</MlButton>
-            <MlButton type="primary" @click="() => handlePlacement('bottom')">bottom</MlButton>
-            <MlCheckbox v-model:checked="hasNav">hasNav</MlCheckbox>
-            <MlDrawer
+            <ml-button type="primary" @click="() => handlePlacement('right')">right</ml-button>
+            <ml-button type="primary" @click="() => handlePlacement('left')">left</ml-button>
+            <ml-button type="primary" @click="() => handlePlacement('top')">top</ml-button>
+            <ml-button type="primary" @click="() => handlePlacement('bottom')">bottom</ml-button>
+            <ml-checkbox v-model:checked="hasNav">hasNav</ml-checkbox>
+            <ml-drawer
               v-model:visible="templateMap[1].modelVisible"
               :placement="block2Placement"
               :has-nav="hasNav"
@@ -59,10 +59,10 @@
         </template>
         <template #demo>
           <view class="button-container">
-            <MlButton type="primary" size="small" @click="templateMap[2].modelVisible = true">
+            <ml-button type="primary" size="small" @click="templateMap[2].modelVisible = true">
               click me
-            </MlButton>
-            <MlDrawer v-model:visible="templateMap[2].modelVisible">
+            </ml-button>
+            <ml-drawer v-model:visible="templateMap[2].modelVisible">
               <template #title>自定义标题</template>
               <text>
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni, dolor libero
@@ -70,9 +70,9 @@
                 perspiciatis non animi, eaque facilis sed reiciendis in aut vel.
               </text>
               <template #footer>
-                <MlButton>自定义页脚</MlButton>
+                <ml-button>自定义页脚</ml-button>
               </template>
-            </MlDrawer>
+            </ml-drawer>
           </view>
         </template>
       </CodeBlock>
@@ -89,16 +89,16 @@
         <template #demo>
           <view class="drawer-container">
             <view>监听到：{{ listenedEvent }}事件</view>
-            <MlButton type="primary" size="mini" @click="templateMap[3].modelVisible = true">
+            <ml-button type="primary" size="mini" @click="templateMap[3].modelVisible = true">
               click me
-            </MlButton>
-            <MlDrawer
+            </ml-button>
+            <ml-drawer
               v-model:visible="templateMap[3].modelVisible"
               @ok="listenedEvent = 'ok'"
               @close="listenedEvent = 'close'"
             >
               <text>监听到：{{ listenedEvent }}事件</text>
-            </MlDrawer>
+            </ml-drawer>
           </view>
         </template>
       </CodeBlock>
@@ -110,9 +110,6 @@
   import { ref, computed } from 'vue'
   import { useAppStore } from '@/store'
   import MlNavigator from '@/ml-ui/lib/ml-navigator/index.vue'
-  import MlButton from '@/ml-ui/lib/ml-button/index.vue'
-  import MlCheckbox from '@/ml-ui/lib/ml-checkbox/index.vue'
-  import MlDrawer from '@/ml-ui/lib/ml-drawer/index.vue'
   import CodeBlock from '@/components/CodeBlock/index.vue'
 
   const appStore = useAppStore()

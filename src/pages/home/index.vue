@@ -28,7 +28,7 @@
           <view class="actions">
             <ml-button type="primary" @click="onNavigate('/pages/componentList/index')">
               {{ $t('home.actions.start') }}
-              <MlIcon icon="ml-arrow-right--line" color="#FFFFFF" />
+              <MlIcon name="ml-arrow-right--line" color="#FFFFFF" />
             </ml-button>
             <!-- <MlButton
               type="secondary"
@@ -36,7 +36,7 @@
               @click="copyLinkUrl('https://github.com/floruitShow2/MeleonUI')"
             >
               <template #icon>
-                <MlIcon icon="ml-github" />
+                <MlIcon name="ml-github" />
               </template>
               Github
             </MlButton> -->
@@ -87,13 +87,11 @@
   // import MlIcon from '@/ml-ui/lib/ml-icon/index.vue'
   import MlMessage from '@/ml-ui/lib/ml-message/index.vue'
   import MlTabbar from '@/ml-ui/lib/ml-tabbar/index.vue'
-  import type { ConfigProviderProps } from '~/lib/ml-config-provider/index.interface'
+  import type { ConfigProviderProps } from '@meleon/uni-ui/index'
 
   const appStore = useAppStore()
 
-  const themes: ConfigProviderProps['themes'] = {
-    primary: '#D74B4B'
-  }
+  const themes: ConfigProviderProps['themes'] = {}
 
   const ui = computed(() => {
     return appStore.appSize

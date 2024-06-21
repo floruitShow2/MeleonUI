@@ -1,7 +1,7 @@
 <template>
   <view class="input-view">
     <MlNavigator
-      title="MlInputTag"
+      title="ml-input-tag"
       has-back
       icon-color="#FFFFFF"
       title-color="#FFFFFF"
@@ -17,7 +17,7 @@
           <text>ml-input 组件的基础用法，可使用键盘输入</text>
         </template>
         <template #demo>
-          <MlInputTag
+          <ml-input-tag
             v-model:model-value="templateMap[0].modelValue"
             placeholder="提示文字可自定义"
           />
@@ -34,12 +34,12 @@
         <template #demo>
           <view class="input-demo-size">
             <view class="input-demo-size-buttons">
-              <MlButton size="mini" @click="inputSize = 'mini'">Mini</MlButton>
-              <MlButton size="mini" @click="inputSize = 'small'">Small</MlButton>
-              <MlButton size="mini" @click="inputSize = 'medium'">Medium</MlButton>
-              <MlButton size="mini" @click="inputSize = 'large'">Large</MlButton>
+              <ml-button size="mini" @click="inputSize = 'mini'">Mini</ml-button>
+              <ml-button size="mini" @click="inputSize = 'small'">Small</ml-button>
+              <ml-button size="mini" @click="inputSize = 'medium'">Medium</ml-button>
+              <ml-button size="mini" @click="inputSize = 'large'">Large</ml-button>
             </view>
-            <MlInputTag
+            <ml-input-tag
               v-model:model-value="templateMap[1].modelValue"
               :size="inputSize"
               style="width: 100%"
@@ -57,7 +57,7 @@
         </template>
         <template #demo>
           <view class="input-demo-fix">
-            <MlInputTag
+            <ml-input-tag
               v-model:model-value="templateMap[2].modelValue"
               :max-tag-count="2"
               placeholder="提示文字可自定义"
@@ -74,27 +74,27 @@
           <text>通过设置 tag-type 属性来控制标签的类型，默认为 primary</text>
         </template>
         <template #demo>
-          <MlInputTag
+          <ml-input-tag
             v-model:model-value="templateMap[1].modelValue"
             tag-type="info"
             style="width: 100%"
           />
-          <MlInputTag
+          <ml-input-tag
             v-model:model-value="templateMap[1].modelValue"
             tag-type="primary"
             style="width: 100%"
           />
-          <MlInputTag
+          <ml-input-tag
             v-model:model-value="templateMap[1].modelValue"
             tag-type="success"
             style="width: 100%"
           />
-          <MlInputTag
+          <ml-input-tag
             v-model:model-value="templateMap[1].modelValue"
             tag-type="warning"
             style="width: 100%"
           />
-          <MlInputTag
+          <ml-input-tag
             v-model:model-value="templateMap[1].modelValue"
             tag-type="danger"
             style="width: 100%"
@@ -109,9 +109,6 @@
   import { ref, computed } from 'vue'
   import { useAppStore } from '@/store'
   import MlNavigator from '@/ml-ui/lib/ml-navigator/index.vue'
-  import MlInputTag from '@/ml-ui/lib/ml-input-tag/index.vue'
-  import MlIcon from '@/ml-ui/lib/ml-icon/index.vue'
-  import MlButton from '@/ml-ui/lib/ml-button/index.vue'
   import CodeBlock from '@/components/CodeBlock/index.vue'
   const appStore = useAppStore()
   const wrapperStyle = computed(() => {

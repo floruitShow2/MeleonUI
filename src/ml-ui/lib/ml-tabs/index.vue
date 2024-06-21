@@ -14,12 +14,11 @@
 
 <script setup lang="ts">
   import { ref, toRefs, computed, getCurrentInstance, onMounted, provide, reactive } from 'vue'
-  import type { PropType } from 'vue'
-  import useTheme from '../../hooks/useTheme/useTheme'
-  import { cs } from '../../utils/property'
+  import { useTheme } from '@meleon/uni-ui/hooks'
+  import { cs } from '@meleon/uni-ui/utils'
   import TabNav from './tab-nav/index.vue'
   import { MlTabsGroupInjectionKey } from '../ml-tab/context'
-  import type { TabData } from '../ml-tab/type'
+  import type { TabData } from '../ml-tab/index.interface'
 
   const props = defineProps({
     active: {

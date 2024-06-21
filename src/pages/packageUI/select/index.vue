@@ -1,7 +1,7 @@
 <template>
   <view class="select-view">
     <MlNavigator
-      title="MlSelect"
+      title="ml-select"
       title-color="#FFFFFF"
       has-back
       icon-color="#FFFFFF"
@@ -17,11 +17,11 @@
           <text>ml-input 组件的基础用法，可使用键盘输入</text>
         </template>
         <template #demo>
-          <MlSelect v-model:model-value="templateMap[0].modelValue">
-            <MlOption value="1" label="选项1" />
-            <MlOption value="2" label="选项2" />
-            <MlOption value="3" label="选项3" />
-          </MlSelect>
+          <ml-select v-model:model-value="templateMap[0].modelValue">
+            <ml-option value="1" label="选项1" />
+            <ml-option value="2" label="选项2" />
+            <ml-option value="3" label="选项3" />
+          </ml-select>
         </template>
       </CodeBlock>
       <!-- 尺寸控制 -->
@@ -35,16 +35,16 @@
         <template #demo>
           <view class="select-demo-size">
             <view class="select-demo-size-buttons">
-              <MlButton size="mini" @click="selectSize = 'mini'">Mini</MlButton>
-              <MlButton size="mini" @click="selectSize = 'small'">Small</MlButton>
-              <MlButton size="mini" @click="selectSize = 'medium'">Medium</MlButton>
-              <MlButton size="mini" @click="selectSize = 'large'">Large</MlButton>
+              <ml-button size="mini" @click="selectSize = 'mini'">Mini</ml-button>
+              <ml-button size="mini" @click="selectSize = 'small'">Small</ml-button>
+              <ml-button size="mini" @click="selectSize = 'medium'">Medium</ml-button>
+              <ml-button size="mini" @click="selectSize = 'large'">Large</ml-button>
             </view>
-            <MlSelect v-model:modelValue="templateMap[1].modelValue" :size="selectSize">
-              <MlOption value="1" label="选项1" />
-              <MlOption value="2" label="选项2" />
-              <MlOption value="3" label="选项3" />
-            </MlSelect>
+            <ml-select v-model:modelValue="templateMap[1].modelValue" :size="selectSize">
+              <ml-option value="1" label="选项1" />
+              <ml-option value="2" label="选项2" />
+              <ml-option value="3" label="选项3" />
+            </ml-select>
           </view>
         </template>
       </CodeBlock>
@@ -59,11 +59,11 @@
           </text>
         </template>
         <template #demo>
-          <MlSelect v-model:modelValue="templateMap[1].modelValue" multiple :max-tag-count="1">
-            <MlOption value="1" label="选项1" />
-            <MlOption value="2" label="选项2" />
-            <MlOption value="3" label="选项3" />
-          </MlSelect>
+          <ml-select v-model:modelValue="templateMap[1].modelValue" multiple :max-tag-count="1">
+            <ml-option value="1" label="选项1" />
+            <ml-option value="2" label="选项2" />
+            <ml-option value="3" label="选项3" />
+          </ml-select>
         </template>
       </CodeBlock>
       <!-- 可搜索 -->
@@ -75,11 +75,11 @@
           <text>当设置 filterable 后，可使用键盘输入模糊搜索符合条件选项</text>
         </template>
         <template #demo>
-          <MlSelect v-model:modelValue="templateMap[1].modelValue" filterable>
-            <MlOption value="1" label="选项1" />
-            <MlOption value="2" label="选项2" />
-            <MlOption value="3" label="选项3" />
-          </MlSelect>
+          <ml-select v-model:modelValue="templateMap[1].modelValue" filterable>
+            <ml-option value="1" label="选项1" />
+            <ml-option value="2" label="选项2" />
+            <ml-option value="3" label="选项3" />
+          </ml-select>
         </template>
       </CodeBlock>
     </view>
@@ -90,9 +90,6 @@
   import { ref, computed } from 'vue'
   import { useAppStore } from '@/store'
   import MlNavigator from '@/ml-ui/lib/ml-navigator/index.vue'
-  import MlButton from '@/ml-ui/lib/ml-button/index.vue'
-  import MlSelect from '@/ml-ui/lib/ml-select/index.vue'
-  import MlOption from '@/ml-ui/lib/ml-option/index.vue'
   import CodeBlock from '@/components/CodeBlock/index.vue'
   const appStore = useAppStore()
   const wrapperStyle = computed(() => {
@@ -106,41 +103,41 @@
   const templateMap = ref([
     {
       modelValue: '1',
-      templateCode: `<MlSelect v-model:model-value="modelValue">
-  <MlOption value="1" label="选项1" />
-  <MlOption value="2" label="选项2" />
-  <MlOption value="3" label="选项3" />
-</MlSelect>`
+      templateCode: `<ml-select v-model:model-value="modelValue">
+  <ml-option value="1" label="选项1" />
+  <ml-option value="2" label="选项2" />
+  <ml-option value="3" label="选项3" />
+</ml-select>`
     },
     {
       modelValue: '1',
       templateCode: `<view class="select-demo-size-buttons">
-  <MlButton size="mini" @click="selectSize = 'mini'">Mini</MlButton>
-  <MlButton size="mini" @click="selectSize = 'small'">Small</MlButton>
-  <MlButton size="mini" @click="selectSize = 'medium'">Medium</MlButton>
-  <MlButton size="mini" @click="selectSize = 'large'">Large</MlButton>
+  <ml-button size="mini" @click="selectSize = 'mini'">Mini</ml-button>
+  <ml-button size="mini" @click="selectSize = 'small'">Small</ml-button>
+  <ml-button size="mini" @click="selectSize = 'medium'">Medium</ml-button>
+  <ml-button size="mini" @click="selectSize = 'large'">Large</ml-button>
 </view>
-<MlSelect v-model:modelValue="modelValue" :size="selectSize">
-  <MlOption value="1" label="选项1" />
-  <MlOption value="2" label="选项2" />
-  <MlOption value="3" label="选项3" />
-</MlSelect>`
+<ml-select v-model:modelValue="modelValue" :size="selectSize">
+  <ml-option value="1" label="选项1" />
+  <ml-option value="2" label="选项2" />
+  <ml-option value="3" label="选项3" />
+</ml-select>`
     },
     {
       modelValue: '1',
-      templateCode: `<MlSelect v-model:modelValue="modelValue" multiple :max-tag-count="1">
-  <MlOption value="1" label="选项1" />
-  <MlOption value="2" label="选项2" />
-  <MlOption value="3" label="选项3" />
-</MlSelect>`
+      templateCode: `<ml-select v-model:modelValue="modelValue" multiple :max-tag-count="1">
+  <ml-option value="1" label="选项1" />
+  <ml-option value="2" label="选项2" />
+  <ml-option value="3" label="选项3" />
+</ml-select>`
     },
     {
       modelValue: ['1'],
-      templateCode: `<MlSelect v-model:modelValue="modelValue" filterable>
-  <MlOption value="1" label="选项1" />
-  <MlOption value="2" label="选项2" />
-  <MlOption value="3" label="选项3" />
-</MlSelect>`
+      templateCode: `<ml-select v-model:modelValue="modelValue" filterable>
+  <ml-option value="1" label="选项1" />
+  <ml-option value="2" label="选项2" />
+  <ml-option value="3" label="选项3" />
+</ml-select>`
     }
   ])
 

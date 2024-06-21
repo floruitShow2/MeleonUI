@@ -28,7 +28,7 @@
 <script setup lang="ts">
   import { ref, toRefs, computed, watch, inject, getCurrentInstance } from 'vue'
   import type { PropType } from 'vue'
-  import type { TabData } from '../../ml-tab/type'
+  import type { TabData } from '../../ml-tab/index.interface'
   import useTheme from '../../../hooks/useTheme/useTheme'
   import { cs } from '../../../utils/property'
   import { getAllRect, getRect } from '../../../utils/rect'
