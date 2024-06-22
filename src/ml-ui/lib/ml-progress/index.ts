@@ -2,7 +2,7 @@ import type { App } from 'vue'
 import _Progress from './index.vue'
 
 const install = (app: App) => {
-    app.component('MlProgress', _Progress)
+  app.component('MlProgress', _Progress)
 }
 
 export type ProgressInstance = typeof import('./index.vue').default

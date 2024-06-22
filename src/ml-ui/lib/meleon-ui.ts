@@ -2,6 +2,7 @@ import type { App, Plugin } from 'vue'
 import MlAvatar from './ml-avatar'
 import MlAvatarGroup from './ml-avatar-group'
 import MlButton from './ml-button'
+import MlCell from './ml-cell'
 import MlCheckbox from './ml-checkbox'
 import MlCheckboxGroup from './ml-checkbox-group'
 import MlConfigProvider from './ml-config-provider'
@@ -23,11 +24,11 @@ import MlTag from './ml-tag'
 import MlTimeline from './ml-timeline'
 import MlTimelineItem from './ml-timeline-item'
 
-
 const components: Record<string, Plugin> = {
   MlAvatar,
   MlAvatarGroup,
   MlButton,
+  MlCell,
   MlCheckbox,
   MlCheckboxGroup,
   MlConfigProvider,

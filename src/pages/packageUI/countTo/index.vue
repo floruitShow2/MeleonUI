@@ -49,9 +49,7 @@
           <text>数值前后缀</text>
         </template>
         <template #description>
-          <text>
-            分别提供了 prefix 和 suffix 插槽来设置数值的前缀和后缀
-          </text>
+          <text> 分别提供了 prefix 和 suffix 插槽来设置数值的前缀和后缀 </text>
         </template>
         <template #demo>
           <view class="count-to-container">
@@ -79,9 +77,7 @@
           <text>手动触发</text>
         </template>
         <template #description>
-          <text>
-            可以选择手动触发动画，组件暴露了 start、pause、restart 方法共用户使用
-          </text>
+          <text> 可以选择手动触发动画，组件暴露了 start、pause、restart 方法共用户使用 </text>
         </template>
         <template #demo>
           <view class="count-to-container">

@@ -6,6 +6,13 @@ export default {
   description: '',
   glyphs: [
     {
+      icon_id: '5387747',
+      name: '编辑表格_o',
+      font_class: 'edit',
+      unicode: 'eb47',
+      unicode_decimal: 60231
+    },
+    {
       icon_id: '8106223',
       name: 'cancel',
       font_class: 'close--circle',
@@ -204,7 +211,7 @@ export default {
     {
       icon_id: '12865685',
       name: 'share',
-      font_class: 'share',
+      font_class: 'upload',
       unicode: 'e6ee',
       unicode_decimal: 59118
     },

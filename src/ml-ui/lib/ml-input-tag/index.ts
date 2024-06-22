@@ -2,7 +2,7 @@ import type { App } from 'vue'
 import _InputTag from './index.vue'
 
 const install = (app: App) => {
-    app.component('MlInputTag', _InputTag)
+  app.component('MlInputTag', _InputTag)
 }
 
 export type InputTagInstance = typeof import('./index.vue').default

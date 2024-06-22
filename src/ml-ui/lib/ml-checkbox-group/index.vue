@@ -34,7 +34,7 @@
   const { checkedList, min, max, mode, direction } = toRefs(props)
 
   const emit = defineEmits(['update:checkedList'])
-  
+
   const prefix = 'ml-checkbox-group'
   console.log(prefix)
 

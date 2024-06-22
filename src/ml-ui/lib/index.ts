@@ -9,6 +9,9 @@ export type { AvatarGroupInstance } from './ml-avatar-group'
 export { default as Button } from './ml-button'
 export type { ButtonInstance, ButtonProps } from './ml-button'
 
+export { default as Cell, CellTypeEnum } from './ml-cell'
+export type { CellInstance, CellProps, CellChangePayload } from './ml-cell'
+
 export { default as Checkbox } from './ml-checkbox'
 export type { CheckboxInstance } from './ml-checkbox'
 
@@ -54,7 +57,7 @@ export type { TabInstance, TabData } from './ml-tab'
 export { default as Table } from './ml-table'
 export type { TableInstance } from './ml-table'
 
-export * from './ml-table-column' 
+export * from './ml-table-column'
 
 export { default as Tabs } from './ml-tabs'
 export type { TabsInstance } from './ml-tabs'

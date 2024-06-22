@@ -14,14 +14,40 @@
           <text>基础用法</text>
         </template>
         <template #description>
-          <text
-            >ml-button 组件的基础用法，包括主要按钮 primary、次要按钮 secondary、线框按钮 outline
-            以及文本按钮 text</text
-          >
+          <text>
+            ml-button 组件的基础用法，包括主要按钮 primary、次要按钮 secondary、线框按钮 outline
+            以及文本按钮 text
+          </text>
         </template>
         <template #demo>
-          <view class="button-container">
-            <MlCell label="测试标题"></MlCell>
+          <view class="cell-container">
+            <ml-cell
+              :type="CellTypeEnum.TEXT"
+              label="测试标题"
+              value="测试内容"
+              description="测试描述"
+              disabled
+              allow-edit
+              style="width: 100%"
+              @change="handleCellChange"
+            ></ml-cell>
+
+            <ml-cell
+              :type="CellTypeEnum.BUTTON"
+              label="测试标题"
+              btn-status="danger"
+              disabled
+              style="width: 100%"
+              @btn-click="handleClick"
+            ></ml-cell>
+
+            <ml-cell
+              :type="CellTypeEnum.NAV"
+              label="测试回到首页"
+              url="/pages/home/index"
+              disabled
+              style="width: 100%"
+            ></ml-cell>
           </view>
         </template>
       </CodeBlock>
@@ -33,7 +59,7 @@
   import { ref, computed } from 'vue'
   import { useAppStore } from '@/store'
   import MlNavigator from '@/ml-ui/lib/ml-navigator/index.vue'
-  import MlCell from '@/ml-ui/lib/ml-cell/index.vue'
+  import { CellTypeEnum, type CellChangePayload, type CellProps } from '@meleon/uni-ui/index'
   import CodeBlock from '@/components/CodeBlock/index.vue'
 
   const appStore = useAppStore()
@@ -55,6 +81,14 @@
 </view>`
     }
   ])
+
+  const handleCellChange = (payload: CellChangePayload) => {
+    console.log(payload)
+  }
+
+  const handleClick = ({ cell }: { cell: CellProps }) => {
+    console.log(cell)
+  }
 </script>
 
 <style lang="less">

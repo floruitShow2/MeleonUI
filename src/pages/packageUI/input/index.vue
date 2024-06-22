@@ -17,7 +17,10 @@
           <text>ml-input 组件的基础用法，可使用键盘输入</text>
         </template>
         <template #demo>
-          <ml-input v-model:model-value="templateMap[0].modelValue" placeholder="提示文字可自定义" />
+          <ml-input
+            v-model:model-value="templateMap[0].modelValue"
+            placeholder="提示文字可自定义"
+          />
         </template>
       </CodeBlock>
       <!-- 尺寸控制 -->

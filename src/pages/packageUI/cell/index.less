@@ -5,13 +5,11 @@
     box-sizing: border-box;
     padding: 10px;
     overflow: auto;
-    .button-container {
-      flex-wrap: wrap;
+    .cell-container {
+      width: 100%;
+      gap: 10px;
       align-content: flex-start;
-      #flex(row, center, flex-start);
-      .ml-button {
-        margin: 0 8px 8px 0;
-      }
+      #flex(column, center, flex-start);
     }
   }
 }

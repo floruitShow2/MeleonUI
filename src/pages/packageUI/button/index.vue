@@ -1,7 +1,7 @@
 <template>
   <view class="button-view">
     <MlNavigator
-      title="MlButton"
+      title="ml-button"
       has-back
       icon-color="#FFFFFF"
       title-color="#FFFFFF"
@@ -21,10 +21,10 @@
         </template>
         <template #demo>
           <view class="button-container">
-            <MlButton type="primary">Primary</MlButton>
-            <MlButton>Secondary</MlButton>
-            <MlButton type="outline">Outline</MlButton>
-            <MlButton type="text">Text</MlButton>
+            <ml-button type="primary">Primary</ml-button>
+            <ml-button>Secondary</ml-button>
+            <ml-button type="outline">Outline</ml-button>
+            <ml-button type="text">Text</ml-button>
           </view>
         </template>
       </CodeBlock>
@@ -38,16 +38,16 @@
         </template>
         <template #demo>
           <view class="button-container">
-            <MlButton type="primary" shape="square">Square</MlButton>
-            <MlButton type="primary" shape="round">Round</MlButton>
-            <MlButton type="primary" shape="square">
+            <ml-button type="primary" shape="square">Square</ml-button>
+            <ml-button type="primary" shape="round">Round</ml-button>
+            <ml-button type="primary" shape="square">
               <template #icon>
-                <MlIcon name="ml-plus" color="#FFFFFF" />
+                <ml-icon name="ml-plus" color="#FFFFFF" />
               </template>
-            </MlButton>
-            <MlButton type="primary" shape="circle">
-              <MlIcon name="ml-plus" color="#FFFFFF" />
-            </MlButton>
+            </ml-button>
+            <ml-button type="primary" shape="circle">
+              <ml-icon name="ml-plus" color="#FFFFFF" />
+            </ml-button>
           </view>
         </template>
       </CodeBlock>
@@ -65,10 +65,10 @@
         </template>
         <template #demo>
           <view class="button-container">
-            <MlButton type="primary" size="mini">Mini</MlButton>
-            <MlButton type="primary" size="small">Small</MlButton>
-            <MlButton type="primary" size="medium">Medium</MlButton>
-            <MlButton type="primary" size="large">Large</MlButton>
+            <ml-button type="primary" size="mini">Mini</ml-button>
+            <ml-button type="primary" size="small">Small</ml-button>
+            <ml-button type="primary" size="medium">Medium</ml-button>
+            <ml-button type="primary" size="large">Large</ml-button>
           </view>
         </template>
       </CodeBlock>
@@ -85,22 +85,22 @@
         <template #demo>
           <view class="button-container">
             <view class="button-container">
-              <MlButton type="primary" size="mini" status="success">Primary</MlButton>
-              <MlButton size="mini" status="success">Secondary</MlButton>
-              <MlButton type="outline" size="mini" status="success">Outline</MlButton>
-              <MlButton type="text" size="mini" status="success">Text</MlButton>
+              <ml-button type="primary" size="mini" status="success">Primary</ml-button>
+              <ml-button size="mini" status="success">Secondary</ml-button>
+              <ml-button type="outline" size="mini" status="success">Outline</ml-button>
+              <ml-button type="text" size="mini" status="success">Text</ml-button>
             </view>
             <view class="button-container">
-              <MlButton type="primary" size="mini" status="warning">Primary</MlButton>
-              <MlButton size="mini" status="warning">Secondary</MlButton>
-              <MlButton type="outline" size="mini" status="warning">Outline</MlButton>
-              <MlButton type="text" size="mini" status="warning">Text</MlButton>
+              <ml-button type="primary" size="mini" status="warning">Primary</ml-button>
+              <ml-button size="mini" status="warning">Secondary</ml-button>
+              <ml-button type="outline" size="mini" status="warning">Outline</ml-button>
+              <ml-button type="text" size="mini" status="warning">Text</ml-button>
             </view>
             <view class="button-container">
-              <MlButton type="primary" size="mini" status="danger">Primary</MlButton>
-              <MlButton size="mini" status="danger">Secondary</MlButton>
-              <MlButton type="outline" size="mini" status="danger">Outline</MlButton>
-              <MlButton type="text" size="mini" status="danger">Text</MlButton>
+              <ml-button type="primary" size="mini" status="danger">Primary</ml-button>
+              <ml-button size="mini" status="danger">Secondary</ml-button>
+              <ml-button type="outline" size="mini" status="danger">Outline</ml-button>
+              <ml-button type="text" size="mini" status="danger">Text</ml-button>
             </view>
           </view>
         </template>
@@ -113,8 +113,6 @@
   import { ref, computed } from 'vue'
   import { useAppStore } from '@/store'
   import MlNavigator from '@/ml-ui/lib/ml-navigator/index.vue'
-  import MlIcon from '@/ml-ui/lib/ml-icon/index.vue'
-  import MlButton from '@/ml-ui/lib/ml-button/index.vue'
   import CodeBlock from '@/components/CodeBlock/index.vue'
 
   const appStore = useAppStore()
@@ -129,129 +127,129 @@
   const templateMap = ref([
     {
       templateCode: `<view class="button-container">
-    <MlButton type="primary">Primary</MlButton>
-    <MlButton>Secondary</MlButton>
-    <MlButton type="outline">Outline</MlButton>
-    <MlButton type="text">Text</MlButton>
+    <ml-button type="primary">Primary</ml-button>
+    <ml-button>Secondary</ml-button>
+    <ml-button type="outline">Outline</ml-button>
+    <ml-button type="text">Text</ml-button>
 </view>`
     },
     {
       templateCode: `<view class="button-container">
-  <MlButton type="primary" shape="square">Square</MlButton>
-  <MlButton type="primary" shape="round">Round</MlButton>
-  <MlButton type="primary" shape="square">
+  <ml-button type="primary" shape="square">Square</ml-button>
+  <ml-button type="primary" shape="round">Round</ml-button>
+  <ml-button type="primary" shape="square">
     <template #icon>
-      <MlIcon name="ml-plus" color="#FFFFFF" />
+      <ml-icon name="ml-plus" color="#FFFFFF" />
     </template>
-  </MlButton>
-  <MlButton type="primary" shape="circle">
-    <MlIcon name="ml-plus" color="#FFFFFF" />
-  </MlButton>
+  </ml-button>
+  <ml-button type="primary" shape="circle">
+    <ml-icon name="ml-plus" color="#FFFFFF" />
+  </ml-button>
 </view>`
     },
     {
       templateCode: `<view class="button-container">
-  <MlButton type="primary" size="mini">
+  <ml-button type="primary" size="mini">
     Mini
-  </MlButton>
-  <MlButton type="primary" size="small">
+  </ml-button>
+  <ml-button type="primary" size="small">
     Small
-  </MlButton>
-  <MlButton type="primary" size="medium">
+  </ml-button>
+  <ml-button type="primary" size="medium">
     Medium
-  </MlButton>
-  <MlButton type="primary" size="large">
+  </ml-button>
+  <ml-button type="primary" size="large">
     Large
-  </MlButton>
+  </ml-button>
 </view>`
     },
     {
       templateCode: `<view class="button-container">
-    <MlButton
+    <ml-button
         type="primary"
         size="mini"
         status="success"
     >
         Primary
-    </MlButton>
-    <MlButton
+    </ml-button>
+    <ml-button
         size="mini"
         status="success"
     >
         Secondary
-    </MlButton>
-    <MlButton
+    </ml-button>
+    <ml-button
         type="outline"
         size="mini"
         status="success"
     >
         Outline
-    </MlButton>
-    <MlButton
+    </ml-button>
+    <ml-button
         type="text"
         size="mini"
         status="success"
     >
         Text
-    </MlButton>
+    </ml-button>
 </view>
 <view class="button-container">
-    <MlButton
+    <ml-button
         type="primary"
         size="mini"
         status="warning"
     >
         Primary
-    </MlButton>
-    <MlButton
+    </ml-button>
+    <ml-button
         size="mini"
         status="warning"
     >
         Secondary
-    </MlButton>
-    <MlButton
+    </ml-button>
+    <ml-button
         type="outline"
         size="mini"
         status="warning"
     >
         Outline
-    </MlButton>
-    <MlButton
+    </ml-button>
+    <ml-button
         type="text"
         size="mini"
         status="warning"
     >
         Text
-    </MlButton>
+    </ml-button>
 </view>
 <view class="button-container">
-    <MlButton
+    <ml-button
         type="primary"
         size="mini"
         status="danger"
     >
         Primary
-    </MlButton>
-    <MlButton
+    </ml-button>
+    <ml-button
         size="mini"
         status="danger"
     >
         Secondary
-    </MlButton>
-    <MlButton
+    </ml-button>
+    <ml-button
         type="outline"
         size="mini"
         status="danger"
     >
         Outline
-    </MlButton>
-    <MlButton
+    </ml-button>
+    <ml-button
         type="text"
         size="mini"
         status="danger"
     >
         Text
-    </MlButton>
+    </ml-button>
 </view>`
     }
   ])

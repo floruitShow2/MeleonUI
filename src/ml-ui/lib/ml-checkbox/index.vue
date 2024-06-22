@@ -26,7 +26,7 @@
   const prefix = 'ml-checkbox'
 
   const { themeColors } = useTheme()
-  
+
   const globalCtx = inject(checkboxGroupInjectionKey, null)
 
   const className = computed(() => {
