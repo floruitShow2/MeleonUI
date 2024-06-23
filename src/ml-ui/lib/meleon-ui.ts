@@ -3,6 +3,7 @@ import MlAvatar from './ml-avatar'
 import MlAvatarGroup from './ml-avatar-group'
 import MlButton from './ml-button'
 import MlCell from './ml-cell'
+import MlCellGroup from './ml-cell-group'
 import MlCheckbox from './ml-checkbox'
 import MlCheckboxGroup from './ml-checkbox-group'
 import MlConfigProvider from './ml-config-provider'
@@ -29,6 +30,7 @@ const components: Record<string, Plugin> = {
   MlAvatarGroup,
   MlButton,
   MlCell,
+  MlCellGroup,
   MlCheckbox,
   MlCheckboxGroup,
   MlConfigProvider,

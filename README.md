@@ -147,6 +147,7 @@ export type ColorType = 'primary' | 'info' | 'success' | 'warning' | 'danger'
 
 - 2024/6/19 	新增 ml-config-provider 组件
 - 2024/6/21     调整项目接口，补全TS类型，新增 README 文档
+- 2024/6/23     新增 ml-cell、ml-cell-group 组件
 
 ### 组件
 
@@ -268,6 +269,89 @@ export type ColorType = 'primary' | 'info' | 'success' | 'warning' | 'danger'
 | event | dessc    |
 | ----- | -------- |
 | click | 点击事件 |
+
+#### 单元格 Cell
+
+###### 基本使用
+
+```html
+<ml-cell-group title="测试分组" style="width: 100%">
+    <ml-cell
+        :type="CellTypeEnum.TEXT"
+        label="测试标题"
+        value="测试内容"
+        description="测试描述"
+        disabled
+        allow-edit
+        style="width: 100%"
+        @change="handleCellChange"
+    ></ml-cell>
+    <ml-cell
+        :type="CellTypeEnum.BUTTON"
+        label="测试按钮"
+        btn-status="danger"
+        disabled
+        style="width: 100%"
+        @btn-click="handleClick"
+    ></ml-cell>
+    <ml-cell
+        :type="CellTypeEnum.NAV"
+        label="测试回到首页"
+        value="回首页"
+        url="/pages/home/index"
+        :disabled="false"
+        style="width: 100%"
+    >
+        <template #rightIcon>
+        	<ml-icon name="ml-arrow-right--line" color="var(--info-color-7)"></ml-icon>
+        </template>
+        <template #value>
+        	<text style="font-size: 14px; color: var(--info-color-7)">通过插槽展示内容</text>
+        </template>
+    </ml-cell>
+</ml-cell-group>
+```
+
+###### APIs
+
+| prop        | type                                   | default | desc                                                        |
+| ----------- | -------------------------------------- | ------- | ----------------------------------------------------------- |
+| label       | string                                 | ''      | 左侧标题                                                    |
+| description | string                                 | ''      | 左侧描述                                                    |
+| value       | string                                 | ''      | 右侧 值                                                     |
+| type        | text \| button \| navigator            | text    | 单元格类型【推荐使用 `CellTypeEnum` 枚举变量赋值】          |
+| disabled    | boolean                                | false   | 是否禁用                                                    |
+| allowEdit   | boolean                                | false   | 文本单元格是否允许修改                                      |
+| btnStatus   | normal \| success \| warning \| danger | normal  | 按钮单元格的按钮类型                                        |
+| url         | string                                 | ''      | 导航单元格的跳转地址【小程序页面地址需要保留前面的 / 字符】 |
+
+###### Slots
+
+| name      | desc                                                   |
+| --------- | ------------------------------------------------------ |
+| label     | 左侧标题插槽【会覆盖默认的 label 和 description 区域】 |
+| value     | 右侧内容插槽                                           |
+| rightIcon | 导航单元格生效【覆盖右侧图标】                         |
+
+###### Emits
+
+| name     | desc                                                       |
+| -------- | ---------------------------------------------------------- |
+| change   | 文本单元格修改内容后触发                                   |
+| btnClick | 按钮单元格点击触发                                         |
+| navigate | 导航单元格点击跳转后触发【暂不暴露，考虑有没有必要放出来】 |
+
+###### CellGroup APIs
+
+| prop  | type   | default | desc     |
+| ----- | ------ | ------- | -------- |
+| title | string | ''      | 分组名称 |
+
+###### CellGroup Slots
+
+| name  | desc                     |
+| ----- | ------------------------ |
+| title | 标题插槽【覆盖标题内容】 |
 
 #### 选择框 Checkbox
 

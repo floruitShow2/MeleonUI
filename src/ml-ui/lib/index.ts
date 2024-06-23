@@ -12,6 +12,9 @@ export type { ButtonInstance, ButtonProps } from './ml-button'
 export { default as Cell, CellTypeEnum } from './ml-cell'
 export type { CellInstance, CellProps, CellChangePayload } from './ml-cell'
 
+export { default as CellGroup } from './ml-cell-group'
+export type { CellGroupInstance, CellGroupProps } from './ml-cell-group'
+
 export { default as Checkbox } from './ml-checkbox'
 export type { CheckboxInstance } from './ml-checkbox'
 

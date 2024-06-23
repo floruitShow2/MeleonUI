@@ -6,9 +6,12 @@
     padding: 10px;
     overflow: auto;
     .cell-container {
+      box-sizing: border-box;
       width: 100%;
+      padding: 20px 5px;
       gap: 10px;
       align-content: flex-start;
+      background-color: @--heavy-bg;
       #flex(column, center, flex-start);
     }
   }

@@ -21,33 +21,41 @@
         </template>
         <template #demo>
           <view class="cell-container">
-            <ml-cell
-              :type="CellTypeEnum.TEXT"
-              label="测试标题"
-              value="测试内容"
-              description="测试描述"
-              disabled
-              allow-edit
-              style="width: 100%"
-              @change="handleCellChange"
-            ></ml-cell>
-
-            <ml-cell
-              :type="CellTypeEnum.BUTTON"
-              label="测试标题"
-              btn-status="danger"
-              disabled
-              style="width: 100%"
-              @btn-click="handleClick"
-            ></ml-cell>
-
-            <ml-cell
-              :type="CellTypeEnum.NAV"
-              label="测试回到首页"
-              url="/pages/home/index"
-              disabled
-              style="width: 100%"
-            ></ml-cell>
+            <ml-cell-group title="测试分组" style="width: 100%">
+              <ml-cell
+                :type="CellTypeEnum.TEXT"
+                label="测试标题"
+                value="测试内容"
+                description="测试描述"
+                disabled
+                allow-edit
+                style="width: 100%"
+                @change="handleCellChange"
+              ></ml-cell>
+              <ml-cell
+                :type="CellTypeEnum.BUTTON"
+                label="测试按钮"
+                btn-status="danger"
+                disabled
+                style="width: 100%"
+                @btn-click="handleClick"
+              ></ml-cell>
+              <ml-cell
+                :type="CellTypeEnum.NAV"
+                label="测试回到首页"
+                value="回首页"
+                url="/pages/home/index"
+                :disabled="false"
+                style="width: 100%"
+              >
+                <template #rightIcon>
+                  <ml-icon name="ml-arrow-right--line" color="var(--info-color-7)"></ml-icon>
+                </template>
+                <template #value>
+                  <text style="font-size: 14px; color: var(--info-color-7)">通过插槽展示内容</text>
+                </template>
+              </ml-cell>
+            </ml-cell-group>
           </view>
         </template>
       </CodeBlock>

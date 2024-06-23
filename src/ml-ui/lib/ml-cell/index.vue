@@ -3,8 +3,10 @@
     <!-- text cell -->
     <template v-if="type === CellTypeEnum.TEXT">
       <view :class="`${prefix}--left`">
-        <text :class="`${prefix}-label`">{{ label }}</text>
-        <text :class="`${prefix}-desc`">{{ description }}</text>
+        <slot name="label">
+          <text :class="`${prefix}-label`">{{ label }}</text>
+          <text :class="`${prefix}-desc`">{{ description }}</text>
+        </slot>
       </view>
       <view :class="cs(`${prefix}--right`)">
         <template v-if="isEditing">
@@ -17,15 +19,18 @@
           />
         </template>
         <template v-else>
-          <text :class="`${prefix}-val`">{{ afterValue }}</text>
+          <slot name="value">
+            <text :class="`${prefix}-val`">{{ afterValue }}</text>
+          </slot>
         </template>
-        <template v-if="allowEdit && !isEditing">
+        <template v-if="!$slots.value && allowEdit && !isEditing">
           <Icon name="ml-edit" color="var(--info-color-7)" @click="handleEditClick" />
         </template>
       </view>
     </template>
     <!-- button cell -->
     <template v-else-if="type === CellTypeEnum.BUTTON">
+      <!-- remark: 用 Button 作为标签的话会和默认组件冲突，需要换个名字 -->
       <MlButton
         type="text"
         size="mini"
@@ -38,19 +43,25 @@
     <!-- navigator cell -->
     <template v-else-if="type === CellTypeEnum.NAV">
       <view :class="`${prefix}--left`">
-        <text :class="`${prefix}-label`">{{ label }}</text>
-        <text :class="`${prefix}-desc`">{{ description }}</text>
+        <slot name="label">
+          <text :class="`${prefix}-label`">{{ label }}</text>
+          <text :class="`${prefix}-desc`">{{ description }}</text>
+        </slot>
       </view>
       <view :class="cs(`${prefix}--right`)">
-        <text :class="`${prefix}-val`">{{ afterValue }}</text>
-        <Icon name="ml-arrow-right" color="var(--info-color-7)" />
+        <slot name="value">
+          <text :class="`${prefix}-val`">{{ afterValue }}</text>
+        </slot>
+        <slot name="rightIcon">
+          <Icon name="ml-arrow-right" color="var(--info-color-7)" />
+        </slot>
       </view>
     </template>
   </view>
 </template>
 
 <script setup lang="ts">
-  import { computed, ref, toRefs } from 'vue'
+  import { computed, ref, toRefs, onMounted, inject } from 'vue'
   import type { PropType } from 'vue'
   import { useTheme } from '@meleon/uni-ui/hooks'
   import { cs, useDeepClone } from '@meleon/uni-ui/utils'
@@ -58,6 +69,7 @@
   import Icon from '../ml-icon/index.vue'
   import Input from '../ml-input/index.vue'
   import MlButton from '../ml-button/index.vue'
+  import { cellGroupInjectionKey } from '../ml-cell-group/context'
 
   const props = defineProps({
     label: {
@@ -100,6 +112,17 @@
    */
   const emit = defineEmits(['change', 'btnClick', 'navigate'])
 
+  const globalCtx = inject(cellGroupInjectionKey, null)
+  const idx = ref(-1)
+  onMounted(() => {
+    console.log(globalCtx)
+    if (!globalCtx) {
+      idx.value = -1
+    } else {
+      idx.value = globalCtx.getCellGroupItemIndex()
+    }
+  })
+
   const { themeColors } = useTheme()
 
   const prefix = 'ml-cell'
@@ -108,7 +131,8 @@
       prefix,
       `${prefix}-${type.value}`,
       {
-        [`${prefix}--disabled`]: disabled.value
+        [`${prefix}--disabled`]: disabled.value,
+        [`${prefix}--bordered`]: idx.value !== globalCtx?.total.value
       }
     )
   })

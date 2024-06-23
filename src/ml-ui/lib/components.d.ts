@@ -2,6 +2,8 @@ import type {
   AvatarInstance,
   AvatarGroupInstance,
   ButtonInstance,
+  CellInstance,
+  CellGroupInstance,
   CheckboxInstance,
   CheckboxGroupInstance,
   ConfigProviderInstance,
@@ -21,8 +23,7 @@ import type {
   TableColumnInstance,
   TagInstance,
   TimelineInstance,
-  TimelineItemInstance,
-  CellInstance
+  TimelineItemInstance
 } from './index'
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
@@ -30,6 +31,7 @@ declare module '@vue/runtime-core' {
     MlAvatarGroup: AvatarGroupInstance
     MlButton: ButtonInstance
     MlCell: CellInstance
+    MlCellGroup: CellGroupInstance
     MlCheckbox: CheckboxInstance
     MlCheckboxGroup: CheckboxGroupInstance
     MlConfigProvider: ConfigProviderInstance
