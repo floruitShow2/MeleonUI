@@ -12,7 +12,12 @@ node_modules
 .DS_Store
 *.local
 
-src/packages
+src/packages/constants
+src/packages/hooks
+src/packages/interface
+src/packages/lib
+src/packages/utils
+src/packages/README.md
 
 # Editor directories and files
 .idea

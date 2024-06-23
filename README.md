@@ -4,7 +4,7 @@
 
 ##### 安装
 
-```dash
+```shell
 # npm
 npm install @meleon/uni-ui
 ```
@@ -14,7 +14,7 @@ npm install @meleon/uni-ui
 H5 端
 
 ```ts
-import MeleonUI from '@/ml-ui/lib'
+import MeleonUI from "@meleon/uni-ui"
 
 export function createApp() {
   const app = createSSRApp(App)
@@ -31,15 +31,15 @@ export function createApp() {
 ```ts
 // main.ts
 import { createSSRApp } from 'vue'
-import MeleonUI from '@/ml-ui/lib'
-import MlButton from '@/ml-ui/lib/ml-button/index.vue'
+import MeleonUI from "@meleon/uni-ui";
+import MlButton from '@meleon/uni-ui/lib/ml-button/index.vue'
 import App from './App.vue'
 
 export function createApp() {
   const app = createSSRApp(App)
   app.use(MeleonUI)
 
-  app.component('MlButtonGlobal', ml-button)
+  app.component('MlButtonGlobal', MlButton)
 
   return {
     app
@@ -72,7 +72,7 @@ import type { App } from 'vue'
 import _Button from './index.vue'
 
 const install = async (app: App) => {
-    app.component('ml-button', _Button)
+    app.component('MlButton', _Button)
 }
 
 export default { install }
@@ -130,7 +130,7 @@ MeleonUI 为用户提供了自定义主题的方法，可以通过向 `ml-config
 
 ```ts
 // script
-import type { ConfigProviderProps } from '~/lib/ml-config-provider/index.interface'
+import { configProviderInjectionKey } from '@meleon/uni-ui/lib/ml-config-provider/context'
 
 const themes: ConfigProviderProps['themes'] = {
     primary: '#D74B4B',
@@ -143,7 +143,18 @@ themes 支持以下属性，可根据项目的设计风格批量修改，当然�
 export type ColorType = 'primary' | 'info' | 'success' | 'warning' | 'danger'
 ```
 
-#### 三、更新日志
+#### 三、类型声明
+
+在使用组件时，为了得到更好的类型提示，可以在 `tsconfig.json` 中注入 `MeleonUI` 的类型声明文件，如下所示。
+如果你的编辑器中安装了 `Volar` 插件，注入成功后应该可以看到组件标签的颜色发生了变化，且当尝试传入组件 props 时，编辑器也会给出可选值的提示信息。
+
+```json
+{
+	"types": ["@dcloudio/types", "@meleon/uni-ui"]
+}
+```
+
+#### 四、更新日志
 
 - 2024/6/19 	新增 ml-config-provider 组件
 - 2024/6/21     调整项目接口，补全TS类型，新增 README 文档

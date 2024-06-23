@@ -1,0 +1,40 @@
+{
+    "name": "@meleon/uni-ui",
+    "version": "1.1.7",
+    "keywords": [
+        "uni-ui",
+        "ui",
+        "vue",
+        "typescript",
+        "components"
+    ],
+    "description": "A simple components library written in vue3 and typescript",
+    "scripts": {
+        "build": "tsc --project ./tsconfig.json"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/floruitShow2/MeleonUI.git"
+    },
+    "main": "lib/index.js",
+    "types": "lib/index.d.ts",
+    "author": "meleon",
+    "license": "ISC",
+    "dependencies": {
+        "@dcloudio/uni-app": "3.0.0-3081220230817001",
+        "@dcloudio/uni-app-plus": "3.0.0-3081220230817001",
+        "@dcloudio/uni-mp-weixin": "3.0.0-3081220230817001",
+        "colord": "^2.9.3",
+        "dayjs": "^1.11.11",
+        "pinia": "^2.0.23",
+        "vue": "^3.2.45"
+    },
+    "devDependencies": {
+        "@dcloudio/types": "^3.3.2",
+        "@types/node": "^20.14.2",
+        "less": "^4.2.0",
+        "typescript": "^4.9.4",
+        "vite": "4.1.4",
+        "vue-tsc": "^1.0.24"
+    }
+}

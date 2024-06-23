@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    /* Language and Environment */
+    "target": "ES2015",
+    /* Modules */
+    "module": "ES2015",
+    "moduleResolution": "Node",
+    "baseUrl": "./",
+    "declaration": true,
+    "sourceMap": false,
+    "inlineSourceMap": false,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "lib": ["esnext", "dom"],
+    "paths": {
+      "@meleon/uni-ui/*": ["./*"]
+    },
+    "types": ["@dcloudio/types", "node"]
+  },
+  "exclude": ["node_modules"]
+}
