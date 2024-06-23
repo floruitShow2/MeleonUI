@@ -61,13 +61,17 @@
   })
 
   // 计算组件类名
-  const prefix = 'ml-timeline-item'
+  const prefix = ref('ml-timeline-item')
   const className = computed(() => {
-    return cs(prefix, [`${prefix}-${globalCtx?.direction.value}-${globalCtx?.mode.value}`], {
-      [`${prefix}-${globalCtx?.direction.value}-${globalCtx?.mode.value}-${
-        idx.value % 2 === 0 ? 'left' : 'right'
-      }`]: globalCtx?.mode.value === 'alternate'
-    })
+    return cs(
+      prefix.value,
+      [`${prefix.value}-${globalCtx?.direction.value}-${globalCtx?.mode.value}`],
+      {
+        [
+          `${prefix.value}-${globalCtx?.direction.value}-${globalCtx?.mode.value}-${idx.value % 2 === 0 ? 'left' : 'right'}`
+        ]: globalCtx?.mode.value === 'alternate'
+      }
+    )
   })
   // 计算组件尺寸
   const componentStyle = ref({})
@@ -83,7 +87,7 @@
   // 计算内容尺寸
   const contentWrapperRect = ref<Record<string, number>>({})
   const updateContentRect = async () => {
-    const res = await getRect(instance, `.${prefix}-content-wrapper`)
+    const res = await getRect(instance, `.${prefix.value}-content-wrapper`)
     if (!res) return
     const { width, height, top, bottom, left, right } = res
     contentWrapperRect.value = {
@@ -98,7 +102,7 @@
 
   // 计算 dotLine 类名
   const dotLineCls = computed(() => {
-    return cs(`${prefix}-dot-line`, `${prefix}-dot-line-${lineType.value}`)
+    return cs(`${prefix.value}-dot-line`, `${prefix.value}-dot-line-${lineType.value}`)
   })
   // 计算 dotLine 高度
   const genDotLineHeight = () => {

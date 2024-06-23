@@ -121,9 +121,9 @@
   const instance = getCurrentInstance()
 
   // 类名
-  const prefix = 'ml-progress'
-  const prefixLine = 'ml-progress-line'
-  const prefixCircle = 'ml-progress-circle'
+  const prefix = ref('ml-progress')
+  const prefixLine = ref('ml-progress-line')
+  const prefixCircle = ref('ml-progress-circle')
 
   // 进度条容器的宽度
   const computedWidth = computed(() => {
@@ -154,7 +154,7 @@
   })
 
   const className = computed(() => {
-    return cs(prefix)
+    return cs(prefix.value)
   })
 
   onMounted(() => {

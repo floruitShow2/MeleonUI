@@ -35,9 +35,9 @@
   const emit = defineEmits([])
   const { themeColors } = useTheme()
 
-  const prefix = 'ml-tabs'
+  const prefix = ref('ml-tabs')
   const className = computed(() => {
-    return cs(prefix)
+    return cs(prefix.value)
   })
 
   const instance = getCurrentInstance()

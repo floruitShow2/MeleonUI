@@ -9,7 +9,7 @@
 </template>
 
 <script setup lang="ts">
-  import { toRefs, computed, inject, onMounted } from 'vue'
+  import { ref, toRefs, computed, inject, onMounted } from 'vue'
   import { useTheme, cs } from '@meleon/uni-ui/index'
   import { checkboxGroupInjectionKey } from '../ml-checkbox-group/context'
 
@@ -23,26 +23,26 @@
 
   const emit = defineEmits(['update:checked'])
 
-  const prefix = 'ml-checkbox'
+  const prefix = ref('ml-checkbox')
 
   const { themeColors } = useTheme()
 
   const globalCtx = inject(checkboxGroupInjectionKey, null)
 
   const className = computed(() => {
-    return cs(prefix, {
-      [`${prefix}-disabled`]:
+    return cs(prefix.value, {
+      [`${prefix.value}-disabled`]:
         disabled.value ||
         (globalCtx ? globalCtx.getDisabledList().includes(modelValue.value) : false),
-      [`${prefix}-underGroup`]: globalCtx !== null
+      [`${prefix.value}-underGroup`]: globalCtx !== null
     })
   })
   const inputClassName = computed(() => {
-    return cs(`${prefix}__input`, {
-      [`${prefix}__input-checked`]: globalCtx
+    return cs(`${prefix.value}__input`, {
+      [`${prefix.value}__input-checked`]: globalCtx
         ? globalCtx.getCheckedList().includes(modelValue.value)
         : checked.value,
-      [`${prefix}__input-indeterminate`]: indeterminate.value
+      [`${prefix.value}__input-indeterminate`]: indeterminate.value
     })
   })
 

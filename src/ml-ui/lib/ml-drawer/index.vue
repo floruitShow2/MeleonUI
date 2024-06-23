@@ -27,7 +27,7 @@
 </template>
 
 <script setup lang="ts">
-  import { toRefs, computed } from 'vue'
+  import { ref, toRefs, computed } from 'vue'
   import type { PropType, CSSProperties } from 'vue'
   import { isNumber, cs, generateDeviceUI } from '@meleon/uni-ui/utils'
   import { useTheme } from '@meleon/uni-ui/hooks'
@@ -74,10 +74,10 @@
   const emit = defineEmits(['update:visible', 'close', 'ok'])
 
   const { themeColors } = useTheme()
-  const prefix = 'ml-drawer'
+  const prefix = ref('ml-drawer')
 
   const className = computed(() => {
-    return cs(prefix)
+    return cs(prefix.value)
   })
 
   const styles = computed(() => {

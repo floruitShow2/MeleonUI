@@ -64,12 +64,12 @@
 
   const { themeColors } = useTheme()
 
-  const prefix = 'ml-tab_nav-header'
+  const prefix = ref('ml-tab_nav-header')
   const className = computed(() => {
-    return cs(prefix)
+    return cs(prefix.value)
   })
   const listClassName = computed(() => {
-    return cs(`${prefix}-list`)
+    return cs(`${prefix.value}-list`)
   })
 
   const instance = getCurrentInstance()
@@ -80,8 +80,8 @@
     // 查找对象
     const res = await Promise.all([
       getAllRect(instance, '.ml-tabs-tab'),
-      getRect(instance, `.${prefix}-list-underline`),
-      getRect(instance, `.${prefix}-list`)
+      getRect(instance, `.${prefix.value}-list-underline`),
+      getRect(instance, `.${prefix.value}-list`)
     ])
     const [rects, lineRect, wrapperRect] = res as [
       Array<{ width: number; left: number }>,

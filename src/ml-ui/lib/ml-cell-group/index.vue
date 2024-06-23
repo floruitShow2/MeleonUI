@@ -25,9 +25,9 @@
 
   const { themeColors } = useTheme()
 
-  const prefix = 'ml-cell-group'
+  const prefix = ref('ml-cell-group')
   const className = computed(() => {
-    return cs(prefix)
+    return cs(prefix.value)
   })
 
   const total = ref(0)

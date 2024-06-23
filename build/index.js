@@ -40,7 +40,7 @@ if (isPackagePathExist) {
 }
 
 function startPublish(resourcePath) {
-    exec(`cd ${resourcePath} && npm run build`, (err, stdout, stderr) => {
+    exec(`cd ${resourcePath} && npm run build && npm publish --access public`, (err, stdout, stderr) => {
         if (err) {
             console.log('执行错误：', err)
             return

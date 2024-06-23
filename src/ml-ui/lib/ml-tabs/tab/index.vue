@@ -22,7 +22,7 @@
 </template>
 
 <script setup lang="ts">
-  import { toRefs, computed } from 'vue'
+  import { ref, toRefs, computed } from 'vue'
   import type { PropType } from 'vue'
   import MlIcon from '../../ml-icon/index.vue'
   import useTheme from '../../../hooks/useTheme/useTheme'
@@ -45,11 +45,11 @@
   const emit = defineEmits(['click', 'remove'])
   const { themeColors } = useTheme()
 
-  const prefix = 'ml-tabs-tab'
+  const prefix = ref('ml-tabs-tab')
   const className = computed(() => {
-    return cs(prefix, {
-      [`${prefix}-disabled`]: tab.value.disabled || false,
-      [`${prefix}-active`]: tab.value.value === active.value
+    return cs(prefix.value, {
+      [`${prefix.value}-disabled`]: tab.value.disabled || false,
+      [`${prefix.value}-active`]: tab.value.value === active.value
     })
   })
 

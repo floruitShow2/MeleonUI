@@ -9,7 +9,7 @@
 </template>
 
 <script setup lang="ts">
-  import { computed, toRefs, getCurrentInstance } from 'vue'
+  import { ref, computed, toRefs, getCurrentInstance } from 'vue'
   import type { PropType } from 'vue'
   import type { ButtonProps } from './index.interface'
   import useTheme from '@meleon/uni-ui/hooks/useTheme/useTheme'
@@ -49,19 +49,20 @@
 
   const { themeColors } = useTheme()
 
-  const prefix = 'ml-button'
+  const prefix = ref('ml-button')
   const className = computed(() => {
+    const prefixCls = prefix.value
     return cs(
-      prefix,
+      prefixCls,
       [
-        `${prefix}-${size.value}`,
-        `${prefix}-${shape.value}`,
-        `${prefix}-${type.value}`,
-        `${prefix}-${status.value}`
+        `${prefixCls}-${size.value}`,
+        `${prefixCls}-${shape.value}`,
+        `${prefixCls}-${type.value}`,
+        `${prefixCls}-${status.value}`
       ],
       {
-        [`${prefix}-disabled`]: disabled.value,
-        [`${prefix}-only-icon`]: slots['icon'] !== undefined && !slots['default']
+        [`${prefixCls}-disabled`]: disabled.value,
+        [`${prefixCls}-only-icon`]: slots['icon'] !== undefined && !slots['default']
       }
     )
   })
@@ -69,7 +70,7 @@
     return cs(
       loading.value || disabled.value
         ? []
-        : [`${prefix}-${type.value}-hover`, `${prefix}-${status.value}-hover`]
+        : [`${prefix.value}-${type.value}-hover`, `${prefix.value}-${status.value}-hover`]
     )
   })
 

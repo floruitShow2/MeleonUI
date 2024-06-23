@@ -1,6 +1,6 @@
 <template>
   <view :class="className" :style="{ ...themeColors, ...outerStyle }">
-    <view :class="`${prefixCls}-text`" :style="textStyle">
+    <view :class="`${prefix}-text`" :style="textStyle">
       <slot />
     </view>
   </view>
@@ -28,12 +28,12 @@
   const { size, shape } = toRefs(props)
 
   const { themeColors } = useTheme()
-  const prefixCls = 'ml-avatar'
+  const prefix = ref('ml-avatar')
   const groupCtx = inject(avatarGroupInjectionKey, null)
 
   const className = computed(() =>
-    cs(prefixCls, [
-      groupCtx ? `${prefixCls}-${groupCtx.globalShape}` : `${prefixCls}-${shape.value}`
+    cs(prefix.value, [
+      groupCtx ? `${prefix.value}-${groupCtx.globalShape}` : `${prefix.value}-${shape.value}`
     ])
   )
 
@@ -68,8 +68,8 @@
    * @description 自动调整字体大小
    */
   const autoFixFontSizeHanlder = async () => {
-    const itemRect = await getRect(instance, `.${prefixCls}`)
-    const wrapperRect = await getRect(instance, `.${prefixCls}-text`)
+    const itemRect = await getRect(instance, `.${prefix.value}`)
+    const wrapperRect = await getRect(instance, `.${prefix.value}-text`)
     if (!itemRect || !wrapperRect) return
     const textWidth = wrapperRect.width
     const avatarWidth = itemRect.width

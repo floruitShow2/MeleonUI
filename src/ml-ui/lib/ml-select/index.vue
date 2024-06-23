@@ -111,9 +111,9 @@
 
   const deviceUI = ref<Record<string, number>>({})
 
-  const prefix = 'ml-select'
+  const prefix = ref('ml-select')
   const className = computed(() => {
-    return cs(prefix)
+    return cs(prefix.value)
   })
   const formatPlaceholder = computed(() => {
     if (multiple.value) return placeholder.value
@@ -218,8 +218,8 @@
   const instance = getCurrentInstance()
   const computeMenuPosition = async () => {
     const resStyle: Record<string, any> = {}
-    const inputRes = await getRect(instance, `.${prefix}-input`)
-    const menuRes = await getRect(instance, `.${prefix}-dropdown`)
+    const inputRes = await getRect(instance, `.${prefix.value}-input`)
+    const menuRes = await getRect(instance, `.${prefix.value}-dropdown`)
     if (!inputRes || !menuRes) {
       console.log('节点不存在，获取节点数据失败')
       return

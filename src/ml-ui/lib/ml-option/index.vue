@@ -17,7 +17,7 @@
 </template>
 
 <script setup lang="ts">
-  import { toRefs, computed, inject, onMounted } from 'vue'
+  import { ref, toRefs, computed, inject, onMounted } from 'vue'
   import { useTheme } from '@meleon/uni-ui/hooks'
   import { cs } from '@meleon/uni-ui/utils'
   import { MlSelectGroupInjectionKey } from './context'
@@ -42,10 +42,10 @@
   // const emit = defineEmits([])
   const { themeColors } = useTheme()
 
-  const prefix = 'ml-option'
+  const prefix = ref('ml-option')
   const className = computed(() => {
-    return cs(prefix, {
-      [`${prefix}-active`]: isOptionActive.value
+    return cs(prefix.value, {
+      [`${prefix.value}-active`]: isOptionActive.value
     })
   })
 

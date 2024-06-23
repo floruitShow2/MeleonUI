@@ -50,16 +50,20 @@
   const emit = defineEmits(['update:modelValue', 'click', 'close'])
 
   const { themeColors } = useTheme()
-  const prefix = 'ml-tag'
+  const prefix = ref('ml-tag')
   const className = computed(() => {
-    return cs(prefix, [`${prefix}-${type.value}`, `${prefix}-${size.value}`], {
-      [`${prefix}-closable`]: closable.value,
-      [`${prefix}-plain`]: plain.value,
-      [`${prefix}-bordered`]: bordered.value
-    })
+    return cs(
+      prefix.value,
+      [`${prefix.value}-${type.value}`, `${prefix.value}-${size.value}`],
+      {
+        [`${prefix.value}-closable`]: closable.value,
+        [`${prefix.value}-plain`]: plain.value,
+        [`${prefix.value}-bordered`]: bordered.value
+      }
+    )
   })
   const hoverClassName = computed(() => {
-    return cs([`${prefix}-${type.value}-hover`])
+    return cs([`${prefix.value}-${type.value}-hover`])
   })
 
   const mapIconSize: Record<string, number> = {

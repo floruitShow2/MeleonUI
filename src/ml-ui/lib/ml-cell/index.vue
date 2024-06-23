@@ -125,14 +125,14 @@
 
   const { themeColors } = useTheme()
 
-  const prefix = 'ml-cell'
+  const prefix = ref('ml-cell')
   const className = computed(() => {
     return cs(
-      prefix,
-      `${prefix}-${type.value}`,
+      prefix.value,
+      `${prefix.value}-${type.value}`,
       {
-        [`${prefix}--disabled`]: disabled.value,
-        [`${prefix}--bordered`]: idx.value !== globalCtx?.total.value
+        [`${prefix.value}--disabled`]: disabled.value,
+        [`${prefix.value}--bordered`]: idx.value !== globalCtx?.total.value
       }
     )
   })

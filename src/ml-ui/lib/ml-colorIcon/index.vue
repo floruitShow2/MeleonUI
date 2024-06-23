@@ -13,7 +13,7 @@
 </template>
 
 <script setup lang="ts">
-  import { toRefs, computed } from 'vue'
+  import { ref, toRefs, computed } from 'vue'
   import { cs } from '@meleon/uni-ui/utils'
 
   const props = defineProps({
@@ -33,9 +33,9 @@
   const emit = defineEmits(['click'])
   const { name, size } = toRefs(props)
 
-  const prefix = 'ml-icon'
+  const prefix = ref('ml-icon')
   const className = computed(() => {
-    return cs(prefix, `${prefix}-${name.value.replace('ml-', '')}`)
+    return cs(prefix.value, `${prefix.value}-${name.value.replace('ml-', '')}`)
   })
 </script>
 

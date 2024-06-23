@@ -35,7 +35,7 @@
 
   const emit = defineEmits(['update:checkedList'])
 
-  const prefix = 'ml-checkbox-group'
+  const prefix = ref('ml-checkbox-group')
   console.log(prefix)
 
   const totalList = ref<Array<string | number>>([])

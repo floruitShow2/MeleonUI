@@ -88,10 +88,10 @@
   const emit = defineEmits(['update:modelValue', 'focus', 'blur', 'change', 'remove'])
 
   const { themeColors } = useTheme()
-  const prefix = 'ml-input-tag'
+  const prefix = ref('ml-input-tag')
 
   const className = computed(() => {
-    return cs(prefix, [`${prefix}-${size.value}`], {
+    return cs(prefix.value, [`${prefix.value}-${size.value}`], {
       'is-focus': isFocus.value
     })
   })

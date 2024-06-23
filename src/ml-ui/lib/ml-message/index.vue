@@ -66,7 +66,7 @@
 </template>
 
 <script setup lang="ts">
-  import { toRefs, computed, getCurrentInstance, reactive } from 'vue'
+  import { ref, toRefs, computed, getCurrentInstance, reactive } from 'vue'
   import { useTheme } from '@meleon/uni-ui/hooks'
   import { cs, generateDeviceUI } from '@meleon/uni-ui/utils'
   import MlMessage from './MlMessage'
@@ -85,9 +85,9 @@
   const emit = defineEmits([])
   const { themeColors } = useTheme()
 
-  const prefix = 'ml-message'
+  const prefix = ref('ml-message')
   const className = computed(() => {
-    return cs(prefix)
+    return cs(prefix.value)
   })
 
   const styles = computed(() => {

@@ -49,8 +49,8 @@
   })
 
   // 类名生成
-  const prefixCls = 'ml-tabbar'
-  const className = cs(prefixCls)
+  const prefix = ref('ml-tabbar')
+  const className = cs(prefix.value)
 
   // tabbar options
   const options: TabbarOptionType[] = [

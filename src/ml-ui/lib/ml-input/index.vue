@@ -112,7 +112,7 @@
 
   const instance = getCurrentInstance()
 
-  const prefix = 'ml-input'
+  const prefix = ref('ml-input')
 
   const ui = ref<Record<string, number>>({
     screenWidth: 0,
@@ -122,7 +122,7 @@
   })
 
   const className = computed(() => {
-    return cs(prefix, [`${prefix}-${size.value}`], {
+    return cs(prefix.value, [`${prefix.value}-${size.value}`], {
       'is-disabled': disabled.value,
       'is-focus': isFocus.value
     })

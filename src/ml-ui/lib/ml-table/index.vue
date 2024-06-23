@@ -338,11 +338,15 @@
 
   const { themeColors } = useTheme()
 
-  const prefix = 'ml-table'
+  const prefix = ref('ml-table')
   const className = computed(() => {
-    return cs(prefix, [`${prefix}-${size.value}`], {
-      [`${prefix}-border`]: border.value
-    })
+    return cs(
+      prefix.value,
+      [`${prefix.value}-${size.value}`],
+      {
+        [`${prefix.value}-border`]: border.value
+      }
+    )
   })
 
   // 创建 ml-table 标识符

@@ -4,7 +4,7 @@
 </template>
 
 <script setup lang="ts">
-  import { toRefs, computed } from 'vue'
+  import { ref, toRefs, computed } from 'vue'
   import type { PropType } from 'vue'
   // @ts-ignore
   import { useTheme } from '@meleon/uni-ui/hooks'
@@ -18,9 +18,9 @@
 
   const { themeColors } = useTheme()
 
-  const prefix = 'ml-name'
+  const prefix = ref('ml-name')
   const className = computed(() => {
-    return cs(prefix)
+    return cs(prefix.value)
   })
 </script>
 

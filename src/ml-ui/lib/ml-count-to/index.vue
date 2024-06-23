@@ -47,9 +47,9 @@
   const { from, to, animation, showSeperator, animationDuration } = toRefs(props)
 
   const { themeColors } = useTheme()
-  const prefix = 'ml-count-to'
+  const prefix = ref('ml-count-to')
   const className = computed(() => {
-    return cs(prefix)
+    return cs(prefix.value)
   })
 
   const innerValue = ref<number>(0)

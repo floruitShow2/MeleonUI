@@ -65,10 +65,9 @@
   import { ref, toRefs, computed } from 'vue'
   import type { PropType } from 'vue'
   import { onShow } from '@dcloudio/uni-app'
-  import { generateDeviceUI } from '@/utils/device'
-  import { cs } from '@/utils/property'
-  import MlIcon from '../ml-icon/index.vue'
+  import { cs, generateDeviceUI } from '@meleon/uni-ui/utils'
   import type { NavigatorProps, NavigatorToolEntity } from './index.interface'
+  import MlIcon from '../ml-icon/index.vue'
 
   const props = defineProps({
     // 导航栏背景色
@@ -123,8 +122,8 @@
   })
 
   // 类名生成
-  const prefixCls = 'ml-navigator'
-  const className = cs(prefixCls)
+  const prefix = ref('ml-navigator')
+  const className = cs(prefix.value)
 
   // 样式生成
   const baseStyle = computed(() => {

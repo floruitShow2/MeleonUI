@@ -33,11 +33,15 @@
   const instance = getCurrentInstance()
 
   const { themeColors } = useTheme()
-  const prefix = 'ml-timeline'
+  const prefix = ref('ml-timeline')
   const className = computed(() => {
-    return cs(prefix, [`${prefix}-${direction.value}`, `${prefix}-${mode.value}`], {
-      [`${prefix}-reverse`]: reverse.value
-    })
+    return cs(
+      prefix.value,
+      [`${prefix.value}-${direction.value}`, `${prefix.value}-${mode.value}`],
+      {
+        [`${prefix.value}-reverse`]: reverse.value
+      }
+    )
   })
 
   const total = ref(0)
@@ -47,7 +51,7 @@
 
   const getTimeLineRect = () => {
     return new Promise((resolve) => {
-      getRect(instance, `.${prefix}`).then((res) => {
+      getRect(instance, `.${prefix.value}`).then((res) => {
         resolve(res)
       })
     })
