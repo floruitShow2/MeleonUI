@@ -67,9 +67,9 @@
       prefix.value,
       [`${prefix.value}-${globalCtx?.direction.value}-${globalCtx?.mode.value}`],
       {
-        [
-          `${prefix.value}-${globalCtx?.direction.value}-${globalCtx?.mode.value}-${idx.value % 2 === 0 ? 'left' : 'right'}`
-        ]: globalCtx?.mode.value === 'alternate'
+        [`${prefix.value}-${globalCtx?.direction.value}-${globalCtx?.mode.value}-${
+          idx.value % 2 === 0 ? 'left' : 'right'
+        }`]: globalCtx?.mode.value === 'alternate'
       }
     )
   })

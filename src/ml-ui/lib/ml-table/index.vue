@@ -340,13 +340,9 @@
 
   const prefix = ref('ml-table')
   const className = computed(() => {
-    return cs(
-      prefix.value,
-      [`${prefix.value}-${size.value}`],
-      {
-        [`${prefix.value}-border`]: border.value
-      }
-    )
+    return cs(prefix.value, [`${prefix.value}-${size.value}`], {
+      [`${prefix.value}-border`]: border.value
+    })
   })
 
   // 创建 ml-table 标识符

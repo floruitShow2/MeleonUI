@@ -1,3 +1,3 @@
 export interface CellGroupProps {
-    title: string
+  title: string
 }

@@ -37,23 +37,24 @@
     path: string
   }
   const componentList = ref<ComponentItemType[]>([
-    { name: 'ml-icon', path: '/pages/packageUI/icon/index' },
-    { name: 'ml-button', path: '/pages/packageUI/button/index' },
     { name: 'ml-avatar', path: '/pages/packageUI/avatar/index' },
-    { name: 'ml-input', path: '/pages/packageUI/input/index' },
-    { name: 'ml-input-tag', path: '/pages/packageUI/inputTag/index' },
-    { name: 'ml-tabs', path: '/pages/packageUI/tabs/index' },
-    { name: 'ml-tag', path: '/pages/packageUI/tag/index' },
-    { name: 'ml-select', path: '/pages/packageUI/select/index' },
+    { name: 'ml-button', path: '/pages/packageUI/button/index' },
+    { name: 'ml-cell', path: '/pages/packageUI/cell/index' },
     { name: 'ml-checkbox', path: '/pages/packageUI/checkbox/index' },
     { name: 'ml-count-to', path: '/pages/packageUI/countTo/index' },
     { name: 'ml-drawer', path: '/pages/packageUI/drawer/index' },
-    { name: 'ml-table', path: '/pages/packageUI/table/index' },
+    { name: 'ml-icon', path: '/pages/packageUI/icon/index' },
+    { name: 'ml-input', path: '/pages/packageUI/input/index' },
+    { name: 'ml-input-tag', path: '/pages/packageUI/inputTag/index' },
     { name: 'ml-message', path: '/pages/packageUI/message/index' },
-    { name: 'ml-timeline', path: '/pages/packageUI/timeline/index' },
     { name: 'ml-progress', path: '/pages/packageUI/progress/index' },
-    { name: 'ml-cell', path: '/pages/packageUI/cell/index' },
-    { name: 'ml-swiper-cell', path: '../../package-WsUI/pages/swiperCell/swiperCell' }
+    { name: 'ml-swiper-cell', path: '../../package-WsUI/pages/swiperCell/swiperCell' },
+    { name: 'ml-select', path: '/pages/packageUI/select/index' },
+    { name: 'ml-tabs', path: '/pages/packageUI/tabs/index' },
+    { name: 'ml-tag', path: '/pages/packageUI/tag/index' },
+    { name: 'ml-table', path: '/pages/packageUI/table/index' },
+    { name: 'ml-timeline', path: '/pages/packageUI/timeline/index' },
+    { name: 'ml-uploder', path: '/pages/packageUI/uploader/index' }
   ])
 
   const onNavigate = (item: ComponentItemType) => {

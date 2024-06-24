@@ -6,6 +6,13 @@ export default {
   description: '',
   glyphs: [
     {
+      icon_id: '983774',
+      name: '相机',
+      font_class: 'camera--fill',
+      unicode: 'e639',
+      unicode_decimal: 58937
+    },
+    {
       icon_id: '5387747',
       name: '编辑表格_o',
       font_class: 'edit',

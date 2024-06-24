@@ -148,6 +148,12 @@
 					"style": {
 						"navigationStyle": "custom"
 					}
+				},
+				{
+					"path": "uploader/index",
+					"style": {
+						"navigationStyle": "custom"
+					}
 				}
 			]
 		},

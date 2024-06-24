@@ -1,4 +1,4 @@
-import type { ButtonProps } from "../ml-button"
+import type { ButtonProps } from '../ml-button'
 
 export enum CellTypeEnum {
   TEXT = 'text',

@@ -1,6 +1,5 @@
 <template>
-  <view :class="className" :style="themeColors">
-  </view>
+  <view :class="className" :style="themeColors"> </view>
 </template>
 
 <script setup lang="ts">

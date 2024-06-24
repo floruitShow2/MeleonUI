@@ -31,12 +31,7 @@
     <!-- button cell -->
     <template v-else-if="type === CellTypeEnum.BUTTON">
       <!-- remark: 用 Button 作为标签的话会和默认组件冲突，需要换个名字 -->
-      <MlButton
-        type="text"
-        size="mini"
-        :status="btnStatus"
-        @click="handleBtnClick"
-      >
+      <MlButton type="text" size="mini" :status="btnStatus" @click="handleBtnClick">
         {{ label }}
       </MlButton>
     </template>
@@ -127,14 +122,10 @@
 
   const prefix = ref('ml-cell')
   const className = computed(() => {
-    return cs(
-      prefix.value,
-      `${prefix.value}-${type.value}`,
-      {
-        [`${prefix.value}--disabled`]: disabled.value,
-        [`${prefix.value}--bordered`]: idx.value !== globalCtx?.total.value
-      }
-    )
+    return cs(prefix.value, `${prefix.value}-${type.value}`, {
+      [`${prefix.value}--disabled`]: disabled.value,
+      [`${prefix.value}--bordered`]: idx.value !== globalCtx?.total.value
+    })
   })
 
   const afterValue = ref(value.value)

@@ -12,8 +12,8 @@
   import { ref, computed, toRefs, getCurrentInstance } from 'vue'
   import type { PropType } from 'vue'
   import type { ButtonProps } from './index.interface'
-  import useTheme from '@meleon/uni-ui/hooks/useTheme/useTheme'
-  import { cs } from '@meleon/uni-ui/utils/property'
+  import { useTheme } from '@meleon/uni-ui/hooks'
+  import { cs } from '@meleon/uni-ui/utils'
   import MlIcon from '@meleon/uni-ui/lib/ml-icon/index.vue'
 
   const props = defineProps({
