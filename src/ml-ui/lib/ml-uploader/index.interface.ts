@@ -14,13 +14,35 @@ export interface UploaderProps {
    * @description 上传地址
    */
   action: string | (() => string)
+  /**
+   * @description 是否自动上传
+   */
+  autoUpload: boolean
+  /**
+   * @description 上传文件字段名
+   */
+  fieldName: string
+  /**
+   * @description 上传请求头
+   */
   headers: Record<string, string>
+  /**
+   * @description 文件上传额外携带的数据
+   */
+  data: Record<string, any>
+  /**
+   * @description 文件列表
+   */
   fileList: FileItem[]
   /**
    * @description 是否支持多选图片
    * @description 最多一次性上传9张图片
    */
   multiple: boolean
+  /**
+   * @description 限制上传数量
+   */
+  limit: number
   /**
    * @description 是否禁用文件上传
    */
@@ -37,6 +59,10 @@ export interface UploaderProps {
    * @description 上传文件之前的钩子函数
    */
   beforeUpload: (files: FileItem[]) => boolean | Promise<boolean>
+  /**
+   * @description 文件列表变化触发回调
+   */
+  onChange: (files: FileItem[]) => void
   /**
    * @description 删除文件之前的钩子函数
    */

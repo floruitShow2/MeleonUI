@@ -1,33 +1,35 @@
 <template>
   <view :class="className" :style="themeColors">
     <view :class="`${prefix}-files`">
-      <div
-        v-for="item in cachedImageList"
-        :key="item.path"
-        :class="`${prefix}-files-item`"
-      >
-        <Image
-          :class="`${prefix}-files-item--image`"
-          :src="item.path"
-        />
+      <template v-if="showFileList">
         <div
-          :class="`${prefix}-files-item--close`"
-          @click.stop="() => handleDeleteFile(item)"
+          v-for="item in cachedImageList"
+          :key="item.path"
+          :class="`${prefix}-files-item`"
         >
-          <Icon
-            v-if="item.deletable"
-            class="ml-icon-close"
-            name="ml-close"
-            color="#ffffff"
-            :size="14"
+          <Image
+            :class="`${prefix}-files-item--image`"
+            :src="item.path"
           />
+          <div
+            :class="`${prefix}-files-item--close`"
+            @click.stop="() => handleDeleteFile(item)"
+          >
+            <Icon
+              v-if="item.deletable"
+              class="ml-icon-close"
+              name="ml-close"
+              color="#ffffff"
+              :size="14"
+            />
+          </div>
         </div>
-      </div>
-      <div v-if="!$slots.trigger" :class="`${prefix}-files-trigger`" @click="handleUpload">
+      </template>
+      <div v-if="!$slots.trigger" :class="`${prefix}-files-trigger`" @click="handleUploadFile">
         <Icon name="ml-camera--fill" :size="24" color="var(--info-color-8)" />
         <text :class="`${prefix}-files-trigger-text`">请上传图片文件</text>
       </div>
-      <div @click="handleUpload">
+      <div @click="handleUploadFile">
         <slot name="trigger"> </slot>
       </div>
     </view>
@@ -49,8 +51,20 @@
       type: String as PropType<UploaderProps['action']>,
       default: ''
     },
+    autoUpload: {
+      type: Boolean,
+      default: false
+    },
+    fieldName: {
+      type: String,
+      default: 'file'
+    },
     headers: {
       type: Object as PropType<UploaderProps['headers']>,
+      default: () => ({})
+    },
+    data: {
+      type: Object as PropType<UploaderProps['data']>,
       default: () => ({})
     },
     fileList: {
@@ -61,9 +75,17 @@
       type: Boolean,
       default: false
     },
+    limit: {
+      type: Number,
+      default: 9
+    },
     disabled: {
       type: Boolean,
       default: false
+    },
+    showFileList: {
+      type: Boolean,
+      default: false      
     },
     sourceType: {
       type: String as PropType<UploaderProps['sourceType']>,
@@ -73,6 +95,10 @@
       type: Function as PropType<UploaderProps['beforeUpload']>,
       default: () => true
     },
+    onChange: {
+      type: Function as PropType<UploaderProps['onChange']>,
+      default: () => {}
+    },
     beforeDelete: {
       type: Function as PropType<UploaderProps['beforeDelete']>,
       default: () => true
@@ -80,16 +106,21 @@
   })
   const {
     action,
+    autoUpload,
+    fieldName,
     headers,
+    data,
     fileList,
     multiple,
+    limit,
     disabled,
     sourceType,
     beforeUpload,
-    beforeDelete
+    beforeDelete,
+    onChange
   } = toRefs(props)
 
-  const emit = defineEmits(['update:fileList', 'delete'])
+  const emit = defineEmits(['update:fileList', 'delete', 'uploaded'])
 
   const { themeColors } = useTheme()
 
@@ -98,7 +129,7 @@
     return cs(
       prefix.value,
       {
-        [`${prefix.value}--disabled`]: disabled.value
+        [`${prefix.value}--disabled`]: disabled.value || cachedImageList.value.length >= limit.value
       }
     )
   })
@@ -109,18 +140,38 @@
     cachedImageList.value = newVal
   })
 
-  const handleUpload = async () => {
+  // 上传文件到服务器
+  const handleSubmitFile = async () => {
+    const requestList = cachedImageList.value.map(file => uploadFile({
+      url: isString(action.value) ? action.value : action.value(),
+      path: file.path,
+      fieldName: fieldName.value,
+      header: headers.value,
+      formData: data.value
+    }))
+    const res = await Promise.all(requestList)
+    emit('uploaded', res
+      .filter(item => item.statusCode < 300 && item.statusCode >= 200)
+      .map(item => item.data)
+    )
+  }
+  // 选择文件保存在本地缓存
+  const handleUploadFile = async () => {
     const res = await chooseImage({
       multiple: multiple.value,
+      limit: limit.value,
       sourceType: sourceType.value
     })
     let formatRes: FileItem[] = []
     if (isArray(res.tempFilePaths)) {
-      formatRes = res.tempFilePaths.map((item, index) => ({
-        id: `${Date.now()}${index}`,
-        path: item,
-        deletable: true
-      }))
+      formatRes = res.tempFilePaths
+        .slice(0, limit.value)
+        .map((item, index) => ({
+          id: `${Date.now()}${index}`,
+          path: item,
+          deletable: true
+        })
+      )
     } else {
       formatRes = [
         {
@@ -135,18 +186,17 @@
 
     cachedImageList.value.push(...formatRes)
 
-    if (action.value) {
-      const requestList = cachedImageList.value.map(file => uploadFile({
-        url: isString(action.value) ? action.value : action.value(),
-        header: headers.value,
-        path: file.path
-      }))
-      const res = await Promise.all(requestList)
-      console.log('上传成功', res)
+    // 如果传递了 onChange，则触发
+    onChange.value && onChange.value(cachedImageList.value)
+
+    // 自动上传
+    if (action.value && autoUpload.value) {
+      await handleSubmitFile()
     }
+
     emit('update:fileList', cachedImageList.value)
   }
-
+  // 从本地缓存中删除文件
   const handleDeleteFile = async (file: FileItem) => {
     if (!(await beforeDelete.value(file))) return
 
@@ -155,6 +205,17 @@
     emit('update:fileList', cachedImageList.value)
     emit('delete', file.id)
   }
+
+  const handleUpdateFile = (id: string, file: FileItem) => {
+    const findIdx = cachedImageList.value.findIndex(item => item.id === id)
+    if (findIdx === -1) return
+    cachedImageList.value.splice(findIdx, 1, file)
+  }
+
+  defineExpose({
+    submit: handleSubmitFile,
+    updateFile: handleUpdateFile
+  })
 </script>
 
 <style lang="less">

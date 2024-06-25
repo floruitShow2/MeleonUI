@@ -159,6 +159,7 @@ export type ColorType = 'primary' | 'info' | 'success' | 'warning' | 'danger'
 - 2024/6/19 	新增 ml-config-provider 组件
 - 2024/6/21     调整项目接口，补全TS类型，新增 README 文档
 - 2024/6/23     新增 ml-cell、ml-cell-group 组件
+- 2024/6/25     新增 ml-uploader 组件
 
 ### 组件
 
@@ -980,4 +981,106 @@ const showMessage = (type: MessageOptions['type']) => {
 <view>checkable: 添加点击样式，触发 click 事件</view>
 <ml-tag v-model:model-value="tagValue" editable />
 ```
+
+#### 上传组件 Uploader
+
+###### 基本使用
+
+```vue
+<template>
+    <ml-uploader
+        ref="uploadRef"
+        v-model:file-list="fileList"
+        action="http://localhost:3000/api/file/upload"
+        multiple
+        show-file-list
+        :disabled="false"
+        :auto-upload="false"
+        :on-change="handleOnChange"
+        @delete="handleDelete"
+    >
+        <template #trigger>
+        	<ml-button type="primary">选择文件</ml-button>
+        </template>
+    </ml-uploader>
+
+	<ml-button
+		type="primary"
+		status="success"
+		@click="handleSubmit"
+	>
+        上传
+	</ml-button>
+</template>
+
+<script lang="ts" setup>
+    import type { FileItem, UploaderInstance } from '@/ml-ui/lib/ml-uploader'
+    
+    const fileList = ref<FileItem[]>([])
+    const handleDelete = () => {
+		console.log('a', fileList.value)
+	}
+
+	const handleOnChange = (files: FileItem[]) => {
+		console.log('a', files)
+	}
+
+	const uploadRef = ref<UploaderInstance>()
+	const handleSubmit = () => {
+		if (!uploadRef.value) return
+		uploadRef.value.submit()
+	}
+</script>
+```
+
+###### APIs
+
+| props        | type                                               | default    | desc                         |
+| ------------ | -------------------------------------------------- | ---------- | ---------------------------- |
+| action       | string \| () => string                             | ''         | 文件上传的地址               |
+| autoUpload   | boolean                                            | false      | 是否自动上传                 |
+| fieldName    | string                                             | file       | 上传时文件对应的字段名       |
+| headers      | Record<string, string>                             | {}         | 上传时携带的请求头           |
+| data         | Record<string, any>                                | {}         | 上传时 FromData 里其他的数据 |
+| fileList     | FileItem                                           | 必填项     | 展示的文件列表               |
+| multiple     | boolean                                            | false      | 是否支持同时选择多个文件     |
+| limit        | number                                             | 9          | 最多缓存的文件数量           |
+| disabled     | boolean                                            | false      | 是否禁用                     |
+| showFileList | boolean                                            | false      | 是否展示文件列表             |
+| sourceType   | UploaderSourceTypeEnum                             | ''         | 支持相机或相册，默认都支持   |
+| beforeUpload | (files: FileItem[]) => boolean \| Promise<boolean> | () => true | 上传前的钩子函数             |
+| beforeDelete | (file: FileItem) => boolean \| Promise<boolean>    | () => true | 删除前的钩子函数             |
+
+###### Types
+
+`FileItem`
+
+| prop      | desc           |
+| --------- | -------------- |
+| path      | 图片路径       |
+| id        | 图片id         |
+| deletable | 是否可以被删除 |
+
+`UploaderSourceTypeEnum`
+
+| enum   | desc   |
+| ------ | ------ |
+| ALBUM  | album  |
+| CAMERA | camera |
+
+###### Emits
+
+| name            | desc               |
+| --------------- | ------------------ |
+| delete          | 文件在缓存中被删除 |
+| uploaded        | 文件上传成功       |
+| update:fileList | 文件列表更新       |
+
+###### Methods
+
+| name       | type                                 | desc                       |
+| ---------- | ------------------------------------ | -------------------------- |
+| submit     | () => void                           | 手动上传当前展示的所有文件 |
+| updateFile | (id: string, file: FileItem) => void | 指定id，更新文件对象       |
+|            |                                      |                            |
 

@@ -23,8 +23,10 @@ import type {
   TableColumnInstance,
   TagInstance,
   TimelineInstance,
-  TimelineItemInstance
+  TimelineItemInstance,
+  UploaderInstanceWithExpose
 } from './index'
+import type { UploaderInstanceWidthExpose } from './ml-uploader'
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     MlAvatar: AvatarInstance
@@ -52,6 +54,7 @@ declare module '@vue/runtime-core' {
     MlTag: TagInstance
     MlTimeline: TimelineInstance
     MlTimelineItem: TimelineItemInstance
+    MlUploader: UploaderInstanceWidthExpose
   }
 }
 

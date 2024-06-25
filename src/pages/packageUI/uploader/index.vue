@@ -8,16 +8,23 @@
       background-color="#7A98B3"
     />
     <view class="view-wrapper" :style="wrapperStyle">
-      <MlUploader
+      <ml-uploader
+        ref="uploadRef"
         v-model:file-list="fileList"
+        action="http://localhost:3000/api/file/upload"
+        :auto-upload="false"
         multiple
+        show-file-list
         :disabled="false"
-        @delete="handleUploaded"
+        :on-change="handleOnChange"
+        @delete="handleDelete"
       >
         <template #trigger>
-          <ml-button type="primary">上传</ml-button>
+          <ml-button type="primary">选择文件</ml-button>
         </template>
-      </MlUploader>
+      </ml-uploader>
+
+      <ml-button type="primary" status="success" @click="handleSubmit">上传</ml-button>
     </view>
   </view>
 </template>
@@ -26,9 +33,11 @@
   import { ref, computed } from 'vue'
   import { useAppStore } from '@/store'
   import MlNavigator from '@/ml-ui/lib/ml-navigator/index.vue'
-  import MlUploader from '@/ml-ui/lib/ml-uploader/index.vue'
-  import type { FileItem } from '@/ml-ui/lib/ml-uploader'
+  import type { FileItem, UploaderInstance } from '@/ml-ui/lib/ml-uploader'
 
+  /**
+   * @deprecated
+   */
   const appStore = useAppStore()
   const wrapperStyle = computed(() => {
     const { screenWidth, contentHeight, tabbarHeight, bottomBarHeight } = appStore.appSize
@@ -39,9 +48,20 @@
   })
 
   const fileList = ref<FileItem[]>([])
-  const handleUploaded = () => {
+  const handleDelete = () => {
     console.log('a', fileList.value)
   }
+
+  const handleOnChange = (files: FileItem[]) => {
+    console.log('a', files)
+  }
+
+  const uploadRef = ref<UploaderInstance>()
+  const handleSubmit = () => {
+    if (!uploadRef.value) return
+    uploadRef.value.submit()
+  }
+
 </script>
 
 <style lang="less">

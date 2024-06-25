@@ -74,5 +74,8 @@ export type { TimelineInstance, TimelineProps } from './ml-timeline'
 export { default as TimelineItem } from './ml-timeline-item'
 export type { TimelineItemInstance, TimelineItemProps } from './ml-timeline-item'
 
+export { default as Uploader } from './ml-uploader'
+export type { UploaderInstance, UploaderProps } from './ml-uploader'
+
 // 导入 components 类型声明
 export type {} from './components'
