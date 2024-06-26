@@ -44,6 +44,10 @@ export interface UploaderProps {
    */
   limit: number
   /**
+   * @description 预览及上传区域的尺寸
+   */
+  previewSize: number
+  /**
    * @description 是否禁用文件上传
    */
   disabled: boolean

@@ -1,7 +1,7 @@
 <template>
   <view :class="className" @click="handleIconClick">
     <icon
-      :class="cs('ml-icon-inner', name)"
+      :class="innerClassName"
       :style="{
         color,
         fontSize: `${size}px`,
@@ -36,7 +36,18 @@
 
   const prefix = ref('ml-icon')
   const className = computed(() => {
-    return cs(prefix.value, `${prefix.value}-${name.value.replace('ml-', '')}`)
+    return cs(
+      prefix.value,
+      `${prefix.value}-${name.value.replace('ml-', '')}`
+    )
+  })
+  const innerClassName = computed(() => {
+    return cs(
+      'ml-icon-inner',
+      name.value,
+      {
+        [`${prefix.value}-rotating`]: ['ml-loading', 'ml-loading--line'].includes(name.value)
+      })
   })
 
   const handleIconClick = (e: MouseEvent) => {

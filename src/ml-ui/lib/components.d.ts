@@ -10,6 +10,7 @@ import type {
   CountToInstance,
   DrawerInstance,
   IconInstance,
+  ImageInstance,
   InputInstance,
   InputTagInstance,
   MessageInstance,
@@ -24,9 +25,8 @@ import type {
   TagInstance,
   TimelineInstance,
   TimelineItemInstance,
-  UploaderInstanceWithExpose
+  UploaderInstance
 } from './index'
-import type { UploaderInstanceWidthExpose } from './ml-uploader'
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     MlAvatar: AvatarInstance
@@ -40,6 +40,7 @@ declare module '@vue/runtime-core' {
     MlCountTo: CountToInstance
     MlDrawer: DrawerInstance
     MlIcon: IconInstance
+    MlImage: ImageInstance
     MlInput: InputInstance
     MlInputTag: InputTagInstance
     MlMessage: MessageInstance
@@ -54,7 +55,7 @@ declare module '@vue/runtime-core' {
     MlTag: TagInstance
     MlTimeline: TimelineInstance
     MlTimelineItem: TimelineItemInstance
-    MlUploader: UploaderInstanceWidthExpose
+    MlUploader: UploaderInstance
   }
 }
 

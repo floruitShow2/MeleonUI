@@ -52,8 +52,8 @@
   import { onShow } from '@dcloudio/uni-app'
   import { useTheme } from '@meleon/uni-ui/hooks'
   import { cs, generateDeviceUI, convertToNumber } from '@meleon/uni-ui/utils'
-  import MlIcon from '@meleon/uni-ui/lib/ml-icon/index.vue'
   import type { MlInputStatus } from './index.interface'
+  import MlIcon from '../ml-icon/index.vue'
 
   const props = defineProps({
     modelValue: {

@@ -11,7 +11,18 @@ export enum ImageModeEnum {
   HEIGHT_FIX = 'heightFix'
 }
 
+export type ImageToolType = 'zoomIn' | 'zoomOut' | 'rotate' | 'reset'
+export interface ImageToolEntity {
+  name: string
+  icon: string
+  handler: () => void
+}
+
 export interface ImageProps {
+  /**
+   * @description 当前页面是否包含导航栏
+   */
+  hasNav: boolean
   /**
    * @description 图片地址
    */
@@ -28,4 +39,20 @@ export interface ImageProps {
    * @description 图片高度
    */
   height: number
+  /**
+   * @description 显示的工具栏列表
+   */
+  tools: string
+  /**
+   * @description 是否显示预览
+   */
+  showPreview: boolean
+  /**
+   * @description 是否显示加载中
+   */
+  showLoading: boolean
+  /**
+   * @description 是否显示异常提示
+   */
+  showError: boolean
 }

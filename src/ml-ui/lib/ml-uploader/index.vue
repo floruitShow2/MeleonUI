@@ -1,20 +1,16 @@
 <template>
-  <view :class="className" :style="themeColors">
+  <view :class="className" :style="{ ...themeColors, ...style }">
     <view :class="`${prefix}-files`">
       <template v-if="showFileList">
-        <div
-          v-for="item in cachedImageList"
-          :key="item.path"
-          :class="`${prefix}-files-item`"
-        >
+        <div v-for="item in cachedImageList" :key="item.path" :class="`${prefix}-files-item`">
           <Image
             :class="`${prefix}-files-item--image`"
             :src="item.path"
+            :width="previewSize"
+            :height="previewSize"
+            show-loading
           />
-          <div
-            :class="`${prefix}-files-item--close`"
-            @click.stop="() => handleDeleteFile(item)"
-          >
+          <div :class="`${prefix}-files-item--close`" @click.stop="() => handleDeleteFile(item)">
             <Icon
               v-if="item.deletable"
               class="ml-icon-close"
@@ -41,10 +37,10 @@
   import type { PropType } from 'vue'
   import { useTheme } from '@meleon/uni-ui/hooks'
   import { cs, isArray, isString } from '@meleon/uni-ui/utils'
-  import Icon from '@meleon/uni-ui/lib/ml-icon/index.vue'
-  import Image from '@meleon/uni-ui/lib/ml-image/index.vue'
   import { chooseImage, uploadFile } from './file-choose'
   import type { UploaderProps, FileItem } from './index.interface'
+  import Icon from '../ml-icon/index.vue'
+  import Image from '../ml-image/index.vue'
 
   const props = defineProps({
     action: {
@@ -79,13 +75,17 @@
       type: Number,
       default: 9
     },
+    previewSize: {
+      type: Number,
+      default: 100
+    },
     disabled: {
       type: Boolean,
       default: false
     },
     showFileList: {
       type: Boolean,
-      default: false      
+      default: false
     },
     sourceType: {
       type: String as PropType<UploaderProps['sourceType']>,
@@ -113,6 +113,7 @@
     fileList,
     multiple,
     limit,
+    previewSize,
     disabled,
     sourceType,
     beforeUpload,
@@ -126,12 +127,14 @@
 
   const prefix = ref('ml-uploader')
   const className = computed(() => {
-    return cs(
-      prefix.value,
-      {
-        [`${prefix.value}--disabled`]: disabled.value || cachedImageList.value.length >= limit.value
-      }
-    )
+    return cs(prefix.value, {
+      [`${prefix.value}--disabled`]: disabled.value || cachedImageList.value.length >= limit.value
+    })
+  })
+  const style = computed(() => {
+    return {
+      '--preview-size': `${previewSize.value}px`
+    }
   })
 
   const cachedImageList = ref<FileItem[]>([])
@@ -142,17 +145,19 @@
 
   // 上传文件到服务器
   const handleSubmitFile = async () => {
-    const requestList = cachedImageList.value.map(file => uploadFile({
-      url: isString(action.value) ? action.value : action.value(),
-      path: file.path,
-      fieldName: fieldName.value,
-      header: headers.value,
-      formData: data.value
-    }))
+    const requestList = cachedImageList.value.map((file) =>
+      uploadFile({
+        url: isString(action.value) ? action.value : action.value(),
+        path: file.path,
+        fieldName: fieldName.value,
+        header: headers.value,
+        formData: data.value
+      })
+    )
     const res = await Promise.all(requestList)
-    emit('uploaded', res
-      .filter(item => item.statusCode < 300 && item.statusCode >= 200)
-      .map(item => item.data)
+    emit(
+      'uploaded',
+      res.filter((item) => item.statusCode < 300 && item.statusCode >= 200).map((item) => item.data)
     )
   }
   // 选择文件保存在本地缓存
@@ -164,14 +169,11 @@
     })
     let formatRes: FileItem[] = []
     if (isArray(res.tempFilePaths)) {
-      formatRes = res.tempFilePaths
-        .slice(0, limit.value)
-        .map((item, index) => ({
-          id: `${Date.now()}${index}`,
-          path: item,
-          deletable: true
-        })
-      )
+      formatRes = res.tempFilePaths.slice(0, limit.value).map((item, index) => ({
+        id: `${Date.now()}${index}`,
+        path: item,
+        deletable: true
+      }))
     } else {
       formatRes = [
         {
@@ -207,7 +209,7 @@
   }
 
   const handleUpdateFile = (id: string, file: FileItem) => {
-    const findIdx = cachedImageList.value.findIndex(item => item.id === id)
+    const findIdx = cachedImageList.value.findIndex((item) => item.id === id)
     if (findIdx === -1) return
     cachedImageList.value.splice(findIdx, 1, file)
   }

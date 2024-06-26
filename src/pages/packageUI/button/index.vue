@@ -97,7 +97,7 @@
               <ml-button type="text" size="mini" status="warning">Text</ml-button>
             </view>
             <view class="button-container">
-              <ml-button type="primary" size="mini" status="danger">Primary</ml-button>
+              <ml-button loading type="primary" size="mini" status="danger">Primary</ml-button>
               <ml-button size="mini" status="danger">Secondary</ml-button>
               <ml-button type="outline" size="mini" status="danger">Outline</ml-button>
               <ml-button type="text" size="mini" status="danger">Text</ml-button>

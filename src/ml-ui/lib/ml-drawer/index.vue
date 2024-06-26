@@ -31,9 +31,9 @@
   import type { PropType, CSSProperties } from 'vue'
   import { isNumber, cs, generateDeviceUI } from '@meleon/uni-ui/utils'
   import { useTheme } from '@meleon/uni-ui/hooks'
+  import type { DrawerProps } from './index.interface'
   import MlIcon from '../ml-icon/index.vue'
   import MlButton from '../ml-button/index.vue'
-  import type { DrawerProps } from './index.interface'
 
   const props = defineProps({
     hasNav: {

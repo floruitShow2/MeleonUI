@@ -33,6 +33,9 @@ export type { DrawerInstance, DrawerProps } from './ml-drawer'
 export { default as Icon } from './ml-icon'
 export type { IconInstance } from './ml-icon'
 
+export { default as Image, ImageModeEnum } from './ml-image'
+export type { ImageInstance, ImageProps, ImageToolType, ImageToolEntity } from './ml-image'
+
 export { default as Input } from './ml-input'
 export type { InputInstance } from './ml-input'
 

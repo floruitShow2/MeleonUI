@@ -6,6 +6,48 @@ export default {
   description: '',
   glyphs: [
     {
+      icon_id: '2763907',
+      name: 'loading',
+      font_class: 'loading--line',
+      unicode: 'e64f',
+      unicode_decimal: 58959
+    },
+    {
+      icon_id: '3396276',
+      name: 'loading',
+      font_class: 'loading',
+      unicode: 'e600',
+      unicode_decimal: 58880
+    },
+    {
+      icon_id: '5387875',
+      name: '加载_刷新_o',
+      font_class: 'reset',
+      unicode: 'eb7b',
+      unicode_decimal: 60283
+    },
+    {
+      icon_id: '5387894',
+      name: '刷新_o',
+      font_class: 'rotate',
+      unicode: 'eb84',
+      unicode_decimal: 60292
+    },
+    {
+      icon_id: '5387940',
+      name: '末端左右收起_o',
+      font_class: 'zoom-in',
+      unicode: 'eb97',
+      unicode_decimal: 60311
+    },
+    {
+      icon_id: '5387946',
+      name: '末端左右展开_o',
+      font_class: 'zoom-out',
+      unicode: 'eb99',
+      unicode_decimal: 60313
+    },
+    {
       icon_id: '983774',
       name: '相机',
       font_class: 'camera--fill',

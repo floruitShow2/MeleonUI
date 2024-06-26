@@ -1,7 +1,12 @@
 <template>
-  <view :class="className" :hover-class="hoverClassName" :style="themeColors" @click="handleClick">
+  <view
+    :class="className"
+    :hover-class="hoverClassName"
+    :style="themeColors"
+    @click="handleClick"
+  >
     <view v-if="loading || $slots['icon']" :class="`${prefix}-icon`">
-      <MlIcon v-if="loading" name="ml-loading" />
+      <MlIcon v-if="loading" name="ml-loading" color="#FFFFFF" />
       <slot v-else name="icon" />
     </view>
     <slot />
@@ -11,10 +16,10 @@
 <script setup lang="ts">
   import { ref, computed, toRefs, getCurrentInstance } from 'vue'
   import type { PropType } from 'vue'
-  import type { ButtonProps } from './index.interface'
   import { useTheme } from '@meleon/uni-ui/hooks'
   import { cs } from '@meleon/uni-ui/utils'
-  import MlIcon from '@meleon/uni-ui/lib/ml-icon/index.vue'
+  import type { ButtonProps } from './index.interface'
+  import MlIcon from '../ml-icon/index.vue'
 
   const props = defineProps({
     type: {
@@ -61,7 +66,7 @@
         `${prefixCls}-${status.value}`
       ],
       {
-        [`${prefixCls}-disabled`]: disabled.value,
+        [`${prefixCls}-disabled`]: disabled.value || loading.value,
         [`${prefixCls}-only-icon`]: slots['icon'] !== undefined && !slots['default']
       }
     )

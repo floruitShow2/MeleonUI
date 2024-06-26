@@ -12,9 +12,7 @@ async function chooseImage(
   return new Promise((resolve, reject) => {
     const { multiple, limit, sourceType } = chooseImageInput || {}
     uni.chooseImage({
-      count: multiple
-        ? (limit ?? 9)
-        : 1,
+      count: multiple ? limit ?? 9 : 1,
       sizeType: ['original', 'compressed'],
       sourceType: sourceType ? [sourceType] : ['album', 'camera'],
       success: (res) => {
@@ -34,7 +32,9 @@ interface UploadFileInput {
   header: Record<string, string>
   formData: Record<string, any>
 }
-function uploadFile(uploadFileInput: UploadFileInput): Promise<UniApp.UploadFileSuccessCallbackResult> {
+function uploadFile(
+  uploadFileInput: UploadFileInput
+): Promise<UniApp.UploadFileSuccessCallbackResult> {
   return new Promise((resolve, reject) => {
     const { url, path, fieldName, header, formData } = uploadFileInput
     uni.uploadFile({

@@ -16,6 +16,7 @@
         multiple
         show-file-list
         :disabled="false"
+        :preview-size="80"
         :on-change="handleOnChange"
         @delete="handleDelete"
       >
@@ -61,7 +62,6 @@
     if (!uploadRef.value) return
     uploadRef.value.submit()
   }
-
 </script>
 
 <style lang="less">

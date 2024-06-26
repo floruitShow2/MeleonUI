@@ -156,7 +156,7 @@ export type ColorType = 'primary' | 'info' | 'success' | 'warning' | 'danger'
 
 #### 四、更新日志
 
-- 2024/6/19 	新增 ml-config-provider 组件
+- 2024/6/19     新增 ml-config-provider 组件
 - 2024/6/21     调整项目接口，补全TS类型，新增 README 文档
 - 2024/6/23     新增 ml-cell、ml-cell-group 组件
 - 2024/6/25     新增 ml-uploader 组件
@@ -439,7 +439,7 @@ export type ColorType = 'primary' | 'info' | 'success' | 'warning' | 'danger'
 
 ```html
 <ml-config-provider :themes="themes">
-	<ml-button type="primary"></ml-button>
+    <ml-button type="primary"></ml-button>
     <ml-button type="success"></ml-button>
     <ml-button type="warning"></ml-button>
     <ml-button type="danger"></ml-button>
@@ -813,6 +813,37 @@ export default {
 }
 ```
 
+#### 图片 Image
+
+###### 基本使用
+
+| prop        | type          | default                     | desc                                                         |
+| ----------- | ------------- | --------------------------- | ------------------------------------------------------------ |
+| hasNav      | boolean       | true                        | 当前页面是否有导航栏，会计算系统导航栏高度，预览区域下移一段距离 |
+| src         | string        | 必填项                      | 图片的资源路径                                               |
+| mode        | ImageModeEnum | ImageModeEnum.ASPECT_FIT    | 图片的填充模式，可参照uniapp官方提供的 Image 组件的 mode 值  |
+| width       | number        | 100                         | 图片宽度                                                     |
+| height      | number        | 100                         | 图片高度                                                     |
+| tools       | string        | zoomIn,zoomOut,rotate,reset | 由这四种工具随意组合，【,】拼接而成的字符串                  |
+| showPreview | boolean       | true                        | 是否允许点击图片后展示预览                                   |
+| showLoading | boolean       | false                       | 是否展示加载中标识                                           |
+| showError   | boolean       | false                       | 是否展示加载失败提示                                         |
+
+###### Slots
+
+| name    | desc             |
+| ------- | ---------------- |
+| loading | 调整加载中提示   |
+| error   | 覆盖加载失败提示 |
+
+###### Emits
+
+| name   | desc         |
+| ------ | ------------ |
+| loaded | 加载成功触发 |
+| error  | 加载失败触发 |
+| click  | 点击图片     |
+
 #### 输入框 Input
 
 ###### 基本使用
@@ -1045,6 +1076,7 @@ const showMessage = (type: MessageOptions['type']) => {
 | fileList     | FileItem                                           | 必填项     | 展示的文件列表               |
 | multiple     | boolean                                            | false      | 是否支持同时选择多个文件     |
 | limit        | number                                             | 9          | 最多缓存的文件数量           |
+| previewSize  | number                                             | 100        | 预览区域尺寸                 |
 | disabled     | boolean                                            | false      | 是否禁用                     |
 | showFileList | boolean                                            | false      | 是否展示文件列表             |
 | sourceType   | UploaderSourceTypeEnum                             | ''         | 支持相机或相册，默认都支持   |
@@ -1082,5 +1114,4 @@ const showMessage = (type: MessageOptions['type']) => {
 | ---------- | ------------------------------------ | -------------------------- |
 | submit     | () => void                           | 手动上传当前展示的所有文件 |
 | updateFile | (id: string, file: FileItem) => void | 指定id，更新文件对象       |
-|            |                                      |                            |
 

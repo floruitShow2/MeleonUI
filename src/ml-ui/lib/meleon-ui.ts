@@ -10,6 +10,7 @@ import MlConfigProvider from './ml-config-provider'
 import MlCountTo from './ml-count-to'
 import MlDrawer from './ml-drawer'
 import MlIcon from './ml-icon'
+import MlImage from './ml-image'
 import MlInput from './ml-input'
 import MlInputTag from './ml-input-tag'
 import MlMessage from './ml-message'
@@ -37,6 +38,7 @@ const components: Record<string, Plugin> = {
   MlCountTo,
   MlDrawer,
   MlIcon,
+  MlImage,
   MlInput,
   MlInputTag,
   MlMessage,
