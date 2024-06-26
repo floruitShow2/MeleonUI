@@ -154,6 +154,12 @@
 					"style": {
 						"navigationStyle": "custom"
 					}
+				},
+				{
+					"path": "tree/index",
+					"style": {
+						"navigationStyle": "custom"
+					}
 				}
 			]
 		},

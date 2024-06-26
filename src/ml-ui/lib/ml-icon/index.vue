@@ -36,18 +36,12 @@
 
   const prefix = ref('ml-icon')
   const className = computed(() => {
-    return cs(
-      prefix.value,
-      `${prefix.value}-${name.value.replace('ml-', '')}`
-    )
+    return cs(prefix.value, `${prefix.value}-${name.value.replace('ml-', '')}`)
   })
   const innerClassName = computed(() => {
-    return cs(
-      'ml-icon-inner',
-      name.value,
-      {
-        [`${prefix.value}-rotating`]: ['ml-loading', 'ml-loading--line'].includes(name.value)
-      })
+    return cs('ml-icon-inner', name.value, {
+      [`${prefix.value}-rotating`]: ['ml-loading', 'ml-loading--line'].includes(name.value)
+    })
   })
 
   const handleIconClick = (e: MouseEvent) => {

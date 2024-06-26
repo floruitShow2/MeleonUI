@@ -12,6 +12,9 @@ export function isObject(val: unknown): val is Record<string, any> {
 export function isString(val: unknown): val is string {
   return _toString.call(val) === '[object String]'
 }
+export function isUndefined(val: unknown): val is undefined {
+  return _toString.call(val) === '[object Undefined]'
+}
 
 export function isNotEmptyObject<T>(obj: T): boolean {
   if (obj instanceof Object) {

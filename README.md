@@ -160,6 +160,10 @@ export type ColorType = 'primary' | 'info' | 'success' | 'warning' | 'danger'
 - 2024/6/21     调整项目接口，补全TS类型，新增 README 文档
 - 2024/6/23     新增 ml-cell、ml-cell-group 组件
 - 2024/6/25     新增 ml-uploader 组件
+- 2024/6/26 
+  - fix: ml-loading 图标缺失，ml-button 组件设置 loading 不生效
+  - feat: 新增 ml-image 组件
+
 
 ### 组件
 

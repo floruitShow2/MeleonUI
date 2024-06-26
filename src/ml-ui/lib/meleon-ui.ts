@@ -25,6 +25,8 @@ import MlTabs from './ml-tabs'
 import MlTag from './ml-tag'
 import MlTimeline from './ml-timeline'
 import MlTimelineItem from './ml-timeline-item'
+import MlTree from './ml-tree'
+import MlUploader from './ml-uploader'
 
 const components: Record<string, Plugin> = {
   MlAvatar,
@@ -52,7 +54,9 @@ const components: Record<string, Plugin> = {
   MlTabs,
   MlTag,
   MlTimeline,
-  MlTimelineItem
+  MlTimelineItem,
+  MlTree,
+  MlUploader
 }
 const install = (app: App) => {
   for (const key in components) {

@@ -1,10 +1,5 @@
 <template>
-  <view
-    :class="className"
-    :hover-class="hoverClassName"
-    :style="themeColors"
-    @click="handleClick"
-  >
+  <view :class="className" :hover-class="hoverClassName" :style="themeColors" @click="handleClick">
     <view v-if="loading || $slots['icon']" :class="`${prefix}-icon`">
       <MlIcon v-if="loading" name="ml-loading" color="#FFFFFF" />
       <slot v-else name="icon" />

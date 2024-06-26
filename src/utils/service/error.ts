@@ -4,9 +4,7 @@ import {
   DEFAULT_REQUEST_ERROR_MSG,
   ERROR_STATUS,
   NETWORK_ERROR_CODE,
-  NETWORK_ERROR_MSG,
-  REQUEST_TIMEOUT_CODE,
-  REQUEST_TIMEOUT_MSG
+  NETWORK_ERROR_MSG
 } from '@/common/service'
 // import { exeStrategyActions } from '../common'
 import { showErrorMsg } from './msg'

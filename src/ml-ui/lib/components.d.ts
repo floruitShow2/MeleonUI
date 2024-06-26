@@ -25,6 +25,7 @@ import type {
   TagInstance,
   TimelineInstance,
   TimelineItemInstance,
+  TreeInstance,
   UploaderInstance
 } from './index'
 declare module '@vue/runtime-core' {
@@ -55,6 +56,7 @@ declare module '@vue/runtime-core' {
     MlTag: TagInstance
     MlTimeline: TimelineInstance
     MlTimelineItem: TimelineItemInstance
+    MlTree: TreeInstance
     MlUploader: UploaderInstance
   }
 }

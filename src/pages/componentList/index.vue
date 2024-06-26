@@ -54,6 +54,7 @@
     { name: 'ml-tag', path: '/pages/packageUI/tag/index' },
     { name: 'ml-table', path: '/pages/packageUI/table/index' },
     { name: 'ml-timeline', path: '/pages/packageUI/timeline/index' },
+    { name: 'ml-tree', path: '/pages/packageUI/tree/index' },
     { name: 'ml-uploder', path: '/pages/packageUI/uploader/index' }
   ])
 

@@ -52,5 +52,7 @@ export class Observer {
   constructor(name: string) {
     this.name = name
   }
-  update() {}
+  update() {
+    console.log('update')
+  }
 }
