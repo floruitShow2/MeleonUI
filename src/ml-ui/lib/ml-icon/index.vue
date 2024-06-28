@@ -15,7 +15,7 @@
 
 <script setup lang="ts">
   import { ref, toRefs, computed } from 'vue'
-  import { cs } from '../../utils/property'
+  import { cs } from '@meleon/uni-ui/utils'
 
   const props = defineProps({
     name: {
@@ -28,7 +28,7 @@
     },
     color: {
       type: String,
-      default: '#808080'
+      default: 'var(--info-color-8)'
     }
   })
   const emit = defineEmits(['click'])

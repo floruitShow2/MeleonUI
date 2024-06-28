@@ -8,7 +8,11 @@
       background-color="#7A98B3"
     />
     <view class="view-wrapper" :style="wrapperStyle">
-      <ml-tree v-model:expanded-keys="expandedKeys" :data="treeData"></ml-tree>
+      <ml-tree v-model:expanded-keys="expandedKeys" :data="treeData">
+        <template #title="{ title }">
+          <view class="text" style="color: var(--info-color-8)">{{ title }}测试</view>
+        </template>
+      </ml-tree>
     </view>
   </view>
 </template>

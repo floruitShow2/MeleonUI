@@ -1,77 +1,72 @@
-import type { Key2TreeNode, TreeDataEntity, TreeNodeEntity, TreeOptions } from "../index.interface";
+import { toRaw } from 'vue'
+import type { Key2TreeNode, TreeDataEntity, TreeNodeEntity, TreeOptions } from '../index.interface'
 
 interface GenerateNodeInput {
-    treeNodeData: TreeDataEntity
-    treeOptions: TreeOptions
-    parentNode?: TreeNodeEntity
+  treeNodeData: TreeDataEntity
+  treeOptions: TreeOptions
+  parentNode?: TreeNodeEntity
 }
 
 const generateNode = (option: GenerateNodeInput) => {
-    const { treeNodeData, parentNode } = option
-    
-    // 叶子节点
-    const isLeaf = !!(!treeNodeData.children || treeNodeData.children.length === 0)
-    const level = parentNode ? parentNode.level + 1 : 0
+  const { treeNodeData, parentNode } = option
 
-    const treeNodeProps = {
-        disabled: !!treeNodeData.disabled,
-        isLeaf,
-        level 
-    }
-    const node: TreeNodeEntity = {
-        ...treeNodeProps,
-        ...treeNodeData as TreeNodeEntity,
-        // 暂时加上
-        treeNodeProps,
-        parentNode,
-        parentNodeKey: parentNode?.key,
-        parentNodeKeysPath: parentNode
-            ? [...parentNode.parentNodeKeysPath || [], parentNode.key]
-            : []
-    }
+  // 叶子节点
+  const isLeaf = !!(!treeNodeData.children || treeNodeData.children.length === 0)
+  const level = parentNode ? parentNode.level + 1 : 0
 
-    return node
+  const treeNodeProps = {
+    disabled: !!treeNodeData.disabled,
+    isLeaf,
+    level
+  }
+  const node: TreeNodeEntity = {
+    ...treeNodeProps,
+    ...(treeNodeData as TreeNodeEntity),
+    // 暂时加上
+    treeNodeProps,
+    parentNode,
+    parentNodeKey: parentNode?.key,
+    parentNodeKeysPath: parentNode ? [...(parentNode.parentNodeKeysPath || []), parentNode.key] : []
+  }
+
+  return node
 }
 
 export const translateData2Node = (
-    treeData: TreeDataEntity[],
-    treeOptions: TreeOptions,
-    parentNode?: TreeNodeEntity
+  treeData: TreeDataEntity[],
+  treeOptions: TreeOptions,
+  parentNode?: TreeNodeEntity
 ) => {
-    if (!treeData) return []
+  if (!treeData) return []
 
-    const nodes: TreeNodeEntity[] = []
-    treeData.forEach(treeNode => {
-        const node = generateNode({
-            treeNodeData: treeNode,
-            treeOptions,
-            parentNode
-        })
-        node.children = translateData2Node(
-            treeNode.children || [],
-            treeOptions,
-            node
-        )
-        nodes.push(node)
+  const nodes: TreeNodeEntity[] = []
+  treeData.forEach((treeNode) => {
+    const node = generateNode({
+      treeNodeData: treeNode,
+      treeOptions,
+      parentNode
     })
+    node.children = translateData2Node(treeNode.children || [], treeOptions, node)
+    nodes.push(node)
+  })
 
-    return nodes
+  return nodes
 }
 
 export const translate2FlatterNode = (tree: TreeNodeEntity[], result: TreeNodeEntity[] = []) => {
-    tree.forEach(node => {
-        result.push(node)
-        if (node.children) {
-            translate2FlatterNode(node.children, result)
-        }
-    })
-    return result
+  tree.forEach((node) => {
+    result.push(node)
+    if (node.children) {
+      translate2FlatterNode(node.children, result)
+    }
+  })
+  return result
 }
 
 export const translateNodeList2Map = (nodeList: TreeNodeEntity[]) => {
-    const map: Key2TreeNode = new Map()
-    nodeList.forEach(node => {
-        map.set(node.key, node)
-    })
-    return map
+  const map: Key2TreeNode = new Map()
+  nodeList.forEach((node) => {
+    map.set(node.key, node)
+  })
+  return map
 }

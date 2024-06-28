@@ -6,6 +6,20 @@ export default {
   description: '',
   glyphs: [
     {
+      icon_id: '23261314',
+      name: '三角下',
+      font_class: 'arrow--fill',
+      unicode: 'e650',
+      unicode_decimal: 58960
+    },
+    {
+      icon_id: '40891349',
+      name: '三角下',
+      font_class: 'arrow-right--fill',
+      unicode: 'eb9a',
+      unicode_decimal: 60314
+    },
+    {
       icon_id: '2763907',
       name: 'loading',
       font_class: 'loading--line',

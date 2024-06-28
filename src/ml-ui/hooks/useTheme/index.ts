@@ -3,8 +3,6 @@ import { isNotEmptyObject, useDeepClone } from '@meleon/uni-ui/index'
 import { getColorPalette } from './color'
 import themeSettings from './themeSettings'
 
-export { default as useTheme } from './useTheme'
-
 /**
  * 初始化主题配置
  * @param isDark 是否处于暗黑模式

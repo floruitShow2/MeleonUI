@@ -1,0 +1,23 @@
+.ml-tree-node {
+    width: 100%;
+    padding: 4px 8px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    &-title {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        &-switcher {
+            margin-right: 4px;
+        }
+        &-text {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--info-color-8);
+        }
+        &--leaf {
+            padding-left: 16px;
+        }
+    }
+}

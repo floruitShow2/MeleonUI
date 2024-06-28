@@ -8,17 +8,17 @@ export interface TreeDataEntity {
 
 // 经过处理后，完整的节点类型
 export interface TreeNodeEntity extends TreeDataEntity {
-    level: number
-    isLeaf: boolean
-    parentNode?: TreeNodeEntity
-    parentNodeKey?: string
-    parentNodeKeysPath?: string[]
-    treeNodeProps: Partial<TreeNodeEntity>
-    children?: TreeNodeEntity[]
+  level: number
+  isLeaf: boolean
+  parentNode?: TreeNodeEntity
+  parentNodeKey?: string
+  parentNodeKeysPath?: string[]
+  treeNodeProps: Partial<TreeNodeEntity>
+  children?: TreeNodeEntity[]
 }
 
 export interface TreeOptions {
-    loadMore: boolean
+  loadMore: boolean
 }
 
 export type Key2TreeNode = Map<string, TreeNodeEntity>
