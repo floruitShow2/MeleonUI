@@ -9,32 +9,52 @@
 </template>
 
 <script setup lang="ts">
-  import { ref, toRefs, computed, inject, onMounted } from 'vue'
+  import { ref, toRefs, computed, inject, onMounted, getCurrentInstance } from 'vue'
+  import type { PropType } from 'vue'
   import { useTheme, cs } from '@meleon/uni-ui/index'
   import { checkboxGroupInjectionKey } from '../ml-checkbox-group/context'
+  import type { CheckboxProps } from './index.interface'
 
   const props = defineProps({
-    checked: { type: Boolean, default: false },
-    indeterminate: { type: Boolean, default: false },
-    disabled: { type: Boolean, default: false },
-    value: { type: [String, Number], default: '' }
+    checked: {
+      type: Boolean,
+      default: false
+    },
+    indeterminate: {
+      type: Boolean,
+      default: false
+    },
+    disabled: {
+      type: Boolean,
+      default: false
+    },
+    size: {
+      type: String as PropType<CheckboxProps['size']>,
+      default: 'small'
+    },
+    value: {
+      type: [String, Number],
+      default: ''
+    }
   })
-  const { checked, indeterminate, disabled, value: modelValue } = toRefs(props)
+  const { checked, indeterminate, disabled, size, value: modelValue } = toRefs(props)
 
   const emit = defineEmits(['update:checked'])
 
   const prefix = ref('ml-checkbox')
 
   const { themeColors } = useTheme()
+  const { slots } = getCurrentInstance()!
 
   const globalCtx = inject(checkboxGroupInjectionKey, null)
 
   const className = computed(() => {
-    return cs(prefix.value, {
+    return cs(prefix.value, `${prefix.value}-${size.value}`, {
       [`${prefix.value}-disabled`]:
         disabled.value ||
         (globalCtx ? globalCtx.getDisabledList().includes(modelValue.value) : false),
-      [`${prefix.value}-underGroup`]: globalCtx !== null
+      [`${prefix.value}-underGroup`]: globalCtx !== null,
+      [`${prefix.value}-only-input`]: !slots.default
     })
   })
   const inputClassName = computed(() => {

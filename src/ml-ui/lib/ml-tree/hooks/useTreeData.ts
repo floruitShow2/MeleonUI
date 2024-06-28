@@ -3,12 +3,14 @@ import type { TreeDataEntity, TreeNodeEntity, TreeOptions } from '../index.inter
 import { translateData2Node, translate2FlatterNode, translateNodeList2Map } from '../utils'
 
 export default function useTreeData(props: Partial<TreeOptions> & { treeData: TreeDataEntity[] }) {
-  const { treeData, loadMore } = toRefs(props)
+  const { treeData, checkable, selectable, loadMore } = toRefs(props)
 
   const treeNode = ref<TreeNodeEntity[]>([])
   watchEffect(() => {
     treeNode.value = translateData2Node(treeData.value, {
-      loadMore: !!loadMore?.value
+      loadMore: !!loadMore?.value,
+      checkable: !!checkable?.value,
+      selectable: !!selectable?.value
     })
   })
 

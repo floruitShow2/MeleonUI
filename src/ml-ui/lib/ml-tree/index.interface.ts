@@ -3,6 +3,8 @@ export interface TreeDataEntity {
   title: string
   key: string
   disabled?: boolean
+  checkable?: boolean
+  selectable?: boolean
   children?: TreeDataEntity[]
 }
 
@@ -13,11 +15,14 @@ export interface TreeNodeEntity extends TreeDataEntity {
   parentNode?: TreeNodeEntity
   parentNodeKey?: string
   parentNodeKeysPath?: string[]
+  treeNodeData: TreeDataEntity
   treeNodeProps: Partial<TreeNodeEntity>
   children?: TreeNodeEntity[]
 }
 
 export interface TreeOptions {
+  checkable: boolean
+  selectable: boolean
   loadMore: boolean
 }
 
@@ -38,6 +43,40 @@ export interface TreeProps {
    * @description 是否自动展开父节点
    */
   autoExpandParent: boolean
-  disabled: boolean
+  /**
+   * @description 是否支持选择文本节点
+   */
+  selectable: boolean
+  /**
+   * @description 选中节点的 key 值列表
+   */
+  selectedKeys: string[]
+  /**
+   * @description 默认选中节点的 key 值列表
+   */
+  defaultSelectedKeys: string[]
+  /**
+   * @description 是否支持多选
+   */
+  multiple: boolean
+  /**
+   * @description 是否显示选择器
+   */
+  checkable: boolean
+  /**
+   * @description 选中复选框的节点的 key 值列表
+   */
+  checkedKeys: string[]
+  /**
+   * @description 默认选中复选框的节点的 key 值列表
+   */
+  defaultCheckedKeys: string[]
+  /**
+   * @description 半选的 key 值的列表
+   */
+  indeterminateKeys: string[]
+  /**
+   * @description 是否支持异步加载
+   */
   loadMore: boolean
 }

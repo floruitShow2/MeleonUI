@@ -163,6 +163,15 @@ export type ColorType = 'primary' | 'info' | 'success' | 'warning' | 'danger'
 - 2024/6/26 
   - fix: ml-loading 图标缺失，ml-button 组件设置 loading 不生效
   - feat: 新增 ml-image 组件
+- 2024/6/27
+  - feat: ml-tree 组件模块拆分，支持自定义 title 节点
+  - feat: 新增 ml-icon-switcher 小组件
+  - fix: ml-button 单图标按钮图标偏移的问题
+
+- 2024/6/28
+  - feat: ml-tree 组件基本功能完善，支持文本选中、复选框选择、自定义标题节点等
+  - fix: 去除 checkbox 组件无文本时样式的偏移
+
 
 
 ### 组件
@@ -1016,6 +1025,113 @@ const showMessage = (type: MessageOptions['type']) => {
 <view>checkable: 添加点击样式，触发 click 事件</view>
 <ml-tag v-model:model-value="tagValue" editable />
 ```
+
+#### 树 Tree
+
+###### 基本使用
+
+```html
+<ml-tree
+	v-model:expanded-keys="expandedKeys"
+	v-model:checked-keys="checkedKeys"
+	v-model:selected-keys="selectedKeys"
+	v-model:indeterminate-keys="indeterminateKeys"
+	:data="treeData"
+	checkable
+	selectable
+	multiple
+	@check="handleCheck"
+	@select="handleSelect"
+	@expand="handleExpand"
+></ml-tree>
+```
+
+```ts
+const expandedKeys = ref<string[]>(['0-0'])
+const checkedKeys = ref<string[]>([])
+const selectedKeys = ref<string[]>([])
+const indeterminateKeys = ref<string[]>([])
+const handleCheck = (val: string[]) => {
+	console.log('onCheck', val)
+}
+const handleExpand = (val: string[]) => {
+	console.log('onExpand', val)
+}
+const handleSelect = (val: string[]) => {
+	console.log('onSelect', val)
+}
+const treeData: TreeDataEntity[] = [
+    {
+        title: 'Trunk 0-0',
+        key: '0-0',
+        children: [
+            {
+                title: 'Branch 0-0-0',
+                key: '0-0-0',
+                disabled: false,
+                children: [
+                    {
+                        title: 'Leaf',
+                        key: '0-0-0-0'
+                    },
+                    {
+                        title: 'Leaf',
+                        key: '0-0-0-1'
+                    }
+    			]
+    		},
+            {
+                title: 'Branch 0-0-1',
+                key: '0-0-1',
+                children: [
+                    {
+                        title: 'Leaf',
+                        key: '0-0-1-0'
+                    }
+                ]
+            }
+        ]
+    }
+]
+```
+
+###### APIs
+
+| prop                | type             | default   | desc                           |
+| ------------------- | ---------------- | --------- | ------------------------------ |
+| data                | TreeDataEntity[] | 必填      | 树形数据                       |
+| checkable           | boolean          | false     | 是否显示复选框                 |
+| checkedKeys         | string[]         | undefined | 选中的节点键值列表             |
+| defaultCheckedKeys  | string[]         | []        | 默认选中的节点键值列表         |
+| indeterminateKeys   | string[]         | []        | 半选状态的节点键值列表         |
+| expandedKeys        | string[]         | 必填      | 展开的节点键值列表             |
+| defaultExpandedKeys | string[]         | []        | 默认展开的节点键值列表         |
+| autoExpandParent    | boolean          | true      | 是否展开父级节点               |
+| selectable          | boolean          | false     | 是否支持点击文本选中           |
+| selectedKeys        | string[]         | undefined | 选中的文本节点键值列表         |
+| defaultSelectedKeys | string[]         | []        | 默认选中的文本节点键值列表     |
+| multiple            | boolean          | true      | 点击文本节点的选择是否支持多选 |
+
+###### Slots
+
+| name  | desc               | prop  |
+| ----- | ------------------ | ----- |
+| title | 自定义文本节点内容 | title |
+|       |                    |       |
+
+###### Emits
+
+| name                     | desc                   |
+| ------------------------ | ---------------------- |
+| update:expandedKeys      | 更新 expandedKeys      |
+| expand                   | 展开时触发             |
+| update:selectedKeys      | 更新 selectedKeys      |
+| select                   | 点击文本节点时触发     |
+| update:checkedKeys       | 更新 checkedKeys       |
+| check                    | 点击节点复选框时触发   |
+| update:indeterminateKeys | 更新 indeterminateKeys |
+
+
 
 #### 上传组件 Uploader
 

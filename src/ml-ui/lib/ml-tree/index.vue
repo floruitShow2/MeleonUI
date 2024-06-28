@@ -6,7 +6,7 @@
       :node-key="node.key"
       v-bind="node.treeNodeProps"
     >
-      <template #title="{title}">
+      <template #title="{ title }">
         <slot name="title" :title="title"></slot>
       </template>
     </BaseNode>
@@ -16,17 +16,34 @@
 <script setup lang="ts">
   import { ref, toRefs, reactive, computed, provide, onMounted } from 'vue'
   import type { PropType } from 'vue'
-  import { useTheme } from '@meleon/uni-ui/hooks'
+  import { useTheme, useMergeState } from '@meleon/uni-ui/hooks'
   import { cs, isUndefined } from '@meleon/uni-ui/utils'
   import type { TreeProps } from './index.interface'
   import useTreeData from './hooks/useTreeData'
+  import useCheckedState from './hooks/useCheckState'
   import BaseNode from './baseNode/index.vue'
   import { treeInjectionKey } from './context'
+  import { getCheckState } from './utils'
 
   const props = defineProps({
     data: {
       type: Array as PropType<TreeProps['data']>,
       required: true
+    },
+    checkable: {
+      type: Boolean,
+      default: false
+    },
+    checkedKeys: {
+      type: Array as PropType<TreeProps['checkedKeys']>
+    },
+    defaultCheckedKeys: {
+      type: Array as PropType<TreeProps['defaultCheckedKeys']>,
+      default: () => []
+    },
+    indeterminateKeys: {
+      type: Array as PropType<TreeProps['indeterminateKeys']>,
+      default: () => []
     },
     expandedKeys: {
       type: Array as PropType<TreeProps['expandedKeys']>,
@@ -40,9 +57,20 @@
       type: Boolean,
       default: true
     },
-    disabled: {
+    selectable: {
       type: Boolean,
       default: false
+    },
+    selectedKeys: {
+      type: Array as PropType<TreeProps['selectedKeys']>
+    },
+    defaultSelectedKeys: {
+      type: Array as PropType<TreeProps['defaultSelectedKeys']>,
+      default: () => []
+    },
+    multiple: {
+      type: Boolean,
+      default: true
     },
     loadMore: {
       type: Boolean,
@@ -51,13 +79,33 @@
   })
   const {
     data,
+    // 展开节点
     expandedKeys: propExpandedKeys,
     defaultExpandedKeys,
     autoExpandParent,
+    // 选择节点
+    selectable,
+    selectedKeys: propSelectedKeys,
+    defaultSelectedKeys,
+    multiple,
+    // 选中节点
+    checkable,
+    checkedKeys: propCheckedKeys,
+    defaultCheckedKeys,
+    indeterminateKeys: propIndeterminateKeys,
+    // 加载更多
     loadMore
   } = toRefs(props)
 
-  const emit = defineEmits(['update:expandedKeys', 'expand'])
+  const emit = defineEmits([
+    'update:expandedKeys',
+    'expand',
+    'update:selectedKeys',
+    'select',
+    'update:checkedKeys',
+    'check',
+    'update:indeterminateKeys'
+  ])
 
   const { themeColors } = useTheme()
 
@@ -66,10 +114,14 @@
     return cs(prefix.value)
   })
 
-  const { treeNode, flatternTreeNode, key2TreeNode } = useTreeData(reactive({
-    treeData: data.value,
-    loadMore: loadMore.value
-  }))
+  const { treeNode, flatternTreeNode, key2TreeNode } = useTreeData(
+    reactive({
+      treeData: data.value,
+      checkable: checkable.value,
+      selectable: selectable.value,
+      loadMore: loadMore.value
+    })
+  )
 
   function getDefaultExpandedKeys() {
     if (defaultExpandedKeys?.value) {
@@ -88,29 +140,62 @@
     return []
   }
 
-  /**
-   * @description 响应事件
-   */
-  const emitExpandEvents = (options: {
+  const { checkedKeys, indeterminateKeys, setCheckedState } = useCheckedState(reactive({
+    defaultCheckedKeys: defaultCheckedKeys.value,
+    checkedKeys: propCheckedKeys?.value,
+    indeterminateKeys: propIndeterminateKeys.value,
+    key2TreeNode: key2TreeNode.value
+  }))
+  const emitCheckEvent = (options: {
     targetKey?: string
-    targetExpanded: boolean
-    newExpandedKeys: string[]
-    event?: Event
+    targetChecked: boolean
+    newCheckedKeys: string[]
+    newIndeterminateKeys: string[]
   }) => {
-    const { targetKey, targetExpanded, newExpandedKeys, event } = options
+    const { targetKey, targetChecked, newCheckedKeys, newIndeterminateKeys } = options
     const targetNode = targetKey ? key2TreeNode.value.get(targetKey) : undefined
-    emit('expand', newExpandedKeys, {
-      key: targetKey,
-      expanded: targetExpanded,
+
+    emit('update:checkedKeys', newCheckedKeys)
+    emit('update:indeterminateKeys', newIndeterminateKeys)
+    emit('check', newCheckedKeys, {
+      checked: targetChecked,
+      checkedKeys: newCheckedKeys,
+      indeterminateKeys: newIndeterminateKeys,
       node: targetNode,
-      event
+      nodeData: targetNode?.treeNodeData
     })
-    emit('update:expandedKeys', newExpandedKeys)
+  }
+  const onCheck = (checked: boolean, key: string) => {
+    if (!checkable.value) return
+    const node = key2TreeNode.value.get(key)
+    if (!node) return
+
+    const [newCheckedKeys, newIndeterminateKeys] = getCheckState({
+      node,
+      checked,
+      checkedKeys: checkedKeys?.value || [],
+      indeterminateKeys: indeterminateKeys.value
+    })
+
+    setCheckedState(newCheckedKeys, newIndeterminateKeys)
+    emitCheckEvent({
+      targetKey: key,
+      targetChecked: checked,
+      newCheckedKeys: [...newCheckedKeys],
+      newIndeterminateKeys: [...newIndeterminateKeys]
+    })
   }
 
-  const expandedKeys = computed(() => {
-    return isUndefined(propExpandedKeys.value) ? defaultExpandedKeys.value : propExpandedKeys.value
-  })
+  /**
+   * @description 展开节点相关
+   */
+  // const expandedKeys = computed(() => {
+  //   return isUndefined(propExpandedKeys.value) ? defaultExpandedKeys.value : propExpandedKeys.value
+  // })
+  const [expandedKeys, setExpandedKeys] = useMergeState(
+    getDefaultExpandedKeys(),
+    reactive({ value: propExpandedKeys })
+  )
   const visibleTreeNodeList = computed(() => {
     const expandedKeysSet = new Set(expandedKeys.value)
 
@@ -121,6 +206,21 @@
       return isRoot || isVisisble
     })
   })
+  const emitExpandEvent = (options: {
+    targetKey?: string
+    targetExpanded: boolean
+    newExpandedKeys: string[]
+  }) => {
+    const { targetKey, targetExpanded, newExpandedKeys } = options
+    const targetNode = targetKey ? key2TreeNode.value.get(targetKey) : undefined
+
+    emit('update:expandedKeys', newExpandedKeys)
+    emit('expand', newExpandedKeys, {
+      expanded: targetExpanded,
+      node: targetNode,
+      nodeData: targetNode?.treeNodeData
+    })
+  }
   const onExpand = (expanded: boolean, key: string) => {
     const node = key2TreeNode.value.get(key)
     if (!node) return
@@ -129,24 +229,75 @@
 
     expanded ? expandedKeysSet.add(key) : expandedKeysSet.delete(key)
     const newExpandedKeys = [...expandedKeysSet]
-    emitExpandEvents({
+    setExpandedKeys(newExpandedKeys)
+    emitExpandEvent({
       targetKey: key,
       targetExpanded: expanded,
       newExpandedKeys
     })
   }
+  /**
+   * @description 选择节点相关
+   */
+  // const selectedKeys = computed(() => {
+  //   return isUndefined(propSelectedKeys) ? defaultSelectedKeys.value : propSelectedKeys.value
+  // })
+  const [selectedKeys, setSelectedKeys] = useMergeState(
+    defaultSelectedKeys.value,
+    reactive({ value: propSelectedKeys?.value })
+  )
+  const emitSelectedEvent = (options: {
+    targetKey?: string
+    targetSelected: boolean
+    newSelectedKeys: string[]
+  }) => {
+    const { targetKey, targetSelected, newSelectedKeys } = options
+    const targetNode = targetKey ? key2TreeNode.value.get(targetKey) : undefined
 
-  onMounted(() => {
-    console.log(visibleTreeNodeList.value)
-  })
+    emit('update:selectedKeys', newSelectedKeys)
+    emit('select', newSelectedKeys, {
+      selected: !!targetSelected,
+      node: targetNode,
+      nodeData: targetNode?.treeNodeData
+    })
+  }
+  const onSelect = (key: string) => {
+    const node = key2TreeNode.value.get(key)
+    if (!node) return
+
+    let newSelectedKeys: string[] = []
+    let selected: boolean = false
+    if (multiple.value) {
+      const selectedKeysSet = new Set(selectedKeys.value)
+      // 取反，selected: true 的节点点击后就取消选中了
+      selected = !selectedKeysSet.has(key)
+      selected ? selectedKeysSet.add(key) : selectedKeysSet.delete(key)
+      newSelectedKeys = [...selectedKeysSet]
+    } else {
+      selected = true
+      newSelectedKeys = [key]
+    }
+
+    setSelectedKeys(newSelectedKeys)
+    emitSelectedEvent({
+      targetKey: key,
+      targetSelected: selected,
+      newSelectedKeys
+    })
+  }
 
   provide(
     treeInjectionKey,
     reactive({
-      key2TreeNode: key2TreeNode.value,
-      expandedKeys: expandedKeys.value,
-      treeNode: treeNode.value,
-      onExpand
+      key2TreeNode,
+      checkedKeys,
+      indeterminateKeys,
+      expandedKeys,
+      selectedKeys,
+      treeNode,
+      onCheck,
+      onExpand,
+      onSelect
     })
   )
 </script>

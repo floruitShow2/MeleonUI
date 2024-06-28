@@ -6,6 +6,6 @@ const install = (app: App) => {
 }
 
 export type TreeInstance = typeof import('./index.vue').default
-export type { TreeProps, TreeDataEntity } from './index.interface'
+export type { TreeProps, TreeDataEntity, TreeNodeEntity } from './index.interface'
 
 export default { install }

@@ -6,5 +6,6 @@ const install = (app: App) => {
 }
 
 export type CheckboxInstance = typeof import('./index.vue').default
+export type { CheckboxProps } from './index.interface'
 
 export default { install }
