@@ -78,7 +78,15 @@ export { default as TimelineItem } from './ml-timeline-item'
 export type { TimelineItemInstance, TimelineItemProps } from './ml-timeline-item'
 
 export { default as Tree } from './ml-tree'
-export type { TreeInstance, TreeProps, TreeDataEntity, TreeNodeEntity } from './ml-tree'
+export type {
+  TreeInstance,
+  TreeProps,
+  TreeDataEntity,
+  TreeNodeEntity,
+  TreeCheckPayload,
+  TreeExpandPayload,
+  TreeSelectPayload
+} from './ml-tree'
 
 export { default as Uploader } from './ml-uploader'
 export type { UploaderInstance, UploaderProps } from './ml-uploader'

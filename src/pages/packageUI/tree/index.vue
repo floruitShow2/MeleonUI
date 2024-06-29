@@ -9,6 +9,8 @@
     />
     <view class="view-wrapper" :style="wrapperStyle">
       <ml-tree
+        class="tree-wrapper"
+        ref="treeRef"
         v-model:expanded-keys="expandedKeys"
         v-model:checked-keys="checkedKeys"
         v-model:selected-keys="selectedKeys"
@@ -17,19 +19,46 @@
         checkable
         selectable
         multiple
+        :auto-expand-parent="false"
         @check="handleCheck"
         @select="handleSelect"
         @expand="handleExpand"
       ></ml-tree>
+
+      <view class="btn-list">
+        <ml-button type="primary" @click="handleExpandAll">
+          {{ isExpandAll ? 'Close All' : 'Expand All' }}
+        </ml-button>
+
+        <ml-button type="primary" @click="handleCheckAll">
+          {{ isCheckAll ? 'Unheck All' : 'Check All' }}
+        </ml-button>
+
+        <ml-button type="primary" @click="handleSelectAll">
+          {{ isSelectAll ? 'Unselect All' : 'Select All' }}
+        </ml-button>
+
+        <ml-button type="primary" @click="handleExpandNode"> Expand Root </ml-button>
+
+        <ml-button type="primary" @click="handleCheckNode"> Check Root </ml-button>
+
+        <ml-button type="primary" @click="handleSelectNode"> Select Root </ml-button>
+      </view>
     </view>
   </view>
 </template>
 
 <script setup lang="ts">
-  import { ref, computed, nextTick } from 'vue'
+  import { ref, computed } from 'vue'
   import { useAppStore } from '@/store'
   import MlNavigator from '@/ml-ui/lib/ml-navigator/index.vue'
-  import type { TreeDataEntity } from '@/ml-ui'
+  import type {
+    TreeDataEntity,
+    TreeCheckPayload,
+    TreeExpandPayload,
+    TreeSelectPayload,
+    TreeInstance
+  } from '@meleon/uni-ui/index'
 
   const appStore = useAppStore()
   const wrapperStyle = computed(() => {
@@ -40,19 +69,55 @@
     }
   })
 
-  const expandedKeys = ref<string[]>(['0-0'])
+  const treeRef = ref<TreeInstance>()
+  const rootKey = ref('0-0')
+  const expandedKeys = ref<string[]>(['0-0-0'])
   const checkedKeys = ref<string[]>([])
   const selectedKeys = ref<string[]>([])
   const indeterminateKeys = ref<string[]>([])
-  const handleCheck = (val: string[]) => {
-    console.log('onCheck', val)
+  const handleCheck = (val: string[], payload: TreeCheckPayload) => {
+    console.log('onCheck', val, payload)
   }
-  const handleExpand = (val: string[]) => {
-    console.log('onExpand', val)
+  const handleExpand = (val: string[], payload: TreeExpandPayload) => {
+    console.log('onExpand', val, payload)
   }
-  const handleSelect = (val: string[]) => {
-    console.log('onSelect', val)
+  const handleSelect = (val: string[], payload: TreeSelectPayload) => {
+    console.log('onSelect', val, payload)
   }
+
+  const isExpandAll = ref(false)
+  const handleExpandAll = () => {
+    if (!treeRef.value) return
+    isExpandAll.value = !isExpandAll.value
+    treeRef.value.expandAll(isExpandAll.value)
+  }
+  const handleExpandNode = () => {
+    if (!treeRef.value) return
+    treeRef.value.expandNode(rootKey.value, true)
+  }
+
+  const isCheckAll = ref(false)
+  const handleCheckAll = () => {
+    if (!treeRef.value) return
+    isCheckAll.value = !isCheckAll.value
+    treeRef.value.checkAll(isCheckAll.value)
+  }
+  const handleCheckNode = () => {
+    if (!treeRef.value) return
+    treeRef.value.checkNode(rootKey.value, true)
+  }
+
+  const isSelectAll = ref(false)
+  const handleSelectAll = () => {
+    if (!treeRef.value) return
+    isSelectAll.value = !isSelectAll.value
+    treeRef.value.selectAll(isSelectAll.value)
+  }
+  const handleSelectNode = () => {
+    if (!treeRef.value) return
+    treeRef.value.selectNode(rootKey.value, true)
+  }
+
   const treeData: TreeDataEntity[] = [
     {
       title: 'Trunk 0-0',

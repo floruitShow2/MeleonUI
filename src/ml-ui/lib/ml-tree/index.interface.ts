@@ -1,4 +1,4 @@
-// 暴露给用户的节点类型
+// 暴露给用户的节点数据类型
 export interface TreeDataEntity {
   title: string
   key: string
@@ -6,6 +6,39 @@ export interface TreeDataEntity {
   checkable?: boolean
   selectable?: boolean
   children?: TreeDataEntity[]
+}
+
+// 暴露给用户的事件负载类型
+interface EmitPayload {
+  node: TreeNodeEntity
+  nodeData: TreeDataEntity
+}
+export interface TreeCheckPayload extends EmitPayload {
+  checked: boolean
+  indeterminateKeys: string[]
+}
+export interface TreeExpandPayload extends EmitPayload {
+  expanded?: boolean
+}
+export interface TreeSelectPayload extends EmitPayload {
+  selected: boolean
+}
+
+// 暴露给用户的方法类型
+export interface TreeEvents {
+  // expand events
+  getExpandedNodes: () => TreeNodeEntity[]
+  expandNode: (key: string | string[], expanded: boolean) => void
+  expandAll: (expandAll?: boolean) => void
+  // select events
+  getSelectedNodes: () => TreeNodeEntity[]
+  selectNode: (key: string | string[], selected: boolean) => void
+  selectAll: (selectAll?: boolean) => void
+  // check events
+  getCheckedNodes: () => TreeNodeEntity[]
+  getIndeterminateNodes: () => TreeNodeEntity[]
+  checkNode: (key: string | string[], selected: boolean) => void
+  checkAll: (selectAll?: boolean) => void
 }
 
 // 经过处理后，完整的节点类型

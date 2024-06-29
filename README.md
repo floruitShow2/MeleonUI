@@ -156,23 +156,28 @@ export type ColorType = 'primary' | 'info' | 'success' | 'warning' | 'danger'
 
 #### 四、更新日志
 
-- 2024/6/19     新增 ml-config-provider 组件
-- 2024/6/21     调整项目接口，补全TS类型，新增 README 文档
-- 2024/6/23     新增 ml-cell、ml-cell-group 组件
-- 2024/6/25     新增 ml-uploader 组件
-- 2024/6/26 
+- 1.1.7
+
+  - 新增 ml-config-provider 组件
+  - 调整项目接口，补全TS类型，新增 README 文档
+
+- 1.1.8
+
+  - feat: 新增 ml-cell、ml-cell-group 组件
+  - feat: 新增 ml-uploader 组件
+
+- 1.1.9
+
   - fix: ml-loading 图标缺失，ml-button 组件设置 loading 不生效
   - feat: 新增 ml-image 组件
-- 2024/6/27
+
   - feat: ml-tree 组件模块拆分，支持自定义 title 节点
   - feat: 新增 ml-icon-switcher 小组件
   - fix: ml-button 单图标按钮图标偏移的问题
 
-- 2024/6/28
   - feat: ml-tree 组件基本功能完善，支持文本选中、复选框选择、自定义标题节点等
   - fix: 去除 checkbox 组件无文本时样式的偏移
-
-
+  - feat: ml-tree 组件新增对外暴露的 expand、check 及 select 等方法
 
 ### 组件
 
@@ -1032,6 +1037,8 @@ const showMessage = (type: MessageOptions['type']) => {
 
 ```html
 <ml-tree
+	class="tree-wrapper"
+	ref="treeRef"
 	v-model:expanded-keys="expandedKeys"
 	v-model:checked-keys="checkedKeys"
 	v-model:selected-keys="selectedKeys"
@@ -1040,59 +1047,132 @@ const showMessage = (type: MessageOptions['type']) => {
 	checkable
 	selectable
 	multiple
+	:auto-expand-parent="false"
 	@check="handleCheck"
 	@select="handleSelect"
 	@expand="handleExpand"
 ></ml-tree>
+
+<view class="btn-list">
+    <ml-button type="primary" @click="handleExpandAll">
+        {{ isExpandAll ? 'Close All' : 'Expand All' }}
+    </ml-button>
+
+    <ml-button type="primary" @click="handleCheckAll">
+        {{ isCheckAll ? 'Unheck All' : 'Check All' }}
+    </ml-button>
+
+    <ml-button type="primary" @click="handleSelectAll">
+        {{ isSelectAll ? 'Unselect All' : 'Select All' }}
+    </ml-button>
+
+    <ml-button type="primary" @click="handleExpandNode"> Expand Root </ml-button>
+
+    <ml-button type="primary" @click="handleCheckNode"> Check Root </ml-button>
+
+    <ml-button type="primary" @click="handleSelectNode"> Select Root </ml-button>
+</view>
 ```
 
 ```ts
-const expandedKeys = ref<string[]>(['0-0'])
-const checkedKeys = ref<string[]>([])
-const selectedKeys = ref<string[]>([])
-const indeterminateKeys = ref<string[]>([])
-const handleCheck = (val: string[]) => {
-	console.log('onCheck', val)
-}
-const handleExpand = (val: string[]) => {
-	console.log('onExpand', val)
-}
-const handleSelect = (val: string[]) => {
-	console.log('onSelect', val)
-}
-const treeData: TreeDataEntity[] = [
+  import type {
+    TreeDataEntity,
+    TreeCheckPayload,
+    TreeExpandPayload,
+    TreeSelectPayload,
+    TreeInstance
+  } from '@meleon/uni-ui/index'
+
+  const treeRef = ref<TreeInstance>()
+  const rootKey = ref('0-0')
+  const expandedKeys = ref<string[]>(['0-0-0'])
+  const checkedKeys = ref<string[]>([])
+  const selectedKeys = ref<string[]>([])
+  const indeterminateKeys = ref<string[]>([])
+  
+  // 监听 tree 触发的事件
+  const handleCheck = (val: string[], payload: TreeCheckPayload) => {
+    console.log('onCheck', val, payload)
+  }
+  const handleExpand = (val: string[], payload: TreeExpandPayload) => {
+    console.log('onExpand', val, payload)
+  }
+  const handleSelect = (val: string[], payload: TreeSelectPayload) => {
+    console.log('onSelect', val, payload)
+  }
+
+  // 手动调用组件暴露的方法
+  
+  // 展开节点
+  const isExpandAll = ref(false)
+  const handleExpandAll = () => {
+    if (!treeRef.value) return
+    isExpandAll.value = !isExpandAll.value
+    treeRef.value.expandAll(isExpandAll.value)
+  }
+  const handleExpandNode = () => {
+    if (!treeRef.value) return
+    treeRef.value.expandNode(rootKey.value, true)
+  }
+
+  // 选中节点复选框
+  const isCheckAll = ref(false)
+  const handleCheckAll = () => {
+    if (!treeRef.value) return
+    isCheckAll.value = !isCheckAll.value
+    treeRef.value.checkAll(isCheckAll.value)
+  }
+  const handleCheckNode = () => {
+    if (!treeRef.value) return
+    treeRef.value.checkNode(rootKey.value, true)
+  }
+
+  // 选中节点
+  const isSelectAll = ref(false)
+  const handleSelectAll = () => {
+    if (!treeRef.value) return
+    isSelectAll.value = !isSelectAll.value
+    treeRef.value.selectAll(isSelectAll.value)
+  }
+  const handleSelectNode = () => {
+    if (!treeRef.value) return
+    treeRef.value.selectNode(rootKey.value, true)
+  }
+
+  // 节点数据
+  const treeData: TreeDataEntity[] = [
     {
-        title: 'Trunk 0-0',
-        key: '0-0',
-        children: [
+      title: 'Trunk 0-0',
+      key: '0-0',
+      children: [
+        {
+          title: 'Branch 0-0-0',
+          key: '0-0-0',
+          disabled: false,
+          children: [
             {
-                title: 'Branch 0-0-0',
-                key: '0-0-0',
-                disabled: false,
-                children: [
-                    {
-                        title: 'Leaf',
-                        key: '0-0-0-0'
-                    },
-                    {
-                        title: 'Leaf',
-                        key: '0-0-0-1'
-                    }
-    			]
-    		},
+              title: 'Leaf',
+              key: '0-0-0-0'
+            },
             {
-                title: 'Branch 0-0-1',
-                key: '0-0-1',
-                children: [
-                    {
-                        title: 'Leaf',
-                        key: '0-0-1-0'
-                    }
-                ]
+              title: 'Leaf',
+              key: '0-0-0-1'
             }
-        ]
+          ]
+        },
+        {
+          title: 'Branch 0-0-1',
+          key: '0-0-1',
+          children: [
+            {
+              title: 'Leaf',
+              key: '0-0-1-0'
+            }
+          ]
+        }
+      ]
     }
-]
+  ]
 ```
 
 ###### APIs
@@ -1101,12 +1181,12 @@ const treeData: TreeDataEntity[] = [
 | ------------------- | ---------------- | --------- | ------------------------------ |
 | data                | TreeDataEntity[] | 必填      | 树形数据                       |
 | checkable           | boolean          | false     | 是否显示复选框                 |
-| checkedKeys         | string[]         | undefined | 选中的节点键值列表             |
-| defaultCheckedKeys  | string[]         | []        | 默认选中的节点键值列表         |
+| checkedKeys         | string[]         | undefined | 选中复选框的节点键值列表       |
+| defaultCheckedKeys  | string[]         | []        | 默认选中复选框的节点键值列表   |
 | indeterminateKeys   | string[]         | []        | 半选状态的节点键值列表         |
 | expandedKeys        | string[]         | 必填      | 展开的节点键值列表             |
 | defaultExpandedKeys | string[]         | []        | 默认展开的节点键值列表         |
-| autoExpandParent    | boolean          | true      | 是否展开父级节点               |
+| autoExpandParent    | boolean          | true      | 是否自动展开父级节点           |
 | selectable          | boolean          | false     | 是否支持点击文本选中           |
 | selectedKeys        | string[]         | undefined | 选中的文本节点键值列表         |
 | defaultSelectedKeys | string[]         | []        | 默认选中的文本节点键值列表     |
@@ -1117,19 +1197,35 @@ const treeData: TreeDataEntity[] = [
 | name  | desc               | prop  |
 | ----- | ------------------ | ----- |
 | title | 自定义文本节点内容 | title |
-|       |                    |       |
 
 ###### Emits
 
-| name                     | desc                   |
-| ------------------------ | ---------------------- |
-| update:expandedKeys      | 更新 expandedKeys      |
-| expand                   | 展开时触发             |
-| update:selectedKeys      | 更新 selectedKeys      |
-| select                   | 点击文本节点时触发     |
-| update:checkedKeys       | 更新 checkedKeys       |
-| check                    | 点击节点复选框时触发   |
-| update:indeterminateKeys | 更新 indeterminateKeys |
+| name                     | desc                              | params                                                       |
+| ------------------------ | --------------------------------- | ------------------------------------------------------------ |
+| update:expandedKeys      | 更新 expandedKeys【v-model】      | expandedKeys: string[]                                       |
+| expand                   | 展开时触发                        | 1. expandedKeys: string[]<br />2. {<br />    expanded: boolean<br />    node: TreeNodeEntity<br />    nodeData: TreeDataEntity<br />} |
+| update:selectedKeys      | 更新 selectedKeys【v-model】      | selectedKeys: string[]                                       |
+| select                   | 点击文本节点时触发                | 1. selectedKeys: string[]<br />2. {<br />    selected: boolean<br />    node: TreeNodeEntity<br />    nodeData: TreeDataEntity<br />} |
+| update:checkedKeys       | 更新 checkedKeys【v-model】       | checkedKeys: string[]                                        |
+| check                    | 点击节点复选框时触发              | 1. checkedKeys: string[]<br />2. {<br />    checked: boolean<br />    checkedKeys: string[]<br />    indeterminateKeys: string[]<br />    node: TreeNodeEntity<br />    nodeData: TreeDataEntity<br />} |
+| update:indeterminateKeys | 更新 indeterminateKeys【v-model】 | indeterminateKeys: string[]                                  |
+
+###### Events
+
+| name                  | desc                 | params                                               |
+| --------------------- | -------------------- | ---------------------------------------------------- |
+| getExpandedNodes      | 获取展开的节点       | () => TreeNodeEntity[]                               |
+| expandNode            | 展开指定的节点       | (key: string \| string[], expand: boolean) => void   |
+| expandAll             | 展开所有节点         | (expandAll: boolean = true) => void                  |
+|                       |                      |                                                      |
+| getSelectedNodes      | 获取选中的节点       | () => TreeNodeEntity[]                               |
+| selectNode            | 选择指定的节点       | (key: string \| string[], selected: boolean) => void |
+| selectAll             | 选择所有节点         | (selectAll: boolean = true) => void                  |
+|                       |                      |                                                      |
+| getCheckedNodes       | 获取选中复选框的节点 | () => TreeNodeEntity[]                               |
+| getIndeterminateNodes | 获取半选状态的节点   | () => TreeNodeEntity[]                               |
+| checkNode             | 选中指定节点的复选框 | (key: string \| string[], checked: boolean) => void  |
+| checkAll              | 选中所有节点的复选框 | (checkAll: boolean = true) => void                   |
 
 
 

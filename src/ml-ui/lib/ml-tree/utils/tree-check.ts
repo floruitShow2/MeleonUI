@@ -1,18 +1,9 @@
+import { isNodeCheckable } from './tree-is'
 import type { Key2TreeNode, TreeNodeEntity } from '../index.interface'
 
 /**
- * @description 判断当前节点是否可选中
- * @param node 节点实体
- * @returns
- */
-export function isNodeCheckable(node: TreeNodeEntity) {
-  if (node.disabled) return false
-  return !!node.checkable
-}
-
-/**
  * @description 更新父级节点的选中情况
- * @param options 
+ * @param options
  */
 export function updateParentCheckedKeys(options: {
   node: TreeNodeEntity
@@ -53,8 +44,8 @@ export function updateParentCheckedKeys(options: {
 
 /**
  * @description 获取当前节点所有可选中的子节点
- * @param node 
- * @returns 
+ * @param node
+ * @returns
  */
 export function getChildrenKeys(node: TreeNodeEntity) {
   const keys: string[] = []
@@ -74,8 +65,8 @@ interface GetCheckStateInput {
 }
 /**
  * @description 更新当前节点的父子节点的选中情况
- * @param options 
- * @returns 
+ * @param options
+ * @returns
  */
 export function getCheckState(options: GetCheckStateInput) {
   const { node, checked, checkedKeys, indeterminateKeys } = options
@@ -113,7 +104,7 @@ interface GetCheckStateWithIntialKeysInput {
   key2TreeNode: Key2TreeNode
 }
 /**
- * @description 根据默认选中的节点 keys 列表，计算出半选节点 
+ * @description 根据默认选中的节点 keys 列表，计算出半选节点
  * @param options
  * @returns
  */
@@ -123,15 +114,15 @@ export function getCheckStateWithIntialKeys(options: GetCheckStateWithIntialKeys
   const childCheckedKeysSet = new Set<string>()
   const indeterminateKeySet = new Set<string>()
 
-  initialCheckedKeys.forEach(key => {
+  initialCheckedKeys.forEach((key) => {
     const node = key2TreeNode.get(key)
     if (!node || childCheckedKeysSet.has(key)) return
 
     const childrenKeys = getChildrenKeys(node)
-    childrenKeys.forEach(key => {
+    childrenKeys.forEach((key) => {
       childCheckedKeysSet.add(key)
     })
-    checkedKeySet.forEach(key => {
+    checkedKeySet.forEach((key) => {
       indeterminateKeySet.delete(key)
     })
 

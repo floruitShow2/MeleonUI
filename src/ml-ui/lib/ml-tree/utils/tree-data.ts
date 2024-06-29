@@ -1,5 +1,5 @@
+import { isUndefined } from '@meleon/uni-ui/utils'
 import type { Key2TreeNode, TreeDataEntity, TreeNodeEntity, TreeOptions } from '../index.interface'
-import { isUndefined } from '@/ml-ui/utils'
 
 interface GenerateEnableInput {
   subEnable?: boolean
