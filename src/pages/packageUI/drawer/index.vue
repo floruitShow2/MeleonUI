@@ -9,7 +9,7 @@
     />
     <view class="button-view-wrapper" :style="wrapperStyle">
       <!-- 基础用法 -->
-      <CodeBlock :code="templateMap[0].templateCode">
+      <CodeBlock :code="templateMap[0].code">
         <template #title>
           <text>基础用法</text>
         </template>
@@ -26,7 +26,7 @@
         </template>
       </CodeBlock>
       <!-- placement -->
-      <CodeBlock :code="templateMap[1].templateCode">
+      <CodeBlock :code="templateMap[1].code">
         <template #title>
           <text>方向</text>
         </template>
@@ -50,7 +50,7 @@
         </template>
       </CodeBlock>
       <!-- 插槽 -->
-      <CodeBlock :code="templateMap[2].templateCode">
+      <CodeBlock :code="templateMap[2].code">
         <template #title>
           <text>控制插槽</text>
         </template>
@@ -77,7 +77,7 @@
         </template>
       </CodeBlock>
       <!-- 按钮尺寸 -->
-      <CodeBlock :code="templateMap[3].templateCode">
+      <CodeBlock :code="templateMap[3].code">
         <template #title>
           <text>按钮状态</text>
         </template>
@@ -124,19 +124,51 @@
   const templateMap = ref([
     {
       modelVisible: false,
-      templateCode: ``
+      code: `
+<ml-drawer v-model:visible="templateMap[0].modelVisible" />
+
+`
     },
     {
       modelVisible: false,
-      templateCode: ``
+      code: `
+<ml-drawer
+  v-model:visible="templateMap[1].modelVisible"
+  :placement="block2Placement"
+  :has-nav="hasNav"
+/>      
+
+`
     },
     {
       modelVisible: false,
-      templateCode: ``
+      code: `
+<ml-drawer v-model:visible="templateMap[2].modelVisible">
+  <template #title>自定义标题</template>
+  <text>
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni, dolor libero
+    blanditiis distinctio commodi totam recusandae aliquam fugit officiis sequi
+    perspiciatis non animi, eaque facilis sed reiciendis in aut vel.
+  </text>
+  <template #footer>
+    <ml-button>自定义页脚</ml-button>
+  </template>
+</ml-drawer>
+
+`
     },
     {
       modelVisible: false,
-      templateCode: ``
+      code: `
+<ml-drawer
+  v-model:visible="templateMap[3].modelVisible"
+  @ok="listenedEvent = 'ok'"
+  @close="listenedEvent = 'close'"
+>
+  <text>监听到：{{ listenedEvent }}事件</text>
+</ml-drawer>
+
+`
     }
   ])
 

@@ -80,7 +80,7 @@
                 <template #label>
                   <view class="timeline-label">
                     <text> 2023-09-25 </text>
-                    <MlIcon name="ml-day" color="red"> </MlIcon>
+                    <ml-icon name="ml-day" color="red"> </ml-icon>
                   </view>
                 </template>
                 <view>The third milestone </view>
@@ -105,7 +105,7 @@
                   <text>2023-09-08</text>
                 </template>
                 <template #dot>
-                  <MlIcon name="ml-selection--circle" color="var(--primary-color-6)" />
+                  <ml-icon name="ml-selection--circle" color="var(--primary-color-6)" />
                 </template>
                 <view>The first milestone content</view>
               </ml-timeline-item>
@@ -114,7 +114,7 @@
                   <text>2023-09-09</text>
                 </template>
                 <template #dot>
-                  <MlIcon name="ml-info--circle" color="var(--info-color-7)" />
+                  <ml-icon name="ml-info--circle" color="var(--info-color-7)" />
                 </template>
                 <view>
                   <view>The second milestone</view>
@@ -126,11 +126,11 @@
                 <template #label>
                   <view class="timeline-label">
                     <text> 2023-09-25 </text>
-                    <MlIcon name="ml-day" color="red"> </MlIcon>
+                    <ml-icon name="ml-day" color="red"> </ml-icon>
                   </view>
                 </template>
                 <template #dot>
-                  <MlIcon name="ml-close--circle" color="var(--danger-color-6)" />
+                  <ml-icon name="ml-close--circle" color="var(--danger-color-6)" />
                 </template>
                 <view>The third milestone </view>
               </ml-timeline-item>
@@ -189,7 +189,6 @@
   import { useAppStore } from '@/store'
   import MlNavigator from '@/ml-ui/lib/ml-navigator/index.vue'
   import CodeBlock from '@/components/CodeBlock/index.vue'
-  import MlIcon from '@/ml-ui/lib/ml-icon/index.vue'
 
   const appStore = useAppStore()
   const wrapperStyle = computed(() => {
@@ -259,7 +258,7 @@
   <template #label>
     <view class="timeline-label">
       <text> 2023-09-25 </text>
-      <MlIcon name="ml-day" color="red"> </MlIcon>
+      <ml-icon name="ml-day" color="red"> </ml-icon>
     </view>
   </template>
   <view>The third milestone </view>
@@ -275,7 +274,7 @@
       <text>2023-09-08</text>
     </template>
     <template #dot>
-      <MlIcon name="ml-selection--circle" color="var(--primary-color-6)" />
+      <ml-icon name="ml-selection--circle" color="var(--primary-color-6)" />
     </template>
     <view>The first milestone content</view>
   </ml-timeline-item>
@@ -284,7 +283,7 @@
       <text>2023-09-09</text>
     </template>
     <template #dot>
-      <MlIcon name="ml-info--circle" color="var(--info-color-7)" />
+      <ml-icon name="ml-info--circle" color="var(--info-color-7)" />
     </template>
     <view>
       <view>The second milestone</view>
@@ -296,11 +295,11 @@
     <template #label>
       <view class="timeline-label">
         <text> 2023-09-25 </text>
-        <MlIcon name="ml-day" color="red"> </MlIcon>
+        <ml-icon name="ml-day" color="red"> </ml-icon>
       </view>
     </template>
     <template #dot>
-      <MlIcon name="ml-close--circle" color="var(--danger-color-6)" />
+      <ml-icon name="ml-close--circle" color="var(--danger-color-6)" />
     </template>
     <view>The third milestone </view>
   </ml-timeline-item>

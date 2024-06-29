@@ -14,6 +14,7 @@
   import { useTheme } from '@meleon/uni-ui/hooks'
   import { cs } from '@meleon/uni-ui/utils'
   import Icon from '../ml-icon/index.vue'
+  import { watch } from 'vue'
 
   const props = defineProps({
     prevIcon: {
@@ -59,10 +60,18 @@
     }
   })
 
-  const isSwitched = ref<boolean>(defaultSwitched.value)
+  const isSwitched = ref<boolean>()
   const currentIcon = computed(() => {
     return loading.value ? 'ml-loading' : isSwitched.value ? nextIcon.value : prevIcon.value
   })
+
+  watch(
+    () => defaultSwitched.value,
+    (newVal) => {
+      isSwitched.value = newVal
+    },
+    { immediate: true }
+  )
 
   const handleStartSwitch = () => {
     if (loading.value || !nextIcon.value) return

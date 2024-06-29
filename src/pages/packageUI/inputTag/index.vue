@@ -9,7 +9,7 @@
     />
     <view class="input-view-wrapper" :style="wrapperStyle">
       <!-- 基础用法 -->
-      <CodeBlock :code="templateMap[0].templateCode">
+      <CodeBlock :code="templateMap[0].code">
         <template #title>
           <text>基础用法</text>
         </template>
@@ -24,7 +24,7 @@
         </template>
       </CodeBlock>
       <!-- 尺寸控制 -->
-      <CodeBlock :code="templateMap[1].templateCode">
+      <CodeBlock :code="templateMap[1].code">
         <template #title>
           <text>输入框尺寸</text>
         </template>
@@ -48,7 +48,7 @@
         </template>
       </CodeBlock>
       <!-- 前后缀 -->
-      <CodeBlock :code="templateMap[2].templateCode">
+      <CodeBlock :code="templateMap[2].code">
         <template #title>
           <text>前缀和后缀</text>
         </template>
@@ -66,7 +66,7 @@
         </template>
       </CodeBlock>
       <!-- 禁用 -->
-      <CodeBlock :code="templateMap[2].templateCode">
+      <CodeBlock :code="templateMap[2].code">
         <template #title>
           <text>标签类型</text>
         </template>
@@ -122,19 +122,68 @@
   const templateMap = ref([
     {
       modelValue: ['test1', 'test2', 'test3', 'test4', 'test5', 'test6', 'test7'],
-      templateCode: ``
+      code: `
+<ml-input-tag
+  v-model:model-value="modelValue"
+  placeholder="提示文字可自定义"
+/>
+
+const modelValue = ref(['test1', 'test2', 'test3', 'test4', 'test5', 'test6', 'test7'])
+
+`
     },
     {
       modelValue: ['test1', 'test2', 'test3'],
-      templateCode: ``
+      code: `
+<ml-input-tag
+  v-model:model-value="templateMap[1].modelValue"
+  :size="inputSize"
+  style="width: 100%"
+/>
+
+`
     },
     {
       modelValue: ['test1', 'test2', 'test3', 'test4', 'test5', 'test6', 'test7'],
-      templateCode: ``
+      code: `
+<ml-input-tag
+  v-model:model-value="templateMap[2].modelValue"
+  :max-tag-count="2"
+  placeholder="提示文字可自定义"
+/>   
+
+`
     },
     {
       modelValue: [],
-      templateCode: ``
+      code: `
+<ml-input-tag
+  v-model:model-value="templateMap[1].modelValue"
+  tag-type="info"
+  style="width: 100%"
+/>
+<ml-input-tag
+  v-model:model-value="templateMap[1].modelValue"
+  tag-type="primary"
+  style="width: 100%"
+/>
+<ml-input-tag
+  v-model:model-value="templateMap[1].modelValue"
+  tag-type="success"
+  style="width: 100%"
+/>
+<ml-input-tag
+  v-model:model-value="templateMap[1].modelValue"
+  tag-type="warning"
+  style="width: 100%"
+/>
+<ml-input-tag
+  v-model:model-value="templateMap[1].modelValue"
+  tag-type="danger"
+  style="width: 100%"
+/>
+
+`
     }
   ])
 

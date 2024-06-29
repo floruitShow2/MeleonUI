@@ -16,16 +16,12 @@
         multiple
         show-file-list
         :disabled="false"
-        :preview-size="80"
+        :preview-size="100"
         :on-change="handleOnChange"
         @delete="handleDelete"
-      >
-        <template #trigger>
-          <ml-button type="primary">选择文件</ml-button>
-        </template>
-      </ml-uploader>
+      ></ml-uploader>
 
-      <ml-button type="primary" status="success" @click="handleSubmit">上传</ml-button>
+      <!-- <ml-button type="primary" status="success" @click="handleSubmit">上传</ml-button> -->
     </view>
   </view>
 </template>

@@ -9,7 +9,7 @@
     />
     <view class="count-to-view-wrapper" :style="wrapperStyle">
       <!-- 基础用法 -->
-      <CodeBlock :code="templateMap[0].templateCode">
+      <CodeBlock :code="templateMap[0].code">
         <template #title>
           <text>基础用法</text>
         </template>
@@ -27,7 +27,7 @@
         </template>
       </CodeBlock>
       <!-- 数值动画 -->
-      <CodeBlock :code="templateMap[1].templateCode">
+      <CodeBlock :code="templateMap[1].code">
         <template #title>
           <text>数值动画</text>
         </template>
@@ -44,7 +44,7 @@
         </template>
       </CodeBlock>
       <!-- 前后缀 -->
-      <CodeBlock :code="templateMap[2].templateCode">
+      <CodeBlock :code="templateMap[2].code">
         <template #title>
           <text>数值前后缀</text>
         </template>
@@ -55,7 +55,7 @@
           <view class="count-to-container">
             <ml-count-to :from="0" :to="1250.44" animation :animation-duration="5000">
               <template #prefix>
-                <MlIcon name="ml-arrow-up" />
+                <ml-icon name="ml-arrow-up" />
               </template>
             </ml-count-to>
             <ml-count-to
@@ -72,7 +72,7 @@
           </view>
         </template>
       </CodeBlock>
-      <CodeBlock :code="templateMap[2].templateCode">
+      <CodeBlock :code="templateMap[3].code">
         <template #title>
           <text>手动触发</text>
         </template>
@@ -112,8 +112,8 @@
   import { ref, computed } from 'vue'
   import { useAppStore } from '@/store'
   import MlNavigator from '@/ml-ui/lib/ml-navigator/index.vue'
-  import MlIcon from '@/ml-ui/lib/ml-icon/index.vue'
   import CodeBlock from '@/components/CodeBlock/index.vue'
+  import type { CountToInstance } from '@/ml-ui'
 
   const appStore = useAppStore()
   const wrapperStyle = computed(() => {
@@ -126,28 +126,79 @@
 
   const templateMap = ref([
     {
-      templateCode: ``
+      code: `
+<ml-count-to :from="0" :to="36241250.44" />
+
+<ml-count-to :from="0" :to="36241250.44" show-seperator />
+
+`
     },
     {
-      templateCode: ``
+      code: `
+<ml-count-to :from="0" :to="1250.44" animation :animation-duration="5000" />
+<ml-count-to :from="0" :to="36241250.44" animation show-seperator />
+
+`
     },
     {
-      templateCode: ``
+      code: `
+<ml-count-to :from="0" :to="1250.44" animation :animation-duration="5000">
+  <template #prefix>
+    <ml-icon name="ml-arrow-up" />
+  </template>
+</ml-count-to>
+<ml-count-to
+  :from="0"
+  :to="1250.44"
+  animation
+  :animation-duration="5000"
+  :value-style="{ color: '#0fbf60' }"
+>
+  <template #suffix>
+    <text>%</text>
+  </template>
+</ml-count-to>
+
+`
     },
     {
-      templateCode: ``
+      code: `
+<ml-count-to
+  ref="countToRef"
+  :from="0"
+  :to="1250.44"
+  :animation-duration="5000"
+  :value-style="{ color: '#0fbf60' }"
+>
+  <template #suffix>
+    <text>%</text>
+  </template>
+</ml-count-to>
+
+const countToRef = ref<CountToInstance>()
+const handleStartClick = () => {
+  if (countToRef.value) countToRef.value.start()
+}
+const handlePauseClick = () => {
+  if (countToRef.value) countToRef.value.pause()
+}
+const handleRestartClick = () => {
+  if (countToRef.value) countToRef.value.restart()
+}
+
+`
     }
   ])
 
-  const countToRef = ref()
+  const countToRef = ref<CountToInstance>()
   const handleStartClick = () => {
-    countToRef.value.start()
+    if (countToRef.value) countToRef.value.start()
   }
   const handlePauseClick = () => {
-    countToRef.value.pause()
+    if (countToRef.value) countToRef.value.pause()
   }
   const handleRestartClick = () => {
-    countToRef.value.restart()
+    if (countToRef.value) countToRef.value.restart()
   }
 </script>
 

@@ -9,7 +9,7 @@
     />
     <view class="checkbox-view-wrapper" :style="wrapperStyle">
       <!-- 基础用法 -->
-      <CodeBlock :code="templateMap[0].templateCode">
+      <CodeBlock :code="templateMap[0].code">
         <template #title>
           <text>基础用法</text>
         </template>
@@ -30,7 +30,7 @@
         </template>
       </CodeBlock>
       <!-- 单选&多选 -->
-      <CodeBlock :code="templateMap[0].templateCode">
+      <CodeBlock :code="templateMap[1].code">
         <template #title>
           <text>单选或多选</text>
         </template>
@@ -62,7 +62,7 @@
         </template>
       </CodeBlock>
       <!-- 选项组方向 -->
-      <CodeBlock :code="templateMap[0].templateCode">
+      <CodeBlock :code="templateMap[2].code">
         <template #title>
           <text>选项组方向</text>
         </template>
@@ -118,16 +118,43 @@
 
   const templateMap = ref([
     {
-      templateCode: `>`
+      code: `
+<ml-checkbox v-model:checked="checked1">Radio</ml-checkbox>
+
+<ml-checkbox indeterminate>Radio</ml-checkbox>
+
+<ml-checkbox v-model:checked="checked1" disabled>Radio</ml-checkbox>
+      `
     },
     {
-      templateCode: ``
+      code: `
+<ml-checkbox-group v-model:checked-list="checked2">
+  <ml-checkbox value="A">RadioA</ml-checkbox>
+  <ml-checkbox value="B">RadioB</ml-checkbox>
+  <ml-checkbox value="C">RadioC</ml-checkbox>
+  <ml-checkbox value="D">RadioD</ml-checkbox>
+  <ml-checkbox value="E">RadioE</ml-checkbox>
+</ml-checkbox-group>
+
+<ml-checkbox-group v-model:checked-list="checked3" mode="multi" :max="3" :min="1">
+  <ml-checkbox value="A">RadioA</ml-checkbox>
+  <ml-checkbox value="B">RadioB</ml-checkbox>
+  <ml-checkbox value="C">RadioC</ml-checkbox>
+  <ml-checkbox value="D">RadioD</ml-checkbox>
+  <ml-checkbox value="E">RadioE</ml-checkbox>
+</ml-checkbox-group>
+      `
     },
     {
-      templateCode: ``
-    },
-    {
-      templateCode: ``
+      code: `
+<ml-checkbox-group v-model:checked-list="checked4" direction="vertical">
+  <ml-checkbox value="A">RadioA</ml-checkbox>
+  <ml-checkbox value="B">RadioB</ml-checkbox>
+  <ml-checkbox value="C">RadioC</ml-checkbox>
+  <ml-checkbox value="D">RadioD</ml-checkbox>
+  <ml-checkbox value="E">RadioE</ml-checkbox>
+</ml-checkbox-group>
+      `
     }
   ])
 </script>

@@ -1,6 +1,12 @@
 {
 	"pages": [
 		{
+			"path": "pages/componentList/index",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		},
+		{
 			"path": "pages/home/index",
 			"name": "首页",
 			"style": {
@@ -21,12 +27,6 @@
 		},
 		{
 			"path": "pages/profile/index",
-			"style": {
-				"navigationStyle": "custom"
-			}
-		},
-		{
-			"path": "pages/componentList/index",
 			"style": {
 				"navigationStyle": "custom"
 			}
@@ -219,14 +219,6 @@
 			{
 				"pagePath": "pages/profile/index",
 				"text": "我的"
-			},
-			{
-				"pagePath": "pages/discovery/index",
-				"text": "发现"
-			},
-			{
-				"pagePath": "pages/articles/index",
-				"text": "专题"
 			}
 		]
 	},

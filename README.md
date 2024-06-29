@@ -179,6 +179,12 @@ export type ColorType = 'primary' | 'info' | 'success' | 'warning' | 'danger'
   - fix: 去除 checkbox 组件无文本时样式的偏移
   - feat: ml-tree 组件新增对外暴露的 expand、check 及 select 等方法
 
+- 1.1.10
+
+  - fix: ml-checkbox 设置 direction 失效的问题
+  - fix: ml-image 预览层层级较低的问题
+
+
 ### 组件
 
 #### 头像 Avatar

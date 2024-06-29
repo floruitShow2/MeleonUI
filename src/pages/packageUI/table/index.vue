@@ -9,12 +9,13 @@
     />
     <view class="table-view-wrapper" :style="wrapperStyle">
       <!-- 基础用法 -->
-      <CodeBlock :code="templateMap[0].templateCode">
+      <CodeBlock :code="templateMap[0].code">
         <template #title>
           <text>基础用法</text>
         </template>
         <template #description>
           <text> 基础用法，支持数据渲染、表格布局及节点自定义等功能 </text>
+          <text> 注：尽量不要在设置 fixed 的同时开启 refresher-enabled 下拉刷新 </text>
         </template>
         <template #demo>
           <view class="table-container">
@@ -25,7 +26,7 @@
               border
               :height="200"
               :loading="false"
-              :refresher-enabled="true"
+              :refresher-enabled="false"
               :refresher-interval="2000"
               style="width: 100%"
               @row-click="onRowClick"
@@ -74,19 +75,52 @@
   const templateMap = ref([
     {
       modelVisible: false,
-      templateCode: ``
+      code: `
+<ml-table
+  :data="tableData"
+  size="mini"
+  stripe
+  border
+  :height="200"
+  :loading="false"
+  :refresher-enabled="false"
+  :refresher-interval="2000"
+  style="width: 100%"
+  @row-click="onRowClick"
+  @cell-click="onCellClick"
+>
+  <template #cell="{ column, row }">
+    <block v-if="column.property === 'gender'">
+      <ml-tag :model-value="row[column.property]" type="primary" size="mini"></ml-tag>
+    </block>
+    <block v-else-if="column.property === 'age'">
+      <ml-count-to
+        :to="row[column.property]"
+        animation
+        :value-style="{ fontSize: '14px', color: 'var(--info-color-8)' }"
+      ></ml-count-to>
+    </block>
+    <text v-else>{{ column.property && row[column.property] }}</text>
+  </template>
+  <ml-table-column type="index" fixed="left"></ml-table-column>
+  <ml-table-column prop="name" label="姓名" fixed></ml-table-column>
+  <ml-table-column prop="age" label="年龄"></ml-table-column>
+  <ml-table-column prop="gender" label="性别"></ml-table-column>
+</ml-table>      
+
+`
     },
     {
       modelVisible: false,
-      templateCode: ``
+      code: ``
     },
     {
       modelVisible: false,
-      templateCode: ``
+      code: ``
     },
     {
       modelVisible: false,
-      templateCode: ``
+      code: ``
     }
   ])
 

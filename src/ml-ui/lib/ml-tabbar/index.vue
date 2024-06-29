@@ -61,13 +61,13 @@
       key: 'home',
       path: '/pages/home/index'
     },
-    {
-      icon: 'ml-tab-article',
-      selectIcon: 'ml-tab-article-select',
-      label: '专题',
-      key: 'articles',
-      path: '/pages/articles/index'
-    },
+    // {
+    //   icon: 'ml-tab-article',
+    //   selectIcon: 'ml-tab-article-select',
+    //   label: '专题',
+    //   key: 'articles',
+    //   path: '/pages/articles/index'
+    // },
     // {
     //   icon: 'ml-plus',
     //   selectIcon: '',
@@ -76,13 +76,13 @@
     //   path: '',
     //   type: 'main'
     // },
-    {
-      icon: 'ml-tab-idea',
-      selectIcon: 'ml-tab-idea-select',
-      label: '发现',
-      key: 'discovery',
-      path: '/pages/discovery/index'
-    },
+    // {
+    //   icon: 'ml-tab-idea',
+    //   selectIcon: 'ml-tab-idea-select',
+    //   label: '发现',
+    //   key: 'discovery',
+    //   path: '/pages/discovery/index'
+    // },
     {
       icon: 'ml-tab-my',
       selectIcon: 'ml-tab-my-select',

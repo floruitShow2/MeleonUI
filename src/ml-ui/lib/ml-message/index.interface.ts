@@ -10,3 +10,11 @@ export interface MessageOptions {
   duration?: number
   position?: 'top' | 'bottom'
 }
+
+export interface MessageEvents {
+  primary: (options: MessageOptions) => void
+  info: (options: MessageOptions) => void
+  success: (options: MessageOptions) => void
+  warning: (options: MessageOptions) => void
+  danger: (options: MessageOptions) => void
+}

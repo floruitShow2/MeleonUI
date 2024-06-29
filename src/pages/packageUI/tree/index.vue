@@ -26,23 +26,23 @@
       ></ml-tree>
 
       <view class="btn-list">
-        <ml-button type="primary" @click="handleExpandAll">
+        <ml-button class="btn" type="primary" @click="handleExpandAll">
           {{ isExpandAll ? 'Close All' : 'Expand All' }}
         </ml-button>
 
-        <ml-button type="primary" @click="handleCheckAll">
+        <ml-button class="btn" type="primary" @click="handleCheckAll">
           {{ isCheckAll ? 'Unheck All' : 'Check All' }}
         </ml-button>
 
-        <ml-button type="primary" @click="handleSelectAll">
+        <ml-button class="btn" type="primary" @click="handleSelectAll">
           {{ isSelectAll ? 'Unselect All' : 'Select All' }}
         </ml-button>
 
-        <ml-button type="primary" @click="handleExpandNode"> Expand Root </ml-button>
+        <ml-button class="btn" type="primary" @click="handleExpandNode"> Expand Root </ml-button>
 
-        <ml-button type="primary" @click="handleCheckNode"> Check Root </ml-button>
+        <ml-button class="btn" type="primary" @click="handleCheckNode"> Check Root </ml-button>
 
-        <ml-button type="primary" @click="handleSelectNode"> Select Root </ml-button>
+        <ml-button class="btn" type="primary" @click="handleSelectNode"> Select Root </ml-button>
       </view>
     </view>
   </view>

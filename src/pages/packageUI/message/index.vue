@@ -156,9 +156,7 @@
       desc: '用来显示「成功、警告、消息、错误」类的操作反馈, 用于主动操作后的反馈提示',
       templateCode: `<ml-message ref="messageRef" />
 
-const messageRef = ref<
-  InstanceType<typeof ml-message>
->()
+const messageRef = ref<MessageInstance>()
 
 const idx = ref(1)
 
