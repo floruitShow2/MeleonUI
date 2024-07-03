@@ -1,7 +1,7 @@
 <template>
   <view class="tag-view">
-    <MlNavigator
-      title="MeleonUI"
+    <ml-navigator
+      title="ml-tag"
       title-color="#FFFFFF"
       has-back
       icon-color="#FFFFFF"
@@ -111,8 +111,7 @@
   import { ref, computed } from 'vue'
   import { useAppStore } from '@/store'
   import CodeBlock from '@/components/CodeBlock/index.vue'
-  import MlNavigator from '@/ml-ui/lib/ml-navigator/index.vue'
-  import MlIcon from '@/ml-ui/lib/ml-icon/index.vue'
+  import MlIcon from '@meleon/uni-ui/lib/ml-icon/index.vue'
 
   const appStore = useAppStore()
   const wrapperStyle = computed(() => {

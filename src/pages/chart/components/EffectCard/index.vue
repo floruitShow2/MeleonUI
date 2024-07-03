@@ -6,11 +6,11 @@
     </view>
     <view class="effect-card-views">
       <view class="item">
-        <MlIcon name="ml-eye" :size="16" />
+        <ml-icon name="ml-eye" :size="16" />
         <text>{{ views }}</text>
       </view>
       <view class="item">
-        <MlIcon name="ml-like" :size="16" />
+        <ml-icon name="ml-like" :size="16" />
         <text>{{ likes }}</text>
       </view>
     </view>
@@ -19,7 +19,6 @@
 
 <script setup lang="ts">
   import { ref, computed, toRefs } from 'vue'
-  import MlIcon from '@/ml-ui/lib/ml-icon/index.vue'
 
   const props = defineProps({
     title: {

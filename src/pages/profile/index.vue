@@ -1,6 +1,6 @@
 <template>
   <view :class="prefix">
-    <MlNavigator
+    <ml-navigator
       :title="$t('profile.navigation.title')"
       icon-color="#FFFFFF"
       title-color="#FFFFFF"
@@ -8,23 +8,23 @@
     />
     <view :class="`${prefix}-wrapper`" :style="wrapperStyle">
       <view :class="`${prefix}-wrapper-header`">
-        <MlAvatar shape="circle" :size="44">
+        <ml-avatar shape="circle" :size="44">
           <image src="@/assets/home/avatar.png" mode="widthFix" />
-        </MlAvatar>
+        </ml-avatar>
         <view class="header-message">
           <view class="username">
             Meleon
-            <MlTag
+            <ml-tag
               model-value="@前端开发"
               type="primary"
               size="mini"
               plain
               :bordered="false"
-            ></MlTag>
+            ></ml-tag>
           </view>
           <text class="description">Keep your face to the sunshine</text>
         </view>
-        <MlButton type="primary" size="mini" shape="round">Edit</MlButton>
+        <ml-button type="primary" size="mini" shape="round">Edit</ml-button>
       </view>
       <!-- <view :class="`${prefix}-wrapper-statistics`">
         <view v-for="(v, k) in statistics" :key="k" class="statistic-item">
@@ -48,29 +48,23 @@
             @click="() => handleSettingClick(setting)"
           >
             <view class="settings-group-item_left">
-              <MlIcon :name="setting.icon" :size="22" style="transform: translateY(1px)" />
+              <ml-icon :name="setting.icon" :size="22" style="transform: translateY(1px)" />
               <text class="title">{{ $t(setting.label) }}</text>
             </view>
             <view class="settings-group-item_right">
-              <MlIcon name="ml-arrow-right" :size="16" style="transform: translateY(1px)" />
+              <ml-icon name="ml-arrow-right" :size="16" style="transform: translateY(1px)" />
             </view>
           </view>
         </view>
       </view>
     </view>
-    <MlTabbar />
+    <ml-tabbar />
   </view>
 </template>
 
 <script setup lang="ts">
   import { ref, computed } from 'vue'
   import { useAppStore } from '@/store'
-  import MlNavigator from '@/ml-ui/lib/ml-navigator/index.vue'
-  import MlTabbar from '@/ml-ui/lib/ml-tabbar/index.vue'
-  import MlAvatar from '@/ml-ui/lib/ml-avatar/index.vue'
-  import MlButton from '@/ml-ui/lib/ml-button/index.vue'
-  import MlIcon from '@/ml-ui/lib/ml-icon/index.vue'
-  import MlTag from '@/ml-ui/lib/ml-tag/index.vue'
   import type { SettingsGroupType, SettingItemType } from './interface'
 
   const appStore = useAppStore()

@@ -20,18 +20,6 @@
 			}
 		},
 		{
-			"path": "pages/discovery/index",
-			"style": {
-				"navigationStyle": "custom"
-			}
-		},
-		{
-			"path": "pages/profile/index",
-			"style": {
-				"navigationStyle": "custom"
-			}
-		},
-		{
 			"path": "pages/chart/index",
 			"style": {
 				"navigationStyle": "custom"
@@ -164,17 +152,6 @@
 			]
 		},
 		{
-			"root": "pages/packageChart",
-			"pages": [
-				{
-					"path": "detail/index",
-					"style": {
-						"navigationStyle": "custom"
-					}
-				}
-			]
-		},
-		{
 			"root": "pages/packageArticles",
 			"pages": [
 				{
@@ -217,8 +194,8 @@
 				"text": "首页"
 			},
 			{
-				"pagePath": "pages/profile/index",
-				"text": "我的"
+				"pagePath": "pages/articles/index",
+				"text": "专题"
 			}
 		]
 	},

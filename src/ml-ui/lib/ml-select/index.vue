@@ -271,6 +271,7 @@
   const onInputFocus = () => {
     isMenuUnfold.value = true
     hiddenList.value = []
+    currentRef.value && currentRef.value.toggleActive(true)
     computeMenuPosition()
   }
   const onInputChange = (e: string) => {
@@ -286,7 +287,7 @@
     })
     animation.scaleY(0).opacity(0).step()
     menuAnimationData.value = animation.export()
-    currentRef.value.onInputBlur()
+    currentRef.value.blur()
     setTimeout(() => {
       isMenuUnfold.value = false
       handleInputValue()

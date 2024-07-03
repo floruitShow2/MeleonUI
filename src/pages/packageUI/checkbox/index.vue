@@ -1,7 +1,7 @@
 <template>
   <view class="checkbox-view">
-    <MlNavigator
-      title="MlButton"
+    <ml-navigator
+      title="ml-checkbox"
       has-back
       icon-color="#FFFFFF"
       title-color="#FFFFFF"
@@ -24,7 +24,7 @@
           </view>
           <view class="checkbox-container">
             <ml-checkbox v-model:checked="checked1">
-              <MlTag model-value="Radio2" size="mini"></MlTag>
+              <ml-tag model-value="Radio2" size="mini"></ml-tag>
             </ml-checkbox>
           </view>
         </template>
@@ -88,8 +88,6 @@
 <script setup lang="ts">
   import { ref, computed, watch } from 'vue'
   import { useAppStore } from '@/store'
-  import MlNavigator from '@/ml-ui/lib/ml-navigator/index.vue'
-  import MlTag from '@/ml-ui/lib/ml-tag/index.vue'
   import CodeBlock from '@/components/CodeBlock/index.vue'
 
   const appStore = useAppStore()

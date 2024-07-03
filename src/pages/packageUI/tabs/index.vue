@@ -1,7 +1,7 @@
 <template>
   <view class="tabs-view">
-    <MlNavigator
-      title="MeleonUI"
+    <ml-navigator
+      title="ml-tabs"
       title-color="#FFFFFF"
       has-back
       icon-color="#FFFFFF"
@@ -84,7 +84,6 @@
   import { ref, computed } from 'vue'
   import { useAppStore } from '@/store'
   import CodeBlock from '@/components/CodeBlock/index.vue'
-  import MlNavigator from '@/ml-ui/lib/ml-navigator/index.vue'
 
   const appStore = useAppStore()
   const wrapperStyle = computed(() => {

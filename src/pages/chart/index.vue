@@ -1,6 +1,6 @@
 <template>
   <view :class="prefix">
-    <MlNavigator
+    <ml-navigator
       title="图表库"
       title-color="#FFFFFF"
       has-back
@@ -25,8 +25,7 @@
   import { ref, computed } from 'vue'
   import { useAppStore } from '@/store'
   import EchartsIcon from '@/common/echarts.icon'
-  import MlNavigator from '@/ml-ui/lib/ml-navigator/index.vue'
-  import MlColorIcon from '@/ml-ui/lib/ml-colorIcon/index.vue'
+  import MlColorIcon from '@meleon/uni-ui/lib/ml-colorIcon/index.vue'
 
   const appStore = useAppStore()
   const wrapperStyle = computed(() => {

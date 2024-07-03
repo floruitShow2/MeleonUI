@@ -1,7 +1,7 @@
 <template>
   <view class="icon-view">
-    <MlNavigator
-      title="MlIcon"
+    <ml-navigator
+      title="ml-icon"
       has-back
       icon-color="#FFFFFF"
       title-color="#FFFFFF"
@@ -19,7 +19,6 @@
 <script setup lang="ts">
   import { ref, computed } from 'vue'
   import { useAppStore } from '@/store'
-  import MlNavigator from '@/ml-ui/lib/ml-navigator/index.vue'
   import IconSettings from './settings'
 
   const appStore = useAppStore()

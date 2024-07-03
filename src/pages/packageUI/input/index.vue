@@ -1,6 +1,6 @@
 <template>
   <view class="input-view">
-    <MlNavigator
+    <ml-navigator
       title="ml-input"
       has-back
       icon-color="#FFFFFF"
@@ -110,7 +110,6 @@
 <script setup lang="ts">
   import { ref, computed } from 'vue'
   import { useAppStore } from '@/store'
-  import MlNavigator from '@/ml-ui/lib/ml-navigator/index.vue'
   import CodeBlock from '@/components/CodeBlock/index.vue'
 
   const appStore = useAppStore()

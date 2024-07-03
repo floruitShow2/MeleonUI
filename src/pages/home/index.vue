@@ -2,15 +2,15 @@
   <view class="home-view">
     <ml-config-provider :themes="themes">
       <!-- 消息提示 -->
-      <MlMessage ref="messageRef" />
+      <ml-message ref="messageRef" />
       <!-- 导航栏 -->
-      <MlNavigator
+      <ml-navigator
         :title="$t('home.navigation.title')"
         title-color="#FFFFFF"
         background-color="#7A98B3"
       >
         <!-- <image class="image" src="../../assets/home/MeleonUI.png" mode="aspectFit" /> -->
-      </MlNavigator>
+      </ml-navigator>
       <!-- 主体 -->
       <view
         class="home-view-content"
@@ -75,7 +75,7 @@
         </view> -->
       </view>
       <!-- 分页栏 -->
-      <MlTabbar />
+      <ml-tabbar />
     </ml-config-provider>
   </view>
 </template>
@@ -83,11 +83,7 @@
 <script setup lang="ts">
   import { ref, reactive, computed } from 'vue'
   import { useAppStore } from '@/store'
-  import MlNavigator from '@/ml-ui/lib/ml-navigator/index.vue'
-  // import MlIcon from '@/ml-ui/lib/ml-icon/index.vue'
-  import MlMessage from '@/ml-ui/lib/ml-message/index.vue'
-  import MlTabbar from '@/ml-ui/lib/ml-tabbar/index.vue'
-  import type { ConfigProviderProps } from '@meleon/uni-ui/index'
+  import type { ConfigProviderProps, MessageInstance } from '@meleon/uni-ui'
 
   const appStore = useAppStore()
 
@@ -97,7 +93,7 @@
     return appStore.appSize
   })
 
-  const messageRef = ref<InstanceType<typeof MlMessage>>()
+  const messageRef = ref<MessageInstance>()
 
   const onNavigate = (url: string) => {
     uni.navigateTo({ url })

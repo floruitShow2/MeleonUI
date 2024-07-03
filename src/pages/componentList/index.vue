@@ -1,6 +1,6 @@
 <template>
   <view class="components-container">
-    <MlNavigator
+    <ml-navigator
       title="MeleonUI"
       title-color="#FFFFFF"
       :has-back="false"
@@ -24,8 +24,7 @@
 <script setup lang="ts">
   import { ref, computed } from 'vue'
   import { useAppStore } from '@/store'
-  import MlIcon from '@/ml-ui/lib/ml-icon/index.vue'
-  import MlNavigator from '@/ml-ui/lib/ml-navigator/index.vue'
+  import MlIcon from '@meleon/uni-ui/lib/ml-icon/index.vue'
 
   const appStore = useAppStore()
   const ui = computed(() => {

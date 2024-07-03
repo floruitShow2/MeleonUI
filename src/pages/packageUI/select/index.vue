@@ -1,6 +1,6 @@
 <template>
   <view class="select-view">
-    <MlNavigator
+    <ml-navigator
       title="ml-select"
       title-color="#FFFFFF"
       has-back
@@ -89,7 +89,6 @@
 <script setup lang="ts">
   import { ref, computed } from 'vue'
   import { useAppStore } from '@/store'
-  import MlNavigator from '@/ml-ui/lib/ml-navigator/index.vue'
   import CodeBlock from '@/components/CodeBlock/index.vue'
   const appStore = useAppStore()
   const wrapperStyle = computed(() => {

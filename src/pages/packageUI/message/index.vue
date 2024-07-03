@@ -1,6 +1,6 @@
 <template>
   <view class="message-view">
-    <MlNavigator
+    <ml-navigator
       title="ml-message"
       has-back
       icon-color="#FFFFFF"
@@ -101,7 +101,6 @@
   import { ref, computed } from 'vue'
   import { useAppStore } from '@/store'
   import type { MessageInstance, MessageOptions } from '@/ml-ui'
-  import MlNavigator from '@/ml-ui/lib/ml-navigator/index.vue'
   import CodeBlock from '@/components/CodeBlock/index.vue'
 
   const appStore = useAppStore()

@@ -59,7 +59,10 @@
         },
         "usingComponents" : true,
         "optimization" : {
-            "subPackages" : true
+            "subPackages" : true,
+            "ignore": [
+                "ml-ui/**"
+            ]
         },
         "libVersion": "latest",
         "lazyCodeLoading": "requiredComponents"

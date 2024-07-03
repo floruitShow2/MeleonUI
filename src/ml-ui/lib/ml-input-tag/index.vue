@@ -18,6 +18,7 @@
       <input
         :class="`${prefix}-inner_input`"
         type="text"
+        v-model="inputValue"
         :focus="isFocus"
         :style="inputStyle"
         :disabled="disabled || readonly"
@@ -91,23 +92,29 @@
   const prefix = ref('ml-input-tag')
 
   const className = computed(() => {
-    return cs(prefix.value, [`${prefix.value}-${size.value}`], {
-      'is-focus': isFocus.value
-    })
+    return cs(
+      prefix.value,
+      [`${prefix.value}-${size.value}`],
+      {
+        [`${prefix.value}--disabled`]: disabled.value,
+        [`${prefix.value}--actived`]: isActive.value
+      }
+    )
   })
 
   const inputStyle = ref<Record<string, any>>({
     width: '12px'
   })
   const setInputWidth = (width: number) => {
-    if (width > 12) {
+    if (width > 20) {
       inputStyle.value.width = `${width}px`
     } else {
-      inputStyle.value.width = '12px'
+      inputStyle.value.width = '20px'
     }
   }
 
   const _value = ref(defaultValue.value)
+  const inputValue = ref('')
 
   const mergedFieldNames = computed(() => ({
     ...DEFAULT_FIELD_NAMES,
@@ -136,6 +143,7 @@
 
   const updateValue = (value: Array<string | number | TagData>) => {
     _value.value = value
+    console.log(_value)
     emit('update:modelValue', _value.value)
     emit('change', _value.value)
   }
@@ -148,9 +156,11 @@
 
   // input 响应事件
   const isFocus = ref(false)
+  const isActive = ref(false)
   const onInputFocus = (e: FocusEvent) => {
     if (disabled.value) return
     isFocus.value = true
+    isActive.value = true
     emit('focus', e)
   }
   const onInputChange = (e: Event) => {
@@ -158,22 +168,31 @@
     setInputWidth(value.length * 16)
   }
   const onInputBlur = (e: FocusEvent) => {
-    console.log(e)
-    if (disabled.value) return
-    if (e && e.preventDefault) e.preventDefault()
+    if (disabled.value || !e) return
     if (readonly.value) {
       isFocus.value = false
+      isActive.value = false
       return
     }
-    isFocus.value = false
-    emit('blur', e)
+    if (e && e.preventDefault) e.preventDefault()
+    isActive.value = false
+    if (!readonly.value) emit('blur', e)
   }
-  const onInputConfirm = (e: FocusEvent) => {
-    console.log(e)
+  const onInputConfirm = (e: InputEvent) => {
+    if (disabled.value) return
+    if (e && e.preventDefault) e.preventDefault()
+    const val = (e.target as any)?.value
+    if (val) {
+      updateValue([...computedValue.value, val])
+      inputValue.value = ''
+    }
   }
 
   defineExpose({
-    onInputBlur
+    toggleActive(active: boolean) {
+      isActive.value = active
+    },
+    blur: onInputBlur
   })
 </script>
 

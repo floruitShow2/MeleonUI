@@ -130,7 +130,7 @@ MeleonUI 为用户提供了自定义主题的方法，可以通过向 `ml-config
 
 ```ts
 // script
-import { configProviderInjectionKey } from '@meleon/uni-ui/lib/ml-config-provider/context'
+import type { ConfigProviderProps } from '@meleon/uni-ui'
 
 const themes: ConfigProviderProps['themes'] = {
     primary: '#D74B4B',
@@ -157,10 +157,9 @@ export type ColorType = 'primary' | 'info' | 'success' | 'warning' | 'danger'
 #### 四、更新日志
 
 - 1.1.7
-
-  - 新增 ml-config-provider 组件
-  - 调整项目接口，补全TS类型，新增 README 文档
-
+  - feat: 新增 ml-config-provider 组件
+  - docs: 调整项目接口，补全TS类型，新增 README 文档
+  
 - 1.1.8
 
   - feat: 新增 ml-cell、ml-cell-group 组件
@@ -182,7 +181,9 @@ export type ColorType = 'primary' | 'info' | 'success' | 'warning' | 'danger'
 - 1.1.10
 
   - fix: ml-checkbox 设置 direction 失效的问题
-  - fix: ml-image 预览层层级较低的问题
+  - fix: ml-image 预览层层级过低的问题
+  - fix: ml-select 无激活样式的问题
+  - fix: ml-input-tag 确认后未触发新增标签
 
 
 ### 组件
@@ -1267,7 +1268,7 @@ const showMessage = (type: MessageOptions['type']) => {
 </template>
 
 <script lang="ts" setup>
-    import type { FileItem, UploaderInstance } from '@/ml-ui/lib/ml-uploader'
+    import type { FileItem, UploaderInstance } from '@meleon/uni-ui/ml-uploader'
     
     const fileList = ref<FileItem[]>([])
     const handleDelete = () => {

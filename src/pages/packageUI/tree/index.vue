@@ -1,7 +1,7 @@
 <template>
   <view class="uni_class">
-    <MlNavigator
-      title="MlTree"
+    <ml-navigator
+      title="ml-tree"
       title-color="#FFFFFF"
       has-back
       icon-color="#FFFFFF"
@@ -51,7 +51,6 @@
 <script setup lang="ts">
   import { ref, computed } from 'vue'
   import { useAppStore } from '@/store'
-  import MlNavigator from '@/ml-ui/lib/ml-navigator/index.vue'
   import type {
     TreeDataEntity,
     TreeCheckPayload,

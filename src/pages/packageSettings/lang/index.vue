@@ -1,6 +1,6 @@
 <template>
   <view class="locale-selector">
-    <MlNavigator
+    <ml-navigator
       title="locale"
       title-color="#FFFFFF"
       has-back
@@ -15,11 +15,11 @@
         @click="selectedLocale = locale"
       >
         <text>{{ label }}</text>
-        <MlIcon v-show="selectedLocale === locale" name="ml-selected" :size="22" color="#A0E548" />
+        <ml-icon v-show="selectedLocale === locale" name="ml-selected" :size="22" color="#A0E548" />
       </view>
-      <MlButton type="primary" size="medium" style="width: 100%" @click="handleLocaleChange">
+      <ml-button type="primary" size="medium" style="width: 100%" @click="handleLocaleChange">
         确认选择
-      </MlButton>
+      </ml-button>
     </view>
   </view>
 </template>
@@ -27,9 +27,6 @@
 <script setup lang="ts">
   import { ref, computed, onMounted } from 'vue'
   import { useAppStore } from '@/store'
-  import MlNavigator from '@/ml-ui/lib/ml-navigator/index.vue'
-  import MlIcon from '@/ml-ui/lib/ml-icon/index.vue'
-  import MlButton from '@/ml-ui/lib/ml-button/index.vue'
   import type { AppState } from '@/store/modules/app/type'
 
   const appStore = useAppStore()

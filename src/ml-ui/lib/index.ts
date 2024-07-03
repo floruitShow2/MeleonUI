@@ -89,7 +89,7 @@ export type {
 } from './ml-tree'
 
 export { default as Uploader } from './ml-uploader'
-export type { UploaderInstance, UploaderProps } from './ml-uploader'
+export type { UploaderInstance, UploaderProps, FileItem } from './ml-uploader'
 
 // 导入 components 类型声明
 export type {} from './components'

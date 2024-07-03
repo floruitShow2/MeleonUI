@@ -27,7 +27,7 @@
         :focus="isFocus"
         :placeholder="placeholder"
         placeholder-class="ml-input-placeholder"
-        :disabled="readonly || disabled"
+        :disabled="disabled || readonly"
         @blur="onInputBlur"
         @input="onInput"
       />
@@ -122,10 +122,14 @@
   })
 
   const className = computed(() => {
-    return cs(prefix.value, [`${prefix.value}-${size.value}`], {
-      'is-disabled': disabled.value,
-      'is-focus': isFocus.value
-    })
+    return cs(
+      prefix.value,
+      [`${prefix.value}-${size.value}`],
+      {
+        [`${prefix.value}--disabled`]: disabled.value,
+        [`${prefix.value}--actived`]: isActive.value
+      }
+    )
   })
 
   const { themeColors } = useTheme()
@@ -143,11 +147,13 @@
   onMounted(() => {
     // 初始化选中状态
     isFocus.value = autoFocus.value
+    isActive.value = autoFocus.value
     // 初始化输入框类型
     inputType.value = type.value
   })
 
   const isFocus = ref<boolean>(false)
+  const isActive = ref<boolean>(false)
   const isOverlayShow = ref<boolean>(false)
 
   const targetPosition = ref({
@@ -203,6 +209,7 @@
     }
     if (!readonly.value) {
       isFocus.value = true
+      isActive.value = true
       changeFocusStyle(e)
     }
     emit('focus')
@@ -219,6 +226,7 @@
     // if (e) e.preventDefault()
     if (readonly.value) {
       isFocus.value = false
+      isActive.value = false
       return
     }
     if (disabled.value || !e) return
@@ -243,6 +251,7 @@
       animationData.value = animation.export()
     }
     isFocus.value = false
+    isActive.value = false
     emit('update:modelValue', value.toString())
     emit('blur', value)
   }
@@ -256,7 +265,11 @@
 
   defineExpose({
     changeFocusStyle,
-    onInputBlur
+    toggleActive(active: boolean) {
+      isActive.value = active
+      console.log(isActive)
+    },
+    blur: onInputBlur
   })
 </script>
 

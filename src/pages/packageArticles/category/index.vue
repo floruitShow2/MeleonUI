@@ -1,6 +1,6 @@
 <template>
   <view :class="prefix">
-    <MlNavigator
+    <ml-navigator
       title="全部分类"
       title-color="#FFFFFF"
       has-back
@@ -12,9 +12,9 @@
       <view :class="`${prefix}-wrapper-category active`">
         <view class="title-container">
           <text class="title">我的频道【{{ allowDrag ? '长按可拖拽' : '点击进入' }}】</text>
-          <MlButton type="text" size="mini" status="normal" @click="handleStartEdit">
+          <ml-button type="text" size="mini" status="normal" @click="handleStartEdit">
             {{ allowDrag ? '取消编辑' : '编辑' }}
-          </MlButton>
+          </ml-button>
         </view>
         <view class="category-container">
           <BasicDrag
@@ -25,20 +25,20 @@
             :disable-drag="!allowDrag"
           >
             <template #item="{ element, width }">
-              <MlButton
+              <ml-button
                 type="secondary"
                 size="small"
                 :disabled="allowDrag"
                 :style="{ width: `${width}px` }"
               >
                 {{ element.label }}
-                <MlIcon
+                <ml-icon
                   v-show="allowDrag"
                   name="ml-close"
                   :size="16"
                   @click.stop="handleItemClose(element)"
                 />
-              </MlButton>
+              </ml-button>
             </template>
           </BasicDrag>
         </view>
@@ -51,7 +51,7 @@
           </text>
         </view>
         <view class="category-container">
-          <MlButton
+          <ml-button
             v-for="item in inactiveCategories"
             :key="item.value"
             type="secondary"
@@ -61,8 +61,8 @@
             @click.stop="handleItemAdd(item)"
           >
             {{ item.label }}
-            <MlIcon v-show="allowDrag" name="ml-plus" :size="16"></MlIcon>
-          </MlButton>
+            <ml-icon v-show="allowDrag" name="ml-plus" :size="16"></ml-icon>
+          </ml-button>
         </view>
       </view>
     </view>
@@ -72,9 +72,6 @@
 <script setup lang="ts">
   import { ref, computed, onMounted } from 'vue'
   import { useAppStore } from '@/store'
-  import MlNavigator from '@/ml-ui/lib/ml-navigator/index.vue'
-  import MlButton from '@/ml-ui/lib/ml-button/index.vue'
-  import MlIcon from '@/ml-ui/lib/ml-icon/index.vue'
   import BasicDrag from '@/components/basic-drag/index.vue'
 
   const appStore = useAppStore()

@@ -1,6 +1,6 @@
 <template>
   <view class="article-view">
-    <MlNavigator
+    <ml-navigator
       title="MeleonUI"
       title-color="#FFFFFF"
       has-back
@@ -17,7 +17,6 @@
   import { ref, computed } from 'vue'
   import { onLoad } from '@dcloudio/uni-app'
   import { useAppStore } from '@/store'
-  import MlNavigator from '@/ml-ui/lib/ml-navigator/index.vue'
   import UAMarkdown from '@/components/ua-markdown/ua-markdown.vue'
   import { findArticleById } from './database'
   const appStore = useAppStore()

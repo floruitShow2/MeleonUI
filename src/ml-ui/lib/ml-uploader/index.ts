@@ -8,4 +8,5 @@ const install = (app: App) => {
 export type UploaderInstance = typeof import('./index.vue').default
 export type { UploaderProps, FileItem } from './index.interface'
 
+export { UploaderSourceTypeEnum } from './index.interface'
 export default { install }

@@ -1,7 +1,7 @@
 <template>
   <view class="uni_class">
-    <MlNavigator
-      title="Uploader"
+    <ml-navigator
+      title="ml-uploader"
       title-color="#FFFFFF"
       has-back
       icon-color="#FFFFFF"
@@ -29,8 +29,7 @@
 <script setup lang="ts">
   import { ref, computed } from 'vue'
   import { useAppStore } from '@/store'
-  import MlNavigator from '@/ml-ui/lib/ml-navigator/index.vue'
-  import type { FileItem, UploaderInstance } from '@/ml-ui/lib/ml-uploader'
+  import type { FileItem, UploaderInstance } from '@meleon/uni-ui'
 
   /**
    * @deprecated

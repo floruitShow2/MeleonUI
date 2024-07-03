@@ -1,42 +1,36 @@
 <template>
   <view class="category-view">
-    <MlNavigator title-color="#FFFFFF" icon-color="#FFFFFF" background-color="#7A98B3">
+    <ml-navigator title-color="#FFFFFF" icon-color="#FFFFFF" background-color="#7A98B3">
       <template #search>
-        <MlInput readonly size="mini" style="width: 100%" @focus="handleSearchFocus">
+        <ml-input readonly size="mini" style="width: 100%" @focus="handleSearchFocus">
           <template #prefix>
-            <MlIcon name="ml-search" :size="14" />
+            <ml-icon name="ml-search" :size="14" />
           </template>
-        </MlInput>
+        </ml-input>
       </template>
-    </MlNavigator>
+    </ml-navigator>
     <view class="category-view-wrapper" :style="wrapperStyle">
-      <MlTabs active="threejs">
+      <ml-tabs active="threejs">
         <template #right>
-          <MlIcon name="ml-filter" :size="18" @click="handleTabFilter" />
+          <ml-icon name="ml-filter" :size="18" @click="handleTabFilter" />
         </template>
-        <MlTab v-for="(articles, tab) in articlesList" :key="tab" :value="tab" :title="tab">
+        <ml-tab v-for="(articles, tab) in articlesList" :key="tab" :value="tab" :title="tab">
           <ArticleCard
             v-for="article in articles"
             :key="article.id"
             v-bind="article"
             @click="handleCardClick"
           />
-        </MlTab>
-      </MlTabs>
+        </ml-tab>
+      </ml-tabs>
     </view>
-    <MlTabbar />
+    <ml-tabbar />
   </view>
 </template>
 
 <script setup lang="ts">
   import { ref, computed } from 'vue'
   import { useAppStore } from '@/store'
-  import MlNavigator from '@/ml-ui/lib/ml-navigator/index.vue'
-  import MlTabbar from '@/ml-ui/lib/ml-tabbar/index.vue'
-  import MlTabs from '@/ml-ui/lib/ml-tabs/index.vue'
-  import MlTab from '@/ml-ui/lib/ml-tab/index.vue'
-  import MlInput from '@/ml-ui/lib/ml-input/index.vue'
-  import MlIcon from '@/ml-ui/lib/ml-icon/index.vue'
   import ArticleCard from '@/components/category/ArticleCard/index.vue'
   import ThreejsList from './articlesList/threejs'
   import VueList from './articlesList/vue'

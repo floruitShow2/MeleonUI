@@ -1,7 +1,7 @@
 <template>
   <view class="count-to-view">
-    <MlNavigator
-      title="ml-button"
+    <ml-navigator
+      title="ml-count-to"
       has-back
       icon-color="#FFFFFF"
       title-color="#FFFFFF"
@@ -111,9 +111,8 @@
 <script setup lang="ts">
   import { ref, computed } from 'vue'
   import { useAppStore } from '@/store'
-  import MlNavigator from '@/ml-ui/lib/ml-navigator/index.vue'
   import CodeBlock from '@/components/CodeBlock/index.vue'
-  import type { CountToInstance } from '@/ml-ui'
+  import type { CountToInstance } from '@meleon/uni-ui'
 
   const appStore = useAppStore()
   const wrapperStyle = computed(() => {

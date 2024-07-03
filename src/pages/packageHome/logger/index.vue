@@ -1,6 +1,6 @@
 <template>
   <view class="logger-view">
-    <MlNavigator
+    <ml-navigator
       title="更新日志"
       title-color="#FFFFFF"
       has-back
@@ -13,8 +13,8 @@
         <text class="desc">这里会有详细的功能更新及Bug修复记录</text>
       </view>
       <view class="logger-view-wrapper_list">
-        <MlTimeline reverse>
-          <MlTimelineItem v-for="log in logsData" :key="log.version">
+        <ml-timeline reverse>
+          <ml-timeline-item v-for="log in logsData" :key="log.version">
             <template #label>
               <view class="item-header">
                 <text class="item-header-version">{{ log.version }}</text>
@@ -37,8 +37,8 @@
                 </template>
               </view>
             </view>
-          </MlTimelineItem>
-        </MlTimeline>
+          </ml-timeline-item>
+        </ml-timeline>
       </view>
     </view>
   </view>
@@ -47,9 +47,6 @@
 <script setup lang="ts">
   import { computed, reactive } from 'vue'
   import { useAppStore } from '@/store'
-  import MlNavigator from '@/ml-ui/lib/ml-navigator/index.vue'
-  import MlTimeline from '@/ml-ui/lib/ml-timeline/index.vue'
-  import MlTimelineItem from '@/ml-ui/lib/ml-timeline-item/index.vue'
   import { formatToDate } from '@/utils/time'
   import Logs from './constants/logs'
 
