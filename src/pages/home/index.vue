@@ -7,7 +7,7 @@
       <ml-navigator
         :title="$t('home.navigation.title')"
         title-color="#FFFFFF"
-        background-color="#7A98B3"
+        background="#7A98B3"
       >
         <!-- <image class="image" src="../../assets/home/MeleonUI.png" mode="aspectFit" /> -->
       </ml-navigator>

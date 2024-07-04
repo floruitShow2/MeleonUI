@@ -5,7 +5,7 @@
       title-color="#FFFFFF"
       has-back
       icon-color="#FFFFFF"
-      background-color="#7A98B3"
+      background="#7A98B3"
     />
     <view class="tag-view-wrapper" :style="wrapperStyle">
       <CodeBlock :code="templateMap[0].templateCode">

@@ -5,7 +5,7 @@
       has-back
       icon-color="#FFFFFF"
       title-color="#FFFFFF"
-      background-color="#7A98B3"
+      background="#7A98B3"
     />
     <view class="count-to-view-wrapper" :style="wrapperStyle">
       <!-- 基础用法 -->

@@ -5,7 +5,7 @@
       title-color="#FFFFFF"
       has-back
       icon-color="#FFFFFF"
-      background-color="#7A98B3"
+      background="#7A98B3"
     />
     <view class="locale-selector-wrapper" :style="wrapperStyle">
       <view

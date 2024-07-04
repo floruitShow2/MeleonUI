@@ -4,7 +4,7 @@
       :title="$t('profile.navigation.title')"
       icon-color="#FFFFFF"
       title-color="#FFFFFF"
-      background-color="#7A98B3"
+      background="#7A98B3"
     />
     <view :class="`${prefix}-wrapper`" :style="wrapperStyle">
       <view :class="`${prefix}-wrapper-header`">

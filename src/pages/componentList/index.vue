@@ -5,7 +5,7 @@
       title-color="#FFFFFF"
       :has-back="false"
       icon-color="#FFFFFF"
-      background-color="#7A98B3"
+      background="#7A98B3"
     />
     <view
       class="components-container-list"
@@ -14,7 +14,15 @@
       }"
     >
       <view v-for="item in componentList" :key="item.name" class="bar" @click="onNavigate(item)">
-        {{ item.name }}
+        <view class="bar-label">
+          {{ item.name }}
+          <ml-tag
+            v-if="item.isNew"
+            model-value="新"
+            type="danger"
+            size="mini"
+          ></ml-tag>
+        </view>
         <MlIcon name="ml-arrow-right" color="#808080" />
       </view>
     </view>
@@ -34,6 +42,7 @@
   interface ComponentItemType {
     name: string
     path: string
+    isNew?: boolean
   }
   const componentList = ref<ComponentItemType[]>([
     { name: '头像 ml-avatar', path: '/pages/packageUI/avatar/index' },
@@ -46,9 +55,11 @@
     { name: '输入框 ml-input', path: '/pages/packageUI/input/index' },
     { name: '标签输入框 ml-input-tag', path: '/pages/packageUI/inputTag/index' },
     { name: '消息提示 ml-message', path: '/pages/packageUI/message/index' },
+    { name: '头部导航 ml-navigator', path: '/pages/packageUI/navigator/index', isNew: true },
     { name: '进度条 ml-progress', path: '/pages/packageUI/progress/index' },
     // { name: '滑动单元格 ml-swiper-cell', path: '../../package-WsUI/pages/swiperCell/swiperCell' },
     { name: '下拉选框 ml-select', path: '/pages/packageUI/select/index' },
+    { name: '开关 ml-switch', path: '/pages/packageUI/switch/index', isNew: true },
     { name: '导航栏 ml-tabs', path: '/pages/packageUI/tabs/index' },
     { name: '标签 ml-tag', path: '/pages/packageUI/tag/index' },
     { name: '表格 ml-table', path: '/pages/packageUI/table/index' },

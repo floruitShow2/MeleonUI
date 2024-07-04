@@ -1,6 +1,6 @@
 <template>
   <view class="category-view">
-    <ml-navigator title-color="#FFFFFF" icon-color="#FFFFFF" background-color="#7A98B3">
+    <ml-navigator title-color="#FFFFFF" icon-color="#FFFFFF" background="#7A98B3">
       <template #search>
         <ml-input readonly size="mini" style="width: 100%" @focus="handleSearchFocus">
           <template #prefix>

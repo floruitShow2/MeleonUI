@@ -11,6 +11,10 @@ export default defineConfig({
       {
         find: '@',
         replacement: resolve(__dirname, './src')
+      },
+      {
+        find: '@meleon/uni-ui',
+        replacement: resolve(__dirname, './src/ml-ui')
       }
     ]
   }

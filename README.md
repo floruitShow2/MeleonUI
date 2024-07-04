@@ -2,6 +2,15 @@
 
 #### 一、快速上手
 
+##### 演示
+使用微信扫描下方的小程序码，在线查看组件的渲染效果。
+
+[注：如果因为网络等原因，小程序码图片无法加载，也可以直接输入 `Meleon Uni-ui` 关键字查询]
+
+
+
+![image-20231007221035897](https://github.com/floruitShow2/MeleonUI/raw/90bee9322594d979af8749c6c626bcbada93ffda/src/assets/app/mpweixin-code.jpg)
+
 ##### 安装
 
 ```shell
@@ -116,7 +125,7 @@ MeleonUI 为用户提供了自定义主题的方法，可以通过向 `ml-config
 	<ml-navigator
 		:title="$t('home.navigation.title')"
 		title-color="#FFFFFF"
-		background-color="#7A98B3"
+		background="#7A98B3"
 	></ml-navigator>
 	<ml-button
 		type="primary"
@@ -184,6 +193,7 @@ export type ColorType = 'primary' | 'info' | 'success' | 'warning' | 'danger'
   - fix: ml-image 预览层层级过低的问题
   - fix: ml-select 无激活样式的问题
   - fix: ml-input-tag 确认后未触发新增标签
+  - docs: @meleon/uni-ui 上线微信小程序，可体验各个组件的使用效果【微信扫描“演示”小程序码】
 
 
 ### 组件
@@ -936,6 +946,72 @@ export default {
 </ml-table>
 ```
 
+#### 消息提示 Message
+
+###### 基本使用
+
+```html
+<ml-message ref="messageRef" />
+```
+
+```ts
+import type { MessageInstance, MessageOptions } from '@meleon/uni-ui'
+
+const messageRef = ref<MessageInstance>()
+
+const showMessage = (type: MessageOptions['type']) => {
+    if (!messageRef.value || !type) return
+    messageRef.value[type]({
+      content: type + idx.value++,
+      duration: 2000
+    })
+}
+```
+
+#### 头部导航栏 Navigator
+
+###### 基本使用
+
+```html
+<ml-navigator
+	title="ml-navigator"
+	title-color="#FFFFFF"
+	has-back
+	icon-color="#FFFFFF"
+	background="#7A98B3"
+/>
+```
+
+###### APIs
+
+| prop       | type                       | default                | desc                             |
+| ---------- | -------------------------- | ---------------------- | -------------------------------- |
+| background | string                     | var(--primary-color-6) | 导航栏背景，支持纯色、渐变或图片 |
+| title      | string                     | ''                     | 导航栏标题                       |
+| titleColor | string                     | #FFFFFF                | 标题颜色                         |
+| titleStyle | Object                     | {}                     | 标题样式                         |
+| hasBack    | boolean                    | true                   | 是否有回退图标                   |
+| iconColor  | string                     | #FFFFFF                | 图标颜色                         |
+| iconStyle  | Object                     | {}                     | 图标样式                         |
+| tools      | Array<NavigatorToolEntity> | []                     | 图标列表                         |
+
+`NavigatorToolEntity`
+
+| prop  | type                | desc                                         |
+| ----- | ------------------- | -------------------------------------------- |
+| icon  | string              | 图标名                                       |
+| color | string              | 图标颜色                                     |
+| type  | return \| navigator | 点击图标的事件的类型                         |
+| delta | number[可选]        | type = return 时，delta 表示回退的页面数     |
+| path  | string[可选]        | type = navigator 时，path 表示跳转的页面地址 |
+
+###### Slots
+
+| name    | desc         |
+| ------- | ------------ |
+| icon    | 图标插槽     |
+| default | 主体内容插槽 |
+
 #### 时间轴 TimeLine
 
 ###### 基本使用
@@ -965,28 +1041,6 @@ export default {
         <view>The third milestone </view>
     </ml-timeline-item>
 </ml-timeline>
-```
-
-#### 消息提示 Message
-
-###### 基本使用
-
-```html
-<ml-message ref="messageRef" />
-```
-
-```ts
-import type { MessageInstance, MessageOptions } from '@meleon/uni-ui'
-
-const messageRef = ref<MessageInstance>()
-
-const showMessage = (type: MessageOptions['type']) => {
-    if (!messageRef.value || !type) return
-    messageRef.value[type]({
-      content: type + idx.value++,
-      duration: 2000
-    })
-}
 ```
 
 #### 进度条 Progress

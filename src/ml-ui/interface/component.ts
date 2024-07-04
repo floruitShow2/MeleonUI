@@ -5,3 +5,7 @@ export interface MlComponent {
   ui: Record<string, number>
   themeColors?: Partial<Record<ColorKey, string>>
 }
+
+export type MlStyle = {
+  [key in keyof CSSStyleDeclaration]?: any
+}

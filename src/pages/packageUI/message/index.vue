@@ -5,12 +5,12 @@
       has-back
       icon-color="#FFFFFF"
       title-color="#FFFFFF"
-      background-color="#7A98B3"
+      background="#7A98B3"
     />
     <view class="message-view-wrapper" :style="wrapperStyle">
       <ml-message ref="messageRef" />
       <!-- 基础用法 -->
-      <CodeBlock :code="templateMap[0].templateCode">
+      <code-block :code="templateMap[0].templateCode">
         <template #title>
           <text>{{ templateMap[0].title }}</text>
         </template>
@@ -34,9 +34,9 @@
             <ml-button type="secondary" @click="showMessage('info')">Info</ml-button>
           </view>
         </template>
-      </CodeBlock>
+      </code-block>
       <!-- 底部展示 -->
-      <CodeBlock :code="templateMap[1].templateCode">
+      <code-block :code="templateMap[1].templateCode">
         <template #title>
           <text>{{ templateMap[1].title }}</text>
         </template>
@@ -59,9 +59,9 @@
             </ml-button>
           </view>
         </template>
-      </CodeBlock>
+      </code-block>
       <!-- 持续时间 -->
-      <CodeBlock :code="templateMap[2].templateCode">
+      <code-block :code="templateMap[2].templateCode">
         <template #title>
           <text>{{ templateMap[2].title }}</text>
         </template>
@@ -76,9 +76,9 @@
             <ml-button type="primary" @click="showMessageDuration">Primary</ml-button>
           </view>
         </template>
-      </CodeBlock>
+      </code-block>
       <!-- 可手动关闭 -->
-      <CodeBlock :code="templateMap[3].templateCode">
+      <code-block :code="templateMap[3].templateCode">
         <template #title>
           <text>{{ templateMap[3].title }}</text>
         </template>
@@ -92,7 +92,7 @@
             <ml-button type="primary" @click="showMessageClosable">Primary</ml-button>
           </view>
         </template>
-      </CodeBlock>
+      </code-block>
     </view>
   </view>
 </template>
