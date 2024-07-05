@@ -12,7 +12,7 @@
         <template v-if="isEditing">
           <Input
             :class="`${prefix}-input`"
-            :model-value="afterValue"
+            :model-value="afterValue?.toString()"
             auto-focus
             size="mini"
             @blur="handleValueChange"
@@ -52,6 +52,21 @@
         </slot>
       </view>
     </template>
+    <template v-else-if="type === CellTypeEnum.SWITCH">
+      <view :class="`${prefix}--left`">
+        <slot name="label">
+          <text :class="`${prefix}-label`">{{ label }}</text>
+          <text :class="`${prefix}-desc`">{{ description }}</text>
+        </slot>
+      </view>
+      <view :class="cs(`${prefix}--right`)">
+        <Switch
+          :model-value="!!afterValue"
+          :disabled="disabled"
+          @change="handleValueChange"
+        />
+      </view>
+    </template>
   </view>
 </template>
 
@@ -64,6 +79,7 @@
   import Icon from '../ml-icon/index.vue'
   import Input from '../ml-input/index.vue'
   import MlButton from '../ml-button/index.vue'
+  import Switch from '../ml-switch/index.vue'
   import { cellGroupInjectionKey } from '../ml-cell-group/context'
 
   const props = defineProps({
@@ -76,7 +92,7 @@
       default: ''
     },
     value: {
-      type: String,
+      type: String as PropType<CellProps['value']>,
       default: ''
     },
     type: {
@@ -110,7 +126,6 @@
   const globalCtx = inject(cellGroupInjectionKey, null)
   const idx = ref(-1)
   onMounted(() => {
-    console.log(globalCtx)
     if (!globalCtx) {
       idx.value = -1
     } else {

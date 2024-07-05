@@ -905,7 +905,28 @@ export default {
 </ml-select>
 ```
 
+#### 开关 Switch
 
+###### 基本使用
+
+```html
+<ml-switch v-model="isActive"></ml-switch>
+
+<ml-switch v-model="isActive" type="circle"></ml-switch>
+
+<ml-switch v-model="isActive" type="line"></ml-switch>
+```
+
+###### APIs
+
+| prop           | type                                             | default                | desc           |
+| -------------- | ------------------------------------------------ | ---------------------- | -------------- |
+| modelValue     | boolean                                          | false                  | 是否开启       |
+| type           | circle \| square \|line                          | square                 | 开关类型       |
+| checkedColor   | string                                           | var(--info-color-7)    | 激活状态颜色   |
+| uncheckedColor | string                                           | var(--primary-color-6) | 未激活状态颜色 |
+| disabled       | boolean                                          | false                  | 是否禁用       |
+| beforeSwitch   | (newVal: boolean) => boolean \| Promise<boolean> | () => true             | 切换前触发     |
 
 #### 表格 Table
 

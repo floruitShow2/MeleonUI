@@ -40,6 +40,14 @@
                 @btn-click="handleClick"
               ></ml-cell>
               <ml-cell
+                :type="CellTypeEnum.SWITCH"
+                label="开关单元格"
+                description="尝试下开关"
+                :value="false"
+                :disabled="false"
+                style="width: 100%"
+              ></ml-cell>
+              <ml-cell
                 :type="CellTypeEnum.NAV"
                 label="测试回到首页"
                 value="回首页"

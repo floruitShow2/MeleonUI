@@ -57,6 +57,9 @@ export type { ProgressInstance, ProgressProps } from './ml-progress'
 export { default as Select } from './ml-select'
 export type { SelectInstance, SelectProps } from './ml-select'
 
+export { default as Switch } from './ml-switch'
+export type { SwitchInstance, SwitchProps } from './ml-switch'
+
 export { default as Tab } from './ml-tab'
 export type { TabInstance, TabData } from './ml-tab'
 

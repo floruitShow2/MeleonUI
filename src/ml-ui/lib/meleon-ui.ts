@@ -18,6 +18,7 @@ import MlNavigator from './ml-navigator'
 import MlOption from './ml-option'
 import MlProgress from './ml-progress'
 import MlSelect from './ml-select'
+import MlSwitch from './ml-switch'
 import MlTab from './ml-tab'
 import MlTable from './ml-table'
 import MlTableColumn from './ml-table-column'
@@ -48,6 +49,7 @@ const components: Record<string, Plugin> = {
   MlOption,
   MlProgress,
   MlSelect,
+  MlSwitch,
   MlTab,
   MlTable,
   MlTableColumn,

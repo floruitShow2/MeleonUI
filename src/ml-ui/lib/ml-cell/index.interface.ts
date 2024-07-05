@@ -25,7 +25,7 @@ export interface CellProps {
   /**
    * @description 单元格右侧展示的文本
    */
-  value?: string
+  value?: string | number | boolean
   /**
    * @description 是否禁用
    */

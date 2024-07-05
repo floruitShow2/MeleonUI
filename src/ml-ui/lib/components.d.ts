@@ -18,6 +18,7 @@ import type {
   OptionInstance,
   ProgressInstance,
   SelectInstance,
+  SwitchInstance,
   TabInstance,
   TabsInstance,
   TableInstance,
@@ -49,6 +50,7 @@ declare module '@vue/runtime-core' {
     MlOption: OptionInstance
     MlProgress: ProgressInstance
     MlSelect: SelectInstance
+    MlSwitch: SwitchInstance
     MlTab: TabInstance
     MlTable: TableInstance
     MlTableColumn: TableColumnInstance
