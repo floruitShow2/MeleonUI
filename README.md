@@ -168,12 +168,10 @@ export type ColorType = 'primary' | 'info' | 'success' | 'warning' | 'danger'
 - 1.1.7
   - feat: 新增 ml-config-provider 组件
   - docs: 调整项目接口，补全TS类型，新增 README 文档
-  
 - 1.1.8
 
   - feat: 新增 ml-cell、ml-cell-group 组件
   - feat: 新增 ml-uploader 组件
-
 - 1.1.9
 
   - fix: ml-loading 图标缺失，ml-button 组件设置 loading 不生效
@@ -186,7 +184,6 @@ export type ColorType = 'primary' | 'info' | 'success' | 'warning' | 'danger'
   - feat: ml-tree 组件基本功能完善，支持文本选中、复选框选择、自定义标题节点等
   - fix: 去除 checkbox 组件无文本时样式的偏移
   - feat: ml-tree 组件新增对外暴露的 expand、check 及 select 等方法
-
 - 1.1.10
 
   - fix: ml-checkbox 设置 direction 失效的问题
@@ -194,7 +191,12 @@ export type ColorType = 'primary' | 'info' | 'success' | 'warning' | 'danger'
   - fix: ml-select 无激活样式的问题
   - fix: ml-input-tag 确认后未触发新增标签
   - docs: @meleon/uni-ui 上线微信小程序，可体验各个组件的使用效果【微信扫描“演示”小程序码】
-
+- 1.1.11
+  - feat: 调整 ml-navigator 组件的结构，完善功能
+  - feat: 添加 ml-switch 组件
+  - feat: ml-cell 组件添加 Cell 类型
+  - fix: ml-cell 组件传入的 value 发生变化时未触发页面更新
+  - feat: 新增 ml-list 组件，初步支持基础列表和虚拟列表功能
 
 ### 组件
 

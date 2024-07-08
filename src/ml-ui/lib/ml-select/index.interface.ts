@@ -1,4 +1,4 @@
 export interface SelectProps {
-  size: MlDesign.Size
+  size: Meleon.MlSize
   direction: 'top' | 'bottom'
 }

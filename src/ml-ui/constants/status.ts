@@ -1,4 +1,4 @@
-// const MlStatusMap: Record<MlDesign.Status, string> = {
+// const MlStatusMap: Record<Meleon.MlStatus, string> = {
 //   primary: 'var(--primary-color-6)',
 //   info: 'var(--info-color-8)',
 //   warning: 'var(--warning-color-6)',

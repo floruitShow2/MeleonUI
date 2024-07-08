@@ -199,8 +199,8 @@
     }
   }
 
-  const curSize = ref<MlDesign.Size>('small')
-  const changeSize = (size: MlDesign.Size) => {
+  const curSize = ref<Meleon.MlSize>('small')
+  const changeSize = (size: Meleon.MlSize) => {
     curSize.value = size
   }
 

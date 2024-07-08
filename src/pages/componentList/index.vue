@@ -16,12 +16,7 @@
       <view v-for="item in componentList" :key="item.name" class="bar" @click="onNavigate(item)">
         <view class="bar-label">
           {{ item.name }}
-          <ml-tag
-            v-if="item.isNew"
-            model-value="新"
-            type="danger"
-            size="mini"
-          ></ml-tag>
+          <ml-tag v-if="item.isNew" model-value="新" type="danger" size="mini"></ml-tag>
         </view>
         <MlIcon name="ml-arrow-right" color="#808080" />
       </view>
@@ -54,6 +49,7 @@
     { name: '图标 ml-icon', path: '/pages/packageUI/icon/index' },
     { name: '输入框 ml-input', path: '/pages/packageUI/input/index' },
     { name: '标签输入框 ml-input-tag', path: '/pages/packageUI/inputTag/index' },
+    { name: '列表 ml-list', path: '/pages/packageUI/list/index', isNew: true },
     { name: '消息提示 ml-message', path: '/pages/packageUI/message/index' },
     { name: '头部导航 ml-navigator', path: '/pages/packageUI/navigator/index', isNew: true },
     { name: '进度条 ml-progress', path: '/pages/packageUI/progress/index' },

@@ -53,6 +53,9 @@ export const generateDeviceUI = function () {
       statusBarHeight,
       menuButtonWidth,
       customBarHeight,
+      /**
+       * @description 减去 头部 + 底部 导航栏的页面高度
+       */
       contentHeight,
       tabbarHeight,
       bottomBarHeight,

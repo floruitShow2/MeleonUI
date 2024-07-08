@@ -60,7 +60,7 @@
       type: String,
       required: true
     },
-    size: { type: String as PropType<MlDesign.Size>, default: 'small' },
+    size: { type: String as PropType<Meleon.MlSize>, default: 'small' },
     type: { type: String, default: 'text' },
     useVirtualInput: {
       type: Boolean,

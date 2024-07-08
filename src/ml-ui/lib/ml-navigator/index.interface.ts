@@ -1,5 +1,3 @@
-import type { MlStyle } from "@meleon/uni-ui/interface/component"
-
 export interface NavigatorToolEntity {
   icon: string
   color: string
@@ -24,11 +22,11 @@ export interface NavigatorProps {
   /**
    * @description 标题样式
    */
-  titleStyle: MlStyle
+  titleStyle: Meleon.MlStyle
   /**
    * @description 图标样式
    */
-  iconStyle: MlStyle
+  iconStyle: Meleon.MlStyle
   /**
    * @description 是否展示返回按钮
    */

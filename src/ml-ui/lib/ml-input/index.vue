@@ -59,7 +59,7 @@
       type: [String, Number],
       default: ''
     },
-    size: { type: String as PropType<MlDesign.Size>, default: 'small' },
+    size: { type: String as PropType<Meleon.MlSize>, default: 'small' },
     type: { type: String, default: 'text' },
     useVirtualInput: {
       type: Boolean,
@@ -122,14 +122,10 @@
   })
 
   const className = computed(() => {
-    return cs(
-      prefix.value,
-      [`${prefix.value}-${size.value}`],
-      {
-        [`${prefix.value}--disabled`]: disabled.value,
-        [`${prefix.value}--actived`]: isActive.value
-      }
-    )
+    return cs(prefix.value, [`${prefix.value}-${size.value}`], {
+      [`${prefix.value}--disabled`]: disabled.value,
+      [`${prefix.value}--actived`]: isActive.value
+    })
   })
 
   const { themeColors } = useTheme()

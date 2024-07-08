@@ -42,6 +42,9 @@ export type { InputInstance } from './ml-input'
 export { default as InputTag } from './ml-input-tag'
 export type { InputTagInstance, InputTagProps } from './ml-input-tag'
 
+export { default as List } from './ml-list'
+export type { ListInstance, ListProps } from './ml-list'
+
 export { default as Message, MlMessage } from './ml-message'
 export type { MessageInstance, MessageOptions, MessageProps } from './ml-message'
 

@@ -58,14 +58,14 @@
   import { MlStatusEnum } from '@meleon/uni-ui/constants'
   import type { ProgressProps } from './index.interface'
 
-  const DEFAULT_WIDTH: Record<MlDesign.Size, number> = {
+  const DEFAULT_WIDTH: Record<Meleon.MlSize, number> = {
     mini: 16,
     small: 48,
     medium: 64,
     large: 80
   }
 
-  const DEFAULT_STROKE_WIDTH: Record<MlDesign.Size, number> = {
+  const DEFAULT_STROKE_WIDTH: Record<Meleon.MlSize, number> = {
     mini: 4,
     small: 3,
     medium: 4,

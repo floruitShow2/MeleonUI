@@ -60,18 +60,14 @@
         </slot>
       </view>
       <view :class="cs(`${prefix}--right`)">
-        <Switch
-          :model-value="!!afterValue"
-          :disabled="disabled"
-          @change="handleValueChange"
-        />
+        <Switch :model-value="!!afterValue" :disabled="disabled" @change="handleValueChange" />
       </view>
     </template>
   </view>
 </template>
 
 <script setup lang="ts">
-  import { computed, ref, toRefs, onMounted, inject } from 'vue'
+  import { ref, toRefs, computed, watch, onMounted, inject } from 'vue'
   import type { PropType } from 'vue'
   import { useTheme } from '@meleon/uni-ui/hooks'
   import { cs, useDeepClone } from '@meleon/uni-ui/utils'
@@ -116,7 +112,7 @@
       default: ''
     }
   })
-  const { type, label, description, value, disabled, url } = toRefs(props)
+  const { type, label, description, value: modelValue, disabled, url } = toRefs(props)
 
   /**
    * @description textCell 编辑后，switchCell 切换后触发 change 事件
@@ -143,7 +139,10 @@
     })
   })
 
-  const afterValue = ref(value.value)
+  const afterValue = ref(modelValue.value)
+  watch(modelValue, (newVal) => {
+    afterValue.value = newVal
+  })
 
   const isEditing = ref<boolean>(false)
   const handleEditClick = () => {

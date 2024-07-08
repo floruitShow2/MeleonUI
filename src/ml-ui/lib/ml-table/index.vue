@@ -313,7 +313,7 @@
       default: false
     },
     size: {
-      type: String as PropType<MlDesign.Size>,
+      type: String as PropType<Meleon.MlSize>,
       default: 'small'
     },
     height: { type: Number },

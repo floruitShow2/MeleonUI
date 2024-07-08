@@ -140,7 +140,7 @@
     }
   ])
 
-  const selectSize = ref<MlDesign.Size>('small')
+  const selectSize = ref<Meleon.MlSize>('small')
 </script>
 
 <style lang="less">

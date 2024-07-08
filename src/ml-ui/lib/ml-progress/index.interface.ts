@@ -22,7 +22,7 @@ export interface ProgressProps {
   /**
    * @description 尺寸
    */
-  size: MlDesign.Size
+  size: Meleon.MlSize
   /**
    * @description 进度条长度
    */
@@ -35,7 +35,7 @@ export interface ProgressProps {
   /**
    * @description 进度条状态
    */
-  status: MlDesign.Status
+  status: Meleon.MlStatus
   /**
    * @description 激活状态线段颜色
    */

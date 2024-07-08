@@ -36,8 +36,8 @@
   import MlInput from '../ml-input/index.vue'
 
   const props = defineProps({
-    type: { type: String as PropType<MlDesign.Status>, default: 'info' },
-    size: { type: String as PropType<MlDesign.Size>, default: 'small' },
+    type: { type: String as PropType<Meleon.MlStatus>, default: 'info' },
+    size: { type: String as PropType<Meleon.MlSize>, default: 'small' },
     modelValue: { type: String, required: true },
     plain: { type: Boolean, default: false },
     bordered: { type: Boolean, default: false },

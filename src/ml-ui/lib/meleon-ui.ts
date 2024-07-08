@@ -13,6 +13,7 @@ import MlIcon from './ml-icon'
 import MlImage from './ml-image'
 import MlInput from './ml-input'
 import MlInputTag from './ml-input-tag'
+import MlList from './ml-list'
 import MlMessage from './ml-message'
 import MlNavigator from './ml-navigator'
 import MlOption from './ml-option'
@@ -44,6 +45,7 @@ const components: Record<string, Plugin> = {
   MlImage,
   MlInput,
   MlInputTag,
+  MlList,
   MlMessage,
   MlNavigator,
   MlOption,

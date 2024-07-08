@@ -180,7 +180,7 @@
     }
   ])
 
-  const inputSize = ref<MlDesign.Size>('mini')
+  const inputSize = ref<Meleon.MlSize>('mini')
 </script>
 
 <style lang="less">

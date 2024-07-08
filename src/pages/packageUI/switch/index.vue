@@ -13,7 +13,9 @@
           <text>开关类型</text>
         </template>
         <template #description>
-          <text>ml-switch组件用于开启/关闭状态切换，支持 circle、square[默认]、line 三种类型。</text>
+          <text
+            >ml-switch组件用于开启/关闭状态切换，支持 circle、square[默认]、line 三种类型。</text
+          >
         </template>
         <template #demo>
           <view class="switch-wrapper">
@@ -65,10 +67,7 @@
           <text>设置 disabled 判断是否禁用开关 </text>
         </template>
         <template #demo>
-          <ml-switch
-            v-model="isActive"
-            disabled
-          ></ml-switch>
+          <ml-switch v-model="isActive" disabled></ml-switch>
         </template>
       </code-block>
 
@@ -80,10 +79,7 @@
           <text> 传入 beforeSwitch 函数，根据返回值判断是否触发切换</text>
         </template>
         <template #demo>
-          <ml-switch
-            v-model="isActive"
-            :before-switch="beforeSwitch"
-          ></ml-switch>
+          <ml-switch v-model="isActive" :before-switch="beforeSwitch"></ml-switch>
         </template>
       </code-block>
     </view>

@@ -2,7 +2,7 @@ import type { App } from 'vue'
 import _Switch from './index.vue'
 
 const install = (app: App) => {
-    app.component('MlSwitch', _Switch)
+  app.component('MlSwitch', _Switch)
 }
 
 export type SwitchInstance = typeof import('./index.vue').default

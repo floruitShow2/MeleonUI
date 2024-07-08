@@ -24,7 +24,7 @@ export interface TableEntityType {
   stripe: boolean
   loading: boolean
   height: number
-  size: MlDesign.Size
+  size: Meleon.MlSize
   refresherEnabled: boolean
   refresherInterval: number
   cellStyle: (e: {

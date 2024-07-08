@@ -4,11 +4,7 @@
       <!-- 消息提示 -->
       <ml-message ref="messageRef" />
       <!-- 导航栏 -->
-      <ml-navigator
-        :title="$t('home.navigation.title')"
-        title-color="#FFFFFF"
-        background="#7A98B3"
-      >
+      <ml-navigator :title="$t('home.navigation.title')" title-color="#FFFFFF" background="#7A98B3">
         <!-- <image class="image" src="../../assets/home/MeleonUI.png" mode="aspectFit" /> -->
       </ml-navigator>
       <!-- 主体 -->

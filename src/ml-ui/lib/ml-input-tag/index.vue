@@ -92,14 +92,10 @@
   const prefix = ref('ml-input-tag')
 
   const className = computed(() => {
-    return cs(
-      prefix.value,
-      [`${prefix.value}-${size.value}`],
-      {
-        [`${prefix.value}--disabled`]: disabled.value,
-        [`${prefix.value}--actived`]: isActive.value
-      }
-    )
+    return cs(prefix.value, [`${prefix.value}-${size.value}`], {
+      [`${prefix.value}--disabled`]: disabled.value,
+      [`${prefix.value}--actived`]: isActive.value
+    })
   })
 
   const inputStyle = ref<Record<string, any>>({

@@ -186,7 +186,7 @@ const modelValue = ref(['test1', 'test2', 'test3', 'test4', 'test5', 'test6', 't
     }
   ])
 
-  const inputSize = ref<MlDesign.Size>('mini')
+  const inputSize = ref<Meleon.MlSize>('mini')
 </script>
 
 <style lang="less">

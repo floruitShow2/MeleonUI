@@ -13,6 +13,7 @@ import type {
   ImageInstance,
   InputInstance,
   InputTagInstance,
+  ListInstance,
   MessageInstance,
   NavigatorInstance,
   OptionInstance,
@@ -45,6 +46,7 @@ declare module '@vue/runtime-core' {
     MlImage: ImageInstance
     MlInput: InputInstance
     MlInputTag: InputTagInstance
+    MlList: ListInstance
     MlMessage: MessageInstance
     MlNavigator: NavigatorInstance
     MlOption: OptionInstance

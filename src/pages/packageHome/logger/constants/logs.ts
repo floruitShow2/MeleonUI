@@ -113,7 +113,7 @@ const Logs: LogInstanceType[] = [
       feature: [],
       optimize: [
         {
-          label: '添加<code>ml-timeline</code>和<code>ml-timeline-item</code>组件',
+          label: '添加<code>ml-timeline</code>和<code>ml-timeline-item</code>组件'
         }
       ],
       bugFix: [],
@@ -127,10 +127,10 @@ const Logs: LogInstanceType[] = [
     content: {
       feature: [
         {
-          label: 'feat: 新增 ml-config-provider 组件',
+          label: 'feat: 新增 ml-config-provider 组件'
         },
         {
-          label: 'docs: 调整项目接口，补全TS类型，新增 README 文档',
+          label: 'docs: 调整项目接口，补全TS类型，新增 README 文档'
         }
       ],
       optimize: [],
@@ -220,7 +220,7 @@ const Logs: LogInstanceType[] = [
       ],
       style: []
     }
-  },
+  }
 ]
 
 export default Logs

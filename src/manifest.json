@@ -58,6 +58,7 @@
             "es6" : true
         },
         "usingComponents" : true,
+        "scopedSlotsCompiler": "legacy",
         "optimization" : {
             "subPackages" : true,
             "ignore": [

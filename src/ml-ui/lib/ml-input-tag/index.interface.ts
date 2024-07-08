@@ -1,6 +1,6 @@
 export interface InputTagProps {
-  size: MlDesign.Size
-  tagType: MlDesign.Status
+  size: Meleon.MlSize
+  tagType: Meleon.MlStatus
 }
 
 export interface TagData {
