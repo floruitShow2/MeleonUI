@@ -61,13 +61,13 @@
       key: 'home',
       path: '/pages/home/index'
     },
-    {
-      icon: 'ml-tab-article',
-      selectIcon: 'ml-tab-article-select',
-      label: '专题',
-      key: 'articles',
-      path: '/pages/articles/index'
-    }
+    // {
+    //   icon: 'ml-tab-article',
+    //   selectIcon: 'ml-tab-article-select',
+    //   label: '专题',
+    //   key: 'articles',
+    //   path: '/pages/articles/index'
+    // }
     // {
     //   icon: 'ml-plus',
     //   selectIcon: '',
@@ -83,13 +83,13 @@
     //   key: 'discovery',
     //   path: '/pages/discovery/index'
     // },
-    // {
-    //   icon: 'ml-tab-my',
-    //   selectIcon: 'ml-tab-my-select',
-    //   label: '我的',
-    //   key: 'profile',
-    //   path: '/pages/profile/index'
-    // }
+    {
+      icon: 'ml-tab-my',
+      selectIcon: 'ml-tab-my-select',
+      label: '我的',
+      key: 'profile',
+      path: '/pages/profile/index'
+    }
   ]
   const activeTab = ref<string>('home')
 

@@ -14,13 +14,8 @@
 			}
 		},
 		{
-			"path": "pages/articles/index",
-			"style": {
-				"navigationStyle": "custom"
-			}
-		},
-		{
-			"path": "pages/chart/index",
+			"path": "pages/profile/index",
+			"name": "我的",
 			"style": {
 				"navigationStyle": "custom"
 			}
@@ -168,34 +163,6 @@
 					}
 				}
 			]
-		},
-		{
-			"root": "pages/packageArticles",
-			"pages": [
-				{
-					"path": "category/index",
-					"style": {
-						"navigationStyle": "custom"
-					}
-				},
-				{
-					"path": "detail/index",
-					"style": {
-						"navigationStyle": "custom"
-					}
-				}
-			]
-		},
-		{
-			"root": "pages/packageSettings",
-			"pages": [
-				{
-					"path": "lang/index",
-					"style": {
-						"navigationStyle": "custom"
-					}
-				}
-			]
 		}
 	],
 	"globalStyle": {
@@ -212,8 +179,8 @@
 				"text": "首页"
 			},
 			{
-				"pagePath": "pages/articles/index",
-				"text": "专题"
+				"pagePath": "pages/profile/index",
+				"text": "我的"
 			}
 		]
 	},
