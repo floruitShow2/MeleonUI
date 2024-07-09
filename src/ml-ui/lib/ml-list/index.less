@@ -1,11 +1,14 @@
 .ml-list {
+    position: relative;
     width: 100%;
     &-scroll {
         position: relative;
         width: 100%;
-        &-loaded {
+        &-loading,
+        &-error,
+        &-finished {
             width: 100%;
-            height: 50px;
+            height: var(--list-item-height);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -13,5 +16,18 @@
             font-weight: 500;
             color: var(--info-color-7);
         }
+    }
+    &-to-top {
+        position: absolute;
+        right: 20px;
+        bottom: 24px;
+        width: 24px;
+        height: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        background-color: #ffffff;
+        box-shadow: 0 0 6px 0 rgba(100, 100, 100, 0.2);
     }
 }

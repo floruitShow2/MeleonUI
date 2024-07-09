@@ -166,37 +166,35 @@ export type ColorType = 'primary' | 'info' | 'success' | 'warning' | 'danger'
 #### 四、更新日志
 
 - 1.1.7
-  - feat: 新增 ml-config-provider 组件
+  - feat: 新增 `ml-config-provider` 组件
   - docs: 调整项目接口，补全TS类型，新增 README 文档
 - 1.1.8
 
-  - feat: 新增 ml-cell、ml-cell-group 组件
-  - feat: 新增 ml-uploader 组件
+  - feat: 新增 `ml-cell`、`ml-cell-group` 组件
+  - feat: 新增 `ml-uploader` 组件
 - 1.1.9
-
-  - fix: ml-loading 图标缺失，ml-button 组件设置 loading 不生效
-  - feat: 新增 ml-image 组件
-
-  - feat: ml-tree 组件模块拆分，支持自定义 title 节点
-  - feat: 新增 ml-icon-switcher 小组件
-  - fix: ml-button 单图标按钮图标偏移的问题
-
-  - feat: ml-tree 组件基本功能完善，支持文本选中、复选框选择、自定义标题节点等
-  - fix: 去除 checkbox 组件无文本时样式的偏移
-  - feat: ml-tree 组件新增对外暴露的 expand、check 及 select 等方法
+  - fix: `ml-loading` 图标缺失，`ml-button` 组件设置 loading 不生效
+  - feat: 新增 `ml-image` 组件
+  
+  - feat: `ml-tree` 组件模块拆分，支持自定义 title 节点
+  - feat: 新增 `ml-icon-switcher` 小组件
+  - fix: `ml-button` 单图标按钮图标偏移的问题
+  
+  - feat: `ml-tree` 组件基本功能完善，支持文本选中、复选框选择、自定义标题节点等
+  - fix: 去除 `ml-checkbox` 组件无文本时样式的偏移
+  - feat: `ml-tree` 组件新增对外暴露的 expand、check 及 select 等方法
 - 1.1.10
-
-  - fix: ml-checkbox 设置 direction 失效的问题
-  - fix: ml-image 预览层层级过低的问题
-  - fix: ml-select 无激活样式的问题
-  - fix: ml-input-tag 确认后未触发新增标签
+  - fix: `ml-checkbox` 设置 direction 失效的问题
+  - fix: `ml-image` 预览层层级过低的问题
+  - fix: `ml-select` 无激活样式的问题
+  - fix: `ml-input-tag` 确认后未触发新增标签
   - docs: @meleon/uni-ui 上线微信小程序，可体验各个组件的使用效果【微信扫描“演示”小程序码】
 - 1.1.11
-  - feat: 调整 ml-navigator 组件的结构，完善功能
-  - feat: 添加 ml-switch 组件
-  - feat: ml-cell 组件添加 Cell 类型
+  - feat: 调整 `ml-navigator` 组件的结构，完善功能
+  - feat: 添加 `ml-switch` 组件
+  - feat: `ml-cell` 组件添加 `SWITCH` 类型
   - fix: ml-cell 组件传入的 value 发生变化时未触发页面更新
-  - feat: 新增 ml-list 组件，初步支持基础列表和虚拟列表功能
+  - feat: 新增 `ml-list` 组件，初步支持基础列表和虚拟列表功能
 
 ### 组件
 
@@ -894,6 +892,166 @@ export default {
 
 <ml-input v-model:model-value="modelValue" disabled :size="inputSize" />
 ```
+
+#### 列表 List
+
+###### 基本使用
+
+基础列表使用示例
+
+```html
+<ml-list
+    ref="listRef"
+    v-model:error="error"
+    :data="mockData"
+    :loading="loading"
+    :loading-text="'自定义的加载中文本...'"
+    :finished="finished"
+    :height="400"
+    style="width: 100%"
+    @load="handleLoad"
+>
+    <template #item="{ item }">
+        <ml-cell
+            :label="item.label"
+            :description="item.description"
+            :value="item.value"
+            allow-edit
+        />
+    </template>
+</ml-list>
+```
+
+```ts
+import type { ListInstance, MessageInstance } from '@meleon/uni-ui'
+
+const mockData = ref(
+    new Array(20).fill(0).map((_, index) => {
+        return {
+            id: `id-${index}`,
+            label: `标题${index}`,
+            description: `描述${index}`,
+            value: `值${index}`
+        }
+    })
+)
+
+const listRef = ref<ListInstance>()
+const messageRef = ref<MessageInstance>()
+const finished = ref(false)
+const loading = ref(false)
+const error = ref(true)
+const handleLoad = () => {
+    if (!messageRef.value) return
+    if (mockData.value.length >= 60) {
+        finished.value = true
+    }
+
+    if (finished.value) {
+        messageRef.value.success({
+            content: '所有数据加载完成',
+            duration: 2000
+        })
+    } else {
+        messageRef.value.primary({
+            content: '触发 load 事件',
+            duration: 2000
+        })
+
+        mockData.value = [
+            ...mockData.value,
+            ...new Array(20).fill(0).map((_, index) => {
+                const idx = mockData.value.length + index
+                return {
+                    id: `id-${idx}`,
+                    label: `标题${idx}`,
+                    description: `描述${idx}`,
+                    value: `值${idx}`
+                }
+            })
+        ]
+    }
+}
+
+onMounted(() => {
+	if (listRef.value) listRef.value.scrollIntoView('id-10')
+})
+```
+
+虚拟列表使用示例
+
+区别于基础列表，虚拟列表不支持调用 load 加载新数据，使用时需要准备好完整的初始数据
+
+默认情况下，页面上仅展示15条数据节点，可以通过传入 pageSize 自定义每页展示的数量
+
+```html
+<ml-list :data="mockData" :height="400" virtual-list style="width: 100%">
+    <template #vitual="{ data }">
+        <ml-cell
+            v-for="item in data"
+            :key="item.id"
+            :label="item.label"
+            :description="item.description"
+            :value="item.value"
+            allow-edit
+        ></ml-cell>
+    </template>
+</ml-list>
+```
+
+```js
+const mockVirtualData = ref(
+    new Array(100).fill(0).map((_, index) => {
+        return {
+            id: `id-${index}`,
+            label: `标题${index}`,
+            description: `描述${index}`,
+            value: `值${index}`
+        }
+    })
+)
+```
+
+###### APIs
+
+| prop         | type     | default            | desc                                                     |
+| ------------ | -------- | ------------------ | -------------------------------------------------------- |
+| data         | WithId[] | []                 | 列表数据，需要提供 id 字段用以定位等操作                 |
+| height       | number   | 必填               | 列表容器的高度                                           |
+| itemHeight   | number   | 58                 | 列表项的高度，可控制提示文本的高度及滚动阈值             |
+| loading      | boolean  | false              | 是否处于加载状态                                         |
+| loadingText  | string   | 加载中...          | 加载状态底部的提示文本                                   |
+| finished     | boolean  | false              | 是否加载完成                                             |
+| finishedText | string   | 没有更多了         | 加载完成时，底部的提示文本                               |
+| error        | boolean  | false              | 是否加载失败                                             |
+| errorText    | string   | 加载失败，点击重试 | 加载失败时，底部的提示文本【可点击，重新触发 load 事件】 |
+|              |          |                    |                                                          |
+| virtualList  | boolean  | false              | 是否开启虚拟列表                                         |
+| pageSize     | number   | 15                 | 虚拟列表中展示的数量                                     |
+
+###### Slots
+
+| name     | desc             |
+| -------- | ---------------- |
+| loading  | 加载中           |
+| error    | 加载异常         |
+| finished | 加载完成         |
+| virtual  | 虚拟列表         |
+| item     | 普通列表的列表项 |
+
+###### Methods
+
+| name           | type                                     | desc                             |
+| -------------- | ---------------------------------------- | -------------------------------- |
+| scrollToTop    | () => void                               | 滚动到顶部                       |
+| scrollIntoView | (id: string \| number \| symbol) => void | 滚动到指定节点【仅支持普通列表】 |
+
+###### Events
+
+| name         | desc               |
+| ------------ | ------------------ |
+| update:error | 更新 error 属性    |
+| load         | 列表滚动到底部触发 |
 
 #### 选择器 Select
 

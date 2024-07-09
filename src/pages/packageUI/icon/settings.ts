@@ -20,6 +20,20 @@ export default {
       unicode_decimal: 60314
     },
     {
+      icon_id: '41002290',
+      name: '三角下',
+      font_class: 'arrow-upper--fill',
+      unicode: 'eb9b',
+      unicode_decimal: 60315
+    },
+    {
+      icon_id: '41002291',
+      name: '三角下',
+      font_class: 'arrow-left--fill',
+      unicode: 'eb9c',
+      unicode_decimal: 60316
+    },
+    {
       icon_id: '2763907',
       name: 'loading',
       font_class: 'loading--line',

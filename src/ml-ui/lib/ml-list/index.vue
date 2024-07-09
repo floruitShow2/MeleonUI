@@ -7,6 +7,7 @@
       :upper-threshold="SCROLL_THRESHOLD"
       :lower-threshold="SCROLL_THRESHOLD"
       :scroll-top="scrollTop"
+      :scroll-into-view="intoViewId"
       :style="{ ...scrollStyles }"
       @scroll="handleScroll"
       @scrolltoupper="handleScrollToUpper"
@@ -18,13 +19,42 @@
       </template>
       <!-- 普通列表 -->
       <template v-else>
-        <view v-for="(row, index) in visibleData" :key="row.id" :class="`${prefix}-scroll-item`">
+        <view
+          v-for="(row, index) in visibleData"
+          :key="row.id"
+          :id="row.id"
+          :class="`${prefix}-scroll-item`"
+        >
           <slot name="item" :item="row" :index="index"></slot>
         </view>
       </template>
-
-      <view v-if="finished || endIndex >= data.length" :class="`${prefix}-scroll-loaded`"> 没有更多了 </view>
+      <!-- 加载中提示 -->
+      <view v-if="loading && !finished" :class="`${prefix}-scroll-loading`">
+        <slot name="loading">
+          {{ loadingText }}
+        </slot>
+      </view>
+      <!-- 加载异常提示 -->
+      <view
+        v-if="error && !loading && !finished"
+        :class="`${prefix}-scroll-error`"
+        @click="handleClickError"
+      >
+        <slot name="error">
+          {{ errorText }}
+        </slot>
+      </view>
+      <!-- 加载完成提示 -->
+      <view v-if="finished || endIndex >= data.length" :class="`${prefix}-scroll-finished`">
+        <slot name="finished">
+          {{ finishedText }}
+        </slot>
+      </view>
     </scroll-view>
+    <!-- 回到顶部按钮 -->
+    <view v-if="isScrollToTopShow" :class="`${prefix}-to-top`" @click="scrollToTop">
+      <Icon name="ml-arrow-upper--fill" :size="16" />
+    </view>
   </view>
 </template>
 
@@ -33,7 +63,8 @@
   import type { PropType, ComponentInternalInstance } from 'vue'
   import { useTheme } from '@meleon/uni-ui/hooks'
   import { cs, getAllRect } from '@meleon/uni-ui/utils'
-  import type { ListProps } from './index.interface'
+  import type { ListProps, WithId } from './index.interface'
+  import Icon from '../ml-icon/index.vue'
 
   const props = defineProps({
     data: {
@@ -60,14 +91,31 @@
       type: Boolean,
       default: false
     },
+    loadingText: {
+      type: String,
+      default: '加载中...'
+    },
+    error: {
+      type: Boolean,
+      default: false
+    },
+    errorText: {
+      type: String,
+      default: '加载失败，点击重试'
+    },
     finished: {
       type: Boolean,
       default: false
+    },
+    finishedText: {
+      type: String,
+      default: '没有更多了'
     }
   })
-  const { data, pageSize, height, itemHeight, virtualList, finished } = toRefs(props)
+  const { data, pageSize, height, itemHeight, virtualList, loading, error, finished } =
+    toRefs(props)
 
-  const emit = defineEmits(['load'])
+  const emit = defineEmits(['update:error', 'load'])
 
   const { themeColors } = useTheme()
 
@@ -77,13 +125,12 @@
   })
   const scrollStyles = computed(() => {
     return {
-      height: `${height.value}px`
+      height: `${height.value}px`,
+      '--list-item-height': `${itemHeight.value}px`
     }
   })
 
-  /**
-   * virtual scroll
-   */
+  // 滚动阈值
   const SCROLL_THRESHOLD = ref(50)
 
   const innerItemHeight = ref(itemHeight.value)
@@ -104,6 +151,7 @@
   const scrollTop = ref(0)
   const oldScrollTop = ref(0)
 
+  // 虚拟列表，每次加载新数据的数量
   const UPDATE_COUNT = ref(1)
   const startIndex = ref(0)
   const endIndex = ref(pageSize.value)
@@ -119,7 +167,7 @@
     oldScrollTop.value = e.detail.scrollTop
   }
   const handleScrollToUpper = () => {
-    if (!virtualList.value) return
+    if (!virtualList.value || loading.value) return
     const minStartIndex = 0
     const minEndIndex = pageSize.value
 
@@ -128,7 +176,7 @@
     endIndex.value = Math.max(endIndex.value - UPDATE_COUNT.value, minEndIndex)
   }
   const handleScrollToLower = () => {
-    if (finished.value) return
+    if (finished.value || loading.value || error.value) return
     if (!virtualList.value) {
       emit('load')
       return
@@ -143,8 +191,43 @@
     endIndex.value = Math.min(endIndex.value + UPDATE_COUNT.value, maxEndIndex)
   }
 
+  const handleClickError = () => {
+    emit('update:error', false)
+    emit('load')
+  }
+
+  const isScrollToTopShow = computed(() => {
+    return oldScrollTop.value > height.value
+    // if (virtualList.value) {
+    //   return startIndex.value > pageSize.value || oldScrollTop.value > height.value
+    // } else {
+    //   return oldScrollTop.value > height.value
+    // }
+  })
+  const scrollToTop = () => {
+    if (virtualList.value) {
+      startIndex.value = 0
+      endIndex.value = pageSize.value
+    }
+    scrollTop.value = oldScrollTop.value
+    setTimeout(() => {
+      scrollTop.value = 0
+    }, 0)
+  }
+  // scroll into view
+  const intoViewId = ref<WithId['id']>('')
+  const scrollIntoView = (id: WithId['id']) => {
+    if (virtualList.value) return
+    intoViewId.value = id
+  }
+
   onMounted(async () => {
     await updateListHeight()
+  })
+
+  defineExpose({
+    scrollToTop,
+    scrollIntoView
   })
 </script>
 
