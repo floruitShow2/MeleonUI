@@ -14,7 +14,63 @@
           <text>基础用法</text>
         </template>
         <template #description>
-          <text> 基础用法，支持数据渲染、表格布局及节点自定义等功能 </text>
+          <text> 基础用法，支持数据渲染 </text>
+        </template>
+        <template #demo>
+          <view class="table-container">
+            <ml-table
+              :data="tableData"
+              size="mini"
+              stripe
+              border
+              :loading="false"
+              style="width: 100%"
+              @row-click="onRowClick"
+              @cell-click="onCellClick"
+            >
+              <ml-table-column type="index"></ml-table-column>
+              <ml-table-column prop="name" label="姓名"></ml-table-column>
+              <ml-table-column prop="age" label="年龄"></ml-table-column>
+              <ml-table-column prop="gender" label="性别"></ml-table-column>
+            </ml-table>
+          </view>
+        </template>
+      </CodeBlock>
+      <!-- 基础用法 -->
+      <CodeBlock :code="templateMap[0].code">
+        <template #title>
+          <text>加载中</text>
+        </template>
+        <template #description>
+          <text> 加载状态 </text>
+        </template>
+        <template #demo>
+          <view class="table-container">
+            <ml-table
+              :data="tableData"
+              size="mini"
+              stripe
+              border
+              :loading="true"
+              style="width: 100%"
+              @row-click="onRowClick"
+              @cell-click="onCellClick"
+            >
+              <ml-table-column type="index"></ml-table-column>
+              <ml-table-column prop="name" label="姓名"></ml-table-column>
+              <ml-table-column prop="age" label="年龄"></ml-table-column>
+              <ml-table-column prop="gender" label="性别"></ml-table-column>
+            </ml-table>
+          </view>
+        </template>
+      </CodeBlock>
+      <!-- 固定列 -->
+      <CodeBlock :code="templateMap[0].code">
+        <template #title>
+          <text>自定义节点</text>
+        </template>
+        <template #description>
+          <text> 支持固定列及节点自定义节点等功能 </text>
           <text> 注：尽量不要在设置 fixed 的同时开启 refresher-enabled 下拉刷新 </text>
         </template>
         <template #demo>
@@ -24,7 +80,6 @@
               size="mini"
               stripe
               border
-              :height="200"
               :loading="false"
               :refresher-enabled="false"
               :refresher-interval="2000"

@@ -97,5 +97,5 @@ export type {
 export { default as Uploader } from './ml-uploader'
 export type { UploaderInstance, UploaderProps, FileItem } from './ml-uploader'
 
-// 导入 components 类型声明
+// 导入 components 类型声明【单纯用于告诉 typescript 去检查下这份文件】
 export type {} from './components'

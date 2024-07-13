@@ -6,7 +6,13 @@
     :style="{ ...themeColors, ...styles.containerStyle }"
     @click.self="handleCloseDrawer"
   >
-    <view id="drawer" :class="`${prefix}-wrapper`" :style="styles.drawerStyle" @click.stop>
+    <view
+      id="drawer"
+      :class="`${prefix}-wrapper`"
+      :animation="animationData"
+      :style="styles.drawerStyle"
+      @click.stop
+    >
       <view :class="`${prefix}-wrapper-header`">
         <slot name="title">标题</slot>
         <MlIcon name="ml-close" :size="22" @click="handleCloseDrawer" />
@@ -27,13 +33,14 @@
 </template>
 
 <script setup lang="ts">
-  import { ref, toRefs, computed } from 'vue'
+  import { ref, toRefs, computed, watch } from 'vue'
   import type { PropType, CSSProperties } from 'vue'
   import { isNumber, cs, generateDeviceUI } from '@meleon/uni-ui/utils'
   import { useTheme } from '@meleon/uni-ui/hooks'
   import type { DrawerProps } from './index.interface'
   import MlIcon from '../ml-icon/index.vue'
   import MlButton from '../ml-button/index.vue'
+  import { onBeforeMount } from 'vue'
 
   const props = defineProps({
     hasNav: {
@@ -49,11 +56,11 @@
       default: 'right'
     },
     width: {
-      type: [String, Number],
+      type: Number,
       default: 250
     },
     height: {
-      type: [String, Number],
+      type: Number,
       default: 250
     },
     radius: {
@@ -69,7 +76,7 @@
       default: '取消'
     }
   })
-  const { placement, width, height, radius, hasNav } = toRefs(props)
+  const { visible, placement, width, height, radius, hasNav } = toRefs(props)
 
   const emit = defineEmits(['update:visible', 'close', 'ok'])
 
@@ -82,6 +89,7 @@
 
   const styles = computed(() => {
     const { statusBarHeight, customBarHeight, bottomBarHeight } = generateDeviceUI().ui
+
     const radiusValue = isNumber(radius.value) ? `${radius.value}px` : radius.value
     const radiusMap: Record<DrawerProps['placement'], string> = {
       top: `0 0 ${radiusValue} ${radiusValue}`,
@@ -94,8 +102,14 @@
       [placement.value]: 0
     }
     if (['left', 'right'].includes(placement.value)) {
+      drawerStyle.transform = `translateX(${
+        placement.value === 'left' ? `-${width.value}px` : `${width.value}px`
+      })`
       drawerStyle.width = isNumber(width.value) ? `${width.value}px` : width.value
     } else {
+      drawerStyle.transform = `translateY(${
+        placement.value === 'top' ? `-${height.value}px` : `${height.value}px`
+      })`
       drawerStyle.height = isNumber(height.value) ? `${height.value}px` : height.value
     }
 
@@ -112,13 +126,82 @@
   })
 
   const handleCloseDrawer = (e: MouseEvent) => {
-    emit('close')
-    emit('update:visible', false)
+    if (animation.value) {
+      switch (placement.value) {
+        case 'left':
+          animation.value.translateX(-width.value).step()
+          break
+        case 'right':
+          animation.value.translateX(width.value).step()
+          break
+        case 'top':
+          animation.value.translateY(-height.value).step()
+          break
+        case 'bottom':
+          animation.value.translateY(height.value).step()
+          break
+      }
+      animationData.value = animation.value.export()
+      setTimeout(() => {
+        emit('close')
+        emit('update:visible', false)
+        animationData.value = {}
+      }, 300)
+    } else {
+      emit('close')
+      emit('update:visible', false)
+    }
   }
 
   const handleDrawerOk = () => {
     emit('ok')
   }
+
+  const animation = ref<UniApp.Animation>()
+  const animationData = ref<any>({})
+
+  const handleOpenAnimation = () => {
+    if (!animation.value) return
+    if (['left', 'right'].includes(placement.value)) {
+      animation.value.translateX(0).step()
+    } else {
+      animation.value.translateY(0).step()
+    }
+    animationData.value = animation.value.export()
+  }
+
+  watch(
+    visible,
+    (newVal) => {
+      if (newVal) {
+        setTimeout(() => {
+          handleOpenAnimation()
+        }, 300)
+      }
+    },
+    { immediate: false }
+  )
+
+  const transformOriginMap: Record<DrawerProps['placement'], string> = {
+    right: 'right center',
+    left: 'left center',
+    top: 'center top',
+    bottom: 'center bottom'
+  }
+  const initAnimation = () => {
+    animation.value = uni.createAnimation({
+      duration: 300,
+      timingFunction: 'ease',
+      transformOrigin: transformOriginMap[placement.value]
+    })
+  }
+  watch(
+    placement,
+    () => {
+      initAnimation()
+    },
+    { immediate: true }
+  )
 </script>
 
 <style lang="less">

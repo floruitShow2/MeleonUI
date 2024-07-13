@@ -42,6 +42,10 @@ export interface ListProps {
    */
   finishedText: string
   /**
+   * @description 是否显示滚动到顶部按钮
+   */
+  showToTop: boolean
+  /**
    * @description 单元格布局或列表布局
    */
   type: 'grid' | 'row'

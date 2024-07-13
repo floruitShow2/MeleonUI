@@ -195,6 +195,9 @@ export type ColorType = 'primary' | 'info' | 'success' | 'warning' | 'danger'
   - feat: `ml-cell` 组件添加 `SWITCH` 类型
   - fix: ml-cell 组件传入的 value 发生变化时未触发页面更新
   - feat: 新增 `ml-list` 组件，初步支持基础列表和虚拟列表功能
+- 1.1.12
+  - style: ml-drawer 组件添加动效
+
 
 ### 组件
 

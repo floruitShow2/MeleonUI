@@ -1,7 +1,7 @@
 <template>
   <view :class="className" :style="themeColors">
     <!-- 表格主题加载动画 -->
-    <view v-if="useGet<boolean>(globalConstants, 'store.states.loading')" class="loading-overlay">
+    <view v-if="useGet<boolean>(storeEntityStates, 'loading')" class="loading-overlay">
       <view class="loader" />
     </view>
     <view class="hidden-columns"><slot /></view>
@@ -26,7 +26,7 @@
               width: `${nfColumn.width}px`,
               borderRight:
                 storeEntityStates.border &&
-                (useGet(storeEntityStates, 'notFixedColumns.length', 0) as number) !== nfIdx + 1
+                (useGet(storeEntityStates, 'notFixedColumns.length', 0) !== nfIdx + 1)
                   ? 'solid 1px var(--info-color-6)'
                   : '',
               ...(
@@ -78,7 +78,7 @@
           ]"
           :style="{
             width: `${fColumn.width}px`,
-            borderRight:
+            borderLeft:
               storeEntityStates.border &&
               (useGet(storeEntityStates, 'notFixedColumns.length', 0) as number) !== nfIdx + 1
                 ? 'solid 1px var(--info-color-6)'
@@ -144,7 +144,7 @@
                 row
               })
             }"
-            @click="($event) => onRowClick(row, index, $event)"
+            @click="($event: MouseEvent) => onRowClick(row, index, $event)"
           >
             <view class="table-columns not-fixed-columns">
               <view
@@ -169,7 +169,7 @@
                     useGet(storeEntityStates, 'cellStyle', () => {}) as TableEntityType['cellStyle']
                   )({ rowIdx: index, row, columnIdx, column })
                 }"
-                @click="($event) => onCellClick(row, index, column, columnIdx, $event)"
+                @click="($event: MouseEvent) => onCellClick(row, index, column, columnIdx, $event)"
               >
                 <text v-if="column.type === 'index'">{{ index + 1 }}</text>
                 <slot
@@ -211,7 +211,11 @@
               :style="{
                 width: `${column.width}px`,
                 borderLeft:
-                  storeEntityStates.border && columnIdx !== 0 ? 'solid 1px var(--info-color-6)' : ''
+                  storeEntityStates.border && columnIdx !== 0 ? 'solid 1px var(--info-color-6)' : '',
+                borderRight:
+                  storeEntityStates.border
+                    ? 'solid 1px var(--info-color-6)'
+                    : ''
               }"
             >
               <text v-if="column.type === 'index'">{{ index + 1 }}</text>
@@ -253,7 +257,7 @@
               :style="{
                 width: `${column.width}px`,
                 borderLeft:
-                  storeEntityStates.border && columnIdx !== 0 ? 'solid 1px var(--info-color-6)' : ''
+                  storeEntityStates.border ? 'solid 1px var(--info-color-6)' : ''
               }"
             >
               <text v-if="column.type === 'index'">{{ index + 1 }}</text>
@@ -276,8 +280,8 @@
 </template>
 
 <script setup lang="ts">
-  import { ref, computed, provide, getCurrentInstance, reactive, toRefs, watch } from 'vue'
-  import type { PropType, ComponentInternalInstance } from 'vue'
+  import { ref, computed, provide, getCurrentInstance, toRefs, watch } from 'vue'
+  import type { PropType } from 'vue'
   import { useTheme } from '@meleon/uni-ui/hooks'
   import {
     cs,
@@ -340,9 +344,13 @@
 
   const prefix = ref('ml-table')
   const className = computed(() => {
-    return cs(prefix.value, [`${prefix.value}-${size.value}`], {
-      [`${prefix.value}-border`]: border.value
-    })
+    return cs(
+      prefix.value,
+      [`${prefix.value}-${size.value}`],
+      {
+        [`${prefix.value}-border`]: border.value
+      }
+    )
   })
 
   // 创建 ml-table 标识符
@@ -360,13 +368,10 @@
   const storeEntity = createStore(instance, {})
   const tableObserver = new Observer(tableId)
   storeEntity.addObserver(tableObserver)
-  const globalConstants = reactive<{
-    store: StateWatcher
-    table: ComponentInternalInstance | null
-  }>({
+  const globalConstants = {
     store: storeEntity,
     table: instance
-  })
+  }
   const storeEntityStates = ref<WatcherStatesType>({})
 
   // 提交 setData，更新 storeEntity 状态

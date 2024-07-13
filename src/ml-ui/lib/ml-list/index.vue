@@ -110,10 +110,23 @@
     finishedText: {
       type: String,
       default: '没有更多了'
+    },
+    showToTop: {
+      type: Boolean,
+      default: false
     }
   })
-  const { data, pageSize, height, itemHeight, virtualList, loading, error, finished } =
-    toRefs(props)
+  const {
+    data,
+    pageSize,
+    height,
+    itemHeight,
+    loading,
+    error,
+    finished,
+    showToTop,
+    virtualList
+  } = toRefs(props)
 
   const emit = defineEmits(['update:error', 'load'])
 
@@ -197,12 +210,12 @@
   }
 
   const isScrollToTopShow = computed(() => {
-    return oldScrollTop.value > height.value
-    // if (virtualList.value) {
-    //   return startIndex.value > pageSize.value || oldScrollTop.value > height.value
-    // } else {
-    //   return oldScrollTop.value > height.value
-    // }
+    if (!showToTop.value) return false
+    if (virtualList.value) {
+      return endIndex.value >= data.value.length
+    } else {
+      return oldScrollTop.value > height.value
+    }
   })
   const scrollToTop = () => {
     if (virtualList.value) {
