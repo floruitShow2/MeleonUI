@@ -45,6 +45,7 @@
     { name: '单元格 ml-cell', path: '/pages/packageUI/cell/index' },
     { name: '复选框 ml-checkbox', path: '/pages/packageUI/checkbox/index' },
     { name: '计数 ml-count-to', path: '/pages/packageUI/countTo/index' },
+    { name: '时间选择器 ml-datatime-picker', path: '/pages/packageUI/dateTimePicker/index' },
     { name: '抽屉 ml-drawer', path: '/pages/packageUI/drawer/index' },
     { name: '图标 ml-icon', path: '/pages/packageUI/icon/index' },
     { name: '输入框 ml-input', path: '/pages/packageUI/input/index' },

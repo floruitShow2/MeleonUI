@@ -117,7 +117,7 @@
   /**
    * @description textCell 编辑后，switchCell 切换后触发 change 事件
    */
-  const emit = defineEmits(['change', 'btnClick', 'navigate'])
+  const emit = defineEmits(['change', 'click', 'btnClick', 'navigate'])
 
   const globalCtx = inject(cellGroupInjectionKey, null)
   const idx = ref(-1)
@@ -168,8 +168,10 @@
           })
         }
       })
+      return
       // emit('navigate', { cell: useDeepClone(props) })
     }
+    emit('click')
   }
 </script>
 

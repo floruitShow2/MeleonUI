@@ -116,17 +116,8 @@
       default: false
     }
   })
-  const {
-    data,
-    pageSize,
-    height,
-    itemHeight,
-    loading,
-    error,
-    finished,
-    showToTop,
-    virtualList
-  } = toRefs(props)
+  const { data, pageSize, height, itemHeight, loading, error, finished, showToTop, virtualList } =
+    toRefs(props)
 
   const emit = defineEmits(['update:error', 'load'])
 

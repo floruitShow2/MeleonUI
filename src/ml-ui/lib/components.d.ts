@@ -6,8 +6,11 @@ import type {
   CellGroupInstance,
   CheckboxInstance,
   CheckboxGroupInstance,
+  CollapseInstance,
+  CollapseItemInstance,
   ConfigProviderInstance,
   CountToInstance,
+  DatetimePickerInstance,
   DrawerInstance,
   IconInstance,
   ImageInstance,
@@ -40,8 +43,11 @@ declare module '@vue/runtime-core' {
     MlCellGroup: CellGroupInstance
     MlCheckbox: CheckboxInstance
     MlCheckboxGroup: CheckboxGroupInstance
+    MlCollapse: CollapseInstance
+    MlCollapseItem: CollapseItemInstance
     MlConfigProvider: ConfigProviderInstance
     MlCountTo: CountToInstance
+    MlDatetimePicker: DatetimePickerInstance
     MlDrawer: DrawerInstance
     MlIcon: IconInstance
     MlImage: ImageInstance
@@ -61,7 +67,6 @@ declare module '@vue/runtime-core' {
     MlTag: TagInstance
     MlTimeline: TimelineInstance
     MlTimelineItem: TimelineItemInstance
-    MlTransition: TransitionInstance
     MlTree: TreeInstance
     MlUploader: UploaderInstance
   }

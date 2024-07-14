@@ -6,6 +6,34 @@ export default {
   description: '',
   glyphs: [
     {
+      icon_id: '5387930',
+      name: '箭头_页面_向上_o',
+      font_class: 'arrow-double-upper',
+      unicode: 'eb93',
+      unicode_decimal: 60307
+    },
+    {
+      icon_id: '5387932',
+      name: '箭头_页面_向右_o',
+      font_class: 'arrow-double-right',
+      unicode: 'eb94',
+      unicode_decimal: 60308
+    },
+    {
+      icon_id: '5387935',
+      name: '箭头_页面_向左_o',
+      font_class: 'arrow-double-left',
+      unicode: 'eb95',
+      unicode_decimal: 60309
+    },
+    {
+      icon_id: '5387938',
+      name: '箭头_页面_向下_o',
+      font_class: 'arrow-double-down',
+      unicode: 'eb96',
+      unicode_decimal: 60310
+    },
+    {
       icon_id: '23261314',
       name: '三角下',
       font_class: 'arrow--fill',

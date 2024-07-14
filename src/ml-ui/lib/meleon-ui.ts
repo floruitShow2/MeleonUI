@@ -6,8 +6,11 @@ import MlCell from './ml-cell'
 import MlCellGroup from './ml-cell-group'
 import MlCheckbox from './ml-checkbox'
 import MlCheckboxGroup from './ml-checkbox-group'
+import MlCollapse from './ml-collapse'
+import MlCollapseItem from './ml-collapse-item'
 import MlConfigProvider from './ml-config-provider'
 import MlCountTo from './ml-count-to'
+import MlDatetimePicker from './ml-datetime-picker'
 import MlDrawer from './ml-drawer'
 import MlIcon from './ml-icon'
 import MlImage from './ml-image'
@@ -38,8 +41,11 @@ const components: Record<string, Plugin> = {
   MlCellGroup,
   MlCheckbox,
   MlCheckboxGroup,
+  MlCollapse,
+  MlCollapseItem,
   MlConfigProvider,
   MlCountTo,
+  MlDatetimePicker,
   MlDrawer,
   MlIcon,
   MlImage,

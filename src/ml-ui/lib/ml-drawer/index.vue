@@ -15,12 +15,12 @@
     >
       <view :class="`${prefix}-wrapper-header`">
         <slot name="title">标题</slot>
-        <MlIcon name="ml-close" :size="22" @click="handleCloseDrawer" />
+        <MlIcon v-if="showClose" name="ml-close" :size="22" @click="handleCloseDrawer" />
       </view>
       <view :class="`${prefix}-wrapper-content`">
         <slot />
       </view>
-      <view :class="`${prefix}-wrapper-footer`">
+      <view v-if="showFooter" :class="`${prefix}-wrapper-footer`">
         <slot name="footer">
           <MlButton type="primary" @click="handleDrawerOk">{{ okText }}</MlButton>
           <MlButton type="secondary" style="margin-left: 8px" @click="handleCloseDrawer">
@@ -40,7 +40,6 @@
   import type { DrawerProps } from './index.interface'
   import MlIcon from '../ml-icon/index.vue'
   import MlButton from '../ml-button/index.vue'
-  import { onBeforeMount } from 'vue'
 
   const props = defineProps({
     hasNav: {
@@ -66,6 +65,14 @@
     radius: {
       type: [String, Number],
       default: 0
+    },
+    showClose: {
+      type: Boolean,
+      default: true
+    },
+    showFooter: {
+      type: Boolean,
+      default: true
     },
     okText: {
       type: String,

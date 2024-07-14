@@ -26,7 +26,7 @@
               width: `${nfColumn.width}px`,
               borderRight:
                 storeEntityStates.border &&
-                (useGet(storeEntityStates, 'notFixedColumns.length', 0) !== nfIdx + 1)
+                useGet(storeEntityStates, 'notFixedColumns.length', 0) !== nfIdx + 1
                   ? 'solid 1px var(--info-color-6)'
                   : '',
               ...(
@@ -211,11 +211,10 @@
               :style="{
                 width: `${column.width}px`,
                 borderLeft:
-                  storeEntityStates.border && columnIdx !== 0 ? 'solid 1px var(--info-color-6)' : '',
-                borderRight:
-                  storeEntityStates.border
+                  storeEntityStates.border && columnIdx !== 0
                     ? 'solid 1px var(--info-color-6)'
-                    : ''
+                    : '',
+                borderRight: storeEntityStates.border ? 'solid 1px var(--info-color-6)' : ''
               }"
             >
               <text v-if="column.type === 'index'">{{ index + 1 }}</text>
@@ -256,8 +255,7 @@
               :class="['custom-table__column', 'fixed-table__column', column.columnId]"
               :style="{
                 width: `${column.width}px`,
-                borderLeft:
-                  storeEntityStates.border ? 'solid 1px var(--info-color-6)' : ''
+                borderLeft: storeEntityStates.border ? 'solid 1px var(--info-color-6)' : ''
               }"
             >
               <text v-if="column.type === 'index'">{{ index + 1 }}</text>
@@ -344,13 +342,9 @@
 
   const prefix = ref('ml-table')
   const className = computed(() => {
-    return cs(
-      prefix.value,
-      [`${prefix.value}-${size.value}`],
-      {
-        [`${prefix.value}-border`]: border.value
-      }
-    )
+    return cs(prefix.value, [`${prefix.value}-${size.value}`], {
+      [`${prefix.value}-border`]: border.value
+    })
   })
 
   // 创建 ml-table 标识符
