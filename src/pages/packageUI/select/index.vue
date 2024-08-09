@@ -59,7 +59,7 @@
           </text>
         </template>
         <template #demo>
-          <ml-select v-model:modelValue="templateMap[1].modelValue" multiple :max-tag-count="1">
+          <ml-select v-model:modelValue="templateMap[2].modelValue" multiple :max-tag-count="1">
             <ml-option value="1" label="选项1" />
             <ml-option value="2" label="选项2" />
             <ml-option value="3" label="选项3" />
@@ -123,7 +123,7 @@
 </ml-select>`
     },
     {
-      modelValue: '1',
+      modelValue: ['1'],
       templateCode: `<ml-select v-model:modelValue="modelValue" multiple :max-tag-count="1">
   <ml-option value="1" label="选项1" />
   <ml-option value="2" label="选项2" />

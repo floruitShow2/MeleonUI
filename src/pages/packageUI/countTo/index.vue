@@ -55,7 +55,7 @@
           <view class="count-to-container">
             <ml-count-to :from="0" :to="1250.44" animation :animation-duration="5000">
               <template #prefix>
-                <ml-icon name="ml-arrow-up" />
+                <ml-icon name="ml-arrow-upper" />
               </template>
             </ml-count-to>
             <ml-count-to
@@ -143,7 +143,7 @@
       code: `
 <ml-count-to :from="0" :to="1250.44" animation :animation-duration="5000">
   <template #prefix>
-    <ml-icon name="ml-arrow-up" />
+    <ml-icon name="ml-arrow-upper" />
   </template>
 </ml-count-to>
 <ml-count-to

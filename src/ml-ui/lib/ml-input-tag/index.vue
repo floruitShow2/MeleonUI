@@ -124,13 +124,14 @@
       if (invisibleTags > 0) {
         const result = valueData.value.slice(0, maxTagCount.value)
         const raw = {
-          value: '__arco__more',
+          value: '__meleon__more',
           label: `+${invisibleTags}...`,
           closable: false
         }
         result.push({
           ...raw
         })
+        console.log(maxTagCount.value, result)
         return result
       }
     }
@@ -139,7 +140,6 @@
 
   const updateValue = (value: Array<string | number | TagData>) => {
     _value.value = value
-    console.log(_value)
     emit('update:modelValue', _value.value)
     emit('change', _value.value)
   }

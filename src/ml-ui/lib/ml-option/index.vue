@@ -36,9 +36,13 @@
     disabled: {
       type: Boolean,
       default: false
+    },
+    isExtra: {
+      type: Boolean,
+      default: false
     }
   })
-  const { label, value, disabled } = toRefs(props)
+  const { label, value, disabled, isExtra } = toRefs(props)
   // const emit = defineEmits([])
   const { themeColors } = useTheme()
 
@@ -62,7 +66,8 @@
     return {
       label: label.value,
       value: value.value,
-      disabled: disabled.value
+      disabled: disabled.value,
+      isExtra: isExtra.value
     } as OptionProps
   })
 

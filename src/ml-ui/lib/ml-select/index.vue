@@ -11,9 +11,10 @@
         @focus="onInputFocus"
         @remove="onInputTagRemove"
         @blur="onInputBlur"
+        @change="onInputTagChange"
       >
         <template #suffix>
-          <MlIcon :name="isMenuUnfold ? 'ml-arrow-down' : 'ml-arrow-up'" color="#808080" />
+          <MlIcon :name="isMenuUnfold ? 'ml-arrow-down' : 'ml-arrow-upper'" color="#808080" />
         </template>
       </MlInputTag>
     </template>
@@ -33,7 +34,7 @@
         @blur="onInputBlur"
       >
         <template #suffix>
-          <MlIcon :name="isMenuUnfold ? 'ml-arrow-down' : 'ml-arrow-up'" color="#808080" />
+          <MlIcon :name="isMenuUnfold ? 'ml-arrow-down' : 'ml-arrow-upper'" color="#808080" />
         </template>
       </MlInput>
     </template>
@@ -46,15 +47,15 @@
       :style="menuStyle"
     >
       <slot />
-      <!-- <view
-        v-for="option in options"
+      <MlOption
+        v-for="option in options.filter(i => i.isExtra)"
         :key="option.value"
-        :class="[`${prefix}-dropdown-item`, option.disabled ? `${prefix}__option-disabled` : '']"
+        :value="option.value"
+        :label="option.label"
+        :disabled="option.disabled"
+        :is-extra="option.isExtra"
         @click.stop="handleSelectItem(option)"
-      >
-        {{ option.label }}
-        <MlIcon class="ml-icon" name="ml-success" />
-      </view> -->
+      />
     </scroll-view>
     <view v-if="isMenuUnfold" :class="`${prefix}-menu-mask`" @click.stop="onInputBlur" />
   </view>
@@ -64,11 +65,12 @@
   import { ref, toRefs, computed, provide, getCurrentInstance, onMounted, watch } from 'vue'
   import type { PropType } from 'vue'
   import { useTheme } from '@meleon/uni-ui/hooks'
-  import { cs, getRect, generateDeviceUI } from '@meleon/uni-ui/utils'
+  import { cs, isArray, getRect, generateDeviceUI } from '@meleon/uni-ui/utils'
   import type { SelectProps } from './index.interface'
   import MlIcon from '../ml-icon/index.vue'
   import MlInput from '../ml-input/index.vue'
   import MlInputTag from '../ml-input-tag/index.vue'
+  import MlOption from '../ml-option/index.vue'
   import { MlSelectGroupInjectionKey } from '../ml-option/context'
   import type { OptionProps } from '../ml-option/index.interface'
 
@@ -293,6 +295,19 @@
       handleInputValue()
       emit('update:model-value', selectedValue.value)
     }, 200)
+  }
+  const onInputTagChange = (labels: string[]) => {
+    const label2Value: Record<string, string | number> = {}
+    options.value.forEach(({ label, value }) => {
+      label2Value[label] = value
+    })
+    const _labels = [...new Set(labels)]
+    const targetLabel = _labels.find(label => !label2Value[label])
+    if (targetLabel && isArray(modelValue.value)) {
+      emit('update:model-value', [...modelValue.value, targetLabel])
+      addOption({ label: targetLabel, value: targetLabel, disabled: false, isExtra: true })
+      // selectedList.value = [...selectedList.value, ]
+    }
   }
   const onInputTagRemove = () => {
     selectedList.value = selectedList.value.filter((item) =>
