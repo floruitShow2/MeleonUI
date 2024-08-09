@@ -12,26 +12,39 @@
       :show-footer="false"
     >
       <template #title>
-        <view :class="`${prefix}--header`">
-          <Icon name="ml-arrow-double-left" />
-          <text>2024</text>
-          <Icon name="ml-arrow-double-right" />
-        </view>
+        <DatePickerHeader
+          v-bind="{ ...headerOperations }"
+          :prefix-cls="prefix"
+          mode="month"
+          :value="headerValue"
+          :on-label-click="onLabelClick"
+          :style="{
+            width: '100%',
+            height: '100%'
+          }"
+        />
       </template>
-      <template #default> 默认内容 </template>
+      <template #default>
+        <DateMonthPanel
+          :prefix-cls="prefix"
+          :header-value="headerValue"
+        />
+      </template>
     </Drawer>
   </view>
 </template>
 
 <script setup lang="ts">
-  import { ref, toRefs, computed } from 'vue'
+  import { ref, reactive, toRefs, computed } from 'vue'
   import type { PropType } from 'vue'
+  import type { Dayjs } from 'dayjs'
   import { usePickerHeader, useTheme } from '@meleon/uni-ui/hooks'
-  import { cs } from '@meleon/uni-ui/utils'
+  import { cs, getReturnValue } from '@meleon/uni-ui/utils'
+  import DatePickerHeader from './components/header.vue'
+  import DateMonthPanel from './components/monthPanel.vue'
   import Drawer from '../ml-drawer/index.vue'
-  import Icon from '../ml-icon/index.vue'
+
   import type { DatetimePickerProps } from './index.interface'
-import { reactive } from 'vue'
 
   const props = defineProps({
     modelValue: {
@@ -53,7 +66,7 @@ import { reactive } from 'vue'
   })
   const { modelValue, defaultModelValue, mode, format } = toRefs(props)
 
-  const emit = defineEmits([])
+  const emit = defineEmits(['update:modelValue', 'change'])
 
   const { themeColors } = useTheme()
 
@@ -64,17 +77,23 @@ import { reactive } from 'vue'
 
   const localModelValue = computed(() => {})
 
-  const {} = usePickerHeader(reactive(
+  const { headerValue, setHeaderValue, headerOperations } = usePickerHeader(
     {
-      mode: mode.value,
-      modelValue: modelValue.value,
-      defaultModelValue: defaultModelValue.value,
-      format: format.value,
-      onChange() {
-
+      mode,
+      modelValue,
+      defaultModelValue,
+      format,
+      onChange(newVal: Dayjs) {
+        const returnValue = getReturnValue(newVal)
+        emit('update:modelValue', returnValue)
       }
     }
-  ))
+  )
+
+  console.log(headerOperations)
+  const onLabelClick = () => {
+    console.log('aaa')
+  }
 
   const showPicker = ref(false)
   const openPicker = () => {

@@ -28,7 +28,7 @@
     },
     color: {
       type: String,
-      default: 'var(--info-color-8)'
+      default: 'var(--info-color-7)'
     }
   })
   const emit = defineEmits(['click'])

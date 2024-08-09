@@ -24,7 +24,7 @@
           </slot>
         </template>
         <template v-if="!$slots.value && allowEdit && !isEditing">
-          <Icon name="ml-edit" color="var(--info-color-7)" @click="handleEditClick" />
+          <Icon name="ml-edit" color="var(--info-color-5)" @click="handleEditClick" />
         </template>
       </view>
     </template>
@@ -48,7 +48,7 @@
           <text :class="`${prefix}-val`">{{ afterValue }}</text>
         </slot>
         <slot name="rightIcon">
-          <Icon name="ml-arrow-right" color="var(--info-color-7)" />
+          <Icon name="ml-arrow-right" color="var(--info-color-5)" />
         </slot>
       </view>
     </template>

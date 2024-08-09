@@ -15,6 +15,9 @@ export function isString(val: unknown): val is string {
 export function isUndefined(val: unknown): val is undefined {
   return _toString.call(val) === '[object Undefined]'
 }
+export function isFunction(val: unknown): val is Function {
+  return _toString.call(val) === '[object Function]'
+}
 
 export function isNotEmptyObject<T>(obj: T): boolean {
   if (obj instanceof Object) {

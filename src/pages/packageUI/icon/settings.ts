@@ -6,6 +6,34 @@ export default {
   description: '',
   glyphs: [
     {
+      icon_id: '5387920',
+      name: '箭头_列表向左_o',
+      font_class: 'arrow-left',
+      unicode: 'eb8e',
+      unicode_decimal: 60302
+    },
+    {
+      icon_id: '5387909',
+      name: '箭头_列表收起_o',
+      font_class: 'arrow-upper',
+      unicode: 'eb8a',
+      unicode_decimal: 60298
+    },
+    {
+      icon_id: '5387910',
+      name: '箭头_列表向右_o',
+      font_class: 'arrow-right',
+      unicode: 'eb8b',
+      unicode_decimal: 60299
+    },
+    {
+      icon_id: '5387911',
+      name: '箭头_列表展开_o',
+      font_class: 'arrow-down',
+      unicode: 'eb8c',
+      unicode_decimal: 60300
+    },
+    {
       icon_id: '5387930',
       name: '箭头_页面_向上_o',
       font_class: 'arrow-double-upper',
@@ -244,20 +272,6 @@ export default {
       unicode_decimal: 59106
     },
     {
-      icon_id: '10678401',
-      name: 'back',
-      font_class: 'arrow-left',
-      unicode: 'e6db',
-      unicode_decimal: 59099
-    },
-    {
-      icon_id: '8106272',
-      name: 'next',
-      font_class: 'arrow-right',
-      unicode: 'e6a3',
-      unicode_decimal: 59043
-    },
-    {
       icon_id: '8106251',
       name: 'increase',
       font_class: 'plus',
@@ -326,20 +340,6 @@ export default {
       font_class: 'setting',
       unicode: 'e6f0',
       unicode_decimal: 59120
-    },
-    {
-      icon_id: '8106224',
-      name: 'down',
-      font_class: 'arrow-down',
-      unicode: 'e69b',
-      unicode_decimal: 59035
-    },
-    {
-      icon_id: '8106260',
-      name: 'upward',
-      font_class: 'arrow-up',
-      unicode: 'e6a1',
-      unicode_decimal: 59041
     },
     {
       icon_id: '8106276',

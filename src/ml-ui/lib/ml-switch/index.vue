@@ -32,7 +32,7 @@
     },
     uncheckedColor: {
       type: String,
-      default: 'var(--info-color-7)'
+      default: 'var(--info-color-4)'
     },
     disabled: {
       type: Boolean,

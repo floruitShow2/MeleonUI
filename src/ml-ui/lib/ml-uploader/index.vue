@@ -22,7 +22,7 @@
         </div>
       </template>
       <div v-if="!$slots.trigger" :class="`${prefix}-files-trigger`" @click="handleUploadFile">
-        <Icon name="ml-camera--fill" :size="24" color="var(--info-color-8)" />
+        <Icon name="ml-camera--fill" :size="24" color="var(--info-color-7)" />
         <text :class="`${prefix}-files-trigger-text`">请上传图片文件</text>
       </div>
       <div @click="handleUploadFile">

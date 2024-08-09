@@ -1,7 +1,10 @@
 import type { Dayjs } from 'dayjs'
 
+// header
+export type HeaderLabelClickFunc = (label: 'year' | 'month') => void
+
 export interface DatetimePickerProps {
-  mode: 'date' | 'month' | 'week'
+  mode: MeleonDatetime.DateMode
 
   modelValue: MeleonDatetime.DateValue
 

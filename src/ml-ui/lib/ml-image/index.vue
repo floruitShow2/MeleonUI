@@ -34,7 +34,7 @@
             class="tool-item"
             @click="tool.handler()"
           >
-            <Icon :name="tool.icon" :size="20" color="var(--info-color-8)"></Icon>
+            <Icon :name="tool.icon" :size="20" color="var(--info-color-7)"></Icon>
           </view>
         </view>
         <!-- 关闭按钮 -->

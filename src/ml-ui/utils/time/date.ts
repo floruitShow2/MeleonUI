@@ -24,3 +24,13 @@ export const methods = {
     return time.subtract(value, unit)
   }
 }
+
+export function getReturnValue(date: Dayjs, format?: MeleonDatetime.DateFormat) {
+  if (format === 'timestamp') {
+    return date.toDate().getTime();
+  }
+  if (format === 'Date') {
+    return date.toDate();
+  }
+  return date.format(format);
+}

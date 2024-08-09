@@ -18,7 +18,7 @@
         </template>
         <template #demo>
           <view class="cell-container">
-            <ml-datetime-picker style="width: 100%">
+            <ml-datetime-picker v-model="selectedDateTime" style="width: 100%">
               <template #trigger>
                 <ml-cell
                   label="时间选择器"

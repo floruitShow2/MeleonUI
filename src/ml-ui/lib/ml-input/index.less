@@ -9,7 +9,7 @@
     position: absolute;
     width: 100%;
     font-size: 16px;
-    color: var(--info-color-6);
+    color: var(--info-color-7);
     .message {
       border: unset;
       background-color: unset;
@@ -34,8 +34,8 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border-color: var(--info-color-6);
-    background-color: var(--info-color-6);
+    border-color: var(--info-color-1);
+    background-color: var(--info-color-1);
     box-shadow: 0 0 0 0 var(--primaryColorHover);
     transition: all 0.2s ease;
     overflow: hidden;
@@ -51,7 +51,10 @@
     .input {
       flex: 1;
       font-size: 12px;
-      color: var(--info-color-8);
+      color: var(--info-color-7);
+    }
+    .ml-input-placeholder {
+      color: var(--info-color-7);
     }
     .icon {
       height: 100%;
@@ -124,9 +127,10 @@
 // disabled
 .ml-input--disabled {
   .ml-input-wrapper {
-    background-color: var(--info-color-6);
+    border-color: var(--info-color-1);
+    background-color: var(--info-color-1);
     .ml-input-placeholder {
-      color: var(--info-color-7);
+      color: var(--info-color-4);
     }
   }
 } 

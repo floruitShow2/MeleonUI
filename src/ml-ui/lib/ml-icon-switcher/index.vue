@@ -39,7 +39,7 @@
     },
     color: {
       type: String,
-      default: 'var(--info-color-8)'
+      default: 'var(--info-color-7)'
     }
   })
   const { prevIcon, nextIcon, defaultSwitched, loading, size } = toRefs(props)

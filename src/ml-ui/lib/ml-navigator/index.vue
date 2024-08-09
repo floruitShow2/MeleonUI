@@ -19,7 +19,7 @@
             <MlIcon
               :name="tool.icon"
               :color="tool.color || iconColor"
-              :size="20"
+              :size="26"
               @click="switchToPage(tool)"
             />
           </template>

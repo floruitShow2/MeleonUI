@@ -1,16 +1,15 @@
-import { computed, reactive, toRefs } from 'vue'
+import { computed, reactive, toRefs, type Ref } from 'vue'
 import type { Dayjs } from 'dayjs'
 import { useState } from '@meleon/uni-ui/hooks'
 import { formatDateValue, getNow, methods } from '@meleon/uni-ui/utils'
 import { usePickerSpan } from './index'
-import type { DatetimePickerProps } from '@meleon/uni-ui/lib'
 
 export interface PickerHeaderInput {
-    mode: MeleonDatetime.DateMode
-    modelValue: MeleonDatetime.DateValue | undefined
-    defaultModelValue: MeleonDatetime.DateValue | undefined
-    format: string
-    onChange: (val: Dayjs) => void
+  mode: Ref<MeleonDatetime.DateMode>
+  modelValue: Ref<MeleonDatetime.DateValue>
+  defaultModelValue: Ref<MeleonDatetime.DateValue>
+  format: Ref<string>
+  onChange: (val: Dayjs) => void
 }
 export default function usePickerHeader(input: PickerHeaderInput) {
   const { mode, modelValue, defaultModelValue, format, onChange } = toRefs(input)
@@ -21,11 +20,12 @@ export default function usePickerHeader(input: PickerHeaderInput) {
 
   const { span, superSpan } = usePickerSpan(
     reactive({
-      mode: computedMode,
+      mode: computedMode
     })
   )
 
   const computedValue = computed(() => {
+    console.log('picker', modelValue.value)
     return formatDateValue(modelValue.value, format.value)
   })
 
@@ -71,8 +71,11 @@ export default function usePickerHeader(input: PickerHeaderInput) {
   }))
 
   return {
+    // 选择器头部信息
     headerValue,
+    // 设置选择器头部信息
     setHeaderValue,
+    // 选择器头部操作函数
     headerOperations
   }
 }
