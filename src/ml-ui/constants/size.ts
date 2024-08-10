@@ -6,8 +6,8 @@ export enum MlSizeEnum {
 }
 
 export enum MlSizeSecondaryEnum {
-  mini = '24px',
-  small = '28px',
-  medium = '32px',
-  large = '36px'
+  mini = '22px',
+  small = '24px',
+  medium = '30px',
+  large = '34px'
 }

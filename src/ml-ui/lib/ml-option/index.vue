@@ -20,7 +20,7 @@
   import { ref, toRefs, computed, inject, onMounted } from 'vue'
   import { useTheme } from '@meleon/uni-ui/hooks'
   import { cs } from '@meleon/uni-ui/utils'
-  import { MlSelectGroupInjectionKey } from './context'
+  import { MlSelectGroupInjectionKey } from '../ml-select'
   import type { OptionProps } from './index.interface'
   import MlIcon from '../ml-icon/index.vue'
 

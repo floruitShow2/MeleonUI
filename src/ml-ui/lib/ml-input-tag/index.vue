@@ -1,9 +1,9 @@
 <template>
-  <view :class="className" :style="themeColors">
+  <view :class="className" :style="themeColors" @click="beforeFoucs">
     <view v-if="$slots['prefix']" class="icon prefix-icon">
       <slot name="prefix" />
     </view>
-    <span :class="`${prefix}-inner`" @click="onInputFocus">
+    <view :class="`${prefix}-inner`">
       <MlTag
         v-for="(tag, index) in tags"
         :key="tag.value"
@@ -22,12 +22,13 @@
         :focus="isFocus"
         :style="inputStyle"
         :disabled="disabled || readonly"
+        :placeholder="tags.length ? '' : placeholder"
         @focus="onInputFocus"
         @input="onInputChange"
         @blur="onInputBlur"
         @confirm="onInputConfirm"
       />
-    </span>
+    </view>
     <view class="icon suffix-icon">
       <slot v-if="$slots['suffix']" name="suffix" />
       <!-- <MlIcon v-else-if="suffixIcon.length !== 0" :name="suffixIcon" color="#808080" /> -->
@@ -72,6 +73,10 @@
       type: String as PropType<InputTagProps['size']>,
       default: 'small'
     },
+    placeholder: {
+      type: String,
+      default: '请输入'
+    },
     tagType: {
       type: String as PropType<InputTagProps['tagType']>,
       default: 'primary'
@@ -98,8 +103,16 @@
     })
   })
 
-  const inputStyle = ref<Record<string, any>>({
-    width: '12px'
+  const inputStyle = computed<Meleon.MlStyle>(() => {
+    if (tags.value.length) {
+      return {
+        width: ['medium', 'large'].includes(size.value) ? '14px' : '12px'
+      }
+    } else {
+      return {
+        width: '100%'
+      }
+    }
   })
   const setInputWidth = (width: number) => {
     if (width > 20) {
@@ -159,18 +172,27 @@
     isActive.value = true
     emit('focus', e)
   }
+  const beforeFoucs = (e: FocusEvent) => {
+    console.log('beforeFoucs', isFocus.value, isActive.value)
+    if (!isFocus.value) {
+      onInputFocus(e)
+    }
+  }
+
   const onInputChange = (e: Event) => {
     const { value } = e.target as unknown as { value: string }
     setInputWidth(value.length * 16)
   }
   const onInputBlur = (e: FocusEvent) => {
-    if (disabled.value || !e) return
+    console.log('blur', isFocus.value, isActive.value)
     if (readonly.value) {
       isFocus.value = false
       isActive.value = false
       return
     }
+    if (disabled.value || !e) return
     if (e && e.preventDefault) e.preventDefault()
+    isFocus.value = false
     isActive.value = false
     if (!readonly.value) emit('blur', e)
   }

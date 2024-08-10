@@ -6,27 +6,27 @@
       </template>
     </div>
     <div :class="getIconClassName(showPrev)" @click="onPrev">
-        <template v-if="showPrev">
-            <Icon name="ml-arrow-left" :size="24" />
-        </template>
+      <template v-if="showPrev">
+        <Icon name="ml-arrow-left" :size="24" />
+      </template>
     </div>
     <view :class="`${prefixCls}-header-title`">
-        <template v-if="onLabelClick && (localYear || localMonth)">
-            <span v-if="localYear">{{ localYear }}</span>
-            <span v-if="localYear && localMonth">-</span>
-            <span v-if="localMonth">{{ localMonth }}</span>
-        </template>
-        <template v-else>{{ title }}</template>
+      <template v-if="onLabelClick && (localYear || localMonth)">
+        <span v-if="localYear">{{ localYear }}</span>
+        <span v-if="localYear && localMonth">-</span>
+        <span v-if="localMonth">{{ localMonth }}</span>
+      </template>
+      <template v-else>{{ title }}</template>
     </view>
     <div :class="getIconClassName(showNext)" @click="onNext">
-        <template v-if="showNext">
-            <Icon name="ml-arrow-right" :size="24" />
-        </template>
+      <template v-if="showNext">
+        <Icon name="ml-arrow-right" :size="24" />
+      </template>
     </div>
     <div :class="getIconClassName(showSuperNext)" @click="onSuperNext">
-        <template v-if="showSuperNext">
-            <Icon name="ml-arrow-double-right" :size="24" />
-        </template>
+      <template v-if="showSuperNext">
+        <Icon name="ml-arrow-double-right" :size="24" />
+      </template>
     </div>
   </div>
 </template>

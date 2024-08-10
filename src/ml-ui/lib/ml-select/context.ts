@@ -1,5 +1,5 @@
 import type { InjectionKey } from 'vue'
-import type { OptionProps } from './index.interface'
+import type { OptionProps } from '../ml-option'
 
 export interface MlSelectGroupContext {
   getSelectedList: () => OptionProps[]

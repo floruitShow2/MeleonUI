@@ -6,6 +6,7 @@ const install = (app: App) => {
 }
 
 export type SelectInstance = typeof import('./index.vue').default
+export { MlSelectGroupInjectionKey } from './context'
 export type { SelectProps } from './index.interface'
 
 export default { install }

@@ -7,6 +7,7 @@
         v-model:model-value="selectedLabel"
         :class="`${prefix}-input`"
         :size="size"
+        :readonly="!allowCreate"
         :max-tag-count="maxTagCount"
         @focus="onInputFocus"
         @remove="onInputTagRemove"
@@ -48,7 +49,7 @@
     >
       <slot />
       <MlOption
-        v-for="option in options.filter(i => i.isExtra)"
+        v-for="option in options.filter((i) => i.isExtra)"
         :key="option.value"
         :value="option.value"
         :label="option.label"
@@ -71,24 +72,39 @@
   import MlInput from '../ml-input/index.vue'
   import MlInputTag from '../ml-input-tag/index.vue'
   import MlOption from '../ml-option/index.vue'
-  import { MlSelectGroupInjectionKey } from '../ml-option/context'
-  import type { OptionProps } from '../ml-option/index.interface'
+  import type { OptionProps } from '../ml-option'
+  import { MlSelectGroupInjectionKey } from './context'
 
   const props = defineProps({
     // select-menu relative
     modelValue: {
-      type: [String, Array] as PropType<OptionProps['value'] | OptionProps['value'][]>,
+      type: [String, Array] as PropType<SelectProps['modelValue']>,
       required: true
     },
     width: {
       type: Number,
       value: 0
     },
-    placeholder: { type: String, default: '请选择' },
-    size: { type: String as PropType<SelectProps['size']>, value: 'small' },
-    multiple: { type: Boolean, default: false },
-    maxTagCount: { type: Number, default: 0 },
-    filterable: { type: Boolean, default: false },
+    placeholder: {
+      type: String,
+      default: '请选择'
+    },
+    size: {
+      type: String as PropType<SelectProps['size']>,
+      value: 'small'
+    },
+    multiple: {
+      type: Boolean,
+      default: false
+    },
+    maxTagCount: {
+      type: Number,
+      default: 0
+    },
+    filterable: {
+      type: Boolean,
+      default: false
+    },
     disabled: {
       type: Boolean,
       default: false
@@ -97,9 +113,9 @@
       type: Boolean,
       default: false
     },
-    selected: {
-      type: String,
-      value: ''
+    allowCreate: {
+      type: Boolean,
+      default: false
     }
   })
   const { modelValue, placeholder, filterable, multiple, maxTagCount, disabled, addToParent } =
@@ -302,7 +318,7 @@
       label2Value[label] = value
     })
     const _labels = [...new Set(labels)]
-    const targetLabel = _labels.find(label => !label2Value[label])
+    const targetLabel = _labels.find((label) => !label2Value[label])
     if (targetLabel && isArray(modelValue.value)) {
       emit('update:model-value', [...modelValue.value, targetLabel])
       addOption({ label: targetLabel, value: targetLabel, disabled: false, isExtra: true })

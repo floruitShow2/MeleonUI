@@ -1,5 +1,4 @@
 <template>
-  <!-- <wxs src="../../wxs/theme.wxs" module="utils" /> -->
   <view :class="className" :style="themeColors">
     <view class="ml-input-title">
       <view :class="['ml-input-title__label', `is-${status}`]">{{ message[status] }}</view>

@@ -25,10 +25,7 @@
         />
       </template>
       <template #default>
-        <DateMonthPanel
-          :prefix-cls="prefix"
-          :header-value="headerValue"
-        />
+        <DateMonthPanel :prefix-cls="prefix" :header-value="headerValue" />
       </template>
     </Drawer>
   </view>
@@ -77,18 +74,16 @@
 
   const localModelValue = computed(() => {})
 
-  const { headerValue, setHeaderValue, headerOperations } = usePickerHeader(
-    {
-      mode,
-      modelValue,
-      defaultModelValue,
-      format,
-      onChange(newVal: Dayjs) {
-        const returnValue = getReturnValue(newVal)
-        emit('update:modelValue', returnValue)
-      }
+  const { headerValue, setHeaderValue, headerOperations } = usePickerHeader({
+    mode,
+    modelValue,
+    defaultModelValue,
+    format,
+    onChange(newVal: Dayjs) {
+      const returnValue = getReturnValue(newVal)
+      emit('update:modelValue', returnValue)
     }
-  )
+  })
 
   console.log(headerOperations)
   const onLabelClick = () => {
