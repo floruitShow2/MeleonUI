@@ -23,9 +23,9 @@
         :style="inputStyle"
         :disabled="disabled || readonly"
         :placeholder="tags.length ? '' : placeholder"
+        @blur="onInputBlur"
         @focus="onInputFocus"
         @input="onInputChange"
-        @blur="onInputBlur"
         @confirm="onInputConfirm"
       />
     </view>

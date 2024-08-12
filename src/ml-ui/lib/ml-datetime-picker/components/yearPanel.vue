@@ -17,11 +17,17 @@
 </template>
 
 <script setup lang="ts">
-  import { computed, toRefs } from 'vue'
+  import { ref, toRefs, computed, watchEffect } from 'vue'
   import type { PropType } from 'vue'
-  import type { Dayjs } from 'dayjs'
   import dayjs from 'dayjs'
+  import type { Dayjs } from 'dayjs'
   import type { DatetimePickerCell } from '../index.interface'
+  import {} from 'vue'
+
+  const ROW_COUNT = 4
+  const COL_COUNT = 3
+  const CELL_COUNT = ROW_COUNT * COL_COUNT
+  const SPAN = 10
 
   const props = defineProps({
     prefixCls: {
@@ -35,45 +41,33 @@
   })
   const { headerValue } = toRefs(props)
 
-  const emit = defineEmits(['cell-click'])
+  const emit = defineEmits(['cell-click', 'header-title-change'])
 
-  const CELL_COUNT = 12
-  const ROW_COUNT = 4
-  const COL_COUNT = 3
-
-  const MONTH_LIST = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December'
-  ]
-
-  // 将月份拆成 四行三列 的数组
   const rows = computed(() => {
-    const year = headerValue.value.year()
-
-    const flatData = new Array(CELL_COUNT).fill(0).map((_, index) => ({
-      label: MONTH_LIST[index],
-      value: dayjs(`${year}-${index + 1}`, 'YYYY-M')
+    const startYear = Math.floor(headerValue.value.year() / SPAN) * SPAN - 1
+    const flatData: DatetimePickerCell[] = new Array(CELL_COUNT).fill(0).map((_, index) => ({
+      label: `${startYear + index}`,
+      value: dayjs(`${startYear + index}`, 'YYYY'),
+      isPrev: index < 1,
+      isNext: index > SPAN
     }))
 
     const rows = new Array(ROW_COUNT)
       .fill(0)
       .map((_, index) => flatData.slice(index * COL_COUNT, (index + 1) * COL_COUNT))
 
+    console.log(rows)
     return rows
   })
 
+  watchEffect(() => {
+    const headerTitle = `${rows.value[0][1].label}-${rows.value[ROW_COUNT - 1][COL_COUNT - 1].label}`
+    console.log(headerTitle)
+    emit('header-title-change', headerTitle)
+  })
+
   const isActiveCell = (cell: DatetimePickerCell) => {
-    return cell.value.isSame(headerValue.value, 'month')
+    return cell.value.isSame(headerValue.value, 'year')
   }
 
   const onCellClick = (cell: DatetimePickerCell) => {

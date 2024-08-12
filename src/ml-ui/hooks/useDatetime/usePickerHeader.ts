@@ -25,7 +25,6 @@ export default function usePickerHeader(input: PickerHeaderInput) {
   )
 
   const computedValue = computed(() => {
-    console.log('picker', modelValue.value)
     return formatDateValue(modelValue.value, format.value)
   })
 
@@ -44,7 +43,10 @@ export default function usePickerHeader(input: PickerHeaderInput) {
 
   const setHeaderValue = (newVal: Dayjs | undefined, emitChange = true) => {
     if (!newVal) return
-    if (emitChange && !isSame(headerValue.value, newVal)) {
+    console.log(headerValue.value, newVal, computedMode.value)
+    // && !isSame(headerValue.value, newVal)
+    if (emitChange) {
+      console.log('change', newVal)
       onChange?.value?.(newVal)
     }
     setLocalValue(newVal)

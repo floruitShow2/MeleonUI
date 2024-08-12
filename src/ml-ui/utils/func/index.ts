@@ -1,3 +1,5 @@
+export * from './get-value-by-path'
+
 type AnyFunction = (...args: any[]) => any
 
 // 组合函数

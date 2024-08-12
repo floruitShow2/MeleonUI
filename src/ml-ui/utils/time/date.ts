@@ -1,5 +1,5 @@
 import dayjs from 'dayjs'
-import type { Dayjs, ManipulateType } from 'dayjs'
+import type { Dayjs, ManipulateType, OpUnitType } from 'dayjs'
 import { isString } from '../is'
 
 export function getNow() {
@@ -19,6 +19,9 @@ export function formatDateValue(val: MeleonDatetime.DateValue | undefined, forma
 export const methods = {
   add(time: Dayjs, value: number, unit: ManipulateType) {
     return time.add(value, unit)
+  },
+  startOf(time: Dayjs, unit: OpUnitType) {
+    return time.startOf(unit)
   },
   subtract(time: Dayjs, value: number, unit: ManipulateType) {
     return time.subtract(value, unit)

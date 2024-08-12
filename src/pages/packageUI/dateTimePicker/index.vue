@@ -18,13 +18,17 @@
         </template>
         <template #demo>
           <view class="cell-container">
-            <ml-datetime-picker v-model="selectedDateTime" style="width: 100%">
+            <ml-datetime-picker
+              v-model="selectedDateTime"
+              :mode="pickerMode"
+              style="width: 100%"
+              @change="handleValueChange"
+            >
               <template #trigger>
                 <ml-cell
                   label="时间选择器"
                   :value="formatToDateTime(selectedDateTime)"
                   style="width: 100%"
-                  @click="handleCellClick"
                 ></ml-cell>
               </template>
             </ml-datetime-picker>
@@ -37,6 +41,7 @@
 
 <script setup lang="ts">
   import { ref, computed } from 'vue'
+  import type { DatetimePickerProps } from '@/ml-ui'
   import { useAppStore } from '@/store'
   import CodeBlock from '@/components/CodeBlock/index.vue'
   import { formatToDateTime } from '@/utils/time'
@@ -51,10 +56,11 @@
   })
 
   const selectedDateTime = ref<Date>(new Date())
-  const drawerVisible = ref<boolean>(false)
-  const handleCellClick = () => {
-    drawerVisible.value = true
+  const handleValueChange = () => {
+    console.log('change', selectedDateTime.value)
   }
+
+  const pickerMode = ref<DatetimePickerProps['mode']>('date')
 
   const templateMap = ref([
     {

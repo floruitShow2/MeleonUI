@@ -15,8 +15,9 @@
         <DatePickerHeader
           v-bind="{ ...headerOperations }"
           :prefix-cls="prefix"
-          mode="month"
+          :mode="headerMode"
           :value="headerValue"
+          :title="localHeaderTitle"
           :on-label-click="onLabelClick"
           :style="{
             width: '100%',
@@ -25,27 +26,42 @@
         />
       </template>
       <template #default>
-        <DateMonthPanel :prefix-cls="prefix" :header-value="headerValue" />
+        <DateYearPanel
+          v-if="headerMode === 'year'"
+          :prefix-cls="prefix"
+          :header-value="headerValue"
+          @cell-click="onCellClick"
+          @header-title-change="onHeaderTitleChange"
+        />
+        <DateMonthPanel
+          v-else-if="headerMode === 'month'"
+          :prefix-cls="prefix"
+          :header-value="headerValue"
+          @cell-click="onCellClick"
+        />
+        <DatePanel v-else :prefix-cls="prefix" :mode="headerMode" :header-value="headerValue" />
       </template>
     </Drawer>
   </view>
 </template>
 
 <script setup lang="ts">
-  import { ref, reactive, toRefs, computed } from 'vue'
+  import { ref, toRefs, computed, watch, provide } from 'vue'
   import type { PropType } from 'vue'
   import type { Dayjs } from 'dayjs'
-  import { usePickerHeader, useTheme } from '@meleon/uni-ui/hooks'
+  import { usePickerHeader, useTheme, useState, usePickerTransform } from '@meleon/uni-ui/hooks'
   import { cs, getReturnValue } from '@meleon/uni-ui/utils'
-  import DatePickerHeader from './components/header.vue'
-  import DateMonthPanel from './components/monthPanel.vue'
   import Drawer from '../ml-drawer/index.vue'
-
+  import DatePickerHeader from './components/header.vue'
+  import DateYearPanel from './components/yearPanel.vue'
+  import DateMonthPanel from './components/monthPanel.vue'
+  import DatePanel from './components/datePanel.vue'
+  import { DatetimePickerContextKey } from './context'
   import type { DatetimePickerProps } from './index.interface'
 
   const props = defineProps({
     modelValue: {
-      type: String as PropType<DatetimePickerProps['modelValue']>,
+      type: [String, Object] as PropType<DatetimePickerProps['modelValue']>,
       default: ''
     },
     defaultModelValue: {
@@ -54,7 +70,7 @@
     },
     mode: {
       type: String as PropType<DatetimePickerProps['mode']>,
-      default: 'month'
+      default: 'date'
     },
     format: {
       type: String,
@@ -67,6 +83,11 @@
 
   const { themeColors } = useTheme()
 
+  const datePickerT = usePickerTransform({})
+  provide(DatetimePickerContextKey, {
+    datePickerT
+  })
+
   const prefix = ref('ml-datetime-picker')
   const className = computed(() => {
     return cs(prefix.value, `${prefix.value}--${mode.value}`)
@@ -74,25 +95,53 @@
 
   const localModelValue = computed(() => {})
 
+  const [headerMode, setHeaderMode] = useState(mode.value)
+  watch(
+    () => props.mode,
+    (newVal) => {
+      console.log(newVal, headerMode.value)
+    },
+    { immediate: true }
+  )
+
   const { headerValue, setHeaderValue, headerOperations } = usePickerHeader({
-    mode,
+    mode: headerMode,
     modelValue,
     defaultModelValue,
     format,
     onChange(newVal: Dayjs) {
       const returnValue = getReturnValue(newVal)
       emit('update:modelValue', returnValue)
+      emit('change', returnValue)
     }
   })
 
-  console.log(headerOperations)
-  const onLabelClick = () => {
-    console.log('aaa')
+  const [localHeaderTitle, setLocalHeaderTitle] = useState<string | undefined>()
+  const onHeaderTitleChange = (newTitle: string) => {
+    setLocalHeaderTitle(newTitle)
+  }
+
+  const onLabelClick = (type: 'year' | 'month') => {
+    setHeaderMode(type)
+  }
+  const onCellClick = (date: Dayjs) => {
+    let newVal = headerValue.value
+    newVal = newVal.set('year', date.year())
+    if (headerMode.value === 'month') {
+      newVal = newVal.set('month', date.month())
+    }
+    setHeaderValue(newVal)
+
+    if (headerMode.value === 'year') {
+      // setHeaderMode(headerMode.value === 'year' ? 'month' : 'date')
+      setHeaderMode('month')
+    }
   }
 
   const showPicker = ref(false)
   const openPicker = () => {
     showPicker.value = true
+    console.log(headerMode.value)
   }
 </script>
 
