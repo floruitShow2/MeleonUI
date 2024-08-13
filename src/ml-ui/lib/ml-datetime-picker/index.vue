@@ -39,7 +39,13 @@
           :header-value="headerValue"
           @cell-click="onCellClick"
         />
-        <DatePanel v-else :prefix-cls="prefix" :mode="headerMode" :header-value="headerValue" />
+        <DatePanel
+          v-else
+          :prefix-cls="prefix"
+          :mode="headerMode"
+          :header-value="headerValue"
+          @cell-click="onCellClick"
+        />
       </template>
     </Drawer>
   </view>
@@ -95,14 +101,7 @@
 
   const localModelValue = computed(() => {})
 
-  const [headerMode, setHeaderMode] = useState(mode.value)
-  watch(
-    () => props.mode,
-    (newVal) => {
-      console.log(newVal, headerMode.value)
-    },
-    { immediate: true }
-  )
+  const [headerMode, setHeaderMode] = useState<DatetimePickerProps['mode'] | undefined>(mode.value)
 
   const { headerValue, setHeaderValue, headerOperations } = usePickerHeader({
     mode: headerMode,
@@ -127,21 +126,21 @@
   const onCellClick = (date: Dayjs) => {
     let newVal = headerValue.value
     newVal = newVal.set('year', date.year())
+    newVal = newVal.set('date', date.date())
     if (headerMode.value === 'month') {
       newVal = newVal.set('month', date.month())
     }
     setHeaderValue(newVal)
 
-    if (headerMode.value === 'year') {
-      // setHeaderMode(headerMode.value === 'year' ? 'month' : 'date')
-      setHeaderMode('month')
-    }
+    // if (headerMode.value === 'year') {
+    //   setHeaderMode('month')
+    // }
+    setHeaderMode(headerMode.value === 'year' ? 'month' : undefined)
   }
 
   const showPicker = ref(false)
   const openPicker = () => {
     showPicker.value = true
-    console.log(headerMode.value)
   }
 </script>
 

@@ -1,19 +1,23 @@
 <template>
   <view :class="`${prefixCls}-body`">
     <view :class="`${prefixCls}-body-inner`">
+      <!-- 周 -->
       <view :class="`${prefixCls}-body-inner-weeks`">
         <div v-for="key in weekList" :key="key" :class="`${prefixCls}-weeks-item`">
           {{ labelList[key] || '' }}
         </div>
       </view>
+      <!-- 日历 -->
       <view :class="`${prefixCls}-body-inner-date`">
         <view v-for="(row, rowIndex) in rows" :key="rowIndex" :class="`${prefixCls}-row`">
           <view
             v-for="(cell, colIndex) in row"
             :key="colIndex"
             :class="{
-              [`${prefixCls}-date`]: true
+              [`${prefixCls}-date`]: true,
+              [`${prefixCls}-date--active`]: isActiveCell(cell)
             }"
+            @click="onCellClick(cell)"
           >
             <view :class="`${prefixCls}-date-value`">{{ cell.label }}</view>
           </view>
@@ -53,6 +57,8 @@
   })
   const { mode, headerValue, dayStartOfWeek } = toRefs(props)
 
+  const emit = defineEmits(['cell-click'])
+
   const datetimePickerCtx = inject(DatetimePickerContextKey, null)
 
   const ROW_COUNT = 6
@@ -71,9 +77,13 @@
   const labelList = computed<string[]>(() => {
     if (!datetimePickerCtx) return []
     return ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'].map((i) =>
-      datetimePickerCtx.datePickerT(`datePicker.week.short.${i}`)
+      datetimePickerCtx.datePickerT(`calendar.week.short.${i}`)
     )
   })
+
+  const isActiveCell = (cell: DatetimePickerCell) => {
+    return cell.value.isSame(headerValue.value, 'day')
+  }
 
   const rows = computed(() => {
     const startDate = methods.startOf(headerValue.value, 'month')
@@ -107,6 +117,10 @@
 
     return rows
   })
+
+  const onCellClick = (cell: DatetimePickerCell) => {
+    emit('cell-click', cell.value)
+  }
 </script>
 
 <style lang="less">
@@ -122,6 +136,19 @@
     justify-content: flex-start;
     &-inner {
       width: 100%;
+      &-weeks {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        @{prefix}-weeks-item {
+          flex: 1;
+          padding: 4px 12px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+      }
       &-date {
         width: 100%;
         @{prefix}-row {
@@ -138,10 +165,23 @@
             justify-content: center;
             font-size: 12px;
             color: var(--info-color-7);
-            background-color: var(--info-color-1);
+            // background-color: var(--info-color-1);
             &--active {
+              position: relative;
               color: var(--primary-color-6);
-              background-color: var(--primary-color-1);
+              &::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 50%;
+                transform: translateX(-50%);
+                display: block;
+                width: 5px;
+                height: 5px;
+                border-radius: 50%;
+                background-color: var(--primary-color-6);
+              }
+              // background-color: var(--primary-color-1);
             }
           }
         }

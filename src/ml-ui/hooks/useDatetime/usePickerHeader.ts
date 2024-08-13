@@ -5,7 +5,7 @@ import { formatDateValue, getNow, methods } from '@meleon/uni-ui/utils'
 import { usePickerSpan } from './index'
 
 export interface PickerHeaderInput {
-  mode: Ref<MeleonDatetime.DateMode>
+  mode: Ref<MeleonDatetime.DateMode | undefined>
   modelValue: Ref<MeleonDatetime.DateValue>
   defaultModelValue: Ref<MeleonDatetime.DateValue>
   format: Ref<string>
@@ -43,10 +43,8 @@ export default function usePickerHeader(input: PickerHeaderInput) {
 
   const setHeaderValue = (newVal: Dayjs | undefined, emitChange = true) => {
     if (!newVal) return
-    console.log(headerValue.value, newVal, computedMode.value)
     // && !isSame(headerValue.value, newVal)
     if (emitChange) {
-      console.log('change', newVal)
       onChange?.value?.(newVal)
     }
     setLocalValue(newVal)
