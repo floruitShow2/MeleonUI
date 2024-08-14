@@ -17,16 +17,20 @@
 </template>
 
 <script setup lang="ts">
-  import { computed, toRefs } from 'vue'
+  import { computed, toRefs, inject } from 'vue'
   import type { PropType } from 'vue'
-  import type { Dayjs } from 'dayjs'
   import dayjs from 'dayjs'
+  import type { Dayjs } from 'dayjs'
+  import { DatetimePickerContextKey } from '../context'
   import type { DatetimePickerCell } from '../index.interface'
 
   const props = defineProps({
     prefixCls: {
       type: String,
       required: true
+    },
+    value: {
+      type: Object as PropType<Dayjs>
     },
     headerValue: {
       type: Object as PropType<Dayjs>,
@@ -36,6 +40,8 @@
   const { headerValue } = toRefs(props)
 
   const emit = defineEmits(['cell-click'])
+
+  const datetimePickerCtx = inject(DatetimePickerContextKey, null)
 
   const CELL_COUNT = 12
   const ROW_COUNT = 4
@@ -61,7 +67,9 @@
     const year = headerValue.value.year()
 
     const flatData = new Array(CELL_COUNT).fill(0).map((_, index) => ({
-      label: MONTH_LIST[index],
+      label: datetimePickerCtx
+        ? datetimePickerCtx.datePickerT(`calendar.month.long.${MONTH_LIST[index]}`)
+        : MONTH_LIST[index],
       value: dayjs(`${year}-${index + 1}`, 'YYYY-M')
     }))
 

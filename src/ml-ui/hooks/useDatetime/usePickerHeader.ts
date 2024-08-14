@@ -1,4 +1,4 @@
-import { computed, reactive, toRefs, type Ref } from 'vue'
+import { computed, reactive, toRefs, type Ref, watch, type ComputedRef } from 'vue'
 import type { Dayjs } from 'dayjs'
 import { useState } from '@meleon/uni-ui/hooks'
 import { formatDateValue, getNow, methods } from '@meleon/uni-ui/utils'
@@ -6,13 +6,14 @@ import { usePickerSpan } from './index'
 
 export interface PickerHeaderInput {
   mode: Ref<MeleonDatetime.DateMode | undefined>
-  modelValue: Ref<MeleonDatetime.DateValue>
-  defaultModelValue: Ref<MeleonDatetime.DateValue>
+  pickerValue: Ref<MeleonDatetime.DateValue>
+  defaultPickerValue: Ref<MeleonDatetime.DateValue>
+  selectedValue: ComputedRef<Dayjs | undefined>
   format: Ref<string>
   onChange: (val: Dayjs) => void
 }
 export default function usePickerHeader(input: PickerHeaderInput) {
-  const { mode, modelValue, defaultModelValue, format, onChange } = toRefs(input)
+  const { mode, pickerValue, defaultPickerValue, selectedValue, format, onChange } = toRefs(input)
 
   const computedMode = computed(() => {
     return mode.value || 'date'
@@ -25,11 +26,11 @@ export default function usePickerHeader(input: PickerHeaderInput) {
   )
 
   const computedValue = computed(() => {
-    return formatDateValue(modelValue.value, format.value)
+    return formatDateValue(pickerValue.value, format.value)
   })
 
   const computedDefaultValue = computed(() => {
-    return formatDateValue(defaultModelValue.value, format.value)
+    return formatDateValue(defaultPickerValue.value, format.value)
   })
 
   const isSame = (current: Dayjs, target: Dayjs) => {
@@ -49,6 +50,17 @@ export default function usePickerHeader(input: PickerHeaderInput) {
     }
     setLocalValue(newVal)
   }
+
+  // 选中值变更，触发 header 显示值变更
+  if (selectedValue.value) {
+    setLocalValue(selectedValue.value)
+  }
+  watch(
+    () => selectedValue.value,
+    (newVal) => {
+      setHeaderValue(newVal)
+    }
+  )
 
   const showSingleBtn = computed(() => span.value !== superSpan.value)
   const headerOperations = computed(() => ({

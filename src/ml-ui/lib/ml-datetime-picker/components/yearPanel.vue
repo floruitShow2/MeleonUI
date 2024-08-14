@@ -22,7 +22,6 @@
   import dayjs from 'dayjs'
   import type { Dayjs } from 'dayjs'
   import type { DatetimePickerCell } from '../index.interface'
-  import {} from 'vue'
 
   const ROW_COUNT = 4
   const COL_COUNT = 3
@@ -33,6 +32,9 @@
     prefixCls: {
       type: String,
       required: true
+    },
+    value: {
+      type: Object as PropType<Dayjs>
     },
     headerValue: {
       type: Object as PropType<Dayjs>,
@@ -56,13 +58,11 @@
       .fill(0)
       .map((_, index) => flatData.slice(index * COL_COUNT, (index + 1) * COL_COUNT))
 
-    console.log(rows)
     return rows
   })
 
   watchEffect(() => {
     const headerTitle = `${rows.value[0][1].label}-${rows.value[ROW_COUNT - 1][COL_COUNT - 1].label}`
-    console.log(headerTitle)
     emit('header-title-change', headerTitle)
   })
 

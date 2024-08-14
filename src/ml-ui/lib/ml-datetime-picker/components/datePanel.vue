@@ -8,15 +8,12 @@
         </div>
       </view>
       <!-- 日历 -->
-      <view :class="`${prefixCls}-body-inner-date`">
+      <view :class="`${prefixCls}-body-inner-wrapper`">
         <view v-for="(row, rowIndex) in rows" :key="rowIndex" :class="`${prefixCls}-row`">
           <view
             v-for="(cell, colIndex) in row"
             :key="colIndex"
-            :class="{
-              [`${prefixCls}-date`]: true,
-              [`${prefixCls}-date--active`]: isActiveCell(cell)
-            }"
+            :class="localGetCellClassName(cell)"
             @click="onCellClick(cell)"
           >
             <view :class="`${prefixCls}-date-value`">{{ cell.label }}</view>
@@ -29,12 +26,18 @@
 </template>
 
 <script lang="ts" setup>
-  import { toRefs, type PropType } from 'vue'
+  import { reactive, toRefs, inject, type PropType } from 'vue'
   import type { Dayjs } from 'dayjs'
   import { computed } from 'vue'
-  import { methods } from '@meleon/uni-ui/utils'
-  import type { DatetimePickerProps, DatetimePickerCell, WeekStart } from '../index.interface'
-  import { inject } from 'vue'
+  import { getDateValue, isFunction, methods } from '@meleon/uni-ui/utils'
+  import { usePickerCellClassName } from '@meleon/uni-ui/hooks'
+  import type {
+    DatetimePickerProps,
+    DatetimePickerCell,
+    WeekStart,
+    IsSameTimeFunc,
+    DisabledDateFunc
+  } from '../index.interface'
   import { DatetimePickerContextKey } from '../context'
 
   const props = defineProps({
@@ -46,6 +49,9 @@
       type: String as PropType<DatetimePickerProps['mode']>,
       default: 'month'
     },
+    value: {
+      type: Object as PropType<Dayjs>
+    },
     headerValue: {
       type: Object as PropType<Dayjs>,
       required: true
@@ -53,11 +59,25 @@
     dayStartOfWeek: {
       type: Number as PropType<WeekStart>,
       default: 0
+    },
+    isSameTime: {
+      type: Function as PropType<IsSameTimeFunc>
+    },
+    disabledDate: {
+      type: Function as PropType<DisabledDateFunc>
     }
   })
-  const { mode, headerValue, dayStartOfWeek } = toRefs(props)
+  const {
+    prefixCls,
+    mode,
+    value: modelValue,
+    headerValue,
+    isSameTime,
+    disabledDate,
+    dayStartOfWeek
+  } = toRefs(props)
 
-  const emit = defineEmits(['cell-click'])
+  const emit = defineEmits(['cell-click', 'select'])
 
   const datetimePickerCtx = inject(DatetimePickerContextKey, null)
 
@@ -81,8 +101,28 @@
     )
   })
 
-  const isActiveCell = (cell: DatetimePickerCell) => {
-    return cell.value.isSame(headerValue.value, 'day')
+  const mergedIsSameTime = computed(() => {
+    return (
+      isSameTime?.value ||
+      ((current: Dayjs, target: Dayjs) => {
+        return current.isSame(target, 'day')
+      })
+    )
+  })
+  const isCellDisabled = (cell: DatetimePickerCell): boolean => {
+    return !!(isFunction(disabledDate?.value) && disabledDate?.value(getDateValue(cell.value)))
+  }
+  const { getCellClassName } = usePickerCellClassName(
+    reactive({
+      prefixCls,
+      value: modelValue,
+      mode,
+      isSameTime: mergedIsSameTime
+    })
+  )
+  const localGetCellClassName = (cell: DatetimePickerCell) => {
+    const isDisabled = isCellDisabled(cell)
+    return getCellClassName(cell, isDisabled)
   }
 
   const rows = computed(() => {
@@ -119,7 +159,9 @@
   })
 
   const onCellClick = (cell: DatetimePickerCell) => {
-    emit('cell-click', cell.value)
+    const isDisabled = isCellDisabled(cell)
+    if (isDisabled) return
+    emit('select', cell.value)
   }
 </script>
 
@@ -149,14 +191,14 @@
           justify-content: center;
         }
       }
-      &-date {
+      &-wrapper {
         width: 100%;
         @{prefix}-row {
           width: 100%;
           display: flex;
           align-items: center;
           justify-content: space-between;
-          @{prefix}-date {
+          @{prefix}-cell {
             flex: 1;
             padding: 12px;
             border-radius: 2px;
@@ -164,9 +206,11 @@
             align-items: center;
             justify-content: center;
             font-size: 12px;
-            color: var(--info-color-7);
-            // background-color: var(--info-color-1);
-            &--active {
+            color: var(--info-color-5);
+            &-in-view {
+              color: var(--info-color-7);
+            }
+            &-selected {
               position: relative;
               color: var(--primary-color-6);
               &::after {
@@ -182,6 +226,10 @@
                 background-color: var(--primary-color-6);
               }
               // background-color: var(--primary-color-1);
+            }
+            &-disabled {
+              color: var(--info-color-5);
+              background-color: var(--info-color-1);
             }
           }
         }

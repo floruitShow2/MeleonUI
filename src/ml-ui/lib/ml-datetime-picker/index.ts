@@ -6,6 +6,6 @@ const install = (app: App) => {
 }
 
 export type DatetimePickerInstance = typeof import('./index.vue').default
-export type { DatetimePickerProps } from './index.interface'
+export type { DatetimePickerProps, DatetimePickerCell, IsSameTimeFunc } from './index.interface'
 
 export default { install }

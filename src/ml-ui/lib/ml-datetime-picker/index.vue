@@ -29,6 +29,7 @@
         <DateYearPanel
           v-if="headerMode === 'year'"
           :prefix-cls="prefix"
+          :value="selectedValue"
           :header-value="headerValue"
           @cell-click="onCellClick"
           @header-title-change="onHeaderTitleChange"
@@ -36,6 +37,7 @@
         <DateMonthPanel
           v-else-if="headerMode === 'month'"
           :prefix-cls="prefix"
+          :value="selectedValue"
           :header-value="headerValue"
           @cell-click="onCellClick"
         />
@@ -43,8 +45,11 @@
           v-else
           :prefix-cls="prefix"
           :mode="headerMode"
+          :is-same-time="isSameTime"
+          :disabled-date="disabledDate"
+          :value="selectedValue"
           :header-value="headerValue"
-          @cell-click="onCellClick"
+          @select="onDateSelect"
         />
       </template>
     </Drawer>
@@ -52,10 +57,16 @@
 </template>
 
 <script setup lang="ts">
-  import { ref, toRefs, computed, watch, provide } from 'vue'
+  import { ref, reactive, toRefs, computed, provide } from 'vue'
   import type { PropType } from 'vue'
   import type { Dayjs } from 'dayjs'
-  import { usePickerHeader, useTheme, useState, usePickerTransform } from '@meleon/uni-ui/hooks'
+  import {
+    usePickerHeader,
+    useTheme,
+    useState,
+    usePickerTransform,
+    usePickerState
+  } from '@meleon/uni-ui/hooks'
   import { cs, getReturnValue } from '@meleon/uni-ui/utils'
   import Drawer from '../ml-drawer/index.vue'
   import DatePickerHeader from './components/header.vue'
@@ -66,11 +77,21 @@
   import type { DatetimePickerProps } from './index.interface'
 
   const props = defineProps({
+    // 绑定的值
     modelValue: {
       type: [String, Object] as PropType<DatetimePickerProps['modelValue']>,
       default: ''
     },
     defaultModelValue: {
+      type: String as PropType<DatetimePickerProps['defaultModelValue']>,
+      default: ''
+    },
+    // 面板显示的时间
+    pickerValue: {
+      type: [String, Object] as PropType<DatetimePickerProps['modelValue']>,
+      default: ''
+    },
+    defaultPickerValue: {
       type: String as PropType<DatetimePickerProps['defaultModelValue']>,
       default: ''
     },
@@ -81,14 +102,22 @@
     format: {
       type: String,
       default: 'YYYY-MM-DD'
+    },
+    isSameTime: {
+      type: Function as PropType<DatetimePickerProps['isSameTime']>
+    },
+    disabledDate: {
+      type: Function as PropType<DatetimePickerProps['disabledDate']>
     }
   })
-  const { modelValue, defaultModelValue, mode, format } = toRefs(props)
+  const { modelValue, defaultModelValue, pickerValue, defaultPickerValue, mode, format } =
+    toRefs(props)
 
-  const emit = defineEmits(['update:modelValue', 'change'])
+  const emit = defineEmits(['update:modelValue', 'change', 'update:pickerValue'])
 
   const { themeColors } = useTheme()
 
+  // locale 转换方法注入
   const datePickerT = usePickerTransform({})
   provide(DatetimePickerContextKey, {
     datePickerT
@@ -99,19 +128,25 @@
     return cs(prefix.value, `${prefix.value}--${mode.value}`)
   })
 
-  const localModelValue = computed(() => {})
+  const [selectedValue, setSelectedValue] = usePickerState(
+    reactive({
+      modelValue,
+      defaultValue: defaultModelValue,
+      format
+    })
+  )
 
   const [headerMode, setHeaderMode] = useState<DatetimePickerProps['mode'] | undefined>(mode.value)
 
   const { headerValue, setHeaderValue, headerOperations } = usePickerHeader({
     mode: headerMode,
-    modelValue,
-    defaultModelValue,
+    pickerValue,
+    defaultPickerValue,
+    selectedValue,
     format,
     onChange(newVal: Dayjs) {
       const returnValue = getReturnValue(newVal)
-      emit('update:modelValue', returnValue)
-      emit('change', returnValue)
+      emit('update:pickerValue', returnValue)
     }
   })
 
@@ -126,7 +161,6 @@
   const onCellClick = (date: Dayjs) => {
     let newVal = headerValue.value
     newVal = newVal.set('year', date.year())
-    newVal = newVal.set('date', date.date())
     if (headerMode.value === 'month') {
       newVal = newVal.set('month', date.month())
     }
@@ -136,6 +170,13 @@
     //   setHeaderMode('month')
     // }
     setHeaderMode(headerMode.value === 'year' ? 'month' : undefined)
+  }
+  const onDateSelect = (newVal: Dayjs) => {
+    setSelectedValue(newVal)
+    headerMode.value = undefined
+    const returnValue = getReturnValue(newVal)
+    emit('update:modelValue', returnValue)
+    emit('change', returnValue)
   }
 
   const showPicker = ref(false)

@@ -21,6 +21,7 @@
             <ml-datetime-picker
               v-model="selectedDateTime"
               :mode="pickerMode"
+              :disabled-date="isDateDisabled"
               style="width: 100%"
               @change="handleValueChange"
             >
@@ -61,6 +62,9 @@
   }
 
   const pickerMode = ref<DatetimePickerProps['mode']>('date')
+  const isDateDisabled = (current: Date) => {
+    return current.getTime() < new Date().getTime() - 24 * 60 * 60 * 1000
+  }
 
   const templateMap = ref([
     {

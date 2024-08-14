@@ -14,6 +14,9 @@ export interface DatetimePickerProps {
 
   format: string
 
+  isSameTime: IsSameTimeFunc
+  disabledDate: DisabledDateFunc
+
   onChange?: (value: Dayjs) => void
 }
 
@@ -25,3 +28,6 @@ export interface DatetimePickerCell {
   isPrev?: boolean
   isNext?: boolean
 }
+
+export type IsSameTimeFunc = (current: Dayjs, dayjs: Dayjs) => boolean
+export type DisabledDateFunc = (current: Date) => boolean
