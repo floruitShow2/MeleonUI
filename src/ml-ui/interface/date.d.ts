@@ -1,5 +1,5 @@
 declare namespace MeleonDatetime {
-  type DateMode = 'date' | 'year' | 'quarter' | 'month' | 'week'
+  type DateMode = 'date' | 'year' | 'month' | 'week'
 
   type DateFormat = 'timestamp' | 'Date' | string
 

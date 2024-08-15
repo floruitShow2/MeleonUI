@@ -10,6 +10,7 @@
       :radius="10"
       :show-close="false"
       :show-footer="false"
+      @close="closePicker"
     >
       <template #title>
         <DatePickerHeader
@@ -29,7 +30,7 @@
         <DateYearPanel
           v-if="headerMode === 'year'"
           :prefix-cls="prefix"
-          :value="selectedValue"
+          :value="panelValue"
           :header-value="headerValue"
           @cell-click="onCellClick"
           @header-title-change="onHeaderTitleChange"
@@ -37,7 +38,7 @@
         <DateMonthPanel
           v-else-if="headerMode === 'month'"
           :prefix-cls="prefix"
-          :value="selectedValue"
+          :value="panelValue"
           :header-value="headerValue"
           @cell-click="onCellClick"
         />
@@ -47,7 +48,7 @@
           :mode="headerMode"
           :is-same-time="isSameTime"
           :disabled-date="disabledDate"
-          :value="selectedValue"
+          :value="panelValue"
           :header-value="headerValue"
           @select="onDateSelect"
         />
@@ -67,7 +68,7 @@
     usePickerTransform,
     usePickerState
   } from '@meleon/uni-ui/hooks'
-  import { cs, getReturnValue } from '@meleon/uni-ui/utils'
+  import { cs, getReturnValue, isDateValueChange } from '@meleon/uni-ui/utils'
   import Drawer from '../ml-drawer/index.vue'
   import DatePickerHeader from './components/header.vue'
   import DateYearPanel from './components/yearPanel.vue'
@@ -75,9 +76,9 @@
   import DatePanel from './components/datePanel.vue'
   import { DatetimePickerContextKey } from './context'
   import type { DatetimePickerProps } from './index.interface'
+import dayjs from 'dayjs'
 
   const props = defineProps({
-    // 绑定的值
     modelValue: {
       type: [String, Object] as PropType<DatetimePickerProps['modelValue']>,
       default: ''
@@ -86,7 +87,6 @@
       type: String as PropType<DatetimePickerProps['defaultModelValue']>,
       default: ''
     },
-    // 面板显示的时间
     pickerValue: {
       type: [String, Object] as PropType<DatetimePickerProps['modelValue']>,
       default: ''
@@ -95,9 +95,13 @@
       type: String as PropType<DatetimePickerProps['defaultModelValue']>,
       default: ''
     },
+    locale: {
+      type: Object as PropType<DatetimePickerProps['locale']>,
+      default: () => ({})
+    },
     mode: {
       type: String as PropType<DatetimePickerProps['mode']>,
-      default: 'date'
+      default: 'month'
     },
     format: {
       type: String,
@@ -110,7 +114,7 @@
       type: Function as PropType<DatetimePickerProps['disabledDate']>
     }
   })
-  const { modelValue, defaultModelValue, pickerValue, defaultPickerValue, mode, format } =
+  const { modelValue, defaultModelValue, pickerValue, defaultPickerValue, locale, mode, format } =
     toRefs(props)
 
   const emit = defineEmits(['update:modelValue', 'change', 'update:pickerValue'])
@@ -118,7 +122,7 @@
   const { themeColors } = useTheme()
 
   // locale 转换方法注入
-  const datePickerT = usePickerTransform({})
+  const datePickerT = usePickerTransform(reactive({ locale }))
   provide(DatetimePickerContextKey, {
     datePickerT
   })
@@ -135,6 +139,32 @@
       format
     })
   )
+  const [processValue, setProcessValue] = useState<Dayjs | undefined>()
+  const panelValue = computed(() => {
+    return processValue.value ?? selectedValue.value
+  })
+
+  /**
+   * @description 选中事件，仅修改面板展示的时间数据，不触发双向绑定更新
+   */
+  function select(value: Dayjs | undefined) {
+    setProcessValue(value)
+  }
+  const emitChange = (value: Dayjs | undefined) => {
+    const returnValue = value ? getReturnValue(value) : undefined
+    if (isDateValueChange(value, selectedValue.value)) {
+      emit('update:modelValue', returnValue)
+      emit('change', returnValue)
+    }
+  }
+  /**
+   * @description 确认事件，基本只会在面板关闭前调用，触发双向绑定更新
+   */
+  function confirm(value: Dayjs | undefined) {
+    emitChange(value)
+    setSelectedValue(value)
+    setProcessValue(undefined)
+  }
 
   const [headerMode, setHeaderMode] = useState<DatetimePickerProps['mode'] | undefined>(mode.value)
 
@@ -172,16 +202,15 @@
     setHeaderMode(headerMode.value === 'year' ? 'month' : undefined)
   }
   const onDateSelect = (newVal: Dayjs) => {
-    setSelectedValue(newVal)
-    headerMode.value = undefined
-    const returnValue = getReturnValue(newVal)
-    emit('update:modelValue', returnValue)
-    emit('change', returnValue)
+    select(newVal)
   }
 
   const showPicker = ref(false)
   const openPicker = () => {
     showPicker.value = true
+  }
+  const closePicker = () => {
+    confirm(panelValue.value)
   }
 </script>
 

@@ -31,7 +31,8 @@ export default function usePickerCellClassName(props: PcikerCellClsProps) {
         [`${prefixCls}-cell-today`]: isToday,
         [`${prefixCls}-cell-selected`]: isSelected,
         [`${prefixCls}-cell-disabled`]: disabled
-      }
+      },
+      cellData.className
     ]
   }
 

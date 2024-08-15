@@ -12,7 +12,7 @@ export default function usePickerTransform(props: { locale?: DatetimePickerProps
   const datePickerT: typeof t = (key: string) => {
     const keyForLocale = key.startsWith('datePicker.') ? key.split('.').slice(1).join('.') : key
 
-    return getValueByPath(locale?.value, keyForLocale) || t(key)
+    return getValueByPath(locale?.value || {}, keyForLocale) || t(key)
   }
 
   return datePickerT

@@ -1,9 +1,39 @@
 import dayjs from 'dayjs'
 import type { Dayjs, ManipulateType, OpUnitType } from 'dayjs'
-import { isArray, isString } from '../is'
+import { isArray, isString, isUndefined } from '../is'
 
 export function getNow() {
   return dayjs()
+}
+
+/**
+ * @description 判断时间是否相同
+ * @param prevDate 
+ * @param currentDate 
+ * @returns 
+ */
+export function isDateValueChange(prevDate: Dayjs | undefined, currentDate: Dayjs | undefined) {
+  function isDifference(value1: Dayjs | undefined, value2: Dayjs | undefined) {
+    if (value1 === undefined && value2 === undefined) {
+      return false
+    }
+
+    if ((value1 && !value2) || (!value1 && value2)) {
+      return true
+    }
+
+    return value1?.valueOf() !== value2?.valueOf()
+  }
+
+  if (isUndefined(prevDate) && isUndefined(currentDate)) {
+    return false
+  }
+
+  if (!isArray(prevDate) && !isArray(currentDate)) {
+    return isDifference(prevDate, currentDate)
+  }
+
+  return true
 }
 
 /**

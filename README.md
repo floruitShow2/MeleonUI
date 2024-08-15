@@ -542,6 +542,39 @@ const themes: ConfigProviderProps['themes'] = {
 | pause   | 暂停动画 |
 | restart | 继续动画 |
 
+#### 时间选择器 DatetimePicker
+
+###### 基本使用
+
+###### APIs
+
+| prop               | type                       | default      | desc                   |
+| ------------------ | -------------------------- | ------------ | ---------------------- |
+| modelValue         | Date, string, number       | ''           | 选择的日期时间         |
+| defaultModelValue  | Date, string, number       | ''           | 默认展示的日期时间     |
+| pickerValue        | Date, string, number       | ''           | 面板头部展示的时间     |
+| defaultPickerValue | Date, string, number       | ''           | 面板头部默认展示的时间 |
+|                    |                            |              |                        |
+| locale             | Record<string, any>        | {}           | 自定义面板中展示的文本 |
+| mode               | 'date', 'year', 'month'    | 'date'       | 选择器模式             |
+| format             | string                     | 'YYYY-MM-DD' | 时间转换格式           |
+|                    |                            |              |                        |
+| disabledDate       | (current: Date) => boolean | undefined    | 判断日期是否禁用       |
+|                    |                            |              |                        |
+|                    |                            |              |                        |
+|                    |                            |              |                        |
+
+###### Emits
+
+| name   | type                  | desc                 |
+| ------ | --------------------- | -------------------- |
+| change | (value: Date) => void | 选中值发生变化时触发 |
+|        |                       |                      |
+|        |                       |                      |
+|        |                       |                      |
+
+
+
 #### 抽屉 Drawer
 
 ###### 基本使用

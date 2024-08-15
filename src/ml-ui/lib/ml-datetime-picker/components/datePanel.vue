@@ -198,40 +198,6 @@
           display: flex;
           align-items: center;
           justify-content: space-between;
-          @{prefix}-cell {
-            flex: 1;
-            padding: 12px;
-            border-radius: 2px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 12px;
-            color: var(--info-color-5);
-            &-in-view {
-              color: var(--info-color-7);
-            }
-            &-selected {
-              position: relative;
-              color: var(--primary-color-6);
-              &::after {
-                content: '';
-                position: absolute;
-                bottom: 0;
-                left: 50%;
-                transform: translateX(-50%);
-                display: block;
-                width: 5px;
-                height: 5px;
-                border-radius: 50%;
-                background-color: var(--primary-color-6);
-              }
-              // background-color: var(--primary-color-1);
-            }
-            &-disabled {
-              color: var(--info-color-5);
-              background-color: var(--info-color-1);
-            }
-          }
         }
       }
     }
