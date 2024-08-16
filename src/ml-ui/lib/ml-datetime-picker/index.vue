@@ -76,7 +76,6 @@
   import DatePanel from './components/datePanel.vue'
   import { DatetimePickerContextKey } from './context'
   import type { DatetimePickerProps } from './index.interface'
-import dayjs from 'dayjs'
 
   const props = defineProps({
     modelValue: {
@@ -168,17 +167,19 @@ import dayjs from 'dayjs'
 
   const [headerMode, setHeaderMode] = useState<DatetimePickerProps['mode'] | undefined>(mode.value)
 
-  const { headerValue, setHeaderValue, headerOperations } = usePickerHeader({
-    mode: headerMode,
-    pickerValue,
-    defaultPickerValue,
-    selectedValue,
-    format,
-    onChange(newVal: Dayjs) {
-      const returnValue = getReturnValue(newVal)
-      emit('update:pickerValue', returnValue)
-    }
-  })
+  const { headerValue, setHeaderValue, headerOperations } = usePickerHeader(
+    reactive({
+      mode: headerMode.value,
+      pickerValue: pickerValue.value,
+      defaultPickerValue: defaultPickerValue.value,
+      selectedValue: selectedValue.value,
+      format: format.value,
+      onChange(newVal: Dayjs) {
+        const returnValue = getReturnValue(newVal)
+        emit('update:pickerValue', returnValue)
+      }
+    })
+  )
 
   const [localHeaderTitle, setLocalHeaderTitle] = useState<string | undefined>()
   const onHeaderTitleChange = (newTitle: string) => {
@@ -199,7 +200,14 @@ import dayjs from 'dayjs'
     // if (headerMode.value === 'year') {
     //   setHeaderMode('month')
     // }
-    setHeaderMode(headerMode.value === 'year' ? 'month' : undefined)
+    if (headerMode.value === 'year' && mode.value !== 'year') {
+      setHeaderMode('month')
+    } else if (headerMode.value === 'month' && mode.value !== 'month') {
+      setHeaderMode('date')
+    }
+
+    // 更新下 面板展示的时间
+    select(date)
   }
   const onDateSelect = (newVal: Dayjs) => {
     select(newVal)

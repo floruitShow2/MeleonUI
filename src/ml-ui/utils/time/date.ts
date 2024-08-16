@@ -8,9 +8,9 @@ export function getNow() {
 
 /**
  * @description 判断时间是否相同
- * @param prevDate 
- * @param currentDate 
- * @returns 
+ * @param prevDate
+ * @param currentDate
+ * @returns
  */
 export function isDateValueChange(prevDate: Dayjs | undefined, currentDate: Dayjs | undefined) {
   function isDifference(value1: Dayjs | undefined, value2: Dayjs | undefined) {

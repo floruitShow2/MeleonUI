@@ -5,11 +5,11 @@ import { formatDateValue, getNow, methods } from '@meleon/uni-ui/utils'
 import { usePickerSpan } from './index'
 
 export interface PickerHeaderInput {
-  mode: Ref<MeleonDatetime.DateMode | undefined>
-  pickerValue: Ref<MeleonDatetime.DateValue>
-  defaultPickerValue: Ref<MeleonDatetime.DateValue>
-  selectedValue: ComputedRef<Dayjs | undefined>
-  format: Ref<string>
+  mode: MeleonDatetime.DateMode | undefined
+  pickerValue: MeleonDatetime.DateValue
+  defaultPickerValue: MeleonDatetime.DateValue
+  selectedValue: Dayjs | undefined
+  format: string
   onChange: (val: Dayjs) => void
 }
 export default function usePickerHeader(input: PickerHeaderInput) {

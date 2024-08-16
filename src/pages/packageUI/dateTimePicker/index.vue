@@ -8,10 +8,10 @@
       background="#7A98B3"
     />
     <view class="button-view-wrapper" :style="wrapperStyle">
-      <!-- 基础用法 -->
+      <!-- 年份选择器 -->
       <CodeBlock :code="templateMap[0].code">
         <template #title>
-          <text>基础用法</text>
+          <text>年份选择器</text>
         </template>
         <template #description>
           <text></text>
@@ -19,16 +19,72 @@
         <template #demo>
           <view class="cell-container">
             <ml-datetime-picker
-              v-model="selectedDateTime"
-              :mode="pickerMode"
+              v-model="templateMap[0].value"
+              mode="year"
               :disabled-date="isDateDisabled"
               style="width: 100%"
               @change="handleValueChange"
             >
               <template #trigger>
                 <ml-cell
-                  label="时间选择器"
-                  :value="formatToDateTime(selectedDateTime)"
+                  label="年份选择器"
+                  :value="formatToDateTime(templateMap[0].value)"
+                  style="width: 100%"
+                ></ml-cell>
+              </template>
+            </ml-datetime-picker>
+          </view>
+        </template>
+      </CodeBlock>
+      <!-- 月份选择器 -->
+      <CodeBlock :code="templateMap[1].code">
+        <template #title>
+          <text>月份选择器</text>
+        </template>
+        <template #description>
+          <text></text>
+        </template>
+        <template #demo>
+          <view class="cell-container">
+            <ml-datetime-picker
+              v-model="templateMap[1].value"
+              mode="month"
+              :disabled-date="isDateDisabled"
+              style="width: 100%"
+              @change="handleValueChange"
+            >
+              <template #trigger>
+                <ml-cell
+                  label="月份选择器"
+                  :value="formatToDateTime(templateMap[1].value)"
+                  style="width: 100%"
+                ></ml-cell>
+              </template>
+            </ml-datetime-picker>
+          </view>
+        </template>
+      </CodeBlock>
+      <!-- 日期选择器 -->
+      <CodeBlock :code="templateMap[2].code">
+        <template #title>
+          <text>日期选择器</text>
+        </template>
+        <template #description>
+          <text></text>
+        </template>
+        <template #demo>
+          <view class="cell-container">
+            <ml-datetime-picker
+              v-model="templateMap[2].value"
+              mode="date"
+              :disabled-date="isDateDisabled"
+              style="width: 100%"
+              @change="handleValueChange"
+            >
+              <template #trigger>
+                <ml-cell
+                  label="日期选择器"
+                  :value="formatToDateTime(templateMap[2].value)"
                   style="width: 100%"
                 ></ml-cell>
               </template>
@@ -42,7 +98,6 @@
 
 <script setup lang="ts">
   import { ref, computed } from 'vue'
-  import type { DatetimePickerProps } from '@/ml-ui'
   import { useAppStore } from '@/store'
   import CodeBlock from '@/components/CodeBlock/index.vue'
   import { formatToDateTime } from '@/utils/time'
@@ -56,19 +111,26 @@
     }
   })
 
-  const selectedDateTime = ref<Date>(new Date())
   const handleValueChange = () => {
-    console.log('change', selectedDateTime.value)
+    console.log('change')
   }
 
-  const pickerMode = ref<DatetimePickerProps['mode']>('date')
   const isDateDisabled = (current: Date) => {
     return current.getTime() < new Date().getTime() - 24 * 60 * 60 * 1000
   }
 
   const templateMap = ref([
     {
-      code: ''
+      code: '',
+      value: new Date()
+    },
+    {
+      code: '',
+      value: new Date()
+    },
+    {
+      code: '',
+      value: new Date()
     }
   ])
 </script>
