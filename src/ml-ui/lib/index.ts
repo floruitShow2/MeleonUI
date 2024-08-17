@@ -86,6 +86,9 @@ export type { TabsInstance } from './ml-tabs'
 export { default as Tag } from './ml-tag'
 export type { TagInstance } from './ml-tag'
 
+export { default as TimePicker } from './ml-time-picker'
+export type { TimePickerInstance, TimePickerProps } from './ml-time-picker'
+
 export { default as Timeline } from './ml-timeline'
 export type { TimelineInstance, TimelineProps } from './ml-timeline'
 

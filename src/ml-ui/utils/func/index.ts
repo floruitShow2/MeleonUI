@@ -1,4 +1,5 @@
 export * from './get-value-by-path'
+export * from './pad'
 
 type AnyFunction = (...args: any[]) => any
 

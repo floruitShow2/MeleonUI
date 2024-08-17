@@ -92,6 +92,28 @@
           </view>
         </template>
       </CodeBlock>
+      <!-- 时间选择器 -->
+      <CodeBlock :code="templateMap[3].code">
+        <template #title>
+          <text>时间选择器</text>
+        </template>
+        <template #description>
+          <text></text>
+        </template>
+        <template #demo>
+          <view class="cell-container">
+            <ml-time-picker v-model="templateMap[2].value" style="width: 100%">
+              <template #trigger>
+                <ml-cell
+                  label="时间选择器"
+                  :value="formatToDateTime(templateMap[3].value)"
+                  style="width: 100%"
+                ></ml-cell>
+              </template>
+            </ml-time-picker>
+          </view>
+        </template>
+      </CodeBlock>
     </view>
   </view>
 </template>
@@ -120,6 +142,10 @@
   }
 
   const templateMap = ref([
+    {
+      code: '',
+      value: new Date()
+    },
     {
       code: '',
       value: new Date()

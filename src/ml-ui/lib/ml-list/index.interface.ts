@@ -59,6 +59,10 @@ export interface ListProps {
    * @description 单页展示的数量
    */
   pageSize: number
+  /**
+   * @description 是否展示底部提示信息
+   */
+  showTip: boolean
 }
 
 export interface ListEvents {

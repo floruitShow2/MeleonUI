@@ -35,7 +35,7 @@
         <template #description>{{ tmps[1].description }}</template>
         <template #demo>
           <ml-list :data="mockVirtualData" :height="400" virtual-list style="width: 100%">
-            <template #vitual="{ data }">
+            <template #virtual="{ data }">
               <ml-cell
                 v-for="item in data"
                 :key="item.id"
@@ -163,7 +163,7 @@
       description: '虚拟列表的基础使用',
       code: `
 <ml-list :data="mockVirtualData" :height="400" virtual-list style="width: 100%">
-  <template #vitual="{ data }">
+  <template #virtual="{ data }">
     <ml-cell
       v-for="item in data"
       :key="item.id"

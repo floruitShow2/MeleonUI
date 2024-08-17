@@ -8,6 +8,7 @@
       :lower-threshold="SCROLL_THRESHOLD"
       :scroll-top="scrollTop"
       :scroll-into-view="intoViewId"
+      :scroll-with-animation="true"
       :style="{ ...scrollStyles }"
       @scroll="handleScroll"
       @scrolltoupper="handleScrollToUpper"
@@ -15,7 +16,7 @@
     >
       <!-- 虚拟列表 -->
       <template v-if="virtualList">
-        <slot name="vitual" :data="visibleData"></slot>
+        <slot name="virtual" :data="visibleData"></slot>
       </template>
       <!-- 普通列表 -->
       <template v-else>
@@ -28,28 +29,31 @@
           <slot name="item" :item="row" :index="index"></slot>
         </view>
       </template>
-      <!-- 加载中提示 -->
-      <view v-if="loading && !finished" :class="`${prefix}-scroll-loading`">
-        <slot name="loading">
-          {{ loadingText }}
-        </slot>
-      </view>
-      <!-- 加载异常提示 -->
-      <view
-        v-if="error && !loading && !finished"
-        :class="`${prefix}-scroll-error`"
-        @click="handleClickError"
-      >
-        <slot name="error">
-          {{ errorText }}
-        </slot>
-      </view>
-      <!-- 加载完成提示 -->
-      <view v-if="finished || endIndex >= data.length" :class="`${prefix}-scroll-finished`">
-        <slot name="finished">
-          {{ finishedText }}
-        </slot>
-      </view>
+
+      <template v-if="showTip">
+        <!-- 加载中提示 -->
+        <view v-if="loading && !finished" :class="`${prefix}-scroll-loading`">
+          <slot name="loading">
+            {{ loadingText }}
+          </slot>
+        </view>
+        <!-- 加载异常提示 -->
+        <view
+          v-if="error && !loading && !finished"
+          :class="`${prefix}-scroll-error`"
+          @click="handleClickError"
+        >
+          <slot name="error">
+            {{ errorText }}
+          </slot>
+        </view>
+        <!-- 加载完成提示 -->
+        <view v-if="finished || endIndex >= data.length" :class="`${prefix}-scroll-finished`">
+          <slot name="finished">
+            {{ finishedText }}
+          </slot>
+        </view>
+      </template>
     </scroll-view>
     <!-- 回到顶部按钮 -->
     <view v-if="isScrollToTopShow" :class="`${prefix}-to-top`" @click="scrollToTop">
@@ -112,6 +116,10 @@
       default: '没有更多了'
     },
     showToTop: {
+      type: Boolean,
+      default: false
+    },
+    showTip: {
       type: Boolean,
       default: false
     }
@@ -221,6 +229,7 @@
   // scroll into view
   const intoViewId = ref<WithId['id']>('')
   const scrollIntoView = (id: WithId['id']) => {
+    console.log(id, virtualList.value)
     if (virtualList.value) return
     intoViewId.value = id
   }
