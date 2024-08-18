@@ -43,6 +43,7 @@
                 :description="item.description"
                 :value="item.value"
                 allow-edit
+                style="width: 100%"
               ></ml-cell>
             </template>
           </ml-list>

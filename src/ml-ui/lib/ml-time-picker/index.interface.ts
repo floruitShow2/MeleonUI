@@ -1,3 +1,9 @@
+export enum TimeColumnEnum {
+  H = 'hour',
+  M = 'minute',
+  S = 'second'
+}
+
 export interface TimeListItem {
   id: string
   value: number | string

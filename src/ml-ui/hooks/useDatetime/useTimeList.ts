@@ -2,6 +2,7 @@ import { computed, toRefs, type ComputedRef } from 'vue'
 import type { TimePickerProps } from '@meleon/uni-ui/lib'
 import { padStart } from '@/ml-ui/utils'
 import type { TimeList } from '@meleon/uni-ui/lib/ml-time-picker'
+import { TimeColumnEnum } from '@meleon/uni-ui/lib/ml-time-picker'
 
 interface TimeListProps extends Pick<TimePickerProps, 'step'> {
   selectedHour: number | undefined
@@ -23,7 +24,7 @@ export default function useTimeList(props: TimeListProps): {
     }
 
     return list.map((h) => ({
-      id: `hour${h}`,
+      id: `${TimeColumnEnum.H}${h}`,
       label: padStart(h, 2, '0'),
       value: h,
       selected: selectedHour.value === h
@@ -37,7 +38,7 @@ export default function useTimeList(props: TimeListProps): {
       list.push(i)
     }
     return list.map((m) => ({
-      id: `minute${m}`,
+      id: `${TimeColumnEnum.M}${m}`,
       label: padStart(m, 2, '0'),
       value: m,
       selected: selectedMinute.value === m
@@ -51,7 +52,7 @@ export default function useTimeList(props: TimeListProps): {
       list.push(i)
     }
     return list.map((s) => ({
-      id: `second${s}`,
+      id: `${TimeColumnEnum.S}${s}`,
       label: padStart(s, 2, '0'),
       value: s,
       selected: selectedSecond.value === s

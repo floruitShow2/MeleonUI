@@ -8,7 +8,8 @@
       :lower-threshold="SCROLL_THRESHOLD"
       :scroll-top="scrollTop"
       :scroll-into-view="intoViewId"
-      :scroll-with-animation="true"
+      :scroll-with-animation="animation"
+      :show-scrollbar="true"
       :style="{ ...scrollStyles }"
       @scroll="handleScroll"
       @scrolltoupper="handleScrollToUpper"
@@ -122,6 +123,10 @@
     showTip: {
       type: Boolean,
       default: false
+    },
+    animation: {
+      type: Boolean,
+      default: false
     }
   })
   const { data, pageSize, height, itemHeight, loading, error, finished, showToTop, virtualList } =
@@ -229,7 +234,6 @@
   // scroll into view
   const intoViewId = ref<WithId['id']>('')
   const scrollIntoView = (id: WithId['id']) => {
-    console.log(id, virtualList.value)
     if (virtualList.value) return
     intoViewId.value = id
   }
