@@ -1,7 +1,7 @@
 import { computed, reactive, toRefs, type Ref, watch, type ComputedRef } from 'vue'
 import type { Dayjs } from 'dayjs'
 import { useState } from '@meleon/uni-ui/hooks'
-import { formatDateValue, getNow, methods } from '@meleon/uni-ui/utils'
+import { convertDate2Dayjs, getNow, methods } from '@meleon/uni-ui/utils'
 import { usePickerSpan } from './index'
 
 export interface PickerHeaderInput {
@@ -26,11 +26,11 @@ export default function usePickerHeader(input: PickerHeaderInput) {
   )
 
   const computedValue = computed(() => {
-    return formatDateValue(pickerValue.value, format.value)
+    return convertDate2Dayjs(pickerValue.value, format.value)
   })
 
   const computedDefaultValue = computed(() => {
-    return formatDateValue(defaultPickerValue.value, format.value)
+    return convertDate2Dayjs(defaultPickerValue.value, format.value)
   })
 
   const isSame = (current: Dayjs, target: Dayjs) => {

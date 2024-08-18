@@ -2,7 +2,7 @@
   <List
     ref="columnRef"
     :data="list"
-    :height="400"
+    :height="450"
     :item-height="50"
     :show-tip="false"
     :page-size="60"
@@ -21,17 +21,21 @@
         {{ item.label }}
       </view>
     </template>
+    <!-- 占位元素，让最底部节点可以滚动到顶部 -->
+    <template #footer>
+      <view :class="`${prefixCls}-column-footer`" />
+    </template>
   </List>
 </template>
 
 <script setup lang="ts">
-  import { ref, toRefs, watch, onMounted } from 'vue'
+  import { ref, toRefs, onMounted } from 'vue'
   import type { PropType } from 'vue'
   import { cs } from '@meleon/uni-ui/utils'
-  import List from '../../ml-list/index.vue'
-  import type { TimeColumnEnum, TimeList } from '../index.interface'
   import type { ListInstance } from '@meleon/uni-ui/lib'
+  import List from '../../ml-list/index.vue'
   import type { WithId } from '../../ml-list/index.interface'
+  import type { TimeColumnEnum, TimeList } from '../index.interface'
 
   const props = defineProps({
     prefixCls: {
@@ -67,13 +71,13 @@
     }
   }
 
-  watch(
-    () => modelValue,
-    (newVal) => {
-      if (newVal) onItemClick({ id: `${type.value}${newVal}`, value: newVal })
-    },
-    { immediate: false }
-  )
+  // watch(
+  //   () => modelValue,
+  //   (newVal) => {
+  //     if (newVal) onItemClick({ id: `${type.value}${newVal}`, value: newVal })
+  //   },
+  //   { immediate: false }
+  // )
 
   onMounted(() => {
     if (modelValue && modelValue.value) {
@@ -101,5 +105,10 @@
     &--selected {
       background-color: var(--info-color-1);
     }
+  }
+  @{prefix}-column-footer {
+    display: block;
+    width: 100%;
+    height: 400px;
   }
 </style>

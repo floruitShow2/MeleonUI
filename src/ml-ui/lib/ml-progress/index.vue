@@ -246,7 +246,6 @@
     ctx.setStrokeStyle(formatedColor.value)
 
     if (percent.value === 0) {
-      console.log('aaa')
       ctx.draw()
       setOldPercent(0)
       return

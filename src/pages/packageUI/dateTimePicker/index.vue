@@ -102,7 +102,7 @@
         </template>
         <template #demo>
           <view class="cell-container">
-            <ml-time-picker v-model="templateMap[2].value" style="width: 100%">
+            <ml-time-picker v-model="templateMap[3].value" style="width: 100%">
               <template #trigger>
                 <ml-cell
                   label="时间选择器"
@@ -121,6 +121,7 @@
 <script setup lang="ts">
   import { ref, computed } from 'vue'
   import { useAppStore } from '@/store'
+  import type { DatetimePickerProps } from '@meleon/uni-ui/lib';
   import CodeBlock from '@/components/CodeBlock/index.vue'
   import { formatToDateTime } from '@/utils/time'
 
@@ -133,8 +134,8 @@
     }
   })
 
-  const handleValueChange = () => {
-    console.log('change')
+  const handleValueChange = (value: DatetimePickerProps['modelValue']) => {
+    console.log('change', value)
   }
 
   const isDateDisabled = (current: Date) => {
@@ -156,7 +157,7 @@
     },
     {
       code: '',
-      value: new Date()
+      value: '16:41:37'
     }
   ])
 </script>

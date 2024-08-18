@@ -1,6 +1,6 @@
 import { computed, toRefs, watch, type ComputedRef } from 'vue'
 import type { Dayjs } from 'dayjs'
-import { formatDateValue, isUndefined } from '@meleon/uni-ui/utils'
+import { convertDate2Dayjs, isUndefined } from '@meleon/uni-ui/utils'
 import { useState } from '../useState'
 
 interface PickerStateProps {
@@ -18,10 +18,10 @@ export default function usePickerState(props: PickerStateProps) {
   const { modelValue, defaultValue, format } = toRefs(props)
 
   const computedModelValue = computed(() => {
-    return formatDateValue(modelValue.value, format.value)
+    return convertDate2Dayjs(modelValue.value, format.value)
   })
   const computedDefaultValue = computed(() => {
-    return formatDateValue(defaultValue.value, format.value)
+    return convertDate2Dayjs(defaultValue.value, format.value)
   })
 
   const [localValue, setLocalValue] = useState<Dayjs | undefined>(

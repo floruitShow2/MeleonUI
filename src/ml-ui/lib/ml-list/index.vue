@@ -29,6 +29,7 @@
         >
           <slot name="item" :item="row" :index="index"></slot>
         </view>
+        <slot name="footer"></slot>
       </template>
 
       <template v-if="showTip">
@@ -122,14 +123,18 @@
     },
     showTip: {
       type: Boolean,
-      default: false
+      default: true
     },
     animation: {
       type: Boolean,
       default: false
+    },
+    scrollStyle: {
+      type: Object as PropType<ListProps['scrollStyle']>,
+      default: () => ({})
     }
   })
-  const { data, pageSize, height, itemHeight, loading, error, finished, showToTop, virtualList } =
+  const { data, pageSize, height, itemHeight, loading, error, finished, showToTop, virtualList, scrollStyle } =
     toRefs(props)
 
   const emit = defineEmits(['update:error', 'load'])
@@ -143,7 +148,8 @@
   const scrollStyles = computed(() => {
     return {
       height: `${height.value}px`,
-      '--list-item-height': `${itemHeight.value}px`
+      '--list-item-height': `${itemHeight.value}px`,
+      ...scrollStyle.value
     }
   })
 

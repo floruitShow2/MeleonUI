@@ -7,7 +7,11 @@ export function formatToDateTime(
   date: dayjs.ConfigType = undefined,
   format = DATE_TIME_FORMAT
 ): string {
-  return dayjs(date).format(format)
+  if (dayjs(date).isValid()) {
+    return dayjs(date).format(format)
+  } else {
+    return date?.toString() || '-'
+  }
 }
 
 export function formatToDate(date: dayjs.ConfigType = undefined, format = DATE_FORMAT): string {

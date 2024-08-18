@@ -42,14 +42,29 @@ export function isDateValueChange(prevDate: Dayjs | undefined, currentDate: Dayj
  * @param format string
  * @returns
  */
-export function formatDateValue(val: MeleonDatetime.DateValue | undefined, format: string) {
+export function convertDate2Dayjs(val: MeleonDatetime.DateValue | undefined, format: string) {
   if (!val) return
 
   if (isString(val)) {
     if (dayjs(val, format).isValid()) return dayjs(val, format)
   }
 
-  return dayjs(val, format)
+  return dayjs(val)
+}
+
+/**
+ * @description 将内部的 Dayjs 转换为返给用户的时间
+ * @param time Dayjs
+ * @param format 格式
+ * @returns
+ */
+export function convertDayjs2FormatValue(
+  time: Dayjs | undefined,
+  format: string
+): string | undefined {
+  if (isUndefined(time)) return undefined
+
+  return time.format(format)
 }
 
 /**

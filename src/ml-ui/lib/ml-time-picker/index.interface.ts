@@ -15,5 +15,6 @@ export type TimeList = TimeListItem[]
 
 export interface TimePickerProps {
   modelValue: MeleonDatetime.DateValue
+  defaultModelValue: MeleonDatetime.DateValue | undefined
   step?: Partial<{ hour: number; minute: number; second: number }>
 }

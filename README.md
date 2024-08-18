@@ -87,15 +87,13 @@ const install = async (app: App) => {
 export default { install }
 ```
 
-可以看到，虽然本质上都是使用 app.component 实现注册组件，但编译的结果却完全不同
+虽然本质上都是使用 `app.component` 实现注册组件，但 uniapp 编译的结果却并不完全相同
 
-在 main.ts 中注册 MlButtonGroup 组件被编译成函数
+在 `main.ts` 中注册 `MlButtonGroup` 组件被编译成函数
 
-而 meleon-ui.ts 里的组件被编译成对象
+而 `meleon-ui.ts` 里的组件被编译成对象
 
 在使用时也是前者可以被正常渲染成组件展示到页面上
-
-![image-20240618223130651](C:\Users\23200\AppData\Roaming\Typora\typora-user-images\image-20240618223130651.png)
 
 因此，如果希望在微信小程序端实现批量注册组件，需要使用 uniapp 提供的 `easycom` 方法
 
@@ -547,6 +545,36 @@ const themes: ConfigProviderProps['themes'] = {
 
 ###### 基本使用
 
+```html
+<ml-datetime-picker
+    v-model="value"
+    mode="date"
+    :disabled-date="isDateDisabled"
+    style="width: 100%"
+    @change="handleValueChange"
+>
+    <template #trigger>
+        <ml-cell
+            label="日期选择器"
+            :value="formatToDateTime(value)"
+            style="width: 100%"
+        ></ml-cell>
+    </template>
+</ml-datetime-picker>
+```
+
+```ts
+const value = ref(new Date())
+
+const isDateDisabled = (current: Date) => {
+    return current.getTime() < new Date().getTime() - 24 * 60 * 60 * 1000
+}
+
+const handleValueChange = (value: DatetimePickerProps['modelValue']) => {
+    console.log('change', value)
+}
+```
+
 ###### APIs
 
 | prop               | type                       | default      | desc                   |
@@ -561,20 +589,13 @@ const themes: ConfigProviderProps['themes'] = {
 | format             | string                     | 'YYYY-MM-DD' | 时间转换格式           |
 |                    |                            |              |                        |
 | disabledDate       | (current: Date) => boolean | undefined    | 判断日期是否禁用       |
-|                    |                            |              |                        |
-|                    |                            |              |                        |
-|                    |                            |              |                        |
 
 ###### Emits
 
-| name   | type                  | desc                 |
-| ------ | --------------------- | -------------------- |
-| change | (value: Date) => void | 选中值发生变化时触发 |
-|        |                       |                      |
-|        |                       |                      |
-|        |                       |                      |
-
-
+| name              | type                  | desc                 |
+| ----------------- | --------------------- | -------------------- |
+| change            | (value: Date) => void | 选中值发生变化时触发 |
+| update:modelValue | (value: Date) => void | 双向绑定选中日期     |
 
 #### 抽屉 Drawer
 
@@ -1259,6 +1280,22 @@ const showMessage = (type: MessageOptions['type']) => {
         <view>The third milestone </view>
     </ml-timeline-item>
 </ml-timeline>
+```
+
+#### 时间选择器 TimePicker
+
+###### 基本使用
+
+```html
+<ml-time-picker v-model="value" style="width: 100%">
+    <template #trigger>
+        <ml-cell
+            label="时间选择器"
+            :value="value"
+            style="width: 100%"
+        ></ml-cell>
+    </template>
+</ml-time-picker>
 ```
 
 #### 进度条 Progress

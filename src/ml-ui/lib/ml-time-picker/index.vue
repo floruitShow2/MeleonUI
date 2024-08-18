@@ -9,10 +9,12 @@
       :height="500"
       :radius="10"
       :show-close="false"
-      :show-footer="true"
+      :show-footer="false"
       @close="closePicker"
     >
-      <template #header></template>
+      <template #title>
+        <view :class="`${prefix}--header`">请选择时间</view>
+      </template>
       <template #default>
         <view :class="`${prefix}--content`">
           <TimeColumn
@@ -47,35 +49,43 @@
           />
         </view>
       </template>
-      <template #footer>
-        <view :class="`${prefix}--footer`">
-          <MlButton type="secondary" size="small">此刻</MlButton>
-        </view>
-      </template>
     </Drawer>
   </view>
 </template>
 
 <script setup lang="ts">
-  import { ref, reactive, toRefs, computed, watch, onMounted } from 'vue'
+  import { ref, reactive, toRefs, computed } from 'vue'
   import type { PropType } from 'vue'
   import dayjs from 'dayjs'
   import customParseFormat from 'dayjs/plugin/customParseFormat'
   import type { Dayjs } from 'dayjs'
-  import { useState, useTheme, useTimeFormat, useTimeList } from '@meleon/uni-ui/hooks'
-  import { cs, formatDateValue, generateDeviceUI, getReturnValue } from '@meleon/uni-ui/utils'
+  import {
+    useTheme,
+    useTimeFormat,
+    useTimeList,
+    useTimeState
+  } from '@meleon/uni-ui/hooks'
+  import {
+    cs,
+    generateDeviceUI,
+    convertDayjs2FormatValue,
+    getDateValue,
+    isDateValueChange
+  } from '@meleon/uni-ui/utils'
   import Drawer from '../ml-drawer/index.vue'
-  import MlButton from '../ml-button/index.vue'
   import TimeColumn from './components/timeColumn.vue'
-  import { TimeColumnEnum, type TimeListItem } from './index.interface'
-  import type { TimePickerProps } from './index.interface'
+  import { TimeColumnEnum } from './index.interface'
+  import type { TimePickerProps, TimeListItem } from './index.interface'
 
   dayjs.extend(customParseFormat)
 
   const props = defineProps({
     modelValue: {
-      type: [String, Object] as PropType<TimePickerProps['modelValue']>,
+      type: [String, Number, Date, Object] as PropType<TimePickerProps['modelValue']>,
       required: true
+    },
+    defaultModelValue: {
+      type: [String, Number, Date, Object] as PropType<TimePickerProps['defaultModelValue']>
     },
     format: {
       type: String,
@@ -86,9 +96,9 @@
       default: {}
     }
   })
-  const { modelValue, step, format } = toRefs(props)
+  const { modelValue, defaultModelValue, step, format } = toRefs(props)
 
-  const emit = defineEmits(['update:modelValue', 'select'])
+  const emit = defineEmits(['update:modelValue', 'select', 'change'])
 
   const { themeColors } = useTheme()
 
@@ -104,25 +114,24 @@
       format
     })
   )
+  const { localValue, setLocalValue, panelValue, setPanelValue } = useTimeState(
+    reactive({
+      modelValue,
+      defaultModelValue,
+      format: computedFormat
+    })
+  )
+
   const columnWidth = computed(() => {
     const { screenWidth } = generateDeviceUI().ui
     return (screenWidth - 20) / columns.value.length
   })
 
-  const [selectedValue, setSelectedValue] = useState<Dayjs | undefined>()
-  watch(
-    [modelValue, showPicker],
-    () => {
-      if (!showPicker.value) return
-      console.log('value change', formatDateValue(modelValue.value, format.value))
-      setSelectedValue(formatDateValue(modelValue.value, format.value))
-    },
-    { immediate: true }
-  )
-
-  const selectedHour = computed(() => selectedValue.value?.hour())
-  const selectedMinute = computed(() => selectedValue.value?.minute())
-  const selectedSecond = computed(() => selectedValue.value?.second())
+  const selectedHour = computed(() => {
+    return panelValue.value?.hour()
+  })
+  const selectedMinute = computed(() => panelValue.value?.minute())
+  const selectedSecond = computed(() => panelValue.value?.second())
 
   const { hours, minutes, seconds } = useTimeList(
     reactive({
@@ -134,12 +143,22 @@
   )
 
   const emitSelect = (value: Dayjs) => {
-    setSelectedValue(value)
-    const returnValue = getReturnValue(value, computedFormat.value)
-    console.log(value, returnValue)
-    emit('update:modelValue', returnValue)
-    emit('select', returnValue)
+    setPanelValue(value)
+    const formattedValue = convertDayjs2FormatValue(value, computedFormat.value)
+    const dateValue = getDateValue(value)
+    emit('select', formattedValue, dateValue)
   }
+  const emitConfirm = () => {
+    let newVal = panelValue.value
+    if (!newVal) return
+    if (isDateValueChange(newVal, localValue.value)) {
+      const formattedValue = convertDayjs2FormatValue(newVal, computedFormat.value)
+      const dateValue = getDateValue(newVal)
+      emit('update:modelValue', formattedValue)
+      emit('change', formattedValue, dateValue)
+    }
+  }
+
   const onSelect = (value: TimeListItem['value'], type: TimeColumnEnum) => {
     let newValue
 
@@ -169,7 +188,9 @@
   const openPicker = () => {
     showPicker.value = true
   }
-  const closePicker = () => {}
+  const closePicker = () => {
+    emitConfirm()
+  }
 </script>
 
 <style lang="less">

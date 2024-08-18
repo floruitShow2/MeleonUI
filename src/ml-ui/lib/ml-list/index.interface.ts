@@ -49,6 +49,10 @@ export interface ListProps {
    * @description 单元格布局或列表布局
    */
   type: 'grid' | 'row'
+  /**
+   * @description 滚动区域样式
+   */
+  scrollStyle: Meleon.MlStyle
 
   // 虚拟列表属性
   /**
