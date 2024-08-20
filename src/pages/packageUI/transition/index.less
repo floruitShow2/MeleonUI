@@ -1,0 +1,27 @@
+@import '@/styles/layout.less';
+@import '@/styles/theme.less';
+.main {
+  &-wrapper {
+    box-sizing: border-box;
+    padding: 10px;
+    overflow: auto;
+    .button-container {
+      flex-wrap: wrap;
+      align-content: flex-start;
+      #flex(row, center, flex-start);
+      .ml-button {
+        margin: 0 8px 8px 0;
+      }
+    }
+  }
+
+  :deep(.block) {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    margin: -50px 0 0 -50px;
+    width: 100px;
+    height: 100px;
+    background: #0083ff;
+  }
+}

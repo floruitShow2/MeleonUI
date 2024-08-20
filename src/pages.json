@@ -167,6 +167,12 @@
 					"style": {
 						"navigationStyle": "custom"
 					}
+				},
+				{
+					"path": "transition/index",
+					"style": {
+						"navigationStyle": "custom"
+					}
 				}
 			]
 		}

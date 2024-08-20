@@ -59,12 +59,7 @@
   import dayjs from 'dayjs'
   import customParseFormat from 'dayjs/plugin/customParseFormat'
   import type { Dayjs } from 'dayjs'
-  import {
-    useTheme,
-    useTimeFormat,
-    useTimeList,
-    useTimeState
-  } from '@meleon/uni-ui/hooks'
+  import { useTheme, useTimeFormat, useTimeList, useTimeState } from '@meleon/uni-ui/hooks'
   import {
     cs,
     generateDeviceUI,

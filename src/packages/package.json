@@ -1,12 +1,13 @@
 {
     "name": "@meleon/uni-ui",
-    "version": "1.1.11",
+    "version": "1.1.12",
     "keywords": [
         "uni-ui",
         "ui",
         "vue",
+        "uni-app",
         "typescript",
-        "components"
+        "components",
     ],
     "description": "A simple components library written in vue3 and typescript",
     "scripts": {

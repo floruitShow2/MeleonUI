@@ -1,6 +1,6 @@
 import { computed, toRefs, type ComputedRef } from 'vue'
 import type { TimePickerProps } from '@meleon/uni-ui/lib'
-import { padStart } from '@/ml-ui/utils'
+import { padStart } from '@meleon/uni-ui/utils'
 import type { TimeList } from '@meleon/uni-ui/lib/ml-time-picker'
 import { TimeColumnEnum } from '@meleon/uni-ui/lib/ml-time-picker'
 

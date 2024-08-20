@@ -1,4 +1,4 @@
-import { convertFormat2Columns } from '@/ml-ui/utils'
+import { convertFormat2Columns } from '@meleon/uni-ui/utils'
 import { computed, toRefs } from 'vue'
 
 interface TimeFormatProps {

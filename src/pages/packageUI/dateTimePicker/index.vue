@@ -121,7 +121,7 @@
 <script setup lang="ts">
   import { ref, computed } from 'vue'
   import { useAppStore } from '@/store'
-  import type { DatetimePickerProps } from '@meleon/uni-ui/lib';
+  import type { DatetimePickerProps } from '@meleon/uni-ui/lib'
   import CodeBlock from '@/components/CodeBlock/index.vue'
   import { formatToDateTime } from '@/utils/time'
 

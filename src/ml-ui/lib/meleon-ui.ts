@@ -31,6 +31,7 @@ import MlTag from './ml-tag'
 import MlTimeline from './ml-timeline'
 import MlTimelineItem from './ml-timeline-item'
 import MlTimePicker from './ml-time-picker'
+import MlTransition from './ml-transition'
 import MlTree from './ml-tree'
 import MlUploader from './ml-uploader'
 
@@ -67,6 +68,7 @@ const components: Record<string, Plugin> = {
   MlTimeline,
   MlTimelineItem,
   MlTimePicker,
+  MlTransition,
   MlTree,
   MlUploader
 }

@@ -134,8 +134,18 @@
       default: () => ({})
     }
   })
-  const { data, pageSize, height, itemHeight, loading, error, finished, showToTop, virtualList, scrollStyle } =
-    toRefs(props)
+  const {
+    data,
+    pageSize,
+    height,
+    itemHeight,
+    loading,
+    error,
+    finished,
+    showToTop,
+    virtualList,
+    scrollStyle
+  } = toRefs(props)
 
   const emit = defineEmits(['update:error', 'load'])
 

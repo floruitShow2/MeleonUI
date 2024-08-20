@@ -95,6 +95,9 @@ export type { TimelineInstance, TimelineProps } from './ml-timeline'
 export { default as TimelineItem } from './ml-timeline-item'
 export type { TimelineItemInstance, TimelineItemProps } from './ml-timeline-item'
 
+export { default as Transition } from './ml-transition'
+export type { TransitionInstance, TransitionProps } from './ml-transition'
+
 export { default as Tree } from './ml-tree'
 export type {
   TreeInstance,

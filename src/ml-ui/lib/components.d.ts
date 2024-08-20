@@ -69,6 +69,7 @@ declare module '@vue/runtime-core' {
     MlTimeline: TimelineInstance
     MlTimelineItem: TimelineItemInstance
     MlTimePicker: TimePickerInstance
+    MlTransition: TransitionInstance
     MlTree: TreeInstance
     MlUploader: UploaderInstance
   }

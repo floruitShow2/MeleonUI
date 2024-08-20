@@ -65,6 +65,7 @@
     { name: '标签 ml-tag', path: '/pages/packageUI/tag/index' },
     { name: '表格 ml-table', path: '/pages/packageUI/table/index' },
     { name: '时间线 ml-timeline', path: '/pages/packageUI/timeline/index' },
+    { name: '过渡 ml-transition', path: '/pages/packageUI/transition/index', isNew: true },
     { name: '树 ml-tree', path: '/pages/packageUI/tree/index' },
     { name: '图片上传 ml-uploder', path: '/pages/packageUI/uploader/index' }
   ])

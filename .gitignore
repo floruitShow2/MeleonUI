@@ -17,6 +17,7 @@ src/packages/hooks
 src/packages/interface
 src/packages/lib
 src/packages/utils
+src/packages/locale
 src/packages/README.md
 
 # Editor directories and files
