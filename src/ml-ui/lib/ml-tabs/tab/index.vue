@@ -1,5 +1,9 @@
 <template>
-  <view :class="className" :style="themeColors" @click.self="() => handleTabClick(tab)">
+  <view
+    :class="className"
+    :style="themeColors"
+    @click.self="() => handleTabClick(tab)"
+  >
     <MlIcon
       v-if="tab.icon"
       :name="tab.icon"

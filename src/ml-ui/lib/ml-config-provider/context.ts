@@ -6,6 +6,7 @@ export interface ConfigProviderContext {
   locale: MeleonLocale.CoreLocale
 }
 
-const configProviderInjectionKey: InjectionKey<ConfigProviderContext> = Symbol('ml-config-provider')
+const configProviderInjectionKey: InjectionKey<ConfigProviderContext> =
+  Symbol('ml-config-provider')
 
 export { configProviderInjectionKey }

@@ -1,5 +1,10 @@
 <template>
-  <view v-if="!!node" :class="className" :style="themeColors" :data-level="level">
+  <view
+    v-if="!!node"
+    :class="className"
+    :style="themeColors"
+    :data-level="level"
+  >
     <!-- 缩进 -->
     <text
       :class="`${prefix}-node-indent`"
@@ -79,7 +84,8 @@
 
   const { themeColors } = useTheme()
 
-  const treeContext: Partial<TreeContext> = inject<TreeContext>(treeInjectionKey) || {}
+  const treeContext: Partial<TreeContext> =
+    inject<TreeContext>(treeInjectionKey) || {}
   const prefix = ref('ml-tree-node')
   const className = computed(() => {
     return cs(prefix.value)

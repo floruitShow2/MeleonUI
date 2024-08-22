@@ -20,7 +20,8 @@ export const generateDeviceUI = function () {
 
   if (uni.getMenuButtonBoundingClientRect) {
     // 小程序
-    const { top, height, width, left, right } = uni.getMenuButtonBoundingClientRect()
+    const { top, height, width, left, right } =
+      uni.getMenuButtonBoundingClientRect()
     const {
       screenWidth,
       screenHeight,
@@ -29,18 +30,29 @@ export const generateDeviceUI = function () {
     } = uni.getSystemInfoSync()
 
     menuButtonRect = { top, height, width, left, right }
-    systemRect = { screenWidth, screenHeight, safeAreaHeight: safeArea.height, statusBarHeight }
+    systemRect = {
+      screenWidth,
+      screenHeight,
+      safeAreaHeight: safeArea.height,
+      statusBarHeight
+    }
   } else {
     // h5
     const { screenWidth, screenHeight } = {
       screenWidth: window.innerWidth,
       screenHeight: window.innerHeight
     }
-    systemRect = { screenWidth, screenHeight, safeAreaHeight: screenHeight, statusBarHeight: 0 }
+    systemRect = {
+      screenWidth,
+      screenHeight,
+      safeAreaHeight: screenHeight,
+      statusBarHeight: 0
+    }
   }
 
   const { top, height, width, right } = menuButtonRect
-  const { screenWidth, screenHeight, safeAreaHeight, statusBarHeight } = systemRect
+  const { screenWidth, screenHeight, safeAreaHeight, statusBarHeight } =
+    systemRect
 
   const customBarHeight = (top - statusBarHeight) * 2 + height
   const tabbarHeight = 50

@@ -51,7 +51,14 @@
 </template>
 
 <script setup lang="ts">
-  import { ref, toRefs, computed, watch, onMounted, getCurrentInstance } from 'vue'
+  import {
+    ref,
+    toRefs,
+    computed,
+    watch,
+    onMounted,
+    getCurrentInstance
+  } from 'vue'
   import type { PropType } from 'vue'
   import { useTheme } from '@meleon/uni-ui/hooks'
   import { cs, isObject } from '@meleon/uni-ui/utils'
@@ -113,8 +120,17 @@
       default: '#f2f3f5'
     }
   })
-  const { type, percent, decimal, size, width, strokeWidth, color, trackColor, status } =
-    toRefs(props)
+  const {
+    type,
+    percent,
+    decimal,
+    size,
+    width,
+    strokeWidth,
+    color,
+    trackColor,
+    status
+  } = toRefs(props)
 
   const { themeColors } = useTheme()
 
@@ -134,7 +150,9 @@
   const computedStrokeWidth = computed(
     () =>
       strokeWidth.value ||
-      (size.value === 'mini' ? computedWidth.value / 2 : DEFAULT_STROKE_WIDTH[size.value])
+      (size.value === 'mini'
+        ? computedWidth.value / 2
+        : DEFAULT_STROKE_WIDTH[size.value])
   )
 
   // 当前进度条状态
@@ -166,10 +184,14 @@
   /**
    * ml-progress-line
    */
-  const text = computed(() => `${(percent.value * 100).toFixed(decimal.value)}%`)
+  const text = computed(
+    () => `${(percent.value * 100).toFixed(decimal.value)}%`
+  )
 
   const style = computed(() => {
-    const style = width?.value ? { width: `${width.value}px`, flex: 'unset' } : { flex: 1 }
+    const style = width?.value
+      ? { width: `${width.value}px`, flex: 'unset' }
+      : { flex: 1 }
 
     return {
       ...style,
@@ -228,7 +250,14 @@
     ctx.beginPath()
 
     const radius = computedWidth.value / 2
-    ctx.arc(radius, radius, radius - computedStrokeWidth.value, 0, 2 * Math.PI, false)
+    ctx.arc(
+      radius,
+      radius,
+      radius - computedStrokeWidth.value,
+      0,
+      2 * Math.PI,
+      false
+    )
     ctx.stroke()
     ctx.draw()
   }
@@ -255,7 +284,14 @@
     // 半径为整个canvas宽度的一半
     const radius = computedWidth.value / 2
     const endAngle = ((2 * Math.PI) / 100) * (progress * 100) + startAngle.value
-    ctx.arc(radius, radius, radius - computedStrokeWidth.value, startAngle.value, endAngle, false)
+    ctx.arc(
+      radius,
+      radius,
+      radius - computedStrokeWidth.value,
+      startAngle.value,
+      endAngle,
+      false
+    )
     ctx.stroke()
     ctx.draw()
 

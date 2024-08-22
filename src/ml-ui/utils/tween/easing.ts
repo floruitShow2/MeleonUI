@@ -1,6 +1,7 @@
 // https://github.com/LiikeJS/Liike/blob/master/src/ease.js
 const easeInBy = (power: number) => (t: number) => Math.pow(t, power)
-const easeOutBy = (power: number) => (t: number) => 1 - Math.abs(Math.pow(t - 1, power))
+const easeOutBy = (power: number) => (t: number) =>
+  1 - Math.abs(Math.pow(t - 1, power))
 const easeInOutBy = (power: number) => (t: number) =>
   t < 0.5 ? easeInBy(power)(t * 2) / 2 : easeOutBy(power)(t * 2 - 1) / 2 + 0.5
 
@@ -17,9 +18,11 @@ export const quartInOut = easeInOutBy(4)
 export const quintIn = easeInBy(5)
 export const quintOut = easeOutBy(5)
 export const quintInOut = easeInOutBy(5)
-export const sineIn = (t: number) => 1 + Math.sin((Math.PI / 2) * t - Math.PI / 2)
+export const sineIn = (t: number) =>
+  1 + Math.sin((Math.PI / 2) * t - Math.PI / 2)
 export const sineOut = (t: number) => Math.sin((Math.PI / 2) * t)
-export const sineInOut = (t: number) => (1 + Math.sin(Math.PI * t - Math.PI / 2)) / 2
+export const sineInOut = (t: number) =>
+  (1 + Math.sin(Math.PI * t - Math.PI / 2)) / 2
 export const bounceOut = (t: number) => {
   const s = 7.5625
   const p = 2.75

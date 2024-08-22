@@ -2,20 +2,29 @@
   <!-- <wxs src="../../wxs/theme.wxs" module="utils" /> -->
   <view :class="className" :style="themeColors">
     <view class="ml-input-title">
-      <view :class="['ml-input-title__label', `is-${status}`]">{{ message[status] }}</view>
+      <view :class="['ml-input-title__label', `is-${status}`]">{{
+        message[status]
+      }}</view>
     </view>
     <view
       class="ml-input-wrapper"
       :animation="animationData"
       :style="{
-        width: useVirtualInput && isOverlayShow ? ui.screenWidth - 20 + 'px' : '100%',
+        width:
+          useVirtualInput && isOverlayShow
+            ? ui.screenWidth - 20 + 'px'
+            : '100%',
         zIndex: useVirtualInput && isOverlayShow ? 101 : 1
       }"
       @click="changeFocusStyle"
     >
       <view v-if="disabled && isOverlayShow" class="overlay" />
       <view v-if="prefixIcon.length !== 0" class="icon prefix-icon">
-        <MlIcon v-if="prefixIcon.length !== 0" :name="prefixIcon" color="#808080" />
+        <MlIcon
+          v-if="prefixIcon.length !== 0"
+          :name="prefixIcon"
+          color="#808080"
+        />
       </view>
       <view v-if="$slots['prefix']" class="icon prefix-icon">
         <slot name="prefix" />
@@ -39,10 +48,18 @@
           :name="inputType !== 'password' ? 'ml-eye' : 'ml-eye-close'"
           color="#808080"
         />
-        <MlIcon v-else-if="suffixIcon.length !== 0" :name="suffixIcon" color="#808080" />
+        <MlIcon
+          v-else-if="suffixIcon.length !== 0"
+          :name="suffixIcon"
+          color="#808080"
+        />
       </view>
     </view>
-    <view v-if="useVirtualInput && isOverlayShow" class="ml-virtual-overlay" @click.stop />
+    <view
+      v-if="useVirtualInput && isOverlayShow"
+      class="ml-virtual-overlay"
+      @click.stop
+    />
   </view>
 </template>
 
@@ -85,7 +102,10 @@
       type: Boolean,
       default: false
     },
-    message: { type: Object, default: () => ({ success: '密码格式正确', error: '密码格式错误' }) },
+    message: {
+      type: Object,
+      default: () => ({ success: '密码格式正确', error: '密码格式错误' })
+    },
     validator: {
       type: Function as PropType<(v: string | number) => MlInputStatus>
     }
@@ -128,7 +148,8 @@
 
   onShow(() => {
     // 初始化 UI
-    const { screenWidth, windowHeight, statusBarHeight, customBarHeight } = generateDeviceUI().ui
+    const { screenWidth, windowHeight, statusBarHeight, customBarHeight } =
+      generateDeviceUI().ui
     ui.value = {
       screenWidth,
       windowHeight,
@@ -169,9 +190,17 @@
     query
       .select('.ml-input-wrapper')
       .boundingClientRect((data) => {
-        const { left = 0, top = 0, height = 0, width = 0 } = Array.isArray(data) ? data[0] : data
+        const {
+          left = 0,
+          top = 0,
+          height = 0,
+          width = 0
+        } = Array.isArray(data) ? data[0] : data
         originPosition.value.width = width
-        if (top + height * 2 >= windowHeight - KeyboardHeight && useVirtualInput.value) {
+        if (
+          top + height * 2 >= windowHeight - KeyboardHeight &&
+          useVirtualInput.value
+        ) {
           targetPosition.value = {
             ...targetPosition.value,
             top: 20 + ui.value.statusBarHeight + ui.value.customBarHeight,
@@ -187,7 +216,10 @@
             duration: 200
           })
           animation
-            .translate(targetPosition.value.left - left, targetPosition.value.top - top)
+            .translate(
+              targetPosition.value.left - left,
+              targetPosition.value.top - top
+            )
             .width('100%')
             .step()
 

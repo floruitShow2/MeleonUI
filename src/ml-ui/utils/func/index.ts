@@ -6,14 +6,15 @@ export * from './pad'
 type AnyFunction = (...args: any[]) => any
 
 // 组合函数
-export const useCompose: (...props: Array<AnyFunction>) => AnyFunction = function (...funcs) {
-  if (funcs.length === 0) return (arg) => arg
-  return funcs.reduce(
-    (a, b) =>
-      (...args) =>
-        a(b(...args))
-  )
-}
+export const useCompose: (...props: Array<AnyFunction>) => AnyFunction =
+  function (...funcs) {
+    if (funcs.length === 0) return (arg) => arg
+    return funcs.reduce(
+      (a, b) =>
+        (...args) =>
+          a(b(...args))
+    )
+  }
 
 // 防抖
 interface DebounceOptions {
@@ -82,7 +83,11 @@ export const useDeepClone: <T>(target: T) => T = (target) => {
   return temp
 }
 
-export function useGet<T>(source: Record<string, any>, path: string, defaultValue?: any): T {
+export function useGet<T>(
+  source: Record<string, any>,
+  path: string,
+  defaultValue?: any
+): T {
   // a[3].b -> a.3.b
   const paths = path.replace(/\[(\d+)\]/g, '.$1').split('.')
   let result = source

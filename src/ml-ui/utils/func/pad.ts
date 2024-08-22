@@ -5,7 +5,11 @@
  * @param char 用来补位的字符
  * @returns
  */
-export function padStart(value: string | number, length: number, char: string = ' '): string {
+export function padStart(
+  value: string | number,
+  length: number,
+  char: string = ' '
+): string {
   const str = String(value)
   if (!str) return str
 
@@ -13,7 +17,11 @@ export function padStart(value: string | number, length: number, char: string = 
   return newStr.length < length ? padStart(newStr, length, char) : newStr
 }
 
-export function padEnd(value: string | number, length: number, char: string = ' '): string {
+export function padEnd(
+  value: string | number,
+  length: number,
+  char: string = ' '
+): string {
   const str = String(value)
   if (!str) return str
 

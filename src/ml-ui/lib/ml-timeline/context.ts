@@ -10,6 +10,7 @@ export interface TimelineContext {
   getTimeLineRect: () => Promise<Record<string, number>>
 }
 
-const timelineInjectionKey: InjectionKey<TimelineContext> = Symbol('ml-timeline')
+const timelineInjectionKey: InjectionKey<TimelineContext> =
+  Symbol('ml-timeline')
 
 export { timelineInjectionKey }

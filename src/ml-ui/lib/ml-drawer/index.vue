@@ -15,15 +15,26 @@
     >
       <view :class="`${prefix}-wrapper-header`">
         <slot name="title">标题</slot>
-        <MlIcon v-if="showClose" name="ml-close" :size="22" @click="handleCloseDrawer" />
+        <MlIcon
+          v-if="showClose"
+          name="ml-close"
+          :size="22"
+          @click="handleCloseDrawer"
+        />
       </view>
       <view :class="`${prefix}-wrapper-content`">
         <slot />
       </view>
       <view v-if="showFooter" :class="`${prefix}-wrapper-footer`">
         <slot name="footer">
-          <MlButton type="primary" @click="handleDrawerOk">{{ okText }}</MlButton>
-          <MlButton type="secondary" style="margin-left: 8px" @click="handleCloseDrawer">
+          <MlButton type="primary" @click="handleDrawerOk">{{
+            okText
+          }}</MlButton>
+          <MlButton
+            type="secondary"
+            style="margin-left: 8px"
+            @click="handleCloseDrawer"
+          >
             {{ cancelText }}
           </MlButton>
         </slot>
@@ -95,9 +106,12 @@
   })
 
   const styles = computed(() => {
-    const { statusBarHeight, customBarHeight, bottomBarHeight } = generateDeviceUI().ui
+    const { statusBarHeight, customBarHeight, bottomBarHeight } =
+      generateDeviceUI().ui
 
-    const radiusValue = isNumber(radius.value) ? `${radius.value}px` : radius.value
+    const radiusValue = isNumber(radius.value)
+      ? `${radius.value}px`
+      : radius.value
     const radiusMap: Record<DrawerProps['placement'], string> = {
       top: `0 0 ${radiusValue} ${radiusValue}`,
       right: `${radiusValue} 0 0 ${radiusValue}`,
@@ -112,12 +126,16 @@
       drawerStyle.transform = `translateX(${
         placement.value === 'left' ? `-${width.value}px` : `${width.value}px`
       })`
-      drawerStyle.width = isNumber(width.value) ? `${width.value}px` : width.value
+      drawerStyle.width = isNumber(width.value)
+        ? `${width.value}px`
+        : width.value
     } else {
       drawerStyle.transform = `translateY(${
         placement.value === 'top' ? `-${height.value}px` : `${height.value}px`
       })`
-      drawerStyle.height = isNumber(height.value) ? `${height.value}px` : height.value
+      drawerStyle.height = isNumber(height.value)
+        ? `${height.value}px`
+        : height.value
     }
 
     return {
@@ -127,7 +145,9 @@
       drawerStyle: {
         ...drawerStyle,
         borderRadius: radiusMap[placement.value],
-        paddingBottom: ['left', 'right'].includes(placement.value) ? `${bottomBarHeight}px` : 0
+        paddingBottom: ['left', 'right'].includes(placement.value)
+          ? `${bottomBarHeight}px`
+          : 0
       }
     }
   })

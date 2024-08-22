@@ -15,8 +15,8 @@
         </template>
         <template #description>
           <text>
-            ml-cell 目前支持三种：TEXT | BUTTON | NAV 类型，可以单独使用，也可以与 ml-cell-group
-            组件组合使用
+            ml-cell 目前支持三种：TEXT | BUTTON | NAV
+            类型，可以单独使用，也可以与 ml-cell-group 组件组合使用
           </text>
         </template>
         <template #demo>
@@ -56,10 +56,15 @@
                 style="width: 100%"
               >
                 <template #rightIcon>
-                  <ml-icon name="ml-arrow-right--line" color="var(--info-color-7)"></ml-icon>
+                  <ml-icon
+                    name="ml-arrow-right--line"
+                    color="var(--info-color-7)"
+                  ></ml-icon>
                 </template>
                 <template #value>
-                  <text style="font-size: 14px; color: var(--info-color-7)">通过插槽展示内容</text>
+                  <text style="font-size: 14px; color: var(--info-color-7)"
+                    >通过插槽展示内容</text
+                  >
                 </template>
               </ml-cell>
             </ml-cell-group>
@@ -73,12 +78,17 @@
 <script setup lang="ts">
   import { ref, computed } from 'vue'
   import { useAppStore } from '@/store'
-  import { CellTypeEnum, type CellChangePayload, type CellProps } from '@meleon/uni-ui/index'
+  import {
+    CellTypeEnum,
+    type CellChangePayload,
+    type CellProps
+  } from '@meleon/uni-ui/index'
   import CodeBlock from '@/components/CodeBlock/index.vue'
 
   const appStore = useAppStore()
   const wrapperStyle = computed(() => {
-    const { screenWidth, contentHeight, tabbarHeight, bottomBarHeight } = appStore.appSize
+    const { screenWidth, contentHeight, tabbarHeight, bottomBarHeight } =
+      appStore.appSize
     return {
       width: `${screenWidth}px`,
       height: `${contentHeight + tabbarHeight + bottomBarHeight}px`

@@ -34,11 +34,16 @@
     return Number(columnId.slice(columnId.length - 1))
   }
   const mergePropsData = (propsList: ColumnSettingType[]) => {
-    return propsList.reduce((accu: ColumnSettingType, next: ColumnSettingType) => {
-      return { ...accu, ...next }
-    }, {})
+    return propsList.reduce(
+      (accu: ColumnSettingType, next: ColumnSettingType) => {
+        return { ...accu, ...next }
+      },
+      {}
+    )
   }
-  const setColumnForcedProps = (column: ColumnSettingType): ColumnSettingType => {
+  const setColumnForcedProps = (
+    column: ColumnSettingType
+  ): ColumnSettingType => {
     // 根据 column 的类型，禁止开发者对部分属性的设置
     const columnType = column.type
     if (columnType) {
@@ -92,7 +97,8 @@
     const chainsFunc = useCompose(setColumnWidth, setColumnForcedProps)
     columnConfig = chainsFunc(columnConfig)
     const columnIndex: number = getColumnIndex(columnConfig.columnId)
-    if (storeEntity) storeEntity.commit('insertColumns', columnConfig, columnIndex)
+    if (storeEntity)
+      storeEntity.commit('insertColumns', columnConfig, columnIndex)
   })
 </script>
 

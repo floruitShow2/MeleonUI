@@ -15,8 +15,8 @@
         </template>
         <template #description>
           <text>
-            当需要突出某个或某组数字或展示带描述的统计类数据时使用，可设置 show-seperator
-            属性控制是否显示分隔符
+            当需要突出某个或某组数字或展示带描述的统计类数据时使用，可设置
+            show-seperator 属性控制是否显示分隔符
           </text>
         </template>
         <template #demo>
@@ -33,12 +33,18 @@
         </template>
         <template #description>
           <text>
-            通过 animation 可以开启数值动画，通过 animation-duration 可以设置动画持续时间。
+            通过 animation 可以开启数值动画，通过 animation-duration
+            可以设置动画持续时间。
           </text>
         </template>
         <template #demo>
           <view class="count-to-container">
-            <ml-count-to :from="0" :to="1250.44" animation :animation-duration="5000" />
+            <ml-count-to
+              :from="0"
+              :to="1250.44"
+              animation
+              :animation-duration="5000"
+            />
             <ml-count-to :from="0" :to="36241250.44" animation show-seperator />
           </view>
         </template>
@@ -53,7 +59,12 @@
         </template>
         <template #demo>
           <view class="count-to-container">
-            <ml-count-to :from="0" :to="1250.44" animation :animation-duration="5000">
+            <ml-count-to
+              :from="0"
+              :to="1250.44"
+              animation
+              :animation-duration="5000"
+            >
               <template #prefix>
                 <ml-icon name="ml-arrow-upper" />
               </template>
@@ -77,7 +88,10 @@
           <text>手动触发</text>
         </template>
         <template #description>
-          <text> 可以选择手动触发动画，组件暴露了 start、pause、restart 方法共用户使用 </text>
+          <text>
+            可以选择手动触发动画，组件暴露了 start、pause、restart
+            方法共用户使用
+          </text>
         </template>
         <template #demo>
           <view class="count-to-container">
@@ -93,11 +107,23 @@
               </template>
             </ml-count-to>
             <view class="button-list">
-              <ml-button type="primary" size="mini" @click="handleStartClick"> start </ml-button>
-              <ml-button type="primary" size="mini" status="danger" @click="handlePauseClick">
+              <ml-button type="primary" size="mini" @click="handleStartClick">
+                start
+              </ml-button>
+              <ml-button
+                type="primary"
+                size="mini"
+                status="danger"
+                @click="handlePauseClick"
+              >
                 pause
               </ml-button>
-              <ml-button type="primary" size="mini" status="success" @click="handleRestartClick">
+              <ml-button
+                type="primary"
+                size="mini"
+                status="success"
+                @click="handleRestartClick"
+              >
                 restart
               </ml-button>
             </view>
@@ -116,7 +142,8 @@
 
   const appStore = useAppStore()
   const wrapperStyle = computed(() => {
-    const { screenWidth, contentHeight, tabbarHeight, bottomBarHeight } = appStore.appSize
+    const { screenWidth, contentHeight, tabbarHeight, bottomBarHeight } =
+      appStore.appSize
     return {
       width: `${screenWidth}px`,
       height: `${contentHeight + tabbarHeight + bottomBarHeight}px`

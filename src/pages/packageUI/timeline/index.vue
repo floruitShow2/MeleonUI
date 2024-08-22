@@ -18,7 +18,10 @@
         </template>
         <template #demo>
           <view class="timeline-container">
-            <ml-checkbox-group v-model:checked-list="reverseCheckedList" mode="single">
+            <ml-checkbox-group
+              v-model:checked-list="reverseCheckedList"
+              mode="single"
+            >
               <ml-checkbox value="reverse">reverse</ml-checkbox>
               <ml-checkbox value="not-reverse">not reverse</ml-checkbox>
             </ml-checkbox-group>
@@ -105,11 +108,17 @@
                   <text>2023-09-08</text>
                 </template>
                 <template #dot>
-                  <ml-icon name="ml-selection--circle" color="var(--primary-color-6)" />
+                  <ml-icon
+                    name="ml-selection--circle"
+                    color="var(--primary-color-6)"
+                  />
                 </template>
                 <view>The first milestone content</view>
               </ml-timeline-item>
-              <ml-timeline-item dot-color="var(--warning-color-6)" line-type="dashed">
+              <ml-timeline-item
+                dot-color="var(--warning-color-6)"
+                line-type="dashed"
+              >
                 <template #label>
                   <text>2023-09-09</text>
                 </template>
@@ -130,7 +139,10 @@
                   </view>
                 </template>
                 <template #dot>
-                  <ml-icon name="ml-close--circle" color="var(--danger-color-6)" />
+                  <ml-icon
+                    name="ml-close--circle"
+                    color="var(--danger-color-6)"
+                  />
                 </template>
                 <view>The third milestone </view>
               </ml-timeline-item>
@@ -148,7 +160,10 @@
         </template>
         <template #demo>
           <view class="timeline-container">
-            <ml-checkbox-group v-model:checked-list="modeCheckedList" mode="single">
+            <ml-checkbox-group
+              v-model:checked-list="modeCheckedList"
+              mode="single"
+            >
               <ml-checkbox value="left">left</ml-checkbox>
               <ml-checkbox value="right">right</ml-checkbox>
               <ml-checkbox value="alternate">alternate</ml-checkbox>
@@ -191,7 +206,8 @@
 
   const appStore = useAppStore()
   const wrapperStyle = computed(() => {
-    const { screenWidth, contentHeight, tabbarHeight, bottomBarHeight } = appStore.appSize
+    const { screenWidth, contentHeight, tabbarHeight, bottomBarHeight } =
+      appStore.appSize
     return {
       width: `${screenWidth}px`,
       height: `${contentHeight + tabbarHeight + bottomBarHeight}px`

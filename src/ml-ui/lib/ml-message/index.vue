@@ -32,7 +32,10 @@
       </view>
     </view>
     <!-- 底部消息 -->
-    <view :class="`${prefix}-bottom__wrapper`" :style="styles.bottomWrapperStyle">
+    <view
+      :class="`${prefix}-bottom__wrapper`"
+      :style="styles.bottomWrapperStyle"
+    >
       <view
         v-for="message in messagesAtBttom"
         :key="message.id"
@@ -149,16 +152,28 @@
     }
   })
   const primary = (options: MessageOptions) => {
-    messageInstance.add({ ...DefaultOptions.value, ...options, type: 'primary' })
+    messageInstance.add({
+      ...DefaultOptions.value,
+      ...options,
+      type: 'primary'
+    })
   }
   const info = (options: MessageOptions) => {
     messageInstance.add({ ...DefaultOptions.value, ...options, type: 'info' })
   }
   const success = (options: MessageOptions) => {
-    messageInstance.add({ ...DefaultOptions.value, ...options, type: 'success' })
+    messageInstance.add({
+      ...DefaultOptions.value,
+      ...options,
+      type: 'success'
+    })
   }
   const warning = (options: MessageOptions) => {
-    messageInstance.add({ ...DefaultOptions.value, ...options, type: 'warning' })
+    messageInstance.add({
+      ...DefaultOptions.value,
+      ...options,
+      type: 'warning'
+    })
   }
   const danger = (options: MessageOptions) => {
     messageInstance.add({ ...DefaultOptions.value, ...options, type: 'danger' })

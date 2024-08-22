@@ -43,7 +43,10 @@ declare namespace Service {
   type RequestResult<T = any> = SuccessResult<T> | FailedResult
 
   /** 多个请求数据结果 */
-  type MultiRequestResult<T extends any[]> = T extends [infer First, ...infer Rest]
+  type MultiRequestResult<T extends any[]> = T extends [
+    infer First,
+    ...infer Rest
+  ]
     ? [First] extends [any]
       ? Rest extends any[]
         ? [Service.RequestResult<First>, ...MultiRequestResult<Rest>]

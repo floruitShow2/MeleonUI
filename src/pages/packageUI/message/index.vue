@@ -21,17 +21,33 @@
         </template>
         <template #demo>
           <view class="button-container">
-            <ml-button type="primary" @click="showMessage('primary')">Primary</ml-button>
-            <ml-button type="primary" status="success" @click="showMessage('success')">
+            <ml-button type="primary" @click="showMessage('primary')"
+              >Primary</ml-button
+            >
+            <ml-button
+              type="primary"
+              status="success"
+              @click="showMessage('success')"
+            >
               Success
             </ml-button>
-            <ml-button type="primary" status="warning" @click="showMessage('warning')">
+            <ml-button
+              type="primary"
+              status="warning"
+              @click="showMessage('warning')"
+            >
               Warning
             </ml-button>
-            <ml-button type="primary" status="danger" @click="showMessage('danger')">
+            <ml-button
+              type="primary"
+              status="danger"
+              @click="showMessage('danger')"
+            >
               Danger
             </ml-button>
-            <ml-button type="secondary" @click="showMessage('info')">Info</ml-button>
+            <ml-button type="secondary" @click="showMessage('info')"
+              >Info</ml-button
+            >
           </view>
         </template>
       </code-block>
@@ -47,14 +63,28 @@
         </template>
         <template #demo>
           <view class="button-container">
-            <ml-button type="primary" @click="showMessagePosition('primary')">Primary</ml-button>
-            <ml-button type="primary" status="success" @click="showMessagePosition('success')">
+            <ml-button type="primary" @click="showMessagePosition('primary')"
+              >Primary</ml-button
+            >
+            <ml-button
+              type="primary"
+              status="success"
+              @click="showMessagePosition('success')"
+            >
               Success
             </ml-button>
-            <ml-button type="primary" status="warning" @click="showMessagePosition('warning')">
+            <ml-button
+              type="primary"
+              status="warning"
+              @click="showMessagePosition('warning')"
+            >
               Warning
             </ml-button>
-            <ml-button type="primary" status="danger" @click="showMessagePosition('danger')">
+            <ml-button
+              type="primary"
+              status="danger"
+              @click="showMessagePosition('danger')"
+            >
               Danger
             </ml-button>
           </view>
@@ -73,7 +103,9 @@
         <template #demo>
           <view class="duration-container">
             <ml-input v-model:model-value="duration" size="mini" />
-            <ml-button type="primary" @click="showMessageDuration">Primary</ml-button>
+            <ml-button type="primary" @click="showMessageDuration"
+              >Primary</ml-button
+            >
           </view>
         </template>
       </code-block>
@@ -89,7 +121,9 @@
         </template>
         <template #demo>
           <view class="button-container">
-            <ml-button type="primary" @click="showMessageClosable">Primary</ml-button>
+            <ml-button type="primary" @click="showMessageClosable"
+              >Primary</ml-button
+            >
           </view>
         </template>
       </code-block>
@@ -105,7 +139,8 @@
 
   const appStore = useAppStore()
   const wrapperStyle = computed(() => {
-    const { screenWidth, contentHeight, tabbarHeight, bottomBarHeight } = appStore.appSize
+    const { screenWidth, contentHeight, tabbarHeight, bottomBarHeight } =
+      appStore.appSize
     return {
       width: `${screenWidth}px`,
       height: `${contentHeight + tabbarHeight + bottomBarHeight}px`
@@ -140,7 +175,9 @@
     })
   }
 
-  const showMessagePosition = (type: 'primary' | 'info' | 'success' | 'danger' | 'warning') => {
+  const showMessagePosition = (
+    type: 'primary' | 'info' | 'success' | 'danger' | 'warning'
+  ) => {
     if (!messageRef.value) return
     messageRef.value[type]({
       content: type + idx.value++,

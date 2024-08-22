@@ -1,7 +1,10 @@
 <template>
   <view :class="className" :style="themeColors">
     <!-- 表格主题加载动画 -->
-    <view v-if="useGet<boolean>(storeEntityStates, 'loading')" class="loading-overlay">
+    <view
+      v-if="useGet<boolean>(storeEntityStates, 'loading')"
+      class="loading-overlay"
+    >
       <view class="loader" />
     </view>
     <view class="hidden-columns"><slot /></view>
@@ -13,7 +16,10 @@
         class="ml-table-header"
         @scroll="onTableBodyScroll"
       >
-        <view class="ml-table-header__wrapper" :style="{ ...fixedPaddingOffset }">
+        <view
+          class="ml-table-header__wrapper"
+          :style="{ ...fixedPaddingOffset }"
+        >
           <view
             v-for="(nfColumn, nfIdx) in storeEntityStates.notFixedColumns"
             :key="nfColumn.columnId"
@@ -26,11 +32,16 @@
               width: `${nfColumn.width}px`,
               borderRight:
                 storeEntityStates.border &&
-                useGet(storeEntityStates, 'notFixedColumns.length', 0) !== nfIdx + 1
+                useGet(storeEntityStates, 'notFixedColumns.length', 0) !==
+                  nfIdx + 1
                   ? 'solid 1px var(--info-color-2)'
                   : '',
               ...(
-                useGet(storeEntityStates, 'columnStyle', () => {}) as TableEntityType['columnStyle']
+                useGet(
+                  storeEntityStates,
+                  'columnStyle',
+                  () => {}
+                ) as TableEntityType['columnStyle']
               )({ columnIdx: nfIdx, column: nfColumn })
             }"
           >
@@ -55,7 +66,12 @@
             width: `${fColumn.width}px`,
             borderRight:
               storeEntityStates.border &&
-              (useGet(storeEntityStates, 'notFixedColumns.length', 0) as number) !== nfIdx + 1
+              (useGet(
+                storeEntityStates,
+                'notFixedColumns.length',
+                0
+              ) as number) !==
+                nfIdx + 1
                 ? 'solid 1px var(--info-color-2)'
                 : ''
           }"
@@ -80,7 +96,12 @@
             width: `${fColumn.width}px`,
             borderLeft:
               storeEntityStates.border &&
-              (useGet(storeEntityStates, 'notFixedColumns.length', 0) as number) !== nfIdx + 1
+              (useGet(
+                storeEntityStates,
+                'notFixedColumns.length',
+                0
+              ) as number) !==
+                nfIdx + 1
                 ? 'solid 1px var(--info-color-2)'
                 : ''
           }"
@@ -109,7 +130,9 @@
       <scroll-view
         v-else
         :enable-flex="true"
-        :refresher-enabled="useGet(storeEntityStates, 'refresherEnabled', false)"
+        :refresher-enabled="
+          useGet(storeEntityStates, 'refresherEnabled', false)
+        "
         :refresher-triggered="refresherTrigger"
         refresher-default-style="none"
         :scroll-y="true"
@@ -138,8 +161,16 @@
             :class="tableRowCls"
             :style="{
               backgroundColor:
-                useGet(storeEntityStates, 'stripe', false) && index % 2 !== 0 ? '#F7F7F7' : '',
-              ...(useGet(storeEntityStates, 'rowStyle', () => {}) as TableEntityType['rowStyle'])({
+                useGet(storeEntityStates, 'stripe', false) && index % 2 !== 0
+                  ? '#F7F7F7'
+                  : '',
+              ...(
+                useGet(
+                  storeEntityStates,
+                  'rowStyle',
+                  () => {}
+                ) as TableEntityType['rowStyle']
+              )({
                 rowIdx: index,
                 row
               })
@@ -166,10 +197,17 @@
                     ) as TableEntityType['columnStyle']
                   )({ columnIdx, column }),
                   ...(
-                    useGet(storeEntityStates, 'cellStyle', () => {}) as TableEntityType['cellStyle']
+                    useGet(
+                      storeEntityStates,
+                      'cellStyle',
+                      () => {}
+                    ) as TableEntityType['cellStyle']
                   )({ rowIdx: index, row, columnIdx, column })
                 }"
-                @click="($event: MouseEvent) => onCellClick(row, index, column, columnIdx, $event)"
+                @click="
+                  ($event: MouseEvent) =>
+                    onCellClick(row, index, column, columnIdx, $event)
+                "
               >
                 <text v-if="column.type === 'index'">{{ index + 1 }}</text>
                 <slot
@@ -194,8 +232,16 @@
           :class="tableRowCls"
           :style="{
             backgroundColor:
-              useGet(storeEntityStates, 'stripe', false) && index % 2 !== 0 ? '#F7F7F7' : '#FFFFFF',
-            ...(useGet(storeEntityStates, 'rowStyle', () => {}) as TableEntityType['rowStyle'])({
+              useGet(storeEntityStates, 'stripe', false) && index % 2 !== 0
+                ? '#F7F7F7'
+                : '#FFFFFF',
+            ...(
+              useGet(
+                storeEntityStates,
+                'rowStyle',
+                () => {}
+              ) as TableEntityType['rowStyle']
+            )({
               rowIdx: index,
               row
             })
@@ -203,18 +249,26 @@
         >
           <view class="table-columns">
             <view
-              v-for="(column, columnIdx) in storeEntityStates.fixedColumns?.filter(
+              v-for="(
+                column, columnIdx
+              ) in storeEntityStates.fixedColumns?.filter(
                 (column) => column.fixed === 'left'
               )"
               :key="column.columnId"
-              :class="['custom-table__column', 'fixed-table__column', column.columnId]"
+              :class="[
+                'custom-table__column',
+                'fixed-table__column',
+                column.columnId
+              ]"
               :style="{
                 width: `${column.width}px`,
                 borderLeft:
                   storeEntityStates.border && columnIdx !== 0
                     ? 'solid 1px var(--info-color-2)'
                     : '',
-                borderRight: storeEntityStates.border ? 'solid 1px var(--info-color-2)' : ''
+                borderRight: storeEntityStates.border
+                  ? 'solid 1px var(--info-color-2)'
+                  : ''
               }"
             >
               <text v-if="column.type === 'index'">{{ index + 1 }}</text>
@@ -239,8 +293,16 @@
           :class="tableRowCls"
           :style="{
             backgroundColor:
-              useGet(storeEntityStates, 'stripe', false) && index % 2 !== 0 ? '#F7F7F7' : '#FFFFFF',
-            ...(useGet(storeEntityStates, 'rowStyle', () => {}) as TableEntityType['rowStyle'])({
+              useGet(storeEntityStates, 'stripe', false) && index % 2 !== 0
+                ? '#F7F7F7'
+                : '#FFFFFF',
+            ...(
+              useGet(
+                storeEntityStates,
+                'rowStyle',
+                () => {}
+              ) as TableEntityType['rowStyle']
+            )({
               rowIdx: index,
               row
             })
@@ -248,14 +310,22 @@
         >
           <view class="table-columns">
             <view
-              v-for="(column, columnIdx) in storeEntityStates.fixedColumns?.filter(
+              v-for="(
+                column, columnIdx
+              ) in storeEntityStates.fixedColumns?.filter(
                 (column) => column.fixed === 'right'
               )"
               :key="column.columnId"
-              :class="['custom-table__column', 'fixed-table__column', column.columnId]"
+              :class="[
+                'custom-table__column',
+                'fixed-table__column',
+                column.columnId
+              ]"
               :style="{
                 width: `${column.width}px`,
-                borderLeft: storeEntityStates.border ? 'solid 1px var(--info-color-2)' : ''
+                borderLeft: storeEntityStates.border
+                  ? 'solid 1px var(--info-color-2)'
+                  : ''
               }"
             >
               <text v-if="column.type === 'index'">{{ index + 1 }}</text>
@@ -278,7 +348,14 @@
 </template>
 
 <script setup lang="ts">
-  import { ref, computed, provide, getCurrentInstance, toRefs, watch } from 'vue'
+  import {
+    ref,
+    computed,
+    provide,
+    getCurrentInstance,
+    toRefs,
+    watch
+  } from 'vue'
   import type { PropType } from 'vue'
   import { useTheme } from '@meleon/uni-ui/hooks'
   import {
@@ -449,7 +526,11 @@
   const fixedPaddingOffset = computed(() => {
     let paddingLeft: number = 0
     let paddingRight: number = 0
-    useGet<ColumnSettingType[]>(storeEntityStates.value, 'fixedColumns', []).forEach((column) => {
+    useGet<ColumnSettingType[]>(
+      storeEntityStates.value,
+      'fixedColumns',
+      []
+    ).forEach((column) => {
       if (column.fixed === 'left') paddingLeft += column.width ?? 0
       else if (column.fixed === 'right') paddingRight += column.width ?? 0
     })
@@ -467,7 +548,11 @@
   const refresherTrigger = ref<boolean>(false)
   const onTableBodyRefresh = () => {
     refresherTrigger.value = true
-    const refreshInterval = useGet<number>(storeEntityStates.value, 'refresherInterval', 500)
+    const refreshInterval = useGet<number>(
+      storeEntityStates.value,
+      'refresherInterval',
+      500
+    )
     setTimeout(() => {
       refresherTrigger.value = false
     }, refreshInterval)

@@ -1,6 +1,12 @@
 import { isArray, isObject, isString } from './is'
 
-type ClassNamesArg = string | string[] | { [key: string]: boolean } | undefined | null | boolean
+type ClassNamesArg =
+  | string
+  | string[]
+  | { [key: string]: boolean }
+  | undefined
+  | null
+  | boolean
 
 export const cs = (...args: ClassNamesArg[]): string => {
   const length = args.length

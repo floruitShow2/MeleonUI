@@ -1,6 +1,9 @@
 import type { Dayjs } from 'dayjs'
 import { getNow } from '@meleon/uni-ui/utils'
-import type { DatetimePickerCell, IsSameTimeFunc } from '@meleon/uni-ui/lib/ml-datetime-picker'
+import type {
+  DatetimePickerCell,
+  IsSameTimeFunc
+} from '@meleon/uni-ui/lib/ml-datetime-picker'
 
 interface PcikerCellClsProps {
   // 选择器前缀
@@ -13,7 +16,10 @@ interface PcikerCellClsProps {
 }
 
 export default function usePickerCellClassName(props: PcikerCellClsProps) {
-  const getCellClassName = (cellData: DatetimePickerCell, disabled: boolean = false) => {
+  const getCellClassName = (
+    cellData: DatetimePickerCell,
+    disabled: boolean = false
+  ) => {
     const { value, isSameTime, mode, prefixCls } = props
 
     const isInView = !cellData.isPrev && !cellData.isNext

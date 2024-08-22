@@ -18,8 +18,12 @@
         </template>
         <template #demo>
           <view class="button-container">
-            <ml-button type="primary" @click="handlePlus(0)"> 加 10% </ml-button>
-            <ml-button type="secondary" @click="handleSub(0)"> 减 10% </ml-button>
+            <ml-button type="primary" @click="handlePlus(0)">
+              加 10%
+            </ml-button>
+            <ml-button type="secondary" @click="handleSub(0)">
+              减 10%
+            </ml-button>
           </view>
           <view>
             <ml-progress :percent="templateMap[0].percent" :width="120" />
@@ -41,8 +45,12 @@
         </template>
         <template #demo>
           <view class="button-container">
-            <ml-button type="primary" @click="handlePlus(1)"> 加 10% </ml-button>
-            <ml-button type="secondary" @click="handleSub(1)"> 减 10% </ml-button>
+            <ml-button type="primary" @click="handlePlus(1)">
+              加 10%
+            </ml-button>
+            <ml-button type="secondary" @click="handleSub(1)">
+              减 10%
+            </ml-button>
           </view>
           <view>
             <ml-progress :percent="templateMap[1].percent" status="primary" />
@@ -62,14 +70,34 @@
         </template>
         <template #demo>
           <view class="button-container">
-            <ml-button type="primary" @click="handlePlus(2)"> 加 10% </ml-button>
-            <ml-button type="secondary" @click="handleSub(2)"> 减 10% </ml-button>
+            <ml-button type="primary" @click="handlePlus(2)">
+              加 10%
+            </ml-button>
+            <ml-button type="secondary" @click="handleSub(2)">
+              减 10%
+            </ml-button>
           </view>
           <view class="progress-wrapper">
-            <ml-progress :percent="templateMap[2].percent" type="circle" status="primary" />
-            <ml-progress :percent="templateMap[2].percent" type="circle" status="success" />
-            <ml-progress :percent="templateMap[2].percent" type="circle" status="warning" />
-            <ml-progress :percent="templateMap[2].percent" type="circle" status="danger" />
+            <ml-progress
+              :percent="templateMap[2].percent"
+              type="circle"
+              status="primary"
+            />
+            <ml-progress
+              :percent="templateMap[2].percent"
+              type="circle"
+              status="success"
+            />
+            <ml-progress
+              :percent="templateMap[2].percent"
+              type="circle"
+              status="warning"
+            />
+            <ml-progress
+              :percent="templateMap[2].percent"
+              type="circle"
+              status="danger"
+            />
           </view>
         </template>
       </CodeBlock>
@@ -103,8 +131,16 @@
             </ml-button>
           </view>
           <view>
-            <ml-progress :percent="templateMap[3].percent" :size="curSize" status="primary" />
-            <ml-progress :percent="templateMap[3].percent" :size="curSize" status="success" />
+            <ml-progress
+              :percent="templateMap[3].percent"
+              :size="curSize"
+              status="primary"
+            />
+            <ml-progress
+              :percent="templateMap[3].percent"
+              :size="curSize"
+              status="success"
+            />
           </view>
           <view class="progress-wrapper">
             <ml-progress
@@ -133,7 +169,8 @@
 
   const appStore = useAppStore()
   const wrapperStyle = computed(() => {
-    const { screenWidth, contentHeight, tabbarHeight, bottomBarHeight } = appStore.appSize
+    const { screenWidth, contentHeight, tabbarHeight, bottomBarHeight } =
+      appStore.appSize
     return {
       width: `${screenWidth}px`,
       height: `${contentHeight + tabbarHeight + bottomBarHeight}px`

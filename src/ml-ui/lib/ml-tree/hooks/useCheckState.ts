@@ -29,7 +29,8 @@ export default function useCheckedState(props: CheckedStateInput) {
   const localIndeterminateKeys = ref<string[]>([])
 
   const init = (keys: string[]) => {
-    ;[localCheckedKeys.value, localIndeterminateKeys.value] = getDefaultStateWithKeys(keys)
+    ;[localCheckedKeys.value, localIndeterminateKeys.value] =
+      getDefaultStateWithKeys(keys)
   }
   init(propCheckedKeys?.value || defaultCheckedKeys?.value || [])
 
@@ -37,9 +38,8 @@ export default function useCheckedState(props: CheckedStateInput) {
   const computedIndeterminateKeys = ref<string[]>([])
   watchEffect(() => {
     if (propCheckedKeys?.value) {
-      ;[computedCheckedKeys.value, computedIndeterminateKeys.value] = getDefaultStateWithKeys(
-        localCheckedKeys.value
-      )
+      ;[computedCheckedKeys.value, computedIndeterminateKeys.value] =
+        getDefaultStateWithKeys(localCheckedKeys.value)
     } else if (isInitialized.value) {
       computedCheckedKeys.value = []
       computedIndeterminateKeys.value = []

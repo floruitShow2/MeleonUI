@@ -14,7 +14,8 @@
         </template>
         <template #description>
           <text
-            >ml-switch组件用于开启/关闭状态切换，支持 circle、square[默认]、line 三种类型。</text
+            >ml-switch组件用于开启/关闭状态切换，支持 circle、square[默认]、line
+            三种类型。</text
           >
         </template>
         <template #demo>
@@ -33,7 +34,9 @@
           <text>自定义开关状态文本</text>
         </template>
         <template #description>
-          <text>设置 checked 和 unchecked 插槽内容，自定义开/关状态下的文本</text>
+          <text
+            >设置 checked 和 unchecked 插槽内容，自定义开/关状态下的文本</text
+          >
         </template>
         <template #demo>
           <ml-switch v-model="isActive">
@@ -79,7 +82,10 @@
           <text> 传入 beforeSwitch 函数，根据返回值判断是否触发切换</text>
         </template>
         <template #demo>
-          <ml-switch v-model="isActive" :before-switch="beforeSwitch"></ml-switch>
+          <ml-switch
+            v-model="isActive"
+            :before-switch="beforeSwitch"
+          ></ml-switch>
         </template>
       </code-block>
     </view>
@@ -93,7 +99,8 @@
 
   const appStore = useAppStore()
   const wrapperStyle = computed(() => {
-    const { screenWidth, contentHeight, tabbarHeight, bottomBarHeight } = appStore.appSize
+    const { screenWidth, contentHeight, tabbarHeight, bottomBarHeight } =
+      appStore.appSize
     return {
       width: `${screenWidth}px`,
       height: `${contentHeight + tabbarHeight + bottomBarHeight}px`

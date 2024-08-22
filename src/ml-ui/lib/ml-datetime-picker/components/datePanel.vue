@@ -3,13 +3,21 @@
     <view :class="`${prefixCls}-body-inner`">
       <!-- 周 -->
       <view :class="`${prefixCls}-body-inner-weeks`">
-        <div v-for="key in weekList" :key="key" :class="`${prefixCls}-weeks-item`">
+        <div
+          v-for="key in weekList"
+          :key="key"
+          :class="`${prefixCls}-weeks-item`"
+        >
           {{ labelList[key] || '' }}
         </div>
       </view>
       <!-- 日历 -->
       <view :class="`${prefixCls}-body-inner-wrapper`">
-        <view v-for="(row, rowIndex) in rows" :key="rowIndex" :class="`${prefixCls}-row`">
+        <view
+          v-for="(row, rowIndex) in rows"
+          :key="rowIndex"
+          :class="`${prefixCls}-row`"
+        >
           <view
             v-for="(cell, colIndex) in row"
             :key="colIndex"
@@ -96,9 +104,15 @@
   })
   const labelList = computed<string[]>(() => {
     if (!datetimePickerCtx) return []
-    return ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'].map((i) =>
-      datetimePickerCtx.datePickerT(`calendar.week.short.${i}`)
-    )
+    return [
+      'sunday',
+      'monday',
+      'tuesday',
+      'wednesday',
+      'thursday',
+      'friday',
+      'saturday'
+    ].map((i) => datetimePickerCtx.datePickerT(`calendar.week.short.${i}`))
   })
 
   const mergedIsSameTime = computed(() => {
@@ -110,7 +124,10 @@
     )
   })
   const isCellDisabled = (cell: DatetimePickerCell): boolean => {
-    return !!(isFunction(disabledDate?.value) && disabledDate?.value(getDateValue(cell.value)))
+    return !!(
+      isFunction(disabledDate?.value) &&
+      disabledDate?.value(getDateValue(cell.value))
+    )
   }
   const { getCellClassName } = usePickerCellClassName(
     reactive({
@@ -131,15 +148,17 @@
 
     const days = startDate.daysInMonth()
     const startIndex = weekList.value.indexOf(startDay)
-    const flatData: DatetimePickerCell[] = new Array(CELL_COUNT).fill(0).map((_, index) => {
-      const value = methods.add(startDate, index - startIndex, 'day')
-      return {
-        label: `${value.date()}`,
-        value,
-        isPrev: index < startIndex,
-        isNext: index >= startIndex + days - 1
-      }
-    })
+    const flatData: DatetimePickerCell[] = new Array(CELL_COUNT)
+      .fill(0)
+      .map((_, index) => {
+        const value = methods.add(startDate, index - startIndex, 'day')
+        return {
+          label: `${value.date()}`,
+          value,
+          isPrev: index < startIndex,
+          isNext: index >= startIndex + days - 1
+        }
+      })
 
     const rows = new Array(ROW_COUNT).fill(0).map((_, index) => {
       const row = flatData.slice(index * COL_COUNT, (index + 1) * COL_COUNT)

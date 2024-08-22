@@ -1,6 +1,10 @@
 <template>
   <view :class="`${prefixCls}-body`">
-    <view v-for="(row, rowIndex) in rows" :key="rowIndex" :class="`${prefixCls}-body-row`">
+    <view
+      v-for="(row, rowIndex) in rows"
+      :key="rowIndex"
+      :class="`${prefixCls}-body-row`"
+    >
       <view
         v-for="(cell, colIndex) in row"
         :key="colIndex"
@@ -47,16 +51,20 @@
 
   const rows = computed(() => {
     const startYear = Math.floor(headerValue.value.year() / SPAN) * SPAN - 1
-    const flatData: DatetimePickerCell[] = new Array(CELL_COUNT).fill(0).map((_, index) => ({
-      label: `${startYear + index}`,
-      value: dayjs(`${startYear + index}`, 'YYYY'),
-      isPrev: index < 1,
-      isNext: index > SPAN
-    }))
+    const flatData: DatetimePickerCell[] = new Array(CELL_COUNT)
+      .fill(0)
+      .map((_, index) => ({
+        label: `${startYear + index}`,
+        value: dayjs(`${startYear + index}`, 'YYYY'),
+        isPrev: index < 1,
+        isNext: index > SPAN
+      }))
 
     const rows = new Array(ROW_COUNT)
       .fill(0)
-      .map((_, index) => flatData.slice(index * COL_COUNT, (index + 1) * COL_COUNT))
+      .map((_, index) =>
+        flatData.slice(index * COL_COUNT, (index + 1) * COL_COUNT)
+      )
 
     return rows
   })

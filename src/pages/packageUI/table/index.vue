@@ -71,7 +71,9 @@
         </template>
         <template #description>
           <text> 支持固定列及节点自定义节点等功能 </text>
-          <text> 注：尽量不要在设置 fixed 的同时开启 refresher-enabled 下拉刷新 </text>
+          <text>
+            注：尽量不要在设置 fixed 的同时开启 refresher-enabled 下拉刷新
+          </text>
         </template>
         <template #demo>
           <view class="table-container">
@@ -89,16 +91,25 @@
             >
               <template #cell="{ column, row }">
                 <block v-if="column.property === 'gender'">
-                  <ml-tag :model-value="row[column.property]" type="primary" size="mini"></ml-tag>
+                  <ml-tag
+                    :model-value="row[column.property]"
+                    type="primary"
+                    size="mini"
+                  ></ml-tag>
                 </block>
                 <block v-else-if="column.property === 'age'">
                   <ml-count-to
                     :to="row[column.property]"
                     animation
-                    :value-style="{ fontSize: '14px', color: 'var(--info-color-8)' }"
+                    :value-style="{
+                      fontSize: '14px',
+                      color: 'var(--info-color-8)'
+                    }"
                   ></ml-count-to>
                 </block>
-                <text v-else>{{ column.property && row[column.property] }}</text>
+                <text v-else>{{
+                  column.property && row[column.property]
+                }}</text>
               </template>
               <ml-table-column type="index" fixed="left"></ml-table-column>
               <ml-table-column prop="name" label="姓名" fixed></ml-table-column>
@@ -119,7 +130,8 @@
 
   const appStore = useAppStore()
   const wrapperStyle = computed(() => {
-    const { screenWidth, contentHeight, tabbarHeight, bottomBarHeight } = appStore.appSize
+    const { screenWidth, contentHeight, tabbarHeight, bottomBarHeight } =
+      appStore.appSize
     return {
       width: `${screenWidth}px`,
       height: `${contentHeight + tabbarHeight + bottomBarHeight}px`
@@ -199,7 +211,8 @@
   const genRowStyle = (e: { rowIdx: number }) => {
     return {
       height: '53px',
-      backgroundColor: e.rowIdx % 2 === 0 ? 'var(--primary-color-6)' : 'var(--success-color-6)'
+      backgroundColor:
+        e.rowIdx % 2 === 0 ? 'var(--primary-color-6)' : 'var(--success-color-6)'
     }
   }
   const genColumnStyle = (e: { columnIdx: number }) => {

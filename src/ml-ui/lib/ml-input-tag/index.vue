@@ -90,8 +90,22 @@
       default: false
     }
   })
-  const { modelValue, defaultValue, size, disabled, readonly, maxTagCount, tagType } = toRefs(props)
-  const emit = defineEmits(['update:modelValue', 'focus', 'blur', 'change', 'remove'])
+  const {
+    modelValue,
+    defaultValue,
+    size,
+    disabled,
+    readonly,
+    maxTagCount,
+    tagType
+  } = toRefs(props)
+  const emit = defineEmits([
+    'update:modelValue',
+    'focus',
+    'blur',
+    'change',
+    'remove'
+  ])
 
   const { themeColors } = useTheme()
   const prefix = ref('ml-input-tag')

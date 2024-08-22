@@ -6,6 +6,7 @@ const install = (app: App) => {
   app.component('MlCountTo', _CountTo)
 }
 
-export type CountToInstance = typeof import('./index.vue').default & CountToEvents
+export type CountToInstance = typeof import('./index.vue').default &
+  CountToEvents
 
 export default { install }

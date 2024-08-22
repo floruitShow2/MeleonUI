@@ -9,6 +9,7 @@ export interface MlSelectGroupContext {
   selectOption: (option: OptionProps) => void
 }
 
-const MlSelectGroupInjectionKey: InjectionKey<MlSelectGroupContext> = Symbol('MlSelect')
+const MlSelectGroupInjectionKey: InjectionKey<MlSelectGroupContext> =
+  Symbol('MlSelect')
 
 export { MlSelectGroupInjectionKey }

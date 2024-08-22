@@ -2,7 +2,11 @@
   <view :class="className" :style="{ ...themeColors, ...style }">
     <view :class="`${prefix}-files`">
       <template v-if="showFileList">
-        <div v-for="item in cachedImageList" :key="item.path" :class="`${prefix}-files-item`">
+        <div
+          v-for="item in cachedImageList"
+          :key="item.path"
+          :class="`${prefix}-files-item`"
+        >
           <Image
             :class="`${prefix}-files-item--image`"
             :src="item.path"
@@ -10,7 +14,10 @@
             :height="previewSize"
             show-loading
           />
-          <div :class="`${prefix}-files-item--close`" @click.stop="() => handleDeleteFile(item)">
+          <div
+            :class="`${prefix}-files-item--close`"
+            @click.stop="() => handleDeleteFile(item)"
+          >
             <Icon
               v-if="item.deletable"
               class="ml-icon-close"
@@ -21,7 +28,11 @@
           </div>
         </div>
       </template>
-      <div v-if="!$slots.trigger" :class="`${prefix}-files-trigger`" @click="handleUploadFile">
+      <div
+        v-if="!$slots.trigger"
+        :class="`${prefix}-files-trigger`"
+        @click="handleUploadFile"
+      >
         <Icon name="ml-camera--fill" :size="24" color="var(--info-color-7)" />
         <text :class="`${prefix}-files-trigger-text`">请上传图片文件</text>
       </div>
@@ -128,7 +139,8 @@
   const prefix = ref('ml-uploader')
   const className = computed(() => {
     return cs(prefix.value, {
-      [`${prefix.value}--disabled`]: disabled.value || cachedImageList.value.length >= limit.value
+      [`${prefix.value}--disabled`]:
+        disabled.value || cachedImageList.value.length >= limit.value
     })
   })
   const style = computed(() => {
@@ -157,7 +169,9 @@
     const res = await Promise.all(requestList)
     emit(
       'uploaded',
-      res.filter((item) => item.statusCode < 300 && item.statusCode >= 200).map((item) => item.data)
+      res
+        .filter((item) => item.statusCode < 300 && item.statusCode >= 200)
+        .map((item) => item.data)
     )
   }
   // 选择文件保存在本地缓存
@@ -169,11 +183,13 @@
     })
     let formatRes: FileItem[] = []
     if (isArray(res.tempFilePaths)) {
-      formatRes = res.tempFilePaths.slice(0, limit.value).map((item, index) => ({
-        id: `${Date.now()}${index}`,
-        path: item,
-        deletable: true
-      }))
+      formatRes = res.tempFilePaths
+        .slice(0, limit.value)
+        .map((item, index) => ({
+          id: `${Date.now()}${index}`,
+          path: item,
+          deletable: true
+        }))
     } else {
       formatRes = [
         {
@@ -202,7 +218,9 @@
   const handleDeleteFile = async (file: FileItem) => {
     if (!(await beforeDelete.value(file))) return
 
-    cachedImageList.value = cachedImageList.value.filter((item) => item.id !== file.id)
+    cachedImageList.value = cachedImageList.value.filter(
+      (item) => item.id !== file.id
+    )
 
     emit('update:fileList', cachedImageList.value)
     emit('delete', file.id)

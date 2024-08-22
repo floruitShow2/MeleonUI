@@ -59,7 +59,14 @@
   })
   const { appear, name, duration, customClass } = toRefs(props)
 
-  const emit = defineEmits([])
+  const emit = defineEmits([
+    'before-enter',
+    'enter',
+    'enter-to',
+    'before-leave',
+    'leave',
+    'leave-to'
+  ])
 
   const prefix = ref('ml-transition')
   const classNames = computed(() => {
@@ -105,12 +112,15 @@
         const classNames = getClassNames(name.value)
         const localDuration = duration.value
 
+        emit('before-enter')
+
         enterLifeCyclePromise.value = requestAnimationFrame()
         await enterLifeCyclePromise.value
 
         // 设置 进入时 的类名和动画持续时间
         classes.value = classNames['enter']
         currentDuration.value = localDuration
+        emit('enter')
 
         enterLifeCyclePromise.value = requestAnimationFrame()
         await enterLifeCyclePromise.value
@@ -125,6 +135,7 @@
         // 结束动画
         enterLifeCyclePromise.value = null
         classes.value = classNames['enter-to']
+        emit('enter-to')
 
         resolve()
       } catch (err) {
@@ -141,7 +152,7 @@
   }
   const leave = async () => {
     if (!enterPromise.value) {
-      return
+      return onTransitionEnd()
     }
 
     try {
@@ -151,11 +162,14 @@
       const classNames = getClassNames(name.value)
       const localDuration = duration.value
       currentDuration.value = localDuration
+      emit('before-leave')
 
       leaveLifeCyclePromise.value = requestAnimationFrame()
       await leaveLifeCyclePromise.value
 
       classes.value = classNames['leave']
+      emit('leave')
+
       leaveLifeCyclePromise.value = requestAnimationFrame()
       await leaveLifeCyclePromise.value
 
@@ -165,6 +179,7 @@
       await leaveLifeCyclePromise.value
 
       leaveLifeCyclePromise.value = null
+      emit('leave-to')
       onTransitionEnd()
       enterPromise.value = null
     } catch (err) {}

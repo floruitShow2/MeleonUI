@@ -6,7 +6,11 @@ const install = (app: App) => {
 }
 
 export type ImageInstance = typeof import('./index.vue').default
-export type { ImageProps, ImageToolType, ImageToolEntity } from './index.interface'
+export type {
+  ImageProps,
+  ImageToolType,
+  ImageToolEntity
+} from './index.interface'
 
 export { ImageModeEnum } from './index.interface'
 export default { install }

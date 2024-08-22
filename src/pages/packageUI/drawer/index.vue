@@ -18,7 +18,10 @@
         </template>
         <template #demo>
           <view class="button-container">
-            <ml-button type="primary" @click="templateMap[0].modelVisible = true">
+            <ml-button
+              type="primary"
+              @click="templateMap[0].modelVisible = true"
+            >
               打开弹窗
             </ml-button>
             <ml-drawer v-model:visible="templateMap[0].modelVisible" />
@@ -32,14 +35,24 @@
         </template>
         <template #description>
           <view>设置 placement 属性控制 drawer 的弹出方向。</view>
-          <view>设置 hasNav 属性，默认为 true，告诉组件当前页面是否包含导航栏</view>
+          <view
+            >设置 hasNav 属性，默认为 true，告诉组件当前页面是否包含导航栏</view
+          >
         </template>
         <template #demo>
           <view class="button-container">
-            <ml-button type="primary" @click="() => handlePlacement('right')">right</ml-button>
-            <ml-button type="primary" @click="() => handlePlacement('left')">left</ml-button>
-            <ml-button type="primary" @click="() => handlePlacement('top')">top</ml-button>
-            <ml-button type="primary" @click="() => handlePlacement('bottom')">bottom</ml-button>
+            <ml-button type="primary" @click="() => handlePlacement('right')"
+              >right</ml-button
+            >
+            <ml-button type="primary" @click="() => handlePlacement('left')"
+              >left</ml-button
+            >
+            <ml-button type="primary" @click="() => handlePlacement('top')"
+              >top</ml-button
+            >
+            <ml-button type="primary" @click="() => handlePlacement('bottom')"
+              >bottom</ml-button
+            >
             <ml-checkbox v-model:checked="hasNav">hasNav</ml-checkbox>
             <ml-drawer
               v-model:visible="templateMap[1].modelVisible"
@@ -59,15 +72,20 @@
         </template>
         <template #demo>
           <view class="button-container">
-            <ml-button type="primary" size="small" @click="templateMap[2].modelVisible = true">
+            <ml-button
+              type="primary"
+              size="small"
+              @click="templateMap[2].modelVisible = true"
+            >
               click me
             </ml-button>
             <ml-drawer v-model:visible="templateMap[2].modelVisible">
               <template #title>自定义标题</template>
               <text>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni, dolor libero
-                blanditiis distinctio commodi totam recusandae aliquam fugit officiis sequi
-                perspiciatis non animi, eaque facilis sed reiciendis in aut vel.
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni,
+                dolor libero blanditiis distinctio commodi totam recusandae
+                aliquam fugit officiis sequi perspiciatis non animi, eaque
+                facilis sed reiciendis in aut vel.
               </text>
               <template #footer>
                 <ml-button>自定义页脚</ml-button>
@@ -83,13 +101,18 @@
         </template>
         <template #description>
           <text>
-            按钮状态分为 warning, danger, success 三种，可以与按钮类型同时生效，优先级高于按钮类型。
+            按钮状态分为 warning, danger, success
+            三种，可以与按钮类型同时生效，优先级高于按钮类型。
           </text>
         </template>
         <template #demo>
           <view class="drawer-container">
             <view>监听到：{{ listenedEvent }}事件</view>
-            <ml-button type="primary" size="mini" @click="templateMap[3].modelVisible = true">
+            <ml-button
+              type="primary"
+              size="mini"
+              @click="templateMap[3].modelVisible = true"
+            >
               click me
             </ml-button>
             <ml-drawer
@@ -113,7 +136,8 @@
 
   const appStore = useAppStore()
   const wrapperStyle = computed(() => {
-    const { screenWidth, contentHeight, tabbarHeight, bottomBarHeight } = appStore.appSize
+    const { screenWidth, contentHeight, tabbarHeight, bottomBarHeight } =
+      appStore.appSize
     return {
       width: `${screenWidth}px`,
       height: `${contentHeight + tabbarHeight + bottomBarHeight}px`

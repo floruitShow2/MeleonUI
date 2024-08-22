@@ -110,9 +110,9 @@ export class Tween {
       this.keys[key] = +(
         fromValue +
         (toValue - fromValue) *
-          (Easing as unknown as Record<string, (t: number) => number>)[this.easing](
-            this.elapsed / this.duration
-          )
+          (Easing as unknown as Record<string, (t: number) => number>)[
+            this.easing
+          ](this.elapsed / this.duration)
       ).toFixed(precisionVlaue)
     }
     if (!this.started) {

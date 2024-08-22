@@ -19,22 +19,34 @@ export { default as Checkbox } from './ml-checkbox'
 export type { CheckboxInstance } from './ml-checkbox'
 
 export { default as CheckboxGroup } from './ml-checkbox-group'
-export type { CheckboxGroupInstance, CheckboxGroupProps } from './ml-checkbox-group'
+export type {
+  CheckboxGroupInstance,
+  CheckboxGroupProps
+} from './ml-checkbox-group'
 
 export { default as Collapse } from './ml-collapse'
 export type { CollapseInstance, CollapseProps } from './ml-collapse'
 
 export { default as CollapseItem } from './ml-collapse-item'
-export type { CollapseItemInstance, CollapseItemProps } from './ml-collapse-item'
+export type {
+  CollapseItemInstance,
+  CollapseItemProps
+} from './ml-collapse-item'
 
 export { default as ConfigProvider } from './ml-config-provider'
-export type { ConfigProviderInstance, ConfigProviderProps } from './ml-config-provider'
+export type {
+  ConfigProviderInstance,
+  ConfigProviderProps
+} from './ml-config-provider'
 
 export { default as CountTo } from './ml-count-to'
 export type { CountToInstance } from './ml-count-to'
 
 export { default as DatetimePicker } from './ml-datetime-picker'
-export type { DatetimePickerInstance, DatetimePickerProps } from './ml-datetime-picker'
+export type {
+  DatetimePickerInstance,
+  DatetimePickerProps
+} from './ml-datetime-picker'
 
 export { default as Drawer } from './ml-drawer'
 export type { DrawerInstance, DrawerProps } from './ml-drawer'
@@ -43,7 +55,12 @@ export { default as Icon } from './ml-icon'
 export type { IconInstance } from './ml-icon'
 
 export { default as Image, ImageModeEnum } from './ml-image'
-export type { ImageInstance, ImageProps, ImageToolType, ImageToolEntity } from './ml-image'
+export type {
+  ImageInstance,
+  ImageProps,
+  ImageToolType,
+  ImageToolEntity
+} from './ml-image'
 
 export { default as Input } from './ml-input'
 export type { InputInstance } from './ml-input'
@@ -55,7 +72,11 @@ export { default as List } from './ml-list'
 export type { ListInstance, ListProps } from './ml-list'
 
 export { default as Message, MlMessage } from './ml-message'
-export type { MessageInstance, MessageOptions, MessageProps } from './ml-message'
+export type {
+  MessageInstance,
+  MessageOptions,
+  MessageProps
+} from './ml-message'
 
 export { default as Navigator } from './ml-navigator'
 export type { NavigatorInstance, NavigatorProps } from './ml-navigator'
@@ -93,7 +114,10 @@ export { default as Timeline } from './ml-timeline'
 export type { TimelineInstance, TimelineProps } from './ml-timeline'
 
 export { default as TimelineItem } from './ml-timeline-item'
-export type { TimelineItemInstance, TimelineItemProps } from './ml-timeline-item'
+export type {
+  TimelineItemInstance,
+  TimelineItemProps
+} from './ml-timeline-item'
 
 export { default as Transition } from './ml-transition'
 export type { TransitionInstance, TransitionProps } from './ml-transition'

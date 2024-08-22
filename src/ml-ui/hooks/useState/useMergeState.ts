@@ -15,7 +15,9 @@ export default function useMergeState<T, E = T | undefined>(
     isUndefined(newVal) && setLocalValue(undefined)
   })
 
-  const mergeValue = computed(() => (!isUndefined(value.value) ? value.value : localValue.value))
+  const mergeValue = computed(() =>
+    !isUndefined(value.value) ? value.value : localValue.value
+  )
 
   return [mergeValue, setLocalValue, localValue]
 }

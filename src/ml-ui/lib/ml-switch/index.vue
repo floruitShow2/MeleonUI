@@ -43,7 +43,14 @@
       default: () => true
     }
   })
-  const { modelValue, type, checkedColor, uncheckedColor, disabled, beforeSwitch } = toRefs(props)
+  const {
+    modelValue,
+    type,
+    checkedColor,
+    uncheckedColor,
+    disabled,
+    beforeSwitch
+  } = toRefs(props)
 
   const emit = defineEmits(['update:modelValue', 'change'])
 

@@ -5,6 +5,7 @@ export interface CellGroupContext {
   getCellGroupItemIndex: () => number
 }
 
-const cellGroupInjectionKey: InjectionKey<CellGroupContext> = Symbol('ml-cell-group')
+const cellGroupInjectionKey: InjectionKey<CellGroupContext> =
+  Symbol('ml-cell-group')
 
 export { cellGroupInjectionKey }

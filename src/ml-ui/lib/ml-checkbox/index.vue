@@ -9,7 +9,14 @@
 </template>
 
 <script setup lang="ts">
-  import { ref, toRefs, computed, inject, onMounted, getCurrentInstance } from 'vue'
+  import {
+    ref,
+    toRefs,
+    computed,
+    inject,
+    onMounted,
+    getCurrentInstance
+  } from 'vue'
   import type { PropType } from 'vue'
   import { useTheme, cs } from '@meleon/uni-ui/index'
   import { checkboxGroupInjectionKey } from '../ml-checkbox-group/context'
@@ -37,7 +44,13 @@
       default: ''
     }
   })
-  const { checked, indeterminate, disabled, size, value: modelValue } = toRefs(props)
+  const {
+    checked,
+    indeterminate,
+    disabled,
+    size,
+    value: modelValue
+  } = toRefs(props)
 
   const emit = defineEmits(['update:checked'])
 
@@ -52,7 +65,9 @@
     return cs(prefix.value, `${prefix.value}-${size.value}`, {
       [`${prefix.value}-disabled`]:
         disabled.value ||
-        (globalCtx ? globalCtx.getDisabledList().includes(modelValue.value) : false),
+        (globalCtx
+          ? globalCtx.getDisabledList().includes(modelValue.value)
+          : false),
       [`${prefix.value}-underGroup`]: globalCtx !== null,
       [`${prefix.value}-only-input`]: !slots.default
     })

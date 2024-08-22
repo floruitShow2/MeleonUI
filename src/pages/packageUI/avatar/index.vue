@@ -15,7 +15,8 @@
         </template>
         <template #description>
           <text>
-            ml-avatar 组件的基础用法，如果头像是文字的话，会自动调节字体大小，来适应头像框。
+            ml-avatar
+            组件的基础用法，如果头像是文字的话，会自动调节字体大小，来适应头像框。
           </text>
         </template>
         <template #demo>
@@ -35,10 +36,13 @@
         </template>
         <template #description>
           <view>
-            size 字段的值推荐按照 28px(mini)、32px(small)、36px(medium)、40px(large) 的规范
+            size 字段的值推荐按照
+            28px(mini)、32px(small)、36px(medium)、40px(large) 的规范
             设置头像尺寸，默认为 32px。
           </view>
-          <view> 设置 shape 字段，可以设置头像是圆形 (circle) 还是正方形 (square) </view>
+          <view>
+            设置 shape 字段，可以设置头像是圆形 (circle) 还是正方形 (square)
+          </view>
         </template>
         <template #demo>
           <view class="avatar-container">
@@ -61,8 +65,8 @@
         </template>
         <template #description>
           <text>
-            使用 ml-avatar-group 可以使用头像组功能，可通过 size 指定头像的大小，通过 offset 指定
-            Avatar 的偏移量。
+            使用 ml-avatar-group 可以使用头像组功能，可通过 size
+            指定头像的大小，通过 offset 指定 Avatar 的偏移量。
           </text>
         </template>
         <template #demo>
@@ -115,7 +119,8 @@
 
   const appStore = useAppStore()
   const wrapperStyle = computed(() => {
-    const { screenWidth, contentHeight, tabbarHeight, bottomBarHeight } = appStore.appSize
+    const { screenWidth, contentHeight, tabbarHeight, bottomBarHeight } =
+      appStore.appSize
     return {
       width: `${screenWidth}px`,
       height: `${contentHeight + tabbarHeight + bottomBarHeight}px`

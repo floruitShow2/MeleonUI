@@ -12,9 +12,13 @@
     </view>
     <view :class="`${prefixCls}-header-title`">
       <template v-if="onLabelClick && (localYear || localMonth)">
-        <view v-if="localYear" @click="handleLabelClick('year')">{{ localYear }}</view>
+        <view v-if="localYear" @click="handleLabelClick('year')">{{
+          localYear
+        }}</view>
         <view v-if="localYear && localMonth">-</view>
-        <view v-if="localMonth" @click="handleLabelClick('month')">{{ localMonth }}</view>
+        <view v-if="localMonth" @click="handleLabelClick('month')">{{
+          localMonth
+        }}</view>
       </template>
       <template v-else>{{ title }}</template>
     </view>

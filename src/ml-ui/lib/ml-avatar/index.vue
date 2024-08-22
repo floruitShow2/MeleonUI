@@ -7,7 +7,14 @@
 </template>
 
 <script setup lang="ts">
-  import { ref, toRefs, computed, inject, onMounted, getCurrentInstance } from 'vue'
+  import {
+    ref,
+    toRefs,
+    computed,
+    inject,
+    onMounted,
+    getCurrentInstance
+  } from 'vue'
   import type { PropType } from 'vue'
   import useTheme from '@meleon/uni-ui/hooks/useTheme/useTheme'
   import { cs } from '@meleon/uni-ui/utils/property'
@@ -33,7 +40,9 @@
 
   const className = computed(() =>
     cs(prefix.value, [
-      groupCtx ? `${prefix.value}-${groupCtx.globalShape}` : `${prefix.value}-${shape.value}`
+      groupCtx
+        ? `${prefix.value}-${groupCtx.globalShape}`
+        : `${prefix.value}-${shape.value}`
     ])
   )
 
@@ -55,7 +64,9 @@
         zIndex: groupCtx.total - index.value,
         display: groupCtx.maxCount < index.value ? 'none' : 'flex',
         marginLeft:
-          index.value === 1 ? 0 : `-${groupCtx.offset === 0 ? size.value / 2 : groupCtx.offset}px`
+          index.value === 1
+            ? 0
+            : `-${groupCtx.offset === 0 ? size.value / 2 : groupCtx.offset}px`
       }
     }
 

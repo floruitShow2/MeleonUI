@@ -24,14 +24,23 @@
           </slot>
         </template>
         <template v-if="!$slots.value && allowEdit && !isEditing">
-          <Icon name="ml-edit" color="var(--info-color-5)" @click="handleEditClick" />
+          <Icon
+            name="ml-edit"
+            color="var(--info-color-5)"
+            @click="handleEditClick"
+          />
         </template>
       </view>
     </template>
     <!-- button cell -->
     <template v-else-if="type === CellTypeEnum.BUTTON">
       <!-- remark: 用 Button 作为标签的话会和默认组件冲突，需要换个名字 -->
-      <MlButton type="text" size="mini" :status="btnStatus" @click="handleBtnClick">
+      <MlButton
+        type="text"
+        size="mini"
+        :status="btnStatus"
+        @click="handleBtnClick"
+      >
         {{ label }}
       </MlButton>
     </template>
@@ -60,7 +69,11 @@
         </slot>
       </view>
       <view :class="cs(`${prefix}--right`)">
-        <Switch :model-value="!!afterValue" :disabled="disabled" @change="handleValueChange" />
+        <Switch
+          :model-value="!!afterValue"
+          :disabled="disabled"
+          @change="handleValueChange"
+        />
       </view>
     </template>
   </view>
@@ -71,7 +84,11 @@
   import type { PropType } from 'vue'
   import { useTheme } from '@meleon/uni-ui/hooks'
   import { cs, useDeepClone } from '@meleon/uni-ui/utils'
-  import { CellTypeEnum, type CellProps, type CellChangePayload } from './index.interface'
+  import {
+    CellTypeEnum,
+    type CellProps,
+    type CellChangePayload
+  } from './index.interface'
   import Icon from '../ml-icon/index.vue'
   import Input from '../ml-input/index.vue'
   import MlButton from '../ml-button/index.vue'
@@ -112,7 +129,14 @@
       default: ''
     }
   })
-  const { type, label, description, value: modelValue, disabled, url } = toRefs(props)
+  const {
+    type,
+    label,
+    description,
+    value: modelValue,
+    disabled,
+    url
+  } = toRefs(props)
 
   /**
    * @description textCell 编辑后，switchCell 切换后触发 change 事件
@@ -151,7 +175,10 @@
   const handleValueChange = (val: string) => {
     isEditing.value = false
     afterValue.value = val
-    emit('change', { value: val, cell: useDeepClone(props) } as CellChangePayload)
+    emit('change', {
+      value: val,
+      cell: useDeepClone(props)
+    } as CellChangePayload)
   }
 
   const handleBtnClick = () => {

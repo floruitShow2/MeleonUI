@@ -40,7 +40,9 @@
   })
   const innerClassName = computed(() => {
     return cs('ml-icon-inner', name.value, {
-      [`${prefix.value}-rotating`]: ['ml-loading', 'ml-loading--line'].includes(name.value)
+      [`${prefix.value}-rotating`]: ['ml-loading', 'ml-loading--line'].includes(
+        name.value
+      )
     })
   })
 

@@ -18,7 +18,12 @@ function hasErrorMsg(error: Service.RequestError) {
  * @param error
  */
 export function showErrorMsg(error: Service.RequestError) {
-  if (!error.msg || NO_ERROR_MSG_CODE.includes(error.code) || hasErrorMsg(error)) return
+  if (
+    !error.msg ||
+    NO_ERROR_MSG_CODE.includes(error.code) ||
+    hasErrorMsg(error)
+  )
+    return
 
   addErrorMsg(error)
   setTimeout(() => {

@@ -15,8 +15,8 @@
         </template>
         <template #description>
           <text
-            >ml-button 组件的基础用法，包括主要按钮 primary、次要按钮 secondary、线框按钮 outline
-            以及文本按钮 text</text
+            >ml-button 组件的基础用法，包括主要按钮 primary、次要按钮
+            secondary、线框按钮 outline 以及文本按钮 text</text
           >
         </template>
         <template #demo>
@@ -34,7 +34,10 @@
           <text>按钮形状</text>
         </template>
         <template #description>
-          <text>按钮分为 square - 长方形（默认）、circle - 圆形、round - 圆角三种形状</text>
+          <text
+            >按钮分为 square - 长方形（默认）、circle - 圆形、round -
+            圆角三种形状</text
+          >
         </template>
         <template #demo>
           <view class="button-container">
@@ -79,28 +82,47 @@
         </template>
         <template #description>
           <text>
-            按钮状态分为 warning, danger, success 三种，可以与按钮类型同时生效，优先级高于按钮类型。
+            按钮状态分为 warning, danger, success
+            三种，可以与按钮类型同时生效，优先级高于按钮类型。
           </text>
         </template>
         <template #demo>
           <view class="button-container">
             <view class="button-container">
-              <ml-button type="primary" size="mini" status="success">Primary</ml-button>
+              <ml-button type="primary" size="mini" status="success"
+                >Primary</ml-button
+              >
               <ml-button size="mini" status="success">Secondary</ml-button>
-              <ml-button type="outline" size="mini" status="success">Outline</ml-button>
-              <ml-button type="text" size="mini" status="success">Text</ml-button>
+              <ml-button type="outline" size="mini" status="success"
+                >Outline</ml-button
+              >
+              <ml-button type="text" size="mini" status="success"
+                >Text</ml-button
+              >
             </view>
             <view class="button-container">
-              <ml-button type="primary" size="mini" status="warning">Primary</ml-button>
+              <ml-button type="primary" size="mini" status="warning"
+                >Primary</ml-button
+              >
               <ml-button size="mini" status="warning">Secondary</ml-button>
-              <ml-button type="outline" size="mini" status="warning">Outline</ml-button>
-              <ml-button type="text" size="mini" status="warning">Text</ml-button>
+              <ml-button type="outline" size="mini" status="warning"
+                >Outline</ml-button
+              >
+              <ml-button type="text" size="mini" status="warning"
+                >Text</ml-button
+              >
             </view>
             <view class="button-container">
-              <ml-button loading type="primary" size="mini" status="danger">Primary</ml-button>
+              <ml-button loading type="primary" size="mini" status="danger"
+                >Primary</ml-button
+              >
               <ml-button size="mini" status="danger">Secondary</ml-button>
-              <ml-button type="outline" size="mini" status="danger">Outline</ml-button>
-              <ml-button type="text" size="mini" status="danger">Text</ml-button>
+              <ml-button type="outline" size="mini" status="danger"
+                >Outline</ml-button
+              >
+              <ml-button type="text" size="mini" status="danger"
+                >Text</ml-button
+              >
             </view>
           </view>
         </template>
@@ -116,7 +138,8 @@
 
   const appStore = useAppStore()
   const wrapperStyle = computed(() => {
-    const { screenWidth, contentHeight, tabbarHeight, bottomBarHeight } = appStore.appSize
+    const { screenWidth, contentHeight, tabbarHeight, bottomBarHeight } =
+      appStore.appSize
     return {
       width: `${screenWidth}px`,
       height: `${contentHeight + tabbarHeight + bottomBarHeight}px`

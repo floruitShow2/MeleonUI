@@ -34,7 +34,12 @@
         <template #title>{{ tmps[1].title }}</template>
         <template #description>{{ tmps[1].description }}</template>
         <template #demo>
-          <ml-list :data="mockVirtualData" :height="400" virtual-list style="width: 100%">
+          <ml-list
+            :data="mockVirtualData"
+            :height="400"
+            virtual-list
+            style="width: 100%"
+          >
             <template #virtual="{ data }">
               <ml-cell
                 v-for="item in data"
@@ -61,7 +66,8 @@
 
   const appStore = useAppStore()
   const wrapperStyle = computed(() => {
-    const { screenWidth, contentHeight, tabbarHeight, bottomBarHeight } = appStore.appSize
+    const { screenWidth, contentHeight, tabbarHeight, bottomBarHeight } =
+      appStore.appSize
     return {
       width: `${screenWidth}px`,
       height: `${contentHeight + tabbarHeight + bottomBarHeight}px`

@@ -64,7 +64,10 @@
           <text>添加 Icon</text>
         </template>
         <template #description>
-          <text>在 ml-tab 组件上添加图标名称，目前必须使用 MlIcon 库内的图标，以 “ml-” 开头</text>
+          <text
+            >在 ml-tab 组件上添加图标名称，目前必须使用 MlIcon 库内的图标，以
+            “ml-” 开头</text
+          >
         </template>
         <template #demo>
           <ml-tabs active="a">
@@ -87,7 +90,8 @@
 
   const appStore = useAppStore()
   const wrapperStyle = computed(() => {
-    const { screenWidth, contentHeight, tabbarHeight, bottomBarHeight } = appStore.appSize
+    const { screenWidth, contentHeight, tabbarHeight, bottomBarHeight } =
+      appStore.appSize
     return {
       width: `${screenWidth}px`,
       height: `${contentHeight + tabbarHeight + bottomBarHeight}px`

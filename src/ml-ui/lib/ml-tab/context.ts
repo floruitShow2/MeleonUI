@@ -9,6 +9,7 @@ export interface MlTabsGroupContext {
   removeTabItem: (id: MlTabsGroupContext['activeKey']) => void
 }
 
-const MlTabsGroupInjectionKey: InjectionKey<MlTabsGroupContext> = Symbol('MlTabs')
+const MlTabsGroupInjectionKey: InjectionKey<MlTabsGroupContext> =
+  Symbol('MlTabs')
 
 export { MlTabsGroupInjectionKey }

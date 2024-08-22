@@ -10,7 +10,10 @@ export default function useTimeFormat(props: TimeFormatProps) {
   const { format: propFormat, use12Hours: propUse12Hours } = toRefs(props)
 
   const format = computed(() => {
-    if (!propFormat?.value || !convertFormat2Columns(propFormat.value).list.length) {
+    if (
+      !propFormat?.value ||
+      !convertFormat2Columns(propFormat.value).list.length
+    ) {
       return propUse12Hours?.value ? 'hh:mm:ss a' : 'HH:mm:ss'
     }
     return propFormat.value

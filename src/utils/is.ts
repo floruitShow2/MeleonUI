@@ -19,7 +19,9 @@ export const dataTypeLabels: {
   file: '[object File]'
 }
 
-function getDataTypeString<K extends TypeUtil.DataTypeStringKey>(value: unknown) {
+function getDataTypeString<K extends TypeUtil.DataTypeStringKey>(
+  value: unknown
+) {
   return Object.prototype.toString.call(value) as TypeUtil.DataTypeString<K>
 }
 

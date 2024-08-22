@@ -1,4 +1,11 @@
-import { computed, reactive, toRefs, type Ref, watch, type ComputedRef } from 'vue'
+import {
+  computed,
+  reactive,
+  toRefs,
+  type Ref,
+  watch,
+  type ComputedRef
+} from 'vue'
 import type { Dayjs } from 'dayjs'
 import { useState } from '@meleon/uni-ui/hooks'
 import { convertDate2Dayjs, getNow, methods } from '@meleon/uni-ui/utils'
@@ -13,7 +20,14 @@ export interface PickerHeaderInput {
   onChange: (val: Dayjs) => void
 }
 export default function usePickerHeader(input: PickerHeaderInput) {
-  const { mode, pickerValue, defaultPickerValue, selectedValue, format, onChange } = toRefs(input)
+  const {
+    mode,
+    pickerValue,
+    defaultPickerValue,
+    selectedValue,
+    format,
+    onChange
+  } = toRefs(input)
 
   const computedMode = computed(() => {
     return mode.value || 'date'
@@ -34,11 +48,14 @@ export default function usePickerHeader(input: PickerHeaderInput) {
   })
 
   const isSame = (current: Dayjs, target: Dayjs) => {
-    const unit = computedMode.value === 'date' || computedMode.value === 'week' ? 'M' : 'y'
+    const unit =
+      computedMode.value === 'date' || computedMode.value === 'week' ? 'M' : 'y'
     return current.isSame(target, unit)
   }
 
-  const [localValue, setLocalValue] = useState(computedDefaultValue.value || getNow())
+  const [localValue, setLocalValue] = useState(
+    computedDefaultValue.value || getNow()
+  )
 
   const headerValue = computed(() => computedValue.value || localValue.value)
 

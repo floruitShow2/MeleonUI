@@ -29,15 +29,26 @@
           <text>输入框尺寸</text>
         </template>
         <template #description>
-          <text>输入框定义了四种默认尺寸 mini, small, medium, large，默认为 small</text>
+          <text
+            >输入框定义了四种默认尺寸 mini, small, medium, large，默认为
+            small</text
+          >
         </template>
         <template #demo>
           <view class="input-demo-size">
             <view class="input-demo-size-buttons">
-              <ml-button size="mini" @click="inputSize = 'mini'">Mini</ml-button>
-              <ml-button size="mini" @click="inputSize = 'small'">Small</ml-button>
-              <ml-button size="mini" @click="inputSize = 'medium'">Medium</ml-button>
-              <ml-button size="mini" @click="inputSize = 'large'">Large</ml-button>
+              <ml-button size="mini" @click="inputSize = 'mini'"
+                >Mini</ml-button
+              >
+              <ml-button size="mini" @click="inputSize = 'small'"
+                >Small</ml-button
+              >
+              <ml-button size="mini" @click="inputSize = 'medium'"
+                >Medium</ml-button
+              >
+              <ml-button size="mini" @click="inputSize = 'large'"
+                >Large</ml-button
+              >
             </view>
             <ml-input-tag
               v-model:model-value="templateMap[1].modelValue"
@@ -111,7 +122,8 @@
   import CodeBlock from '@/components/CodeBlock/index.vue'
   const appStore = useAppStore()
   const wrapperStyle = computed(() => {
-    const { screenWidth, contentHeight, tabbarHeight, bottomBarHeight } = appStore.appSize
+    const { screenWidth, contentHeight, tabbarHeight, bottomBarHeight } =
+      appStore.appSize
     return {
       width: `${screenWidth}px`,
       height: `${contentHeight + tabbarHeight + bottomBarHeight}px`
@@ -120,7 +132,15 @@
 
   const templateMap = ref([
     {
-      modelValue: ['test1', 'test2', 'test3', 'test4', 'test5', 'test6', 'test7'],
+      modelValue: [
+        'test1',
+        'test2',
+        'test3',
+        'test4',
+        'test5',
+        'test6',
+        'test7'
+      ],
       code: `
 <ml-input-tag
   v-model:model-value="modelValue"
@@ -143,7 +163,15 @@ const modelValue = ref(['test1', 'test2', 'test3', 'test4', 'test5', 'test6', 't
 `
     },
     {
-      modelValue: ['test1', 'test2', 'test3', 'test4', 'test5', 'test6', 'test7'],
+      modelValue: [
+        'test1',
+        'test2',
+        'test3',
+        'test4',
+        'test5',
+        'test6',
+        'test7'
+      ],
       code: `
 <ml-input-tag
   v-model:model-value="templateMap[2].modelValue"

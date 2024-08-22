@@ -44,7 +44,8 @@
       default: () => ({})
     }
   })
-  const { from, to, animation, showSeperator, animationDuration } = toRefs(props)
+  const { from, to, animation, showSeperator, animationDuration } =
+    toRefs(props)
 
   const { themeColors } = useTheme()
   const prefix = ref('ml-count-to')

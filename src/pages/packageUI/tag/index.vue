@@ -27,7 +27,10 @@
           <text>基础用法</text>
         </template>
         <template #description>
-          <text>标签的类型包括 info | primary | success | warning | danger 四种，默认为 info</text>
+          <text
+            >标签的类型包括 info | primary | success | warning | danger
+            四种，默认为 info</text
+          >
         </template>
         <template #demo>
           <view class="tags-container">
@@ -95,7 +98,9 @@
         <template #description>
           <view>closeable: 添加 ml-close 图标，点击可触发 close 事件</view>
           <view>checkable: 添加点击样式，触发 click 事件</view>
-          <view>editable: 点击后标签会切换成 input 输入框，可修改标签内容 </view>
+          <view
+            >editable: 点击后标签会切换成 input 输入框，可修改标签内容
+          </view>
         </template>
         <template #demo>
           <ml-tag model-value="标签1" closable @close="hanldeTagClose" />
@@ -115,7 +120,8 @@
 
   const appStore = useAppStore()
   const wrapperStyle = computed(() => {
-    const { screenWidth, contentHeight, tabbarHeight, bottomBarHeight } = appStore.appSize
+    const { screenWidth, contentHeight, tabbarHeight, bottomBarHeight } =
+      appStore.appSize
     return {
       width: `${screenWidth}px`,
       height: `${contentHeight + tabbarHeight + bottomBarHeight}px`

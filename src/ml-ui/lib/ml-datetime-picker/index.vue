@@ -113,10 +113,21 @@
       type: Function as PropType<DatetimePickerProps['disabledDate']>
     }
   })
-  const { modelValue, defaultModelValue, pickerValue, defaultPickerValue, locale, mode, format } =
-    toRefs(props)
+  const {
+    modelValue,
+    defaultModelValue,
+    pickerValue,
+    defaultPickerValue,
+    locale,
+    mode,
+    format
+  } = toRefs(props)
 
-  const emit = defineEmits(['update:modelValue', 'change', 'update:pickerValue'])
+  const emit = defineEmits([
+    'update:modelValue',
+    'change',
+    'update:pickerValue'
+  ])
 
   const { themeColors } = useTheme()
 
@@ -165,7 +176,9 @@
     setProcessValue(undefined)
   }
 
-  const [headerMode, setHeaderMode] = useState<DatetimePickerProps['mode'] | undefined>(mode.value)
+  const [headerMode, setHeaderMode] = useState<
+    DatetimePickerProps['mode'] | undefined
+  >(mode.value)
 
   const { headerValue, setHeaderValue, headerOperations } = usePickerHeader(
     reactive({

@@ -81,7 +81,10 @@
 
   onMounted(() => {
     if (modelValue && modelValue.value) {
-      onItemClick({ id: `${type.value}${modelValue.value}`, value: modelValue.value })
+      onItemClick({
+        id: `${type.value}${modelValue.value}`,
+        value: modelValue.value
+      })
     }
   })
 </script>

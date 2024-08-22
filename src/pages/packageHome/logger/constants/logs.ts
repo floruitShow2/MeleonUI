@@ -7,7 +7,8 @@ const Logs: LogInstanceType[] = [
     content: {
       feature: [
         {
-          label: '添加<code>ml-checkbox</code>和<code>ml-checkbox-group</code>组件',
+          label:
+            '添加<code>ml-checkbox</code>和<code>ml-checkbox-group</code>组件',
           link: ''
         }
       ],
@@ -92,7 +93,8 @@ const Logs: LogInstanceType[] = [
       feature: [],
       optimize: [
         {
-          label: '添加<code>ml-message</code>组件，支持设置消息类型、持续时间、可关闭等功能',
+          label:
+            '添加<code>ml-message</code>组件，支持设置消息类型、持续时间、可关闭等功能',
           link: ''
         }
       ],
@@ -113,7 +115,8 @@ const Logs: LogInstanceType[] = [
       feature: [],
       optimize: [
         {
-          label: '添加<code>ml-timeline</code>和<code>ml-timeline-item</code>组件'
+          label:
+            '添加<code>ml-timeline</code>和<code>ml-timeline-item</code>组件'
         }
       ],
       bugFix: [],
@@ -172,10 +175,12 @@ const Logs: LogInstanceType[] = [
           label: 'feat: 新增 ml-icon-switcher 小组件'
         },
         {
-          label: 'feat: ml-tree 组件基本功能完善，支持文本选中、复选框选择、自定义标题节点等'
+          label:
+            'feat: ml-tree 组件基本功能完善，支持文本选中、复选框选择、自定义标题节点等'
         },
         {
-          label: 'feat: ml-tree 组件新增对外暴露的 expand、check 及 select 等方法'
+          label:
+            'feat: ml-tree 组件新增对外暴露的 expand、check 及 select 等方法'
         }
       ],
       optimize: [],

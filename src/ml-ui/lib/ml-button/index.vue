@@ -1,5 +1,10 @@
 <template>
-  <view :class="className" :hover-class="hoverClassName" :style="themeColors" @click="handleClick">
+  <view
+    :class="className"
+    :hover-class="hoverClassName"
+    :style="themeColors"
+    @click="handleClick"
+  >
     <view v-if="loading || $slots['icon']" :class="`${prefix}-icon`">
       <MlIcon v-if="loading" name="ml-loading" color="#FFFFFF" />
       <slot v-else name="icon" />
@@ -62,7 +67,8 @@
       ],
       {
         [`${prefixCls}-disabled`]: disabled.value || loading.value,
-        [`${prefixCls}-only-icon`]: slots['icon'] !== undefined && !slots['default']
+        [`${prefixCls}-only-icon`]:
+          slots['icon'] !== undefined && !slots['default']
       }
     )
   })
@@ -70,7 +76,10 @@
     return cs(
       loading.value || disabled.value
         ? []
-        : [`${prefix.value}-${type.value}-hover`, `${prefix.value}-${status.value}-hover`]
+        : [
+            `${prefix.value}-${type.value}-hover`,
+            `${prefix.value}-${status.value}-hover`
+          ]
     )
   })
 

@@ -13,7 +13,9 @@ interface TimeStateProps {
 export default function useTimeState(props: TimeStateProps) {
   const { modelValue, defaultModelValue, format } = toRefs(props)
 
-  const computedModelValue = computed(() => convertDate2Dayjs(modelValue.value, format.value))
+  const computedModelValue = computed(() =>
+    convertDate2Dayjs(modelValue.value, format.value)
+  )
   const computedDefaultModelValue = computed(() =>
     convertDate2Dayjs(defaultModelValue.value, format.value)
   )
@@ -27,9 +29,13 @@ export default function useTimeState(props: TimeStateProps) {
   )
 
   // 最终状态
-  const computedValue = computed(() => computedModelValue.value || localValue.value)
+  const computedValue = computed(
+    () => computedModelValue.value || localValue.value
+  )
 
-  const [panelValue, setPanelValue] = useState<Dayjs | undefined>(computedValue.value)
+  const [panelValue, setPanelValue] = useState<Dayjs | undefined>(
+    computedValue.value
+  )
   watch(computedValue, (newVal) => {
     setPanelValue(newVal)
   })

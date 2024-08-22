@@ -30,17 +30,31 @@
           <text>输入框尺寸</text>
         </template>
         <template #description>
-          <text>输入框定义了四种默认尺寸 mini, small, medium, large，默认为 small</text>
+          <text
+            >输入框定义了四种默认尺寸 mini, small, medium, large，默认为
+            small</text
+          >
         </template>
         <template #demo>
           <view class="select-demo-size">
             <view class="select-demo-size-buttons">
-              <ml-button size="mini" @click="selectSize = 'mini'">Mini</ml-button>
-              <ml-button size="mini" @click="selectSize = 'small'">Small</ml-button>
-              <ml-button size="mini" @click="selectSize = 'medium'">Medium</ml-button>
-              <ml-button size="mini" @click="selectSize = 'large'">Large</ml-button>
+              <ml-button size="mini" @click="selectSize = 'mini'"
+                >Mini</ml-button
+              >
+              <ml-button size="mini" @click="selectSize = 'small'"
+                >Small</ml-button
+              >
+              <ml-button size="mini" @click="selectSize = 'medium'"
+                >Medium</ml-button
+              >
+              <ml-button size="mini" @click="selectSize = 'large'"
+                >Large</ml-button
+              >
             </view>
-            <ml-select v-model:modelValue="templateMap[1].modelValue" :size="selectSize">
+            <ml-select
+              v-model:modelValue="templateMap[1].modelValue"
+              :size="selectSize"
+            >
               <ml-option value="1" label="选项1" />
               <ml-option value="2" label="选项2" />
               <ml-option value="3" label="选项3" />
@@ -55,11 +69,16 @@
         </template>
         <template #description>
           <text>
-            通过设置 multiple 属性可开启多选模式，或添加 max-tag-count 属性，仅展示一部分选中的标签
+            通过设置 multiple 属性可开启多选模式，或添加 max-tag-count
+            属性，仅展示一部分选中的标签
           </text>
         </template>
         <template #demo>
-          <ml-select v-model:modelValue="templateMap[2].modelValue" multiple :max-tag-count="1">
+          <ml-select
+            v-model:modelValue="templateMap[2].modelValue"
+            multiple
+            :max-tag-count="1"
+          >
             <ml-option value="1" label="选项1" />
             <ml-option value="2" label="选项2" />
             <ml-option value="3" label="选项3" />
@@ -92,7 +111,8 @@
   import CodeBlock from '@/components/CodeBlock/index.vue'
   const appStore = useAppStore()
   const wrapperStyle = computed(() => {
-    const { screenWidth, contentHeight, tabbarHeight, bottomBarHeight } = appStore.appSize
+    const { screenWidth, contentHeight, tabbarHeight, bottomBarHeight } =
+      appStore.appSize
     return {
       width: `${screenWidth}px`,
       height: `${contentHeight + tabbarHeight + bottomBarHeight}px`

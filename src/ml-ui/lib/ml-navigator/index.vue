@@ -111,7 +111,8 @@
   })
   onMounted(() => {
     const { ui, menuButton } = generateDeviceUI()
-    const { screenWidth, statusBarHeight, menuButtonWidth, customBarHeight } = ui
+    const { screenWidth, statusBarHeight, menuButtonWidth, customBarHeight } =
+      ui
 
     sizes.value = {
       screenWidth,

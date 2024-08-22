@@ -12,7 +12,10 @@ export function getNow() {
  * @param currentDate
  * @returns
  */
-export function isDateValueChange(prevDate: Dayjs | undefined, currentDate: Dayjs | undefined) {
+export function isDateValueChange(
+  prevDate: Dayjs | undefined,
+  currentDate: Dayjs | undefined
+) {
   function isDifference(value1: Dayjs | undefined, value2: Dayjs | undefined) {
     if (value1 === undefined && value2 === undefined) {
       return false
@@ -42,7 +45,10 @@ export function isDateValueChange(prevDate: Dayjs | undefined, currentDate: Dayj
  * @param format string
  * @returns
  */
-export function convertDate2Dayjs(val: MeleonDatetime.DateValue | undefined, format: string) {
+export function convertDate2Dayjs(
+  val: MeleonDatetime.DateValue | undefined,
+  format: string
+) {
   if (!val) return
 
   if (isString(val)) {
@@ -72,7 +78,9 @@ export function convertDayjs2FormatValue(
  * @param value
  */
 export function getDateValue(value: Dayjs): Date
-export function getDateValue(value: Dayjs | Dayjs[] | (Dayjs | undefined)[] | undefined) {
+export function getDateValue(
+  value: Dayjs | Dayjs[] | (Dayjs | undefined)[] | undefined
+) {
   const formatValue = (t: Dayjs | undefined) => (t ? t.toDate() : undefined)
 
   if (isArray(value)) {
@@ -100,7 +108,10 @@ export const methods = {
  * @param format
  * @returns
  */
-export function getReturnValue(date: Dayjs, format?: MeleonDatetime.DateFormat) {
+export function getReturnValue(
+  date: Dayjs,
+  format?: MeleonDatetime.DateFormat
+) {
   if (format === 'timestamp') {
     return date.toDate().getTime()
   }

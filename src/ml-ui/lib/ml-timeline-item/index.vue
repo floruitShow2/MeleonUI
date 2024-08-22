@@ -25,7 +25,15 @@
 </template>
 
 <script setup lang="ts">
-  import { ref, toRefs, computed, onMounted, getCurrentInstance, inject, watch } from 'vue'
+  import {
+    ref,
+    toRefs,
+    computed,
+    onMounted,
+    getCurrentInstance,
+    inject,
+    watch
+  } from 'vue'
   import type { PropType } from 'vue'
   import { useTheme } from '@meleon/uni-ui/hooks'
   import { cs, getRect } from '@meleon/uni-ui/utils'
@@ -65,7 +73,9 @@
   const className = computed(() => {
     return cs(
       prefix.value,
-      [`${prefix.value}-${globalCtx?.direction.value}-${globalCtx?.mode.value}`],
+      [
+        `${prefix.value}-${globalCtx?.direction.value}-${globalCtx?.mode.value}`
+      ],
       {
         [`${prefix.value}-${globalCtx?.direction.value}-${globalCtx?.mode.value}-${
           idx.value % 2 === 0 ? 'left' : 'right'
@@ -102,7 +112,10 @@
 
   // 计算 dotLine 类名
   const dotLineCls = computed(() => {
-    return cs(`${prefix.value}-dot-line`, `${prefix.value}-dot-line-${lineType.value}`)
+    return cs(
+      `${prefix.value}-dot-line`,
+      `${prefix.value}-dot-line-${lineType.value}`
+    )
   })
   // 计算 dotLine 高度
   const genDotLineHeight = () => {

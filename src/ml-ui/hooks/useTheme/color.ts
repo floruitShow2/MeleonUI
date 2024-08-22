@@ -202,7 +202,11 @@ export function addColorAlpha(color: string, alpha: number) {
  * @param secondColor - 第二个颜色
  * @param ratio - 第二个颜色占比
  */
-export function mixColor(firstColor: string, secondColor: string, ratio: number) {
+export function mixColor(
+  firstColor: string,
+  secondColor: string,
+  ratio: number
+) {
   return colord(firstColor).mix(secondColor, ratio).toHex()
 }
 

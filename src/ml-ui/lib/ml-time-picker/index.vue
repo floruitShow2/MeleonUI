@@ -18,7 +18,9 @@
       <template #default>
         <view :class="`${prefix}--content`">
           <TimeColumn
-            v-if="showPicker && (columns.includes('H') || columns.includes('h'))"
+            v-if="
+              showPicker && (columns.includes('H') || columns.includes('h'))
+            "
             :prefix-cls="prefix"
             :value="selectedHour"
             :type="TimeColumnEnum.H"
@@ -59,7 +61,12 @@
   import dayjs from 'dayjs'
   import customParseFormat from 'dayjs/plugin/customParseFormat'
   import type { Dayjs } from 'dayjs'
-  import { useTheme, useTimeFormat, useTimeList, useTimeState } from '@meleon/uni-ui/hooks'
+  import {
+    useTheme,
+    useTimeFormat,
+    useTimeList,
+    useTimeState
+  } from '@meleon/uni-ui/hooks'
   import {
     cs,
     generateDeviceUI,
@@ -76,11 +83,15 @@
 
   const props = defineProps({
     modelValue: {
-      type: [String, Number, Date, Object] as PropType<TimePickerProps['modelValue']>,
+      type: [String, Number, Date, Object] as PropType<
+        TimePickerProps['modelValue']
+      >,
       required: true
     },
     defaultModelValue: {
-      type: [String, Number, Date, Object] as PropType<TimePickerProps['defaultModelValue']>
+      type: [String, Number, Date, Object] as PropType<
+        TimePickerProps['defaultModelValue']
+      >
     },
     format: {
       type: String,
@@ -147,7 +158,10 @@
     let newVal = panelValue.value
     if (!newVal) return
     if (isDateValueChange(newVal, localValue.value)) {
-      const formattedValue = convertDayjs2FormatValue(newVal, computedFormat.value)
+      const formattedValue = convertDayjs2FormatValue(
+        newVal,
+        computedFormat.value
+      )
       const dateValue = getDateValue(newVal)
       emit('update:modelValue', formattedValue)
       emit('change', formattedValue, dateValue)

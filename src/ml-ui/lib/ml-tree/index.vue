@@ -23,7 +23,12 @@
   import useCheckedState from './hooks/useCheckState'
   import BaseNode from './baseNode/index.vue'
   import { treeInjectionKey } from './context'
-  import { getCheckState, isNodeCheckable, isNodeExpandable, isNodeSelectable } from './utils'
+  import {
+    getCheckState,
+    isNodeCheckable,
+    isNodeExpandable,
+    isNodeSelectable
+  } from './utils'
 
   const props = defineProps({
     data: {
@@ -124,7 +129,9 @@
   )
 
   const getNodes = (keys: string[]) => {
-    return keys.map((key) => key2TreeNode.value.get(key)).filter(Boolean) as TreeNodeEntity[]
+    return keys
+      .map((key) => key2TreeNode.value.get(key))
+      .filter(Boolean) as TreeNodeEntity[]
   }
 
   function getDefaultExpandedKeys() {
@@ -135,9 +142,10 @@
 
         const node = key2TreeNode.value.get(_key)
         if (!node) return
-        ;[...(autoExpandParent.value ? node.parentNodeKeysPath || [] : []), _key].forEach((_key) =>
-          expandedKeysSet.add(_key)
-        )
+        ;[
+          ...(autoExpandParent.value ? node.parentNodeKeysPath || [] : []),
+          _key
+        ].forEach((_key) => expandedKeysSet.add(_key))
       })
       return [...expandedKeysSet]
     }
@@ -158,7 +166,8 @@
     newCheckedKeys: string[]
     newIndeterminateKeys: string[]
   }) => {
-    const { targetKey, targetChecked, newCheckedKeys, newIndeterminateKeys } = options
+    const { targetKey, targetChecked, newCheckedKeys, newIndeterminateKeys } =
+      options
     const targetNode = targetKey ? key2TreeNode.value.get(targetKey) : undefined
 
     emit('update:checkedKeys', newCheckedKeys)
@@ -228,7 +237,9 @@
 
     return flatternTreeNode.value.filter((node) => {
       const isRoot = isUndefined(node.parentNodeKey)
-      const isVisisble = (node.parentNodeKeysPath || []).every((key) => expandedKeysSet.has(key))
+      const isVisisble = (node.parentNodeKeysPath || []).every((key) =>
+        expandedKeysSet.has(key)
+      )
 
       return isRoot || isVisisble
     })
@@ -248,7 +259,11 @@
       nodeData: targetNode?.treeNodeData
     })
   }
-  const expandNodes = (keys: string[], expanded: boolean, targetKey?: string) => {
+  const expandNodes = (
+    keys: string[],
+    expanded: boolean,
+    targetKey?: string
+  ) => {
     const expandedKeysSet = new Set(expandedKeys.value)
     keys.forEach((key) => {
       expanded ? expandedKeysSet.add(key) : expandedKeysSet.delete(key)
@@ -298,7 +313,11 @@
       nodeData: targetNode?.treeNodeData
     })
   }
-  const selectNodes = (keys: string[], selected: boolean, targetKey?: string) => {
+  const selectNodes = (
+    keys: string[],
+    selected: boolean,
+    targetKey?: string
+  ) => {
     if (!keys.length) return
 
     let newSelectedKeys: string[] = []

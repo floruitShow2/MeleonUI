@@ -18,7 +18,9 @@
             <template #label>
               <view class="item-header">
                 <text class="item-header-version">{{ log.version }}</text>
-                <text class="item-header-date">{{ formatToDate(log.date) }}</text>
+                <text class="item-header-date">{{
+                  formatToDate(log.date)
+                }}</text>
               </view>
             </template>
             <view class="item-content">
@@ -52,7 +54,8 @@
 
   const appStore = useAppStore()
   const wrapperStyle = computed(() => {
-    const { screenWidth, contentHeight, tabbarHeight, bottomBarHeight } = appStore.appSize
+    const { screenWidth, contentHeight, tabbarHeight, bottomBarHeight } =
+      appStore.appSize
     return {
       width: `${screenWidth}px`,
       height: `${contentHeight + tabbarHeight + bottomBarHeight}px`

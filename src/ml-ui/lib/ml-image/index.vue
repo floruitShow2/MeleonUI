@@ -20,7 +20,11 @@
       </slot>
     </view>
     <!-- 图片预览 -->
-    <view v-if="showPreviewImage" :class="`${prefix}-preview`" :style="{ ...style.preview }">
+    <view
+      v-if="showPreviewImage"
+      :class="`${prefix}-preview`"
+      :style="{ ...style.preview }"
+    >
       <view :class="`${prefix}-preview-wrapper`">
         <!-- 图片预览区域 -->
         <view :class="`${prefix}-preview-wrapper--image`">
@@ -34,11 +38,18 @@
             class="tool-item"
             @click="tool.handler()"
           >
-            <Icon :name="tool.icon" :size="20" color="var(--info-color-7)"></Icon>
+            <Icon
+              :name="tool.icon"
+              :size="20"
+              color="var(--info-color-7)"
+            ></Icon>
           </view>
         </view>
         <!-- 关闭按钮 -->
-        <view :class="`${prefix}-preview-wrapper--close`" @click="handleClosePreview">
+        <view
+          :class="`${prefix}-preview-wrapper--close`"
+          @click="handleClosePreview"
+        >
           <Icon name="ml-close" :size="24" color="#FFFFFF"></Icon>
         </view>
       </view>
@@ -109,7 +120,9 @@
   })
   const style = computed(() => {
     const { statusBarHeight, customBarHeight } = generateDeviceUI().ui
-    const navigatorHeight = hasNav.value ? `${statusBarHeight + customBarHeight}px` : 0
+    const navigatorHeight = hasNav.value
+      ? `${statusBarHeight + customBarHeight}px`
+      : 0
     return {
       // 主体样式
       main: {
@@ -136,7 +149,8 @@
       icon: 'ml-zoom-in',
       handler() {
         console.log('zoom in')
-        zoomLevel.value = zoomLevel.value <= 0.5 ? zoomLevel.value : zoomLevel.value - 0.1
+        zoomLevel.value =
+          zoomLevel.value <= 0.5 ? zoomLevel.value : zoomLevel.value - 0.1
       }
     },
     zoomOut: {
@@ -144,7 +158,8 @@
       icon: 'ml-zoom-out',
       handler() {
         console.log('zoom out')
-        zoomLevel.value = zoomLevel.value >= 1.5 ? zoomLevel.value : zoomLevel.value + 0.1
+        zoomLevel.value =
+          zoomLevel.value >= 1.5 ? zoomLevel.value : zoomLevel.value + 0.1
       }
     },
     rotate: {
@@ -152,7 +167,8 @@
       icon: 'ml-rotate',
       handler() {
         console.log('rotate')
-        rotateDegree.value = rotateDegree.value >= 360 ? 0 : rotateDegree.value + 90
+        rotateDegree.value =
+          rotateDegree.value >= 360 ? 0 : rotateDegree.value + 90
       }
     },
     reset: {

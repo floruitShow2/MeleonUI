@@ -108,7 +108,9 @@ interface GetCheckStateWithIntialKeysInput {
  * @param options
  * @returns
  */
-export function getCheckStateWithIntialKeys(options: GetCheckStateWithIntialKeysInput) {
+export function getCheckStateWithIntialKeys(
+  options: GetCheckStateWithIntialKeysInput
+) {
   const { initialCheckedKeys, key2TreeNode } = options
   const checkedKeySet = new Set<string>()
   const childCheckedKeysSet = new Set<string>()

@@ -4,7 +4,9 @@ import zhCN from './zhCN'
 import enUS from './enUS'
 
 const LOCALE = ref<MeleonLocale.LocaleCategory>('zh-CN')
-const I18N_MESSAGE_MAP = reactive<Record<MeleonLocale.LocaleCategory, MeleonLocale.CoreLocale>>({
+const I18N_MESSAGE_MAP = reactive<
+  Record<MeleonLocale.LocaleCategory, MeleonLocale.CoreLocale>
+>({
   'zh-CN': zhCN,
   'en-US': enUS
 })

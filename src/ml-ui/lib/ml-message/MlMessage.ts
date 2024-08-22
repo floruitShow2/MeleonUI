@@ -47,7 +47,10 @@ class MlMessage {
     }
   }
 
-  createAnimationData(message: MessageOptions, status: 'in' | 'out' = 'in'): UniApp.Animation {
+  createAnimationData(
+    message: MessageOptions,
+    status: 'in' | 'out' = 'in'
+  ): UniApp.Animation {
     const animation = uni.createAnimation({
       transformOrigin: '0 50%',
       duration: 500,
@@ -76,7 +79,9 @@ class MlMessage {
   }
 
   addAnimationData(message: MessageOptions) {
-    if (message.id) this.messagesAnimation.value[message.id] = this.createAnimationData(message)
+    if (message.id)
+      this.messagesAnimation.value[message.id] =
+        this.createAnimationData(message)
   }
 
   getAnimationData(id?: string | number) {

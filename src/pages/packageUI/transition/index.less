@@ -22,6 +22,19 @@
     margin: -50px 0 0 -50px;
     width: 100px;
     height: 100px;
-    background: #0083ff;
+    background: #5db1ff;
+  }
+
+  :deep(.custom-enter-active),
+  :deep(.custom-leave-active) {
+    transition-property: background, transform;
+  }
+  :deep(.custom-enter) {
+    transform: translate3d(-100px, -100px, 0) rotate(-180deg);
+    background: #eb7676;
+  }
+  :deep(.custom-leave-to) {
+    transform: translate3d(100px, 100px, 0) rotate(180deg);
+    background: #e76868;
   }
 }

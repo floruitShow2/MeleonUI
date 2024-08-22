@@ -4,7 +4,11 @@
       <!-- 消息提示 -->
       <ml-message ref="messageRef" />
       <!-- 导航栏 -->
-      <ml-navigator :title="$t('home.navigation.title')" title-color="#FFFFFF" background="#7A98B3">
+      <ml-navigator
+        :title="$t('home.navigation.title')"
+        title-color="#FFFFFF"
+        background="#7A98B3"
+      >
         <!-- <image class="image" src="../../assets/home/MeleonUI.png" mode="aspectFit" /> -->
       </ml-navigator>
       <!-- 主体 -->
@@ -22,7 +26,10 @@
           </view>
           <view class="desc"> {{ $t('home.hero.desc') }} </view>
           <view class="actions">
-            <ml-button type="primary" @click="onNavigate('/pages/componentList/index')">
+            <ml-button
+              type="primary"
+              @click="onNavigate('/pages/componentList/index')"
+            >
               {{ $t('home.actions.start') }}
               <ml-icon name="ml-arrow-right--line" color="#FFFFFF" />
             </ml-button>
@@ -56,7 +63,11 @@
           </view> -->
         </view>
         <view class="home-view-content_features">
-          <view v-for="feature in features" :key="feature.title" class="feature">
+          <view
+            v-for="feature in features"
+            :key="feature.title"
+            class="feature"
+          >
             <view class="feature-header">
               {{ feature.title }}
             </view>

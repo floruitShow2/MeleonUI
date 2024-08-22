@@ -50,7 +50,10 @@
           </slot>
         </view>
         <!-- 加载完成提示 -->
-        <view v-if="finished || endIndex >= data.length" :class="`${prefix}-scroll-finished`">
+        <view
+          v-if="finished || endIndex >= data.length"
+          :class="`${prefix}-scroll-finished`"
+        >
           <slot name="finished">
             {{ finishedText }}
           </slot>
@@ -58,14 +61,26 @@
       </template>
     </scroll-view>
     <!-- 回到顶部按钮 -->
-    <view v-if="isScrollToTopShow" :class="`${prefix}-to-top`" @click="scrollToTop">
+    <view
+      v-if="isScrollToTopShow"
+      :class="`${prefix}-to-top`"
+      @click="scrollToTop"
+    >
       <Icon name="ml-arrow-upper--fill" :size="16" />
     </view>
   </view>
 </template>
 
 <script setup lang="ts">
-  import { ref, toRefs, computed, watch, onMounted, getCurrentInstance, nextTick } from 'vue'
+  import {
+    ref,
+    toRefs,
+    computed,
+    watch,
+    onMounted,
+    getCurrentInstance,
+    nextTick
+  } from 'vue'
   import type { PropType, ComponentInternalInstance } from 'vue'
   import { useTheme } from '@meleon/uni-ui/hooks'
   import { cs, getAllRect } from '@meleon/uni-ui/utils'
@@ -205,7 +220,10 @@
     const minEndIndex = pageSize.value
 
     // 起始索引和结束索引 -1
-    startIndex.value = Math.max(startIndex.value - UPDATE_COUNT.value, minStartIndex)
+    startIndex.value = Math.max(
+      startIndex.value - UPDATE_COUNT.value,
+      minStartIndex
+    )
     endIndex.value = Math.max(endIndex.value - UPDATE_COUNT.value, minEndIndex)
   }
   const handleScrollToLower = () => {
@@ -219,7 +237,10 @@
 
     // 起始索引和结束索引 +1
     if (virtualList.value) {
-      startIndex.value = Math.min(startIndex.value + UPDATE_COUNT.value, maxStartIndex)
+      startIndex.value = Math.min(
+        startIndex.value + UPDATE_COUNT.value,
+        maxStartIndex
+      )
     }
     endIndex.value = Math.min(endIndex.value + UPDATE_COUNT.value, maxEndIndex)
   }

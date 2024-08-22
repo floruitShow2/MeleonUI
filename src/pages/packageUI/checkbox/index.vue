@@ -36,8 +36,9 @@
         </template>
         <template #description>
           <text>
-            设置 mode 属性可以控制选项组模式为“单选”或“多选”。设置为“多选”状态时，可以传入 min/max
-            变量控制可选择的数量
+            设置 mode
+            属性可以控制选项组模式为“单选”或“多选”。设置为“多选”状态时，可以传入
+            min/max 变量控制可选择的数量
           </text>
         </template>
         <template #demo>
@@ -51,7 +52,12 @@
             </ml-checkbox-group>
           </view>
           <view class="checkbox-container">
-            <ml-checkbox-group v-model:checked-list="checked3" mode="multi" :max="3" :min="1">
+            <ml-checkbox-group
+              v-model:checked-list="checked3"
+              mode="multi"
+              :max="3"
+              :min="1"
+            >
               <ml-checkbox value="A">RadioA</ml-checkbox>
               <ml-checkbox value="B">RadioB</ml-checkbox>
               <ml-checkbox value="C">RadioC</ml-checkbox>
@@ -71,7 +77,10 @@
         </template>
         <template #demo>
           <view class="checkbox-container">
-            <ml-checkbox-group v-model:checked-list="checked4" direction="vertical">
+            <ml-checkbox-group
+              v-model:checked-list="checked4"
+              direction="vertical"
+            >
               <ml-checkbox value="A">RadioA</ml-checkbox>
               <ml-checkbox value="B">RadioB</ml-checkbox>
               <ml-checkbox value="C">RadioC</ml-checkbox>
@@ -92,7 +101,8 @@
 
   const appStore = useAppStore()
   const wrapperStyle = computed(() => {
-    const { screenWidth, contentHeight, tabbarHeight, bottomBarHeight } = appStore.appSize
+    const { screenWidth, contentHeight, tabbarHeight, bottomBarHeight } =
+      appStore.appSize
     return {
       width: `${screenWidth}px`,
       height: `${contentHeight + tabbarHeight + bottomBarHeight}px`

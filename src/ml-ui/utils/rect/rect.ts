@@ -4,7 +4,10 @@
  * @param selector 目标元素的 CSS 选择器
  * @returns 与 getBoundingClientRect 返回值相同
  */
-export function getRect(context: any, selector: string): Promise<Record<string, number>> {
+export function getRect(
+  context: any,
+  selector: string
+): Promise<Record<string, number>> {
   return new Promise(function (resolve) {
     uni
       .createSelectorQuery()
@@ -19,7 +22,10 @@ export function getRect(context: any, selector: string): Promise<Record<string, 
       })
   })
 }
-export function getAllRect(context: any, selector: string): Promise<Record<string, number>[]> {
+export function getAllRect(
+  context: any,
+  selector: string
+): Promise<Record<string, number>[]> {
   return new Promise(function (resolve) {
     uni
       .createSelectorQuery()

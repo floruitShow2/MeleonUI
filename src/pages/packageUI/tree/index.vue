@@ -38,11 +38,17 @@
           {{ isSelectAll ? 'Unselect All' : 'Select All' }}
         </ml-button>
 
-        <ml-button class="btn" type="primary" @click="handleExpandNode"> Expand Root </ml-button>
+        <ml-button class="btn" type="primary" @click="handleExpandNode">
+          Expand Root
+        </ml-button>
 
-        <ml-button class="btn" type="primary" @click="handleCheckNode"> Check Root </ml-button>
+        <ml-button class="btn" type="primary" @click="handleCheckNode">
+          Check Root
+        </ml-button>
 
-        <ml-button class="btn" type="primary" @click="handleSelectNode"> Select Root </ml-button>
+        <ml-button class="btn" type="primary" @click="handleSelectNode">
+          Select Root
+        </ml-button>
       </view>
     </view>
   </view>
@@ -61,7 +67,8 @@
 
   const appStore = useAppStore()
   const wrapperStyle = computed(() => {
-    const { screenWidth, contentHeight, tabbarHeight, bottomBarHeight } = appStore.appSize
+    const { screenWidth, contentHeight, tabbarHeight, bottomBarHeight } =
+      appStore.appSize
     return {
       width: `${screenWidth}px`,
       height: `${contentHeight + tabbarHeight + bottomBarHeight}px`

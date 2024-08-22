@@ -7,7 +7,11 @@ import { isArray, isFile } from '../is'
  * @param key - 文件的属性名
  * @param file - 单文件或多文件
  */
-async function transformFile(formData: FormData, key: string, file: File[] | File) {
+async function transformFile(
+  formData: FormData,
+  key: string,
+  file: File[] | File
+) {
   if (isArray(file)) {
     // 多文件
     await Promise.all(
@@ -27,7 +31,8 @@ async function handleFormData(data: Record<string, any>) {
   const entries = Object.entries(data)
 
   entries.forEach(async ([key, value]) => {
-    const isFileType = isFile(value) || (isArray(value) && value.length && isFile(value[0]))
+    const isFileType =
+      isFile(value) || (isArray(value) && value.length && isFile(value[0]))
 
     if (isFileType) {
       await transformFile(formData, key, value)
@@ -44,7 +49,10 @@ async function handleFormData(data: Record<string, any>) {
  * @param requestData - 请求数据
  * @param contentType - 请求头的Content-Type
  */
-export async function transformRequestData(requestData: any, contentType?: UnionKey.ContentType) {
+export async function transformRequestData(
+  requestData: any,
+  contentType?: UnionKey.ContentType
+) {
   // application/json类型不处理
   let data = requestData
   // form类型转换

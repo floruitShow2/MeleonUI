@@ -2,7 +2,10 @@
   <view
     v-if="!globalCtxWithDefaults.isHidden"
     :class="className"
-    :style="{ width: `${globalCtxWithDefaults.optionRefWidth}px`, ...themeColors }"
+    :style="{
+      width: `${globalCtxWithDefaults.optionRefWidth}px`,
+      ...themeColors
+    }"
     @click="onOptionClick"
   >
     <text>{{ label }}</text>
@@ -83,7 +86,9 @@
     return {
       optionRefWidth: globalCtx ? globalCtx.getTriggerRect().width : 100,
       selectedOptions: globalCtx ? globalCtx.getSelectedList() : [],
-      isHidden: globalCtx ? globalCtx.getHiddenList().includes(value.value) : false
+      isHidden: globalCtx
+        ? globalCtx.getHiddenList().includes(value.value)
+        : false
     }
   })
 

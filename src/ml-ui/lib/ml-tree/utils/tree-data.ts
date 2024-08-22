@@ -1,5 +1,10 @@
 import { isUndefined } from '@meleon/uni-ui/utils'
-import type { Key2TreeNode, TreeDataEntity, TreeNodeEntity, TreeOptions } from '../index.interface'
+import type {
+  Key2TreeNode,
+  TreeDataEntity,
+  TreeNodeEntity,
+  TreeOptions
+} from '../index.interface'
 
 interface GenerateEnableInput {
   subEnable?: boolean
@@ -32,7 +37,9 @@ const generateNode = (option: GenerateNodeInput) => {
   const { treeNodeData, treeOptions, parentNode } = option
 
   // 叶子节点
-  const isLeaf = !!(!treeNodeData.children || treeNodeData.children.length === 0)
+  const isLeaf = !!(
+    !treeNodeData.children || treeNodeData.children.length === 0
+  )
   const level = parentNode ? parentNode.level + 1 : 0
 
   const treeNodeProps = {
@@ -56,7 +63,9 @@ const generateNode = (option: GenerateNodeInput) => {
     treeNodeData,
     parentNode,
     parentNodeKey: parentNode?.key,
-    parentNodeKeysPath: parentNode ? [...(parentNode.parentNodeKeysPath || []), parentNode.key] : []
+    parentNodeKeysPath: parentNode
+      ? [...(parentNode.parentNodeKeysPath || []), parentNode.key]
+      : []
   }
 
   return node
@@ -83,7 +92,11 @@ export const translateData2Node = (
       treeOptions,
       parentNode
     })
-    node.children = translateData2Node(treeNode.children || [], treeOptions, node)
+    node.children = translateData2Node(
+      treeNode.children || [],
+      treeOptions,
+      node
+    )
     nodes.push(node)
   })
 
@@ -96,7 +109,10 @@ export const translateData2Node = (
  * @param result
  * @returns
  */
-export const translate2FlatterNode = (tree: TreeNodeEntity[], result: TreeNodeEntity[] = []) => {
+export const translate2FlatterNode = (
+  tree: TreeNodeEntity[],
+  result: TreeNodeEntity[] = []
+) => {
   tree.forEach((node) => {
     result.push(node)
     if (node.children) {

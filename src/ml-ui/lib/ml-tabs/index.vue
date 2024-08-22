@@ -13,7 +13,15 @@
 </template>
 
 <script setup lang="ts">
-  import { ref, toRefs, computed, getCurrentInstance, onMounted, provide, reactive } from 'vue'
+  import {
+    ref,
+    toRefs,
+    computed,
+    getCurrentInstance,
+    onMounted,
+    provide,
+    reactive
+  } from 'vue'
   import { useTheme } from '@meleon/uni-ui/hooks'
   import { cs } from '@meleon/uni-ui/utils'
   import TabNav from './tab-nav/index.vue'

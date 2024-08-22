@@ -15,7 +15,10 @@
         @change="onInputTagChange"
       >
         <template #suffix>
-          <MlIcon :name="isMenuUnfold ? 'ml-arrow-down' : 'ml-arrow-upper'" color="#808080" />
+          <MlIcon
+            :name="isMenuUnfold ? 'ml-arrow-down' : 'ml-arrow-upper'"
+            color="#808080"
+          />
         </template>
       </MlInputTag>
     </template>
@@ -35,7 +38,10 @@
         @blur="onInputBlur"
       >
         <template #suffix>
-          <MlIcon :name="isMenuUnfold ? 'ml-arrow-down' : 'ml-arrow-upper'" color="#808080" />
+          <MlIcon
+            :name="isMenuUnfold ? 'ml-arrow-down' : 'ml-arrow-upper'"
+            color="#808080"
+          />
         </template>
       </MlInput>
     </template>
@@ -58,12 +64,24 @@
         @click.stop="handleSelectItem(option)"
       />
     </scroll-view>
-    <view v-if="isMenuUnfold" :class="`${prefix}-menu-mask`" @click.stop="onInputBlur" />
+    <view
+      v-if="isMenuUnfold"
+      :class="`${prefix}-menu-mask`"
+      @click.stop="onInputBlur"
+    />
   </view>
 </template>
 
 <script setup lang="ts">
-  import { ref, toRefs, computed, provide, getCurrentInstance, onMounted, watch } from 'vue'
+  import {
+    ref,
+    toRefs,
+    computed,
+    provide,
+    getCurrentInstance,
+    onMounted,
+    watch
+  } from 'vue'
   import type { PropType } from 'vue'
   import { useTheme } from '@meleon/uni-ui/hooks'
   import { cs, isArray, getRect, generateDeviceUI } from '@meleon/uni-ui/utils'
@@ -118,8 +136,15 @@
       default: false
     }
   })
-  const { modelValue, placeholder, filterable, multiple, maxTagCount, disabled, addToParent } =
-    toRefs(props)
+  const {
+    modelValue,
+    placeholder,
+    filterable,
+    multiple,
+    maxTagCount,
+    disabled,
+    addToParent
+  } = toRefs(props)
 
   const emit = defineEmits(['update:model-value'])
   const mlInputRef = ref()
@@ -156,11 +181,15 @@
     initSelectedList(modelValue.value)
   }
   const selectOption = (option: OptionProps) => {
-    const findIdx = selectedList.value.findIndex((item) => item.value === option.value)
+    const findIdx = selectedList.value.findIndex(
+      (item) => item.value === option.value
+    )
     if (findIdx !== -1) {
       selectedList.value.splice(findIdx, 1)
     } else {
-      selectedList.value = multiple.value ? [...selectedList.value, option] : [option]
+      selectedList.value = multiple.value
+        ? [...selectedList.value, option]
+        : [option]
     }
     emit('update:model-value', selectedValue.value)
   }
@@ -182,7 +211,9 @@
   })
   // 初始化绑定值
   const inputValue = ref('')
-  const initSelectedList = (values: OptionProps['value'] | OptionProps['value'][]) => {
+  const initSelectedList = (
+    values: OptionProps['value'] | OptionProps['value'][]
+  ) => {
     selectedList.value = []
     const arr = !Array.isArray(values) ? [values] : values
     arr.forEach((item) => {
@@ -194,7 +225,10 @@
     handleInputValue()
   }
   const handleInputValue = () => {
-    inputValue.value = !multiple.value && selectedList.value[0] ? selectedList.value[0].label : ''
+    inputValue.value =
+      !multiple.value && selectedList.value[0]
+        ? selectedList.value[0].label
+        : ''
   }
   watch(
     modelValue,
@@ -223,7 +257,10 @@
 
   // 下拉菜单动画
   const menuAnimationData = ref<any>({})
-  const executeMenuAnimate = (time: number, direction: SelectProps['direction']) => {
+  const executeMenuAnimate = (
+    time: number,
+    direction: SelectProps['direction']
+  ) => {
     const animation = uni.createAnimation({
       duration: time,
       timingFunction: 'linear',
@@ -242,7 +279,13 @@
       console.log('节点不存在，获取节点数据失败')
       return
     }
-    let { top: i_top, height: i_height, width: i_width, bottom: i_bottom, left: i_left } = inputRes
+    let {
+      top: i_top,
+      height: i_height,
+      width: i_width,
+      bottom: i_bottom,
+      left: i_left
+    } = inputRes
     const { height: m_height } = menuRes
     let bottom = deviceUI.value.screenHeight
     let stylestr = ''
@@ -321,7 +364,12 @@
     const targetLabel = _labels.find((label) => !label2Value[label])
     if (targetLabel && isArray(modelValue.value)) {
       emit('update:model-value', [...modelValue.value, targetLabel])
-      addOption({ label: targetLabel, value: targetLabel, disabled: false, isExtra: true })
+      addOption({
+        label: targetLabel,
+        value: targetLabel,
+        disabled: false,
+        isExtra: true
+      })
       // selectedList.value = [...selectedList.value, ]
     }
   }

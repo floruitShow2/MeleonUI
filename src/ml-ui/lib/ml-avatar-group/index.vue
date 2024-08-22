@@ -2,7 +2,11 @@
   <view :class="className" :style="themeColors">
     <div :class="`${prefix}-wrapper`">
       <slot />
-      <view v-if="maxCount < total" :class="`${prefix}-extra`" :style="extraStyle">
+      <view
+        v-if="maxCount < total"
+        :class="`${prefix}-extra`"
+        :style="extraStyle"
+      >
         {{ `+${total - maxCount}` }}
       </view>
     </div>

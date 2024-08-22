@@ -1,4 +1,11 @@
-import { nextTick, effectScope, onScopeDispose, ref, watch, computed } from 'vue'
+import {
+  nextTick,
+  effectScope,
+  onScopeDispose,
+  ref,
+  watch,
+  computed
+} from 'vue'
 import type { ComputedRef, Ref } from 'vue'
 import * as echarts from 'echarts/core'
 import {

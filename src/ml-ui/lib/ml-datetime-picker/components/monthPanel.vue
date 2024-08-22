@@ -1,6 +1,10 @@
 <template>
   <view :class="`${prefixCls}-body`">
-    <view v-for="(row, rowIndex) in rows" :key="rowIndex" :class="`${prefixCls}-body-row`">
+    <view
+      v-for="(row, rowIndex) in rows"
+      :key="rowIndex"
+      :class="`${prefixCls}-body-row`"
+    >
       <view
         v-for="(cell, colIndex) in row"
         :key="colIndex"
@@ -25,7 +29,11 @@
   import { usePickerCellClassName } from '@meleon/uni-ui/hooks'
   import { isFunction, getDateValue } from '@meleon/uni-ui/utils'
   import { DatetimePickerContextKey } from '../context'
-  import type { DatetimePickerCell, DisabledDateFunc, IsSameTimeFunc } from '../index.interface'
+  import type {
+    DatetimePickerCell,
+    DisabledDateFunc,
+    IsSameTimeFunc
+  } from '../index.interface'
 
   const props = defineProps({
     prefixCls: {
@@ -43,7 +51,12 @@
       type: Function as PropType<DisabledDateFunc>
     }
   })
-  const { prefixCls, value: modelValue, headerValue, disabledDate } = toRefs(props)
+  const {
+    prefixCls,
+    value: modelValue,
+    headerValue,
+    disabledDate
+  } = toRefs(props)
 
   const emit = defineEmits(['cell-click', 'select'])
 
@@ -72,22 +85,29 @@
   const rows = computed(() => {
     const year = headerValue.value.year()
 
-    const flatData: DatetimePickerCell[] = new Array(CELL_COUNT).fill(0).map((_, index) => ({
-      label: datetimePickerCtx
-        ? datetimePickerCtx.datePickerT(`calendar.month.long.${MONTH_LIST[index]}`)
-        : MONTH_LIST[index],
-      value: dayjs(`${year}-${index + 1}`, 'YYYY-M'),
-      className: `${prefixCls.value}-panel-month`
-    }))
+    const flatData: DatetimePickerCell[] = new Array(CELL_COUNT)
+      .fill(0)
+      .map((_, index) => ({
+        label: datetimePickerCtx
+          ? datetimePickerCtx.datePickerT(
+              `calendar.month.long.${MONTH_LIST[index]}`
+            )
+          : MONTH_LIST[index],
+        value: dayjs(`${year}-${index + 1}`, 'YYYY-M'),
+        className: `${prefixCls.value}-panel-month`
+      }))
 
     const rows = new Array(ROW_COUNT)
       .fill(0)
-      .map((_, index) => flatData.slice(index * COL_COUNT, (index + 1) * COL_COUNT))
+      .map((_, index) =>
+        flatData.slice(index * COL_COUNT, (index + 1) * COL_COUNT)
+      )
 
     return rows
   })
 
-  const isSameTime: IsSameTimeFunc = (current, target) => current.isSame(target, 'month')
+  const isSameTime: IsSameTimeFunc = (current, target) =>
+    current.isSame(target, 'month')
   const { getCellClassName } = usePickerCellClassName(
     reactive({
       prefixCls,
@@ -97,7 +117,10 @@
     })
   )
   const isCellDisabled = (cell: DatetimePickerCell): boolean => {
-    return !!(isFunction(disabledDate?.value) && disabledDate?.value(getDateValue(cell.value)))
+    return !!(
+      isFunction(disabledDate?.value) &&
+      disabledDate?.value(getDateValue(cell.value))
+    )
   }
   const localGetCellClassName = (cell: DatetimePickerCell) => {
     const isDisabled = isCellDisabled(cell)

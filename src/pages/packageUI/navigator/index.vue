@@ -1,6 +1,10 @@
 <template>
   <view class="uni_class">
-    <ml-navigator v-if="!showCustomIcon" :title="title" :background="background"></ml-navigator>
+    <ml-navigator
+      v-if="!showCustomIcon"
+      :title="title"
+      :background="background"
+    ></ml-navigator>
     <ml-navigator v-else :title="title" :background="background">
       <template #icon>
         <ml-icon name="ml-loading" color="#ffffff" :size="20"></ml-icon>
@@ -21,7 +25,11 @@
           </text>
         </template>
         <template #demo>
-          <ml-input v-model="title" size="mini" placeholder="修改页面标题"></ml-input>
+          <ml-input
+            v-model="title"
+            size="mini"
+            placeholder="修改页面标题"
+          ></ml-input>
         </template>
       </code-block>
 
@@ -72,7 +80,11 @@
         </template>
         <template #demo>
           <view class="btn-wrapper">
-            <ml-button type="primary" size="small" @click="handleToggleCustomIcon">
+            <ml-button
+              type="primary"
+              size="small"
+              @click="handleToggleCustomIcon"
+            >
               切换自定义导航栏
             </ml-button>
           </view>
@@ -89,7 +101,8 @@
 
   const appStore = useAppStore()
   const wrapperStyle = computed(() => {
-    const { screenWidth, contentHeight, tabbarHeight, bottomBarHeight } = appStore.appSize
+    const { screenWidth, contentHeight, tabbarHeight, bottomBarHeight } =
+      appStore.appSize
     return {
       width: `${screenWidth}px`,
       height: `${contentHeight + tabbarHeight + bottomBarHeight}px`
@@ -175,11 +188,15 @@ const handleBackgroundChange = (type: BgOperateEnum) => {
   const randomColors = ['#93AEC1', '#9DBDBA', '#F8B042', '#EC6A52', '#F3B7AD']
   const curPureColorIdx = ref(0)
   const handleBackgroundChange = (type: BgOperateEnum) => {
-    const idx = curPureColorIdx.value === randomColors.length - 1 ? 0 : curPureColorIdx.value + 1
+    const idx =
+      curPureColorIdx.value === randomColors.length - 1
+        ? 0
+        : curPureColorIdx.value + 1
     curPureColorIdx.value = idx
     const val: Record<BgOperateEnum, string> = {
       [BgOperateEnum.PURE]: randomColors[curPureColorIdx.value],
-      [BgOperateEnum.GRADIENT]: 'linear-gradient(90deg, #93AEC1 0%, #F3B7AD 100%)',
+      [BgOperateEnum.GRADIENT]:
+        'linear-gradient(90deg, #93AEC1 0%, #F3B7AD 100%)',
       [BgOperateEnum.IMAGE]: `url('https://qiniu-web-assets.dcloud.net.cn/unidoc/zh/shuijiao.jpg')`
     }
     background.value = val[type]

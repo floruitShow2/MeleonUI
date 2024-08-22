@@ -45,18 +45,31 @@
     checkable: { type: Boolean, default: false },
     editable: { type: Boolean, default: false }
   })
-  const { modelValue, type, size, closable, checkable, editable, plain, bordered } = toRefs(props)
+  const {
+    modelValue,
+    type,
+    size,
+    closable,
+    checkable,
+    editable,
+    plain,
+    bordered
+  } = toRefs(props)
 
   const emit = defineEmits(['update:modelValue', 'click', 'close'])
 
   const { themeColors } = useTheme()
   const prefix = ref('ml-tag')
   const className = computed(() => {
-    return cs(prefix.value, [`${prefix.value}-${type.value}`, `${prefix.value}-${size.value}`], {
-      [`${prefix.value}-closable`]: closable.value,
-      [`${prefix.value}-plain`]: plain.value,
-      [`${prefix.value}-bordered`]: bordered.value
-    })
+    return cs(
+      prefix.value,
+      [`${prefix.value}-${type.value}`, `${prefix.value}-${size.value}`],
+      {
+        [`${prefix.value}-closable`]: closable.value,
+        [`${prefix.value}-plain`]: plain.value,
+        [`${prefix.value}-bordered`]: bordered.value
+      }
+    )
   })
   const hoverClassName = computed(() => {
     return cs([`${prefix.value}-${type.value}-hover`])

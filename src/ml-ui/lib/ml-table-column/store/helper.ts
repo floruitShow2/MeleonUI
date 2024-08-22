@@ -13,7 +13,8 @@ export const createStore = (table: any, initialStates: WatcherStatesType) => {
   store.$table = table
   // 将初始值绑定到 store 的 state 上
   Object.keys(initialStates).forEach((key) => {
-    ;(store.states[key as StatesKey] as StatesValue) = initialStates[key as StatesKey]
+    ;(store.states[key as StatesKey] as StatesValue) =
+      initialStates[key as StatesKey]
   })
   return store
 }

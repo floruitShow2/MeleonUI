@@ -8,6 +8,7 @@ export interface CheckboxGroupContext {
   initTotalList: (value: string | number) => void
   updateCheckedList: (value: string | number) => void
 }
-const checkboxGroupInjectionKey: InjectionKey<CheckboxGroupContext> = Symbol('ml-checkbox-group')
+const checkboxGroupInjectionKey: InjectionKey<CheckboxGroupContext> =
+  Symbol('ml-checkbox-group')
 
 export { checkboxGroupInjectionKey }

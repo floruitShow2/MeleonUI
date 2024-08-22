@@ -4,7 +4,10 @@ export class AbortablePromise<T> {
   _reject!: (reason?: any) => void
 
   constructor(
-    executor: (resolve: (value: T | PromiseLike<T>) => void, reject: (reason?: any) => void) => void
+    executor: (
+      resolve: (value: T | PromiseLike<T>) => void,
+      reject: (reason?: any) => void
+    ) => void
   ) {
     this.promise = new Promise<T>((resolve, reject) => {
       executor(resolve, reject)

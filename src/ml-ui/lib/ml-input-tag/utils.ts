@@ -1,7 +1,9 @@
 import { isNumber, isObject } from '../../utils/is'
 import type { TagData } from './index.interface'
 
-export const getValueData = (value: Array<string | number | TagData>): TagData[] => {
+export const getValueData = (
+  value: Array<string | number | TagData>
+): TagData[] => {
   const result: TagData[] = []
   for (const item of value) {
     if (isObject(item)) {

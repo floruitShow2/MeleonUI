@@ -29,15 +29,26 @@
           <text>输入框尺寸</text>
         </template>
         <template #description>
-          <text>输入框定义了四种默认尺寸 mini, small, medium, large，默认为 small</text>
+          <text
+            >输入框定义了四种默认尺寸 mini, small, medium, large，默认为
+            small</text
+          >
         </template>
         <template #demo>
           <view class="input-demo-size">
             <view class="input-demo-size-buttons">
-              <ml-button size="mini" @click="inputSize = 'mini'">Mini</ml-button>
-              <ml-button size="mini" @click="inputSize = 'small'">Small</ml-button>
-              <ml-button size="mini" @click="inputSize = 'medium'">Medium</ml-button>
-              <ml-button size="mini" @click="inputSize = 'large'">Large</ml-button>
+              <ml-button size="mini" @click="inputSize = 'mini'"
+                >Mini</ml-button
+              >
+              <ml-button size="mini" @click="inputSize = 'small'"
+                >Small</ml-button
+              >
+              <ml-button size="mini" @click="inputSize = 'medium'"
+                >Medium</ml-button
+              >
+              <ml-button size="mini" @click="inputSize = 'large'"
+                >Large</ml-button
+              >
             </view>
             <ml-input
               v-model:model-value="templateMap[1].modelValue"
@@ -114,7 +125,8 @@
 
   const appStore = useAppStore()
   const wrapperStyle = computed(() => {
-    const { screenWidth, contentHeight, tabbarHeight, bottomBarHeight } = appStore.appSize
+    const { screenWidth, contentHeight, tabbarHeight, bottomBarHeight } =
+      appStore.appSize
     return {
       width: `${screenWidth}px`,
       height: `${contentHeight + tabbarHeight + bottomBarHeight}px`

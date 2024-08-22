@@ -33,8 +33,14 @@ export interface TableEntityType {
     columnIdx: number
     column: ColumnSettingType
   }) => Record<string, any>
-  rowStyle: (e: { rowIdx: number; row: Record<string, any> }) => Record<string, any>
-  columnStyle: (e: { columnIdx: number; column: ColumnSettingType }) => Record<string, any>
+  rowStyle: (e: {
+    rowIdx: number
+    row: Record<string, any>
+  }) => Record<string, any>
+  columnStyle: (e: {
+    columnIdx: number
+    column: ColumnSettingType
+  }) => Record<string, any>
 }
 // export type ComponentInstance = WechatMiniprogram.Component.Instance<
 //   Record<string, any>,

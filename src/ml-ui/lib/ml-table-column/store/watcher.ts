@@ -1,6 +1,12 @@
-import type { WatcherStatesType, Observer, ColumnSettingType } from '../interface'
+import type {
+  WatcherStatesType,
+  Observer,
+  ColumnSettingType
+} from '../interface'
 
-const flattenColumns: (columns: ColumnSettingType[]) => ColumnSettingType[] = (columns) => {
+const flattenColumns: (columns: ColumnSettingType[]) => ColumnSettingType[] = (
+  columns
+) => {
   const res: ColumnSettingType[] = []
   columns.forEach((column) => {
     if (column.children) {

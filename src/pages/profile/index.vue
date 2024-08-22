@@ -39,7 +39,11 @@
         </view>
       </view> -->
       <view :class="`${prefix}-wrapper-settings`">
-        <view v-for="group in settingsGroup" :key="group.title" class="settings-group">
+        <view
+          v-for="group in settingsGroup"
+          :key="group.title"
+          class="settings-group"
+        >
           <view class="settings-group-title">{{ $t(group.title) }}</view>
           <view
             v-for="setting in group.settings"
@@ -48,11 +52,19 @@
             @click="() => handleSettingClick(setting)"
           >
             <view class="settings-group-item_left">
-              <ml-icon :name="setting.icon" :size="22" style="transform: translateY(1px)" />
+              <ml-icon
+                :name="setting.icon"
+                :size="22"
+                style="transform: translateY(1px)"
+              />
               <text class="title">{{ $t(setting.label) }}</text>
             </view>
             <view class="settings-group-item_right">
-              <ml-icon name="ml-arrow-right" :size="16" style="transform: translateY(1px)" />
+              <ml-icon
+                name="ml-arrow-right"
+                :size="16"
+                style="transform: translateY(1px)"
+              />
             </view>
           </view>
         </view>

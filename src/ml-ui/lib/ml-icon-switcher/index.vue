@@ -62,7 +62,11 @@
 
   const isSwitched = ref<boolean>()
   const currentIcon = computed(() => {
-    return loading.value ? 'ml-loading' : isSwitched.value ? nextIcon.value : prevIcon.value
+    return loading.value
+      ? 'ml-loading'
+      : isSwitched.value
+        ? nextIcon.value
+        : prevIcon.value
   })
 
   watch(
