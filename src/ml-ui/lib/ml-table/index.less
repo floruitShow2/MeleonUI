@@ -10,7 +10,7 @@
     align-items: center;
     justify-content: center;
     background-color: #e9e9e9;
-    opacity: .8;
+    opacity: 0.8;
     z-index: 100;
     .loader {
       width: 20px;
@@ -26,7 +26,7 @@
       left: 0;
       border-radius: 50%;
       background-color: rgb(255, 80, 80);
-      animation: shadowScale .5s linear infinite;
+      animation: shadowScale 0.5s linear infinite;
     }
     .loader::after {
       content: '';
@@ -37,7 +37,7 @@
       top: 0;
       left: 0;
       background-color: rgb(255, 80, 80);
-      animation: rotateJump .5s linear infinite;
+      animation: rotateJump 0.5s linear infinite;
     }
   }
   // width: 100%;
@@ -54,7 +54,7 @@
       color: var(--info-color-7);
       border-top: solid 1px var(--info-color-2);
       border-bottom: solid 1px var(--info-color-2);
-      background-color: #FFFFFF;
+      background-color: #ffffff;
     }
     .ml-table-header__column--mini {
       padding: 5px 8px;
@@ -137,7 +137,7 @@
           left: 0;
           border-radius: 50%;
           background-color: rgb(255, 80, 80);
-          animation: shadowScale .5s linear infinite;
+          animation: shadowScale 0.5s linear infinite;
         }
         .loader::after {
           content: '';
@@ -148,15 +148,15 @@
           top: -10%;
           left: 0;
           background-color: rgb(255, 80, 80);
-          animation: rotateJump .5s linear infinite;
+          animation: rotateJump 0.5s linear infinite;
         }
         .text {
           margin-left: 10px;
           font-size: 12px;
           font-weight: 400;
           color: var(--info-color-6);
-          transition: all .5s ease;
-          animation: upDownText .6s linear infinite;
+          transition: all 0.5s ease;
+          animation: upDownText 0.6s linear infinite;
         }
       }
       &__wrapper {
@@ -184,7 +184,7 @@
               font-size: 12px;
               font-weight: 400;
               color: var(--info-color-7);
-              transition: all .4s ease;
+              transition: all 0.4s ease;
               .column-text {
                 font-size: 12px;
                 font-weight: 400;
@@ -273,7 +273,7 @@
 @keyframes shadowScale {
   0%,
   100% {
-    transform: scale(1, 1)
+    transform: scale(1, 1);
   }
   50% {
     transform: scale(1.2, 1);

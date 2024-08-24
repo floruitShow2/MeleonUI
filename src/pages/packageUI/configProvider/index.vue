@@ -1,5 +1,5 @@
 <template>
-  <view class="uni_class">
+  <view class="view">
     <ml-navigator
       title="ml-config-provider"
       has-back
@@ -8,7 +8,7 @@
       background="#7A98B3"
     />
     <view class="view-wrapper" :style="wrapperStyle">
-      <code-block>
+      <code-block :code="templateCode[0].code" style="width: 100%">
         <template #title>
           <text>自定义主题色</text>
         </template>
@@ -58,15 +58,18 @@
         </template>
       </code-block>
 
-      <code-block>
+      <code-block :code="templateCode[1].code" style="width: 100%">
         <template #title>
           <text>多语言</text>
         </template>
         <template #description>
-          <text> 设置 locale 属性。设置 en-US | zh-CN 则使用组件库的默认语言包，或传入 CoreLocale 类型的对象自由定义</text>
+          <text>
+            设置 locale 属性。设置 en-US | zh-CN
+            则使用组件库的默认语言包，或传入 CoreLocale 类型的对象自由定义</text
+          >
         </template>
         <template #demo>
-          <ml-config-provider locale='en-US'>
+          <ml-config-provider locale="en-US">
             <view class="view-wrapper-block">
               <ml-input></ml-input>
               <ml-select model-value="a">
@@ -115,6 +118,26 @@
       duration: 2000
     })
   }
+
+  const templateCode = [
+    {
+      code: `
+<ml-config-provider :themes="themes"></ml-config-provider>
+
+const themes = ref<ConfigProviderProps['themes']>({
+  primary: '#A6E7FF',
+  success: '#99E5B3',
+  warning: '#F5DEB3',
+  danger: '#F08080'
+})
+      `
+    },
+    {
+      code: `
+<ml-config-provider locale='en-US'></ml-config-provider>
+      `
+    }
+  ]
 </script>
 
 <style lang="less">

@@ -1,86 +1,86 @@
 @import '@/styles/layout.less';
 @import '@/styles/theme.less';
 .logger-view {
-    &-wrapper {
-        box-sizing: border-box;
-        padding: 10px 15px;
-        overflow: auto;
-        &_header {
-            width: 100%;
-            margin-bottom: 10px;
-            padding-bottom: 10px;
-            border-bottom: solid 1px @--primary-border;
-            #flex(column, flex-start, flex-start);
-            .title {
-                margin-bottom: 8px;
-                font-size: 24px;
-                font-weight: 500;
-                color: @--heavy-text;
-            }
-            .desc {
-                font-size: 14px;
-                color: @--primary-text;
-            }
-        }
-        &_list {
-            width: 100%;
-            .item-header {
-                padding-left: 6px;
-                #flex(column, flex-start, center);
-                &-version {
-                    font-size: 16px;
-                    color: @--heavy-text;
-                }
-                &-date {
-                    font-size: 12px;
-                    color: @--primary-text;
-                }
-            }
-            .item-content {
-                #flex(column, flex-start, flex-start);
-                .section {
-                    margin-bottom: 5px;
-                    #flex(column, flex-start, flex-start);
-                    &-title {
-                        margin-bottom: 8px;
-                        font-weight: 500;
-                        font-size: 14px;
-                        color: @--heavy-text;
-                    }
-                    &-list {
-                        #flex(column, flex-start, flex-start);
-                        &-item {
-                            position: relative;
-                            box-sizing: border-box;
-                            padding-left: 40px;
-                            line-height: 24px;
-                            .code {
-                                box-sizing: border-box;
-                                margin: 0 2px;
-                                padding: 3px 6px;
-                                border-radius: 3px;
-                                font-size: 14px;
-                                background-color: @--primary-bg;
-                            }
-                            &::after {
-                                content: '';
-                                position: absolute;
-                                left: 22px;
-                                top: 50%;
-                                transform: translateY(-50%);
-                                display: block;
-                                width: 5px;
-                                height: 5px;
-                                border-radius: 50%;
-                                border: solid 1px @--primary-text;
-                            }
-                        }
-                    }
-                    &:last-child {
-                        margin-bottom: 0;
-                    }
-                }
-            }
-        }
+  &-wrapper {
+    box-sizing: border-box;
+    padding: 10px 15px;
+    overflow: auto;
+    &_header {
+      width: 100%;
+      margin-bottom: 10px;
+      padding-bottom: 10px;
+      border-bottom: solid 1px @--primary-border;
+      #flex(column, flex-start, flex-start);
+      .title {
+        margin-bottom: 8px;
+        font-size: 24px;
+        font-weight: 500;
+        color: @--heavy-text;
+      }
+      .desc {
+        font-size: 14px;
+        color: @--primary-text;
+      }
     }
+    &_list {
+      width: 100%;
+      .item-header {
+        padding-left: 6px;
+        #flex(column, flex-start, center);
+        &-version {
+          font-size: 16px;
+          color: @--heavy-text;
+        }
+        &-date {
+          font-size: 12px;
+          color: @--primary-text;
+        }
+      }
+      .item-content {
+        #flex(column, flex-start, flex-start);
+        .section {
+          margin-bottom: 5px;
+          #flex(column, flex-start, flex-start);
+          &-title {
+            margin-bottom: 8px;
+            font-weight: 500;
+            font-size: 14px;
+            color: @--heavy-text;
+          }
+          &-list {
+            #flex(column, flex-start, flex-start);
+            &-item {
+              position: relative;
+              box-sizing: border-box;
+              padding-left: 40px;
+              line-height: 24px;
+              .code {
+                box-sizing: border-box;
+                margin: 0 2px;
+                padding: 3px 6px;
+                border-radius: 3px;
+                font-size: 14px;
+                background-color: @--primary-bg;
+              }
+              &::after {
+                content: '';
+                position: absolute;
+                left: 22px;
+                top: 50%;
+                transform: translateY(-50%);
+                display: block;
+                width: 5px;
+                height: 5px;
+                border-radius: 50%;
+                border: solid 1px @--primary-text;
+              }
+            }
+          }
+          &:last-child {
+            margin-bottom: 0;
+          }
+        }
+      }
+    }
+  }
 }

@@ -1,31 +1,31 @@
 @prefix: ~'.ml-time-picker';
 
 @{prefix} {
+  width: 100%;
+  &--header {
     width: 100%;
-    &--header {
-        width: 100%;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 14px;
-        color: var(--info-color-6);
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    color: var(--info-color-6);
+  }
+  &--content {
+    width: 100%;
+    height: calc(500px - 32px - 20px);
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: flex-start;
+    justify-content: space-between;
+    &-column {
+      width: 33%;
     }
-    &--content {
-        width: 100%;
-        height: calc(500px - 32px - 20px);
-        display: flex;
-        flex-wrap: nowrap;
-        align-items: flex-start;
-        justify-content: space-between;
-        &-column {
-            width: 33%;
-        }
-    }
-    &--footer {
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-    }
+  }
+  &--footer {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
 }

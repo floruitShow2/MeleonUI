@@ -4,98 +4,98 @@
 @--switch-padding: 4px;
 
 .@{prefix} {
-    position: relative;
-    box-sizing: border-box;
-    width: fit-content;
-    min-width: @--switch-width;
-    height: @--switch-height;
-    padding: 0;
-    overflow: hidden;
+  position: relative;
+  box-sizing: border-box;
+  width: fit-content;
+  min-width: @--switch-width;
+  height: @--switch-height;
+  padding: 0;
+  overflow: hidden;
+  transition: all 0.2s ease;
+  background-color: var(--switch-unchecked-color);
+  &-handler {
+    position: absolute;
+    top: 50%;
+    left: @--switch-padding;
+    transform: translateY(-50%);
+    width: calc(@--switch-height - @--switch-padding * 2);
+    height: calc(@--switch-height - @--switch-padding * 2);
+    background-color: #ffffff;
     transition: all 0.2s ease;
-    background-color: var(--switch-unchecked-color);
-    &-handler {
-        position: absolute;
-        top: 50%;
-        left: @--switch-padding;
-        transform: translateY(-50%);
-        width: calc(@--switch-height - @--switch-padding * 2);
-        height: calc(@--switch-height - @--switch-padding * 2);
-        background-color: #FFFFFF;
-        transition: all 0.2s ease;
-    }
+  }
 
-    // checked/unchecked text
-    &-checked,
-    &-unchecked {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        font-size: 12px;
-        color: #FFFFFF;
-    }
-    &-checked {
-        left: @--switch-padding;
-    }
-    &-unchecked {
-        right: @--switch-padding;
-    }
+  // checked/unchecked text
+  &-checked,
+  &-unchecked {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 12px;
+    color: #ffffff;
+  }
+  &-checked {
+    left: @--switch-padding;
+  }
+  &-unchecked {
+    right: @--switch-padding;
+  }
 
-    // active
-    &--active {
-        background-color: var(--switch-checked-color);
-        .@{prefix}-handler {
-            left: calc(100% - @--switch-height + @--switch-padding);
-        }
+  // active
+  &--active {
+    background-color: var(--switch-checked-color);
+    .@{prefix}-handler {
+      left: calc(100% - @--switch-height + @--switch-padding);
     }
+  }
 
-    // type
-    &--circle {
-        border-radius: 20px;
-        .@{prefix}-handler {
-            border-radius: 50%;
-        }
+  // type
+  &--circle {
+    border-radius: 20px;
+    .@{prefix}-handler {
+      border-radius: 50%;
     }
-    &--square {
-        border-radius: 4px;
-        .@{prefix}-handler {
-            border-radius: 4px;
-        }
+  }
+  &--square {
+    border-radius: 4px;
+    .@{prefix}-handler {
+      border-radius: 4px;
     }
-    &--line {
-        width: calc(@--switch-width - @--switch-padding * 2);
-        overflow: unset;
-        transform-style: preserve-3d;
-        background-color: transparent;
-        .@{prefix}-handler {
-            left: 0;
-            border-radius: 50%;
-            transform: translateY(-50%) translateZ(1px);
-            box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
-        }
-        &::after {
-            content: '';
-            display: block;
-            position: absolute;
-            left: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 100%;
-            height: 6px;
-            border-radius: 6px;
-            background-color: var(--switch-unchecked-color);
-        }
+  }
+  &--line {
+    width: calc(@--switch-width - @--switch-padding * 2);
+    overflow: unset;
+    transform-style: preserve-3d;
+    background-color: transparent;
+    .@{prefix}-handler {
+      left: 0;
+      border-radius: 50%;
+      transform: translateY(-50%) translateZ(1px);
+      box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
     }
-    &--active.@{prefix}--line {
-        .@{prefix}-handler {
-            left: calc(100% - @--switch-height + @--switch-padding * 2);
-        }
+    &::after {
+      content: '';
+      display: block;
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 100%;
+      height: 6px;
+      border-radius: 6px;
+      background-color: var(--switch-unchecked-color);
     }
-    &--active.@{prefix}--line::after {
-        background-color: var(--switch-checked-color);
+  }
+  &--active.@{prefix}--line {
+    .@{prefix}-handler {
+      left: calc(100% - @--switch-height + @--switch-padding * 2);
     }
+  }
+  &--active.@{prefix}--line::after {
+    background-color: var(--switch-checked-color);
+  }
 
-    &--disabled {
-        opacity: 0.5;
-        pointer-events: none;
-    }
+  &--disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
 }

@@ -149,7 +149,7 @@
 
   const emit = defineEmits(['update:model-value'])
 
-  const { t } =useI18n()
+  const { t } = useI18n()
 
   const mlInputRef = ref()
   const mlInputTagRef = ref()

@@ -1,42 +1,42 @@
 @prefix: ~'ml-tree-node';
 
 .ml-tree-node {
-    width: 100%;
-    padding: 4px 8px;
+  width: 100%;
+  padding: 4px 8px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  &-title {
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    &-title {
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
-        &-switcher {
-            margin-right: 4px;
-        }
-        &-check {
-            margin-right: 6px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        &-text {
-            font-size: 14px;
-            font-weight: 500;
-            color: var(--info-color-7);
-        }
-        &--leaf {
-            padding-left: 16px;
-        }
-        &--selected {
-            .@{prefix}-title-text {
-                color: var(--primary-color-6);
-            }
-        }
-        &--disabled {
-            .@{prefix}-title-text {
-                color: var(--info-color-6);
-                pointer-events: none;
-            }
-        }
+    &-switcher {
+      margin-right: 4px;
     }
+    &-check {
+      margin-right: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    &-text {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--info-color-7);
+    }
+    &--leaf {
+      padding-left: 16px;
+    }
+    &--selected {
+      .@{prefix}-title-text {
+        color: var(--primary-color-6);
+      }
+    }
+    &--disabled {
+      .@{prefix}-title-text {
+        color: var(--info-color-6);
+        pointer-events: none;
+      }
+    }
+  }
 }
