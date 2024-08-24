@@ -84,6 +84,7 @@
   } from 'vue'
   import type { PropType } from 'vue'
   import { useTheme } from '@meleon/uni-ui/hooks'
+  import { useI18n } from '@meleon/uni-ui/locale'
   import { cs, isArray, getRect, generateDeviceUI } from '@meleon/uni-ui/utils'
   import type { SelectProps } from './index.interface'
   import MlIcon from '../ml-icon/index.vue'
@@ -105,7 +106,7 @@
     },
     placeholder: {
       type: String,
-      default: '请选择'
+      default: ''
     },
     size: {
       type: String as PropType<SelectProps['size']>,
@@ -147,6 +148,9 @@
   } = toRefs(props)
 
   const emit = defineEmits(['update:model-value'])
+
+  const { t } =useI18n()
+
   const mlInputRef = ref()
   const mlInputTagRef = ref()
 
@@ -159,11 +163,11 @@
     return cs(prefix.value)
   })
   const formatPlaceholder = computed(() => {
-    if (multiple.value) return placeholder.value
+    if (multiple.value) return placeholder.value || t('select.placeholder')
     if (filterable.value && isMenuUnfold.value && selectedList.value[0]) {
       return selectedList.value[0].label
     }
-    return placeholder.value
+    return placeholder.value || t('select.placeholder')
   })
 
   onMounted(() => {

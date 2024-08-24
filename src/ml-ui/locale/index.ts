@@ -2,6 +2,7 @@ import { inject, ref, reactive, computed } from 'vue'
 import { configProviderInjectionKey } from '../lib/ml-config-provider/context'
 import zhCN from './zhCN'
 import enUS from './enUS'
+import { isString } from '../utils'
 
 const LOCALE = ref<MeleonLocale.LocaleCategory>('zh-CN')
 const I18N_MESSAGE_MAP = reactive<
@@ -15,8 +16,10 @@ export const useI18n = () => {
   const configProviderCtx = inject(configProviderInjectionKey, null)
 
   const i18n = computed(() => {
-    if (configProviderCtx) {
-      return configProviderCtx.locale
+    if (configProviderCtx && configProviderCtx.locale) {
+      return isString(configProviderCtx.locale)
+        ? I18N_MESSAGE_MAP[configProviderCtx.locale]
+        : configProviderCtx.locale
     } else {
       return I18N_MESSAGE_MAP[LOCALE.value]
     }

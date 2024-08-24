@@ -67,6 +67,12 @@ declare namespace MeleonLocale {
 
   interface CoreLocale {
     locale: LocaleCategory
+    input: {
+      placeholder: string
+    }
+    select: {
+      placeholder: string
+    }
     calendar: CalendarLang
   }
 }

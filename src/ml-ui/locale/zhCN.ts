@@ -62,7 +62,15 @@ const calendarLang: MeleonLocale.CalendarLang = {
   }
 }
 
-export default {
+const zhCN: MeleonLocale.CoreLocale = {
   locale: 'zh-CN',
-  calendar: calendarLang
-} as MeleonLocale.CoreLocale
+  calendar: calendarLang,
+  input: {
+    placeholder: '请输入'
+  },
+  select: {
+    placeholder: '请选择'
+  }
+}
+
+export default zhCN

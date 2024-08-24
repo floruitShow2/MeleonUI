@@ -54,6 +54,11 @@
     { name: '按钮 ml-button', path: '/pages/packageUI/button/index' },
     { name: '单元格 ml-cell', path: '/pages/packageUI/cell/index' },
     { name: '复选框 ml-checkbox', path: '/pages/packageUI/checkbox/index' },
+    {
+      name: '全局配置 ml-config-provider',
+      path: '/pages/packageUI/configProvider/index',
+      isNew: true
+    },
     { name: '计数 ml-count-to', path: '/pages/packageUI/countTo/index' },
     {
       name: '时间选择器 ml-datetime-picker',

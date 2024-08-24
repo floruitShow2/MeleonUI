@@ -12,11 +12,16 @@
     themes: {
       type: Object as PropType<ConfigProviderProps['themes']>,
       default: () => ({})
+    },
+    locale: {
+      type: [String, Object] as PropType<
+        MeleonLocale.CoreLocale | MeleonLocale.LocaleCategory
+      >
     }
   })
-  const { themes } = toRefs(props)
+  const { themes, locale } = toRefs(props)
 
-  const config = reactive({ themes })
+  const config = reactive({ themes, locale })
 
   provide(configProviderInjectionKey, config)
 </script>

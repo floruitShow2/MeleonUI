@@ -64,5 +64,11 @@ const calendarLang: MeleonLocale.CalendarLang = {
 
 export default {
   locale: 'en-US',
-  calendar: calendarLang
+  calendar: calendarLang,
+  input: {
+    placeholder: 'please input'
+  },
+  select: {
+    placeholder: 'please select'
+  }
 } as MeleonLocale.CoreLocale

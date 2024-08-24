@@ -33,7 +33,7 @@
         :type="inputType"
         class="input"
         :focus="isFocus"
-        :placeholder="placeholder"
+        :placeholder="localPlaceholder"
         placeholder-class="ml-input-placeholder"
         :disabled="disabled || readonly"
         @blur="onInputBlur"
@@ -66,6 +66,7 @@
   import type { PropType } from 'vue'
   import { onShow } from '@dcloudio/uni-app'
   import { useTheme } from '@meleon/uni-ui/hooks'
+  import { useI18n } from '@meleon/uni-ui/locale'
   import { cs, generateDeviceUI, convertToNumber } from '@meleon/uni-ui/utils'
   import type { MlInputStatus } from './index.interface'
   import MlIcon from '../ml-icon/index.vue'
@@ -89,7 +90,7 @@
       type: Number,
       default: Infinity
     },
-    placeholder: { type: String, default: '请输入' },
+    placeholder: { type: String, default: '' },
     prefixIcon: { type: String, default: '' },
     suffixIcon: { type: String, default: '' },
     autoFocus: {
@@ -121,6 +122,7 @@
     size,
     min,
     max,
+    placeholder,
     autoFocus,
     useVirtualInput,
     readonly,
@@ -138,6 +140,12 @@
     windowHeight: 0,
     statusBarHeight: 0,
     customBarHeight: 0
+  })
+
+  const { t } = useI18n()
+  const localPlaceholder = computed(() => {
+    if (!placeholder.value) return t('input.placeholder')
+    return placeholder.value
   })
 
   const className = computed(() => {

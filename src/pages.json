@@ -173,6 +173,12 @@
 					"style": {
 						"navigationStyle": "custom"
 					}
+				},
+				{
+					"path": "configProvider/index",
+					"style": {
+						"navigationStyle": "custom"
+					}
 				}
 			]
 		}
