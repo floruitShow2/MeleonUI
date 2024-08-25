@@ -66,6 +66,7 @@
       isNew: true
     },
     { name: '抽屉 ml-drawer', path: '/pages/packageUI/drawer/index' },
+    { name: '表单 ml-form', path: '/pages/packageUI/form/index', isNew: true },
     { name: '图标 ml-icon', path: '/pages/packageUI/icon/index' },
     { name: '输入框 ml-input', path: '/pages/packageUI/input/index' },
     {

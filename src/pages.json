@@ -179,6 +179,12 @@
 					"style": {
 						"navigationStyle": "custom"
 					}
+				},
+				{
+					"path": "form/index",
+					"style": {
+						"navigationStyle": "custom"
+					}
 				}
 			]
 		}

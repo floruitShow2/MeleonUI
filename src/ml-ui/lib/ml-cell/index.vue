@@ -1,7 +1,21 @@
 <template>
   <view :class="className" :style="{ ...themeColors }" @click="handleCellClick">
     <!-- text cell -->
-    <template v-if="type === CellTypeEnum.TEXT">
+    <template v-if="type === CellTypeEnum.CUSTOM">
+      <view :class="`${prefix}--left`">
+        <slot name="label">
+          <text :class="`${prefix}-label`">{{ label }}</text>
+          <text :class="`${prefix}-desc`">{{ description }}</text>
+        </slot>
+      </view>
+      <view :class="cs(`${prefix}--right`)">
+        <slot name="value">
+          <text :class="`${prefix}-val`">{{ afterValue }}</text>
+        </slot>
+      </view>
+    </template>
+    <!-- text cell -->
+    <template v-else-if="type === CellTypeEnum.TEXT">
       <view :class="`${prefix}--left`">
         <slot name="label">
           <text :class="`${prefix}-label`">{{ label }}</text>
@@ -110,7 +124,7 @@
     },
     type: {
       type: String as PropType<CellProps['type']>,
-      default: CellTypeEnum.TEXT
+      default: CellTypeEnum.CUSTOM
     },
     disabled: {
       type: Boolean,

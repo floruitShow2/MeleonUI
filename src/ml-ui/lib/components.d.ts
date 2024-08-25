@@ -12,6 +12,8 @@ import type {
   CountToInstance,
   DatetimePickerInstance,
   DrawerInstance,
+  FormInstance,
+  FormItemInstance,
   IconInstance,
   ImageInstance,
   InputInstance,
@@ -50,6 +52,8 @@ declare module '@vue/runtime-core' {
     MlCountTo: CountToInstance
     MlDatetimePicker: DatetimePickerInstance
     MlDrawer: DrawerInstance
+    MlForm: FormInstance
+    MlFormItem: FormItemInstance
     MlIcon: IconInstance
     MlImage: ImageInstance
     MlInput: InputInstance

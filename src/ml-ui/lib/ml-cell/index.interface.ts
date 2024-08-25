@@ -1,6 +1,7 @@
 import type { ButtonProps } from '../ml-button'
 
 export enum CellTypeEnum {
+  CUSTOM = 'custom',
   TEXT = 'text',
   BUTTON = 'button',
   SWITCH = 'switch',
@@ -21,6 +22,9 @@ export interface CellProps {
    * @description 单元格左侧提示信息
    */
   label: string
+  /**
+   * @description 单元格标题下方的提示信息
+   */
   description?: string
   /**
    * @description 单元格右侧展示的文本

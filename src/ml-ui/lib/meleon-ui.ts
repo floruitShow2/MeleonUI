@@ -12,6 +12,8 @@ import MlConfigProvider from './ml-config-provider'
 import MlCountTo from './ml-count-to'
 import MlDatetimePicker from './ml-datetime-picker'
 import MlDrawer from './ml-drawer'
+import MlForm from './ml-form'
+import MlFormItem from './ml-form-item'
 import MlIcon from './ml-icon'
 import MlImage from './ml-image'
 import MlInput from './ml-input'
@@ -49,6 +51,8 @@ const components: Record<string, Plugin> = {
   MlCountTo,
   MlDatetimePicker,
   MlDrawer,
+  MlForm,
+  MlFormItem,
   MlIcon,
   MlImage,
   MlInput,
