@@ -12,6 +12,7 @@ node_modules
 .DS_Store
 *.local
 
+# package
 src/packages/constants
 src/packages/hooks
 src/packages/interface
@@ -19,6 +20,9 @@ src/packages/lib
 src/packages/utils
 src/packages/locale
 src/packages/README.md
+
+# test
+coverage
 
 # Editor directories and files
 .idea

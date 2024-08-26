@@ -1,6 +1,6 @@
 export * from './abortablePromise'
 export * from './common'
-export * from './get-value-by-path'
+export * from './getValueByPath'
 export * from './pad'
 
 type AnyFunction = (...args: any[]) => any

@@ -68,7 +68,7 @@
     return baseRules
   })
   const isRequired = computed(() => {
-    return mergedRules.value.some(rule => !!rule.required)
+    return mergedRules.value.some((rule) => !!rule.required)
   })
 
   onMounted(() => {

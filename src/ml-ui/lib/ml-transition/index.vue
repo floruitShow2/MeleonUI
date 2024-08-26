@@ -73,7 +73,9 @@
     return cs(prefix.value, classes.value, customClass.value)
   })
   const styles = computed(() => {
-    return `-webkit-transition-duration:${currentDuration.value}ms;transition-duration:${currentDuration.value}ms;${
+    return `-webkit-transition-duration:${
+      currentDuration.value
+    }ms;transition-duration:${currentDuration.value}ms;${
       display.value ? '' : 'display: none;'
     }`
   })

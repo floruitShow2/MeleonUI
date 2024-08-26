@@ -7,7 +7,7 @@
         "vue",
         "uni-app",
         "typescript",
-        "components",
+        "components"
     ],
     "description": "A simple components library written in vue3 and typescript",
     "scripts": {

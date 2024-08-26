@@ -65,8 +65,8 @@
     return loading.value
       ? 'ml-loading'
       : isSwitched.value
-        ? nextIcon.value
-        : prevIcon.value
+      ? nextIcon.value
+      : prevIcon.value
   })
 
   watch(

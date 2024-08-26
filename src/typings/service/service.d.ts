@@ -52,8 +52,8 @@ declare namespace Service {
         ? [Service.RequestResult<First>, ...MultiRequestResult<Rest>]
         : [Service.RequestResult<First>]
       : Rest extends any[]
-        ? MultiRequestResult<Rest>
-        : []
+      ? MultiRequestResult<Rest>
+      : []
     : []
 
   /** 请求结果的适配器函数 */

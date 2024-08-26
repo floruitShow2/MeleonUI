@@ -28,8 +28,8 @@ export default function usePickerState(props: PickerStateProps) {
     !isUndefined(computedModelValue.value)
       ? computedModelValue.value
       : !isUndefined(computedDefaultValue.value)
-        ? computedDefaultValue.value
-        : undefined
+      ? computedDefaultValue.value
+      : undefined
   )
   watch(computedModelValue, (newVal) => {
     if (isUndefined(newVal)) {

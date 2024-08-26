@@ -51,7 +51,9 @@ function getSceneTheme(colors: Record<string, string>) {
   const themeColor: ThemeColor = {}
   Object.keys(colors).forEach((ColorType) => {
     colorActions.forEach((action) => {
-      const colorKey: ColorKey = `${ColorType as ColorType}-color-${action.scene}`
+      const colorKey: ColorKey = `${ColorType as ColorType}-color-${
+        action.scene
+      }`
       themeColor[colorKey] = action.handler(colors[ColorType])
     })
   })

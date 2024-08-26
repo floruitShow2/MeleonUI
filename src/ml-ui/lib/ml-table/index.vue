@@ -25,7 +25,11 @@
             :key="nfColumn.columnId"
             :class="[
               'ml-table-header__column',
-              `ml-table-header__column--${useGet(storeEntityStates, 'size', 'small')}`,
+              `ml-table-header__column--${useGet(
+                storeEntityStates,
+                'size',
+                'small'
+              )}`,
               nfColumn.columnId
             ]"
             :style="{
@@ -59,7 +63,11 @@
           :key="fColumn.columnId"
           :class="[
             'ml-table-header__column',
-            `ml-table-header__column--${useGet(storeEntityStates, 'size', 'small')}`,
+            `ml-table-header__column--${useGet(
+              storeEntityStates,
+              'size',
+              'small'
+            )}`,
             fColumn.columnId
           ]"
           :style="{
@@ -89,7 +97,11 @@
           :key="fColumn.columnId"
           :class="[
             'ml-table-header__column',
-            `ml-table-header__column--${useGet(storeEntityStates, 'size', 'small')}`,
+            `ml-table-header__column--${useGet(
+              storeEntityStates,
+              'size',
+              'small'
+            )}`,
             fColumn.columnId
           ]"
           :style="{
@@ -492,7 +504,11 @@
   const tableRowCls = computed(() => {
     return cs(
       `${rowPrefix}__wrapper-row`,
-      `${rowPrefix}__wrapper-row--${useGet(storeEntityStates.value, 'size', 'small')}`
+      `${rowPrefix}__wrapper-row--${useGet(
+        storeEntityStates.value,
+        'size',
+        'small'
+      )}`
     )
   })
 

@@ -70,7 +70,9 @@
   })
 
   watchEffect(() => {
-    const headerTitle = `${rows.value[0][1].label}-${rows.value[ROW_COUNT - 1][COL_COUNT - 1].label}`
+    const headerTitle = `${rows.value[0][1].label}-${
+      rows.value[ROW_COUNT - 1][COL_COUNT - 1].label
+    }`
     emit('header-title-change', headerTitle)
   })
 
