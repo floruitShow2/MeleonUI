@@ -43,9 +43,8 @@ declare namespace TypeUtil {
   ) extends (k: infer R) => void
     ? R
     : never
-  type GetUnionLast<U> = Union2IntersectionFn<U> extends () => infer I
-    ? I
-    : never
+  type GetUnionLast<U> =
+    Union2IntersectionFn<U> extends () => infer I ? I : never
 
   type UnionToTuple<T, R extends any[] = []> = [T] extends [never]
     ? R

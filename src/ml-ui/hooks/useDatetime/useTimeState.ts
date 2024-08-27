@@ -24,8 +24,8 @@ export default function useTimeState(props: TimeStateProps) {
     !isUndefined(computedModelValue.value)
       ? computedModelValue.value
       : !isUndefined(computedDefaultModelValue.value)
-      ? computedDefaultModelValue.value
-      : undefined
+        ? computedDefaultModelValue.value
+        : undefined
   )
 
   // 最终状态

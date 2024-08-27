@@ -1,4 +1,10 @@
-export function getDecimalPlaces(num: number) {
+import { isString } from '../is'
+
+export function getDecimalPlaces(num?: number | string) {
+  if (!num) return 0
+
+  if (isString(num) && num.indexOf('.') === -1) return 0
+
   const str = num.toString()
   const decimalPlace = str.indexOf('.')
   if (decimalPlace === -1) return 0

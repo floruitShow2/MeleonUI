@@ -6,7 +6,9 @@ const install = async (app: App) => {
   app.component('MlButton', _Button)
 }
 
+const Button = Object.assign(_Button, { install })
+
 export type ButtonInstance = typeof import('./index.vue').default
 
 export type { ButtonProps }
-export default { install }
+export default Button
