@@ -65,7 +65,7 @@
   import { ref, toRefs, getCurrentInstance, computed, onMounted } from 'vue'
   import type { PropType } from 'vue'
   import { onShow } from '@dcloudio/uni-app'
-  import { useTheme } from '@meleon/uni-ui/hooks'
+  import { useTheme, useFormItem } from '@meleon/uni-ui/hooks'
   import { useI18n } from '@meleon/uni-ui/locale'
   import { cs, generateDeviceUI, convertToNumber } from '@meleon/uni-ui/utils'
   import type { MlInputStatus } from './index.interface'
@@ -114,8 +114,6 @@
     }
   })
 
-  const emit = defineEmits(['update:modelValue', 'input', 'focus', 'blur'])
-
   const {
     modelValue,
     type,
@@ -130,6 +128,10 @@
     message,
     validator
   } = toRefs(props)
+
+  const emit = defineEmits(['update:modelValue', 'change', 'input', 'focus', 'blur'])
+
+  const { eventsHanlders } = useFormItem()
 
   const instance = getCurrentInstance()
 
@@ -237,35 +239,39 @@
       })
       .exec()
   }
-  const onInputFocus = (e: FocusEvent) => {
+  const onInputFocus = (payload: FocusEvent) => {
     if (disabled.value) {
-      e.preventDefault()
+      payload.preventDefault()
       return
     }
     if (!readonly.value) {
       isFocus.value = true
       isActive.value = true
-      changeFocusStyle(e)
+      changeFocusStyle(payload)
     }
     emit('focus')
+    eventsHanlders.value.onFocus?.(payload)
   }
 
   const onInput = (payload: Event) => {
     const e = payload.target as unknown as { value: string }
     emit('input', e.value)
+    emit('change', e.value)
     emit('update:modelValue', e.value)
+    eventsHanlders.value?.onChange?.(payload)
+    eventsHanlders.value?.onInput?.(payload)
   }
 
   const status = ref<MlInputStatus>('info')
-  const onInputBlur = (e: FocusEvent) => {
+  const onInputBlur = (payload: FocusEvent) => {
     // if (e) e.preventDefault()
     if (readonly.value) {
       isFocus.value = false
       isActive.value = false
       return
     }
-    if (disabled.value || !e) return
-    let { value } = e.detail as unknown as { value: string | number }
+    if (disabled.value || !payload) return
+    let { value } = payload.detail as unknown as { value: string | number }
     if (type.value === 'number') {
       const numMin = convertToNumber(min.value, 'lower')
       const numMax = convertToNumber(max.value, 'upper')
@@ -289,6 +295,7 @@
     isActive.value = false
     emit('update:modelValue', value.toString())
     emit('blur', value)
+    eventsHanlders.value?.onBlur?.(payload)
   }
 
   const inputType = ref<string>('text')

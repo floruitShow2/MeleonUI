@@ -1,4 +1,19 @@
-import type { FieldRule } from '../ml-form/index.interface'
+import type { FieldRule, FieldData } from '../ml-form/index.interface'
+
+export interface FormItemEntity {
+  field: string
+  disabled: boolean
+  validateField: () => Promise<any>
+  // setField: (data: FieldData) => void
+}
+
+export type ValidateTrigger = 'change' | 'input' | 'focus' | 'blur'
+export interface FormItemEventHandler {
+  onChange?: (e?: Event) => void
+  onInput?: (e?: Event) => void
+  onFocus?: (e?: Event) => void
+  onBlur?: (e?: Event) => void
+}
 
 export interface FormItemProps {
   /**

@@ -58,6 +58,7 @@
     "@dcloudio/uni-mp-weixin": "3.0.0-3081220230817001",
     "@dcloudio/uni-quickapp-webview": "3.0.0-3081220230817001",
     "@meleon/uni-ui": "^1.1.9",
+    "b-validate": "^1.5.3",
     "colord": "^2.9.3",
     "dayjs": "^1.11.11",
     "pinia": "^2.0.23",
