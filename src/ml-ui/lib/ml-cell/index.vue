@@ -5,7 +5,9 @@
       <view :class="`${prefix}--left`">
         <slot name="label">
           <text :class="`${prefix}-label`">{{ label }}</text>
-          <text :class="`${prefix}-desc`">{{ description }}</text>
+          <text :class="`${prefix}-desc`" :style="descStyle">
+            {{ description }}
+          </text>
         </slot>
       </view>
       <view :class="cs(`${prefix}--right`)">
@@ -19,7 +21,9 @@
       <view :class="`${prefix}--left`">
         <slot name="label">
           <text :class="`${prefix}-label`">{{ label }}</text>
-          <text :class="`${prefix}-desc`">{{ description }}</text>
+          <text :class="`${prefix}-desc`" :style="descStyle">{{
+            description
+          }}</text>
         </slot>
       </view>
       <view :class="cs(`${prefix}--right`)">
@@ -63,7 +67,9 @@
       <view :class="`${prefix}--left`">
         <slot name="label">
           <text :class="`${prefix}-label`">{{ label }}</text>
-          <text :class="`${prefix}-desc`">{{ description }}</text>
+          <text :class="`${prefix}-desc`" :style="descStyle">{{
+            description
+          }}</text>
         </slot>
       </view>
       <view :class="cs(`${prefix}--right`)">
@@ -79,7 +85,9 @@
       <view :class="`${prefix}--left`">
         <slot name="label">
           <text :class="`${prefix}-label`">{{ label }}</text>
-          <text :class="`${prefix}-desc`">{{ description }}</text>
+          <text :class="`${prefix}-desc`" :style="descStyle">{{
+            description
+          }}</text>
         </slot>
       </view>
       <view :class="cs(`${prefix}--right`)">
@@ -141,6 +149,10 @@
     url: {
       type: String,
       default: ''
+    },
+    descStyle: {
+      type: Object as PropType<CellProps['descStyle']>,
+      default: () => ({})
     }
   })
   const {

@@ -1,13 +1,16 @@
-import { inject, toRef } from "vue";
-import { formItemInjectionKey, type FormItemContext } from "@meleon/uni-ui/lib/ml-form-item";
+import { inject, toRef } from 'vue'
+import {
+  formItemInjectionKey,
+  type FormItemContext
+} from '@meleon/uni-ui/lib/ml-form-item'
 
 export default function useFormItem() {
-    const formItemCtx = inject(formItemInjectionKey, {} as FormItemContext)
+  const formItemCtx = inject(formItemInjectionKey, {} as FormItemContext)
 
-    const eventsHanlders = toRef(formItemCtx, 'eventsHanlder')
+  const eventsHanlders = toRef(formItemCtx, 'eventsHanlder')
 
-    return {
-        formItemCtx,
-        eventsHanlders
-    }
+  return {
+    formItemCtx,
+    eventsHanlders
+  }
 }

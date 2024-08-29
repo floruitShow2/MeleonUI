@@ -1,4 +1,5 @@
-export type ValidateErrorStatus = 'danger'
+export type ValidateStatus = 'success' | 'warning' | 'error' | 'validating'
+
 export interface FieldRule {
   /**
    * @description 是否必须
@@ -16,7 +17,7 @@ export interface FieldRule {
 
 export interface FieldData {
   value?: any
-  status?: ValidateErrorStatus
+  status?: ValidateStatus
   message?: string
 }
 
@@ -24,7 +25,7 @@ export interface ValidateError {
   label: string
   field: string
   message: string
-  status: ValidateErrorStatus
+  status: ValidateStatus
 }
 
 export interface FormEvents {

@@ -1,4 +1,4 @@
-import type { FieldRule, FieldData } from '../ml-form/index.interface'
+import type { FieldRule } from '../ml-form/index.interface'
 
 export interface FormItemEntity {
   field: string

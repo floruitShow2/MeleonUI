@@ -50,4 +50,8 @@ export interface CellProps {
    * @description 导航cell的跳转链接
    */
   url?: string
+  /**
+   * @description 描述文字的样式
+   */
+  descStyle: Meleon.MlStyle
 }

@@ -28,7 +28,10 @@
                 <ml-input v-model:model-value="formState.username"></ml-input>
               </ml-form-item>
               <ml-form-item field="password" label="Password">
-                <ml-input v-model:model-value="formState.password" type="password"></ml-input>
+                <ml-input
+                  v-model:model-value="formState.password"
+                  type="password"
+                ></ml-input>
               </ml-form-item>
             </ml-form>
           </view>

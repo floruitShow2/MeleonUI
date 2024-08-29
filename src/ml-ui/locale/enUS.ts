@@ -62,13 +62,30 @@ const calendarLang: MeleonLocale.CalendarLang = {
   }
 }
 
-export default {
+const defaultTypeTemplate = '#{field} is not a #{type} type'
+const formLang: MeleonLocale.FormLang = {
+  validateMessages: {
+    required: '#{field} is required',
+    type: {
+      string: defaultTypeTemplate,
+      number: defaultTypeTemplate,
+      array: defaultTypeTemplate,
+      object: defaultTypeTemplate,
+      boolean: defaultTypeTemplate
+    }
+  }
+}
+
+const enUS: MeleonLocale.CoreLocale = {
   locale: 'en-US',
   calendar: calendarLang,
+  form: formLang,
   input: {
     placeholder: 'please input'
   },
   select: {
     placeholder: 'please select'
   }
-} as MeleonLocale.CoreLocale
+}
+
+export default enUS

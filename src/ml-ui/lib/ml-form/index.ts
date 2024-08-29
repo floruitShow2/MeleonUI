@@ -11,7 +11,8 @@ export type {
   FormProps,
   FieldRule,
   FieldData,
-  ValidateError
+  ValidateError,
+  ValidateStatus
 } from './index.interface'
 
 export { formInjectionKey } from './context'

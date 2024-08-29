@@ -129,7 +129,13 @@
     validator
   } = toRefs(props)
 
-  const emit = defineEmits(['update:modelValue', 'change', 'input', 'focus', 'blur'])
+  const emit = defineEmits([
+    'update:modelValue',
+    'change',
+    'input',
+    'focus',
+    'blur'
+  ])
 
   const { eventsHanlders } = useFormItem()
 

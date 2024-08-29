@@ -1,4 +1,6 @@
 declare namespace MeleonLocale {
+  import type { ValidateMessagesType } from 'b-validate'
+  
   type LocaleCategory = 'zh-CN' | 'en-US'
 
   interface CalendarLang {
@@ -65,7 +67,12 @@ declare namespace MeleonLocale {
     }
   }
 
+  interface FormLang {
+    validateMessages: ValidateMessagesType
+  }
+
   interface CoreLocale {
+    form: FormLang
     locale: LocaleCategory
     input: {
       placeholder: string
