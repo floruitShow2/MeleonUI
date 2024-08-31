@@ -1,6 +1,6 @@
 declare namespace MeleonLocale {
   import type { ValidateMessagesType } from 'b-validate'
-  
+
   type LocaleCategory = 'zh-CN' | 'en-US'
 
   interface CalendarLang {

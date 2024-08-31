@@ -3,6 +3,8 @@ import type { FormItemEventHandler } from './index.interface'
 
 export interface FormItemContext {
   eventsHanlder: FormItemEventHandler
+  disabled: boolean
+  isError: boolean
 }
 
 const formItemInjectionKey: InjectionKey<FormItemContext> = Symbol(

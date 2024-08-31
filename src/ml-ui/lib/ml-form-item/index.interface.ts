@@ -4,7 +4,7 @@ export interface FormItemEntity {
   field: string
   disabled: boolean
   validateField: () => Promise<any>
-  // setField: (data: FieldData) => void
+  clearValidate: () => void
 }
 
 export type ValidateTrigger = 'change' | 'input' | 'focus' | 'blur'

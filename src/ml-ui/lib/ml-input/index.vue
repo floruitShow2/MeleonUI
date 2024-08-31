@@ -103,7 +103,7 @@
     },
     disabled: {
       type: Boolean,
-      default: false
+      default: undefined
     },
     message: {
       type: Object,
@@ -124,7 +124,6 @@
     autoFocus,
     useVirtualInput,
     readonly,
-    disabled,
     message,
     validator
   } = toRefs(props)
@@ -137,7 +136,7 @@
     'blur'
   ])
 
-  const { eventsHanlders } = useFormItem()
+  const { eventsHanlders, disabled } = useFormItem({ disabled: props.disabled })
 
   const instance = getCurrentInstance()
 

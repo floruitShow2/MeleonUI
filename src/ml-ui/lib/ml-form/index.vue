@@ -1,5 +1,5 @@
 <template>
-  <CellGroup :class="className" :style="themeColors">
+  <CellGroup :class="className">
     <slot />
   </CellGroup>
 </template>
@@ -7,8 +7,7 @@
 <script setup lang="ts">
   import { ref, toRefs, reactive, computed, provide } from 'vue'
   import type { PropType } from 'vue'
-  import { useTheme } from '@meleon/uni-ui/hooks'
-  import { cs, isArray, isFunction } from '@meleon/uni-ui/utils'
+  import { cs, isArray, isFunction, isUndefined } from '@meleon/uni-ui/utils'
   import CellGroup from '../ml-cell-group/index.vue'
   import type { FormEvents, FormProps, ValidateError } from './index.interface'
   import { formInjectionKey } from './context'
@@ -26,13 +25,15 @@
     disabled: {
       type: Boolean,
       default: false
+    },
+    labelWidth: {
+      type: String,
+      default: '50%'
     }
   })
-  const { model, rules, disabled } = toRefs(props)
+  const { model, rules, disabled, labelWidth } = toRefs(props)
 
-  const emit = defineEmits([])
-
-  const { themeColors } = useTheme()
+  const emit = defineEmits(['submit'])
 
   const prefix = ref('ml-form')
   const className = computed(() => {
@@ -43,9 +44,14 @@
   const addField = (formItem: FormItemEntity) => {
     if (formItem && formItem.field) {
       localFields.value.push(formItem)
-      console.log(localFields.value)
     }
   }
+
+  /**
+   * @description 校验指定字段的表单项
+   * @param fields field 字符串数组
+   * @param callback 校验结束回调
+   */
   const validateFields: FormEvents['validateFields'] = (fields, callback) => {
     const list: Promise<any>[] = localFields.value
       .filter(
@@ -72,6 +78,26 @@
       return hasError ? errors : undefined
     })
   }
+  const validate = async () => {
+    const fields = localFields.value.map((item) => item.field)
+    const res = await validateFields(fields)
+    emit('submit', {
+      errors: res,
+      fields: localFields.value,
+      model: model.value
+    })
+    return res
+  }
+
+  const clearValidate = (field?: string | string[]) => {
+    const _fields = isUndefined(field) ? [] : ([] as string[]).concat(field)
+
+    localFields.value.forEach((item) => {
+      if (_fields.length === 0 || _fields.includes(item.field)) {
+        item.clearValidate()
+      }
+    })
+  }
 
   provide(
     formInjectionKey,
@@ -80,13 +106,17 @@
       rules,
       disabled,
       fields: localFields,
+      labelWidth,
       addField,
+      validate,
       validateFields
     })
   )
 
   defineExpose({
-    validateFields
+    validate,
+    validateFields,
+    clearValidate
   })
 </script>
 

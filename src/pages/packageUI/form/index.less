@@ -5,12 +5,22 @@
     box-sizing: border-box;
     padding: 10px;
     overflow: auto;
-    .button-container {
-      flex-wrap: wrap;
-      align-content: flex-start;
-      #flex(row, center, flex-start);
-      .ml-button {
-        margin: 0 8px 8px 0;
+    .form-container {
+      padding: 10px 4px 10px 4px;
+      background-color: @--heavy-bg;
+      .submit-btn {
+        width: 100%;
+        margin-top: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        .ml-button {
+          width: 100%;
+        }
+      }
+      &-btns {
+        margin-top: 10px;
+        #flex(row, center, space-between);
       }
     }
   }

@@ -1,8 +1,17 @@
 <template>
   <Cell
+    :class="className"
     :label="label"
+    :type="
+      formItemEntity.field === 'submit'
+        ? CellTypeEnum.BUTTON
+        : CellTypeEnum.CUSTOM
+    "
+    :label-width="mergedLabelWidth"
+    :disabled="mergedDisabled"
     :description="validateMessage"
     :desc-style="validateMessageStyle"
+    @btn-click="handleBtnClick"
   >
     <template #value>
       <slot></slot>
@@ -22,9 +31,8 @@
   } from 'vue'
   import type { PropType } from 'vue'
   import { Schema } from 'b-validate'
-  import { useTheme } from '@meleon/uni-ui/hooks'
   import { useI18n } from '@meleon/uni-ui/locale'
-  import { cs, getValueByPath } from '@meleon/uni-ui/utils'
+  import { cs, getValueByPath, isUndefined } from '@meleon/uni-ui/utils'
   import Cell from '../ml-cell/index.vue'
   import { formInjectionKey } from '../ml-form'
   import type { FieldRule, ValidateStatus } from '../ml-form'
@@ -35,6 +43,7 @@
     FormItemProps,
     ValidateTrigger
   } from './index.interface'
+  import { CellTypeEnum } from '../ml-cell'
 
   const props = defineProps({
     field: {
@@ -43,7 +52,11 @@
     },
     label: {
       type: String,
-      required: true
+      default: ''
+    },
+    labelWidth: {
+      type: String,
+      default: ''
     },
     extra: {
       type: String,
@@ -55,7 +68,7 @@
     },
     disabled: {
       type: Boolean,
-      default: false
+      default: undefined
     },
     required: {
       type: Boolean,
@@ -69,7 +82,9 @@
   const {
     field,
     label,
+    labelWidth,
     required,
+    disabled,
     rules: localRules,
     validateTrigger
   } = toRefs(props)
@@ -79,8 +94,6 @@
   const { i18n } = useI18n()
 
   const formCtx = inject(formInjectionKey, null)
-
-  const { themeColors } = useTheme()
 
   const prefix = ref('ml-form-item')
   const className = computed(() => {
@@ -94,7 +107,9 @@
 
   const mergedRules = computed(() => {
     const baseRules = ([] as FieldRule[]).concat(
-      localRules.value ?? formCtx?.rules[field.value] ?? []
+      localRules.value.length
+        ? localRules.value
+        : formCtx?.rules[field.value] ?? []
     )
 
     const hasRequired = baseRules.some((rule) => rule.required)
@@ -106,6 +121,16 @@
   })
   const isRequired = computed(() => {
     return mergedRules.value.some((rule) => !!rule.required)
+  })
+
+  const mergedLabelWidth = computed(() => {
+    return labelWidth.value || formCtx?.labelWidth || '50%'
+  })
+
+  const mergedDisabled = computed(() => {
+    return isUndefined(disabled?.value)
+      ? Boolean(formCtx?.disabled)
+      : Boolean(disabled?.value)
   })
 
   const validateStatus = ref<ValidateStatus | ''>('')
@@ -121,6 +146,9 @@
       default:
         return {}
     }
+  })
+  const isError = computed(() => {
+    return validateStatus.value === 'error'
   })
 
   const updateFieldState = (
@@ -178,14 +206,24 @@
     })
   }
 
+  const clearValidate = () => {
+    if (formItemEntity.field) {
+      updateFieldState(field.value, {
+        status: '',
+        message: ''
+      })
+    }
+  }
+
   const formItemEntity: FormItemEntity = reactive({
     field: field.value,
     disabled: false,
-    validateField
+    validateField,
+    clearValidate
   })
 
   onMounted(() => {
-    if (formItemEntity.field && formCtx) {
+    if (formItemEntity.field && formItemEntity.field !== 'submit' && formCtx) {
       formCtx.addField(formItemEntity)
     }
   })
@@ -212,10 +250,19 @@
     }, {} as FormItemEventHandler)
   })
 
+  const handleBtnClick = () => {
+    // 仅限 提交按钮 触发校验
+    if (formItemEntity.field === 'submit') {
+      formCtx && formCtx?.validate()
+    }
+  }
+
   provide(
     formItemInjectionKey,
     reactive({
-      eventsHanlder
+      eventsHanlder,
+      disabled: mergedDisabled,
+      isError
     })
   )
 </script>

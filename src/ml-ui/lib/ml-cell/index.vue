@@ -2,7 +2,7 @@
   <view :class="className" :style="{ ...themeColors }" @click="handleCellClick">
     <!-- text cell -->
     <template v-if="type === CellTypeEnum.CUSTOM">
-      <view :class="`${prefix}--left`">
+      <view :class="`${prefix}--left`" :style="{ width: labelWidth }">
         <slot name="label">
           <text :class="`${prefix}-label`">{{ label }}</text>
           <text :class="`${prefix}-desc`" :style="descStyle">
@@ -10,7 +10,10 @@
           </text>
         </slot>
       </view>
-      <view :class="cs(`${prefix}--right`)">
+      <view
+        :class="cs(`${prefix}--right`)"
+        :style="{ width: `calc(100% - ${labelWidth})` }"
+      >
         <slot name="value">
           <text :class="`${prefix}-val`">{{ afterValue }}</text>
         </slot>
@@ -18,7 +21,7 @@
     </template>
     <!-- text cell -->
     <template v-else-if="type === CellTypeEnum.TEXT">
-      <view :class="`${prefix}--left`">
+      <view :class="`${prefix}--left`" :style="{ width: labelWidth }">
         <slot name="label">
           <text :class="`${prefix}-label`">{{ label }}</text>
           <text :class="`${prefix}-desc`" :style="descStyle">{{
@@ -26,7 +29,10 @@
           }}</text>
         </slot>
       </view>
-      <view :class="cs(`${prefix}--right`)">
+      <view
+        :class="cs(`${prefix}--right`)"
+        :style="{ width: `calc(100% - ${labelWidth})` }"
+      >
         <template v-if="isEditing">
           <Input
             :class="`${prefix}-input`"
@@ -64,7 +70,7 @@
     </template>
     <!-- navigator cell -->
     <template v-else-if="type === CellTypeEnum.NAV">
-      <view :class="`${prefix}--left`">
+      <view :class="`${prefix}--left`" :style="{ width: labelWidth }">
         <slot name="label">
           <text :class="`${prefix}-label`">{{ label }}</text>
           <text :class="`${prefix}-desc`" :style="descStyle">{{
@@ -72,7 +78,10 @@
           }}</text>
         </slot>
       </view>
-      <view :class="cs(`${prefix}--right`)">
+      <view
+        :class="cs(`${prefix}--right`)"
+        :style="{ width: `calc(100% - ${labelWidth})` }"
+      >
         <slot name="value">
           <text :class="`${prefix}-val`">{{ afterValue }}</text>
         </slot>
@@ -82,7 +91,7 @@
       </view>
     </template>
     <template v-else-if="type === CellTypeEnum.SWITCH">
-      <view :class="`${prefix}--left`">
+      <view :class="`${prefix}--left`" :style="{ width: labelWidth }">
         <slot name="label">
           <text :class="`${prefix}-label`">{{ label }}</text>
           <text :class="`${prefix}-desc`" :style="descStyle">{{
@@ -90,7 +99,10 @@
           }}</text>
         </slot>
       </view>
-      <view :class="cs(`${prefix}--right`)">
+      <view
+        :class="cs(`${prefix}--right`)"
+        :style="{ width: `calc(100% - ${labelWidth})` }"
+      >
         <Switch
           :model-value="!!afterValue"
           :disabled="disabled"
@@ -149,6 +161,10 @@
     url: {
       type: String,
       default: ''
+    },
+    labelWidth: {
+      type: String,
+      default: '50%'
     },
     descStyle: {
       type: Object as PropType<CellProps['descStyle']>,

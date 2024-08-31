@@ -52,7 +52,12 @@ export { default as Drawer } from './ml-drawer'
 export type { DrawerInstance, DrawerProps } from './ml-drawer'
 
 export { default as Form } from './ml-form'
-export type { FormInstance, FormProps } from './ml-form'
+export type {
+  FormInstance,
+  FormProps,
+  FormEvents,
+  FormEmitsPayload
+} from './ml-form'
 
 export { default as FormItem } from './ml-form-item'
 export type { FormItemInstance, FormItemProps } from './ml-form-item'

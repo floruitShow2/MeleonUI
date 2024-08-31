@@ -12,7 +12,9 @@ export type {
   FieldRule,
   FieldData,
   ValidateError,
-  ValidateStatus
+  ValidateStatus,
+  FormEvents,
+  FormEmitsPayload
 } from './index.interface'
 
 export { formInjectionKey } from './context'

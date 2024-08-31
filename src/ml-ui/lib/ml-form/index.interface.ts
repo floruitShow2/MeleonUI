@@ -1,3 +1,5 @@
+import type { FormItemEntity } from '../ml-form-item'
+
 export type ValidateStatus = 'success' | 'warning' | 'error' | 'validating'
 
 export interface FieldRule {
@@ -13,6 +15,10 @@ export interface FieldRule {
    * @description 校验类型
    */
   type?: 'string' | 'array'
+  validator?: (
+    value: any,
+    callback: (error?: string) => void
+  ) => void;
 }
 
 export interface FieldData {
@@ -29,10 +35,20 @@ export interface ValidateError {
 }
 
 export interface FormEvents {
+  clearValidate: (field?: string | string[]) => void
+  validate: () => Promise<undefined | Record<string, ValidateError>>
   validateFields: (
     fields: string | string[],
     callback?: (errors: undefined | Record<string, ValidateError>) => void
   ) => Promise<undefined | Record<string, ValidateError>>
+}
+
+export interface FormEmitsPayload {
+  submit: (payload: {
+    errors: Record<string, ValidateError> | undefined
+    fields: FormItemEntity[]
+    model: Record<string, any>
+  }) => void
 }
 
 export interface FormProps {
@@ -48,4 +64,8 @@ export interface FormProps {
    * @description 是否禁用
    */
   disabled: boolean
+  /**
+   * @description 标签文本宽度
+   */
+  labelWidth: string
 }
