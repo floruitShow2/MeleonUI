@@ -9,7 +9,7 @@
         "typescript",
         "components"
     ],
-    "description": "A simple components library written in vue3 and typescript",
+    "description": "A uniapp components library written in vue3 and typescript",
     "scripts": {
         "build": "tsc --project ./tsconfig.json"
     },
@@ -26,6 +26,7 @@
         "@dcloudio/uni-app-plus": "3.0.0-3081220230817001",
         "@dcloudio/uni-mp-weixin": "3.0.0-3081220230817001",
         "colord": "^2.9.3",
+        "b-validate": "^1.5.3",
         "dayjs": "^1.11.11",
         "pinia": "^2.0.23",
         "vue": "^3.2.45"

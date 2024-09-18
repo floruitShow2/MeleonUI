@@ -41,7 +41,7 @@
     "lint": "eslint \"{src,apps}/**/*.ts\" --fix",
     "test": "vitest --config ./vitest.config.ts",
     "coverage": "vitest run --coverage --config ./vitest.config.ts",
-    "format": "prettier --write \"src/**/*.{ts,vue,tsx,less}\""
+    "format": "prettier --write \"{src,build}/**/*.{ts,vue,js,less}\""
   },
   "dependencies": {
     "@dcloudio/uni-app": "3.0.0-3081220230817001",
@@ -91,6 +91,7 @@
     "less": "^4.2.0",
     "lint-staged": "^14.0.1",
     "prettier": "^3.0.3",
+    "terser": "^5.33.0",
     "typescript": "^4.9.4",
     "vite": "4.1.4",
     "vitest": "^2.0.5",

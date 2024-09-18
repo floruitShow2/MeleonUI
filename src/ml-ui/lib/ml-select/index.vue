@@ -53,9 +53,8 @@
       :animation="menuAnimationData"
       :style="menuStyle"
     >
-      <slot />
       <MlOption
-        v-for="option in options.filter((i) => i.isExtra)"
+        v-for="option in options"
         :key="option.value"
         :value="option.value"
         :label="option.label"
@@ -69,6 +68,10 @@
       :class="`${prefix}-menu-mask`"
       @click.stop="onInputBlur"
     />
+    <!-- 默认插槽，接收选项 -->
+    <view :class="`${prefix}-hidden-options`">
+      <slot />
+    </view>
   </view>
 </template>
 
@@ -83,15 +86,15 @@
     watch
   } from 'vue'
   import type { PropType } from 'vue'
-  import { useTheme } from '@meleon/uni-ui/hooks'
+  import { useFormItem, useTheme } from '@meleon/uni-ui/hooks'
   import { useI18n } from '@meleon/uni-ui/locale'
   import { cs, isArray, getRect, generateDeviceUI } from '@meleon/uni-ui/utils'
-  import type { SelectProps } from './index.interface'
   import MlIcon from '../ml-icon/index.vue'
   import MlInput from '../ml-input/index.vue'
   import MlInputTag from '../ml-input-tag/index.vue'
   import MlOption from '../ml-option/index.vue'
   import type { OptionProps } from '../ml-option'
+  import type { SelectProps } from './index.interface'
   import { MlSelectGroupInjectionKey } from './context'
 
   const props = defineProps({
@@ -99,6 +102,10 @@
     modelValue: {
       type: [String, Array] as PropType<SelectProps['modelValue']>,
       required: true
+    },
+    options: {
+      type: Array as PropType<SelectProps['options']>,
+      default: () => []
     },
     width: {
       type: Number,
@@ -139,17 +146,18 @@
   })
   const {
     modelValue,
+    options: modelOptions,
     placeholder,
     filterable,
     multiple,
     maxTagCount,
-    disabled,
     addToParent
   } = toRefs(props)
 
   const emit = defineEmits(['update:model-value'])
 
   const { t } = useI18n()
+  const { eventsHanlders, disabled } = useFormItem({ disabled: props.disabled })
 
   const mlInputRef = ref()
   const mlInputTagRef = ref()
@@ -176,14 +184,21 @@
   })
 
   // options 映射
+  // 初始化选项列表，数据来源自 options prop 以及 插槽
   const optionsMap = ref<Map<number | string | symbol, OptionProps>>(new Map())
   const options = computed(() => {
     return Array.from(optionsMap.value.values())
   })
+  watch(modelOptions, (newVal) => {
+    newVal.forEach((item) => {
+      addOption(item)
+    })
+  }, { deep: true, immediate: true })
   const addOption = (option: OptionProps) => {
     optionsMap.value.set(option.value, option)
     initSelectedList(modelValue.value)
   }
+  
   const selectOption = (option: OptionProps) => {
     const findIdx = selectedList.value.findIndex(
       (item) => item.value === option.value
@@ -196,6 +211,7 @@
         : [option]
     }
     emit('update:model-value', selectedValue.value)
+    eventsHanlders.value.onChange?.()
   }
 
   const selectedList = ref<OptionProps[]>([])
@@ -357,6 +373,7 @@
       isMenuUnfold.value = false
       handleInputValue()
       emit('update:model-value', selectedValue.value)
+      eventsHanlders.value.onChange?.()
     }, 200)
   }
   const onInputTagChange = (labels: string[]) => {
@@ -368,6 +385,7 @@
     const targetLabel = _labels.find((label) => !label2Value[label])
     if (targetLabel && isArray(modelValue.value)) {
       emit('update:model-value', [...modelValue.value, targetLabel])
+      eventsHanlders.value.onChange?.()
       addOption({
         label: targetLabel,
         value: targetLabel,
@@ -384,6 +402,6 @@
   }
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
   @import './index.less';
 </style>

@@ -7,7 +7,7 @@
 <script setup lang="ts">
   import { ref, toRefs, computed, provide, reactive } from 'vue'
   import type { PropType } from 'vue'
-  import { useDeepClone, cs } from '@meleon/uni-ui/index'
+  import { useDeepClone, cs } from '@meleon/uni-ui/utils'
   import { checkboxGroupInjectionKey } from './context'
   import type { CheckboxGroupProps } from './index.interface'
 

@@ -82,7 +82,7 @@
     CellTypeEnum,
     type CellChangePayload,
     type CellProps
-  } from '@meleon/uni-ui/index'
+  } from '@meleon/uni-ui/lib'
   import CodeBlock from '@/components/CodeBlock/index.vue'
 
   const appStore = useAppStore()

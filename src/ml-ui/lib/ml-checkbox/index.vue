@@ -18,7 +18,8 @@
     getCurrentInstance
   } from 'vue'
   import type { PropType } from 'vue'
-  import { useTheme, cs } from '@meleon/uni-ui/index'
+  import { useTheme } from '@meleon/uni-ui/hooks'
+  import { cs } from '@meleon/uni-ui/utils'
   import { checkboxGroupInjectionKey } from '../ml-checkbox-group/context'
   import type { CheckboxProps } from './index.interface'
 

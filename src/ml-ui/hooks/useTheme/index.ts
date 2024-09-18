@@ -1,4 +1,4 @@
-import { isNotEmptyObject, useDeepClone } from '@meleon/uni-ui/index'
+import { isNotEmptyObject, useDeepClone } from '@meleon/uni-ui/utils'
 
 import { getColorPalette } from './color'
 import themeSettings from './themeSettings'

@@ -56,7 +56,8 @@ export type {
   FormInstance,
   FormProps,
   FormEvents,
-  FormEmitsPayload
+  FormEmitsPayload,
+  FieldRule
 } from './ml-form'
 
 export { default as FormItem } from './ml-form-item'

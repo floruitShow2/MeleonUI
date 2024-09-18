@@ -15,10 +15,7 @@ export interface FieldRule {
    * @description 校验类型
    */
   type?: 'string' | 'array'
-  validator?: (
-    value: any,
-    callback: (error?: string) => void
-  ) => void;
+  validator?: (value: any, callback: (error?: string) => void) => void
 }
 
 export interface FieldData {

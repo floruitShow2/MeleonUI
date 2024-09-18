@@ -163,22 +163,35 @@ export type ColorType = 'primary' | 'info' | 'success' | 'warning' | 'danger'
 
 #### 四、更新日志
 
+- 1.2.0
+  - refactor: 打包结果调整
+    - 去除初始的 .ts 文件
+    - 去除用于 **重新导出** 的 `index.js` 和 `index.d.ts` 文件
+    - 使用 terser 压缩代码，大幅降低组件库构建到小程序后的体积
+    - `@meleon/uni-ui`小程序主包的构建体积从优化前的 **2.2MB** 降低到现在的 **958KB**
+    - **注：**如果准备将 `1.1` 版本升级到 `1.2`版本，最好检查下之前对组件库内部方法、类型的引用路径是否存在问题，避免出现 bug
+
+- 1.1.13
+  - feat: 新增 `ml-form` 组件【暂时仅支持 input 组件作为表单项】
+  - feat: 新增 `ml-transition` 组件
+
+
 - 1.1.12
-  - style: ml-drawer 组件添加动效
-  - fix: ml-list 组件修改虚拟列表插槽名称错误
-  - feat: 新增 ml-datetime-picker、ml-time-picker 两个时间选择组件
+  - style: `ml-drawer` 组件添加动效
+  - fix: `ml-list` 组件修改虚拟列表插槽名称错误
+  - feat: 新增 `ml-datetime-picker`、`ml-time-picker` 两个时间选择组件
 - 1.1.11
   - feat: 调整 `ml-navigator` 组件的结构，完善功能
   - feat: 添加 `ml-switch` 组件
   - feat: `ml-cell` 组件添加 `SWITCH` 类型
-  - fix: ml-cell 组件传入的 value 发生变化时未触发页面更新
+  - fix: `ml-cell` 组件传入的 value 发生变化时未触发页面更新
   - feat: 新增 `ml-list` 组件，初步支持基础列表和虚拟列表功能
 - 1.1.10
   - fix: `ml-checkbox` 设置 direction 失效的问题
   - fix: `ml-image` 预览层层级过低的问题
   - fix: `ml-select` 无激活样式的问题
   - fix: `ml-input-tag` 确认后未触发新增标签
-  - docs: @meleon/uni-ui 上线微信小程序，可体验各个组件的使用效果【微信扫描“演示”小程序码】
+  - docs: `@meleon/uni-ui`上线微信小程序，可体验各个组件的使用效果【微信扫描“演示”小程序码】
 - 1.1.9
   - fix: `ml-loading` 图标缺失，`ml-button` 组件设置 loading 不生效
   - feat: 新增 `ml-image` 组件

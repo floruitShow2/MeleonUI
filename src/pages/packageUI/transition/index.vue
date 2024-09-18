@@ -154,8 +154,8 @@
 <script setup lang="ts">
   import { ref, computed } from 'vue'
   import { useAppStore } from '@/store'
-  import { CellTypeEnum } from '@meleon/uni-ui/index'
-  import type { TransitionProps } from '@/ml-ui'
+  import { CellTypeEnum } from '@meleon/uni-ui/lib'
+  import type { TransitionProps } from '@meleon/uni-ui/lib'
   import CodeBlock from '@/components/CodeBlock/index.vue'
 
   const appStore = useAppStore()

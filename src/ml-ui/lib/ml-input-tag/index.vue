@@ -39,7 +39,7 @@
 <script setup lang="ts">
   import { ref, toRefs, computed } from 'vue'
   import type { PropType } from 'vue'
-  import { useTheme } from '@meleon/uni-ui/hooks'
+  import { useTheme, useFormItem } from '@meleon/uni-ui/hooks'
   import { cs } from '@meleon/uni-ui/utils'
   import { getValueData } from './utils'
   import type { TagData, InputTagProps } from './index.interface'
@@ -94,7 +94,6 @@
     modelValue,
     defaultValue,
     size,
-    disabled,
     readonly,
     maxTagCount,
     tagType
@@ -108,6 +107,8 @@
   ])
 
   const { themeColors } = useTheme()
+  const { eventsHanlders, disabled } = useFormItem({ disabled: props.disabled })
+
   const prefix = ref('ml-input-tag')
 
   const className = computed(() => {
@@ -169,6 +170,7 @@
     _value.value = value
     emit('update:modelValue', _value.value)
     emit('change', _value.value)
+    eventsHanlders.value?.onChange?.()
   }
 
   const handleDeleteTag = (e: string, index: number) => {
@@ -185,9 +187,9 @@
     isFocus.value = true
     isActive.value = true
     emit('focus', e)
+    eventsHanlders.value.onFocus?.(e)
   }
   const beforeFoucs = (e: FocusEvent) => {
-    console.log('beforeFoucs', isFocus.value, isActive.value)
     if (!isFocus.value) {
       onInputFocus(e)
     }
@@ -198,7 +200,6 @@
     setInputWidth(value.length * 16)
   }
   const onInputBlur = (e: FocusEvent) => {
-    console.log('blur', isFocus.value, isActive.value)
     if (readonly.value) {
       isFocus.value = false
       isActive.value = false
@@ -208,7 +209,10 @@
     if (e && e.preventDefault) e.preventDefault()
     isFocus.value = false
     isActive.value = false
-    if (!readonly.value) emit('blur', e)
+    if (!readonly.value) {
+      emit('blur', e)
+      eventsHanlders.value.onBlur?.(e)
+    }
   }
   const onInputConfirm = (e: InputEvent) => {
     if (disabled.value) return

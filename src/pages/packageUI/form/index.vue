@@ -61,8 +61,9 @@
   import { ref, computed } from 'vue'
   import { useAppStore } from '@/store'
   import CodeBlock from '@/components/CodeBlock/index.vue'
-  import { type MessageInstance, type FormInstance, isUndefined } from '@/ml-ui'
-  import type { FieldRule, FormEmitsPayload } from '@/ml-ui/lib/ml-form'
+  import type { MessageInstance, FormInstance } from '@meleon/uni-ui/lib'
+  import type { FieldRule, FormEmitsPayload } from '@meleon/uni-ui/lib'
+  import { isUndefined } from '@meleon/uni-ui/utils'
 
   const appStore = useAppStore()
   const wrapperStyle = computed(() => {

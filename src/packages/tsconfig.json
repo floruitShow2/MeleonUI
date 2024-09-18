@@ -6,6 +6,7 @@
     "module": "ES2015",
     "moduleResolution": "Node",
     "baseUrl": "./",
+    // Build Options
     "declaration": true,
     "sourceMap": false,
     "inlineSourceMap": false,

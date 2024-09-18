@@ -6,6 +6,10 @@ export interface SelectProps {
    */
   modelValue: OptionProps['value'] | OptionProps['value'][]
   /**
+   * @description 选项列表
+   */
+  options: OptionProps[]
+  /**
    * @description 选择器的宽度
    */
   width: number

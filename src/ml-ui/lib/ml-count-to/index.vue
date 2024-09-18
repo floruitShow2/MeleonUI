@@ -13,7 +13,8 @@
 <script setup lang="ts">
   import { ref, unref, toRefs, computed, onMounted } from 'vue'
   import type { PropType } from 'vue'
-  import { useTheme, cs, Tween } from '@meleon/uni-ui/index'
+  import { useTheme } from '@meleon/uni-ui/hooks'
+  import { cs, Tween } from '@meleon/uni-ui/utils'
 
   const props = defineProps({
     from: {

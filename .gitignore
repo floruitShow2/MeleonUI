@@ -16,6 +16,7 @@ node_modules
 src/packages/constants
 src/packages/hooks
 src/packages/interface
+src/packages/dist
 src/packages/lib
 src/packages/utils
 src/packages/locale
