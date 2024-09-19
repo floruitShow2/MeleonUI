@@ -1,6 +1,6 @@
 {
-  "name": "uni-preset-vue",
-  "version": "1.1.12",
+  "name": "@meleon/uni-ui",
+  "version": "1.2.0",
   "scripts": {
     "dev:app": "uni -p app",
     "dev:app-android": "uni -p app-android",
@@ -57,7 +57,6 @@
     "@dcloudio/uni-mp-toutiao": "3.0.0-3081220230817001",
     "@dcloudio/uni-mp-weixin": "3.0.0-3081220230817001",
     "@dcloudio/uni-quickapp-webview": "3.0.0-3081220230817001",
-    "@meleon/uni-ui": "^1.1.9",
     "b-validate": "^1.5.3",
     "colord": "^2.9.3",
     "dayjs": "^1.11.11",

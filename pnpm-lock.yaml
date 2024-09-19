@@ -44,9 +44,6 @@ dependencies:
   '@dcloudio/uni-quickapp-webview':
     specifier: 3.0.0-3081220230817001
     version: 3.0.0-3081220230817001(postcss@8.4.41)(vue@3.4.31)
-  '@meleon/uni-ui':
-    specifier: ^1.1.9
-    version: 1.1.10(@dcloudio/types@3.4.8)(postcss@8.4.41)(typescript@4.9.5)(vite@4.1.4)
   b-validate:
     specifier: ^1.5.3
     version: 1.5.3
@@ -3299,28 +3296,6 @@ packages:
     dependencies:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.4.15
-
-  /@meleon/uni-ui@1.1.10(@dcloudio/types@3.4.8)(postcss@8.4.41)(typescript@4.9.5)(vite@4.1.4):
-    resolution: {integrity: sha512-zCy7vYzzvSqyQw37SLhlvPVItHOF6vFhm5NVuEJ4tqgHNcFQQ+tuvsE2A4qkGqhbwzkIyYx/inhPC3QbdplM6g==}
-    dependencies:
-      '@dcloudio/uni-app': 3.0.0-3081220230817001(@dcloudio/types@3.4.8)(postcss@8.4.41)(vue@3.4.31)
-      '@dcloudio/uni-app-plus': 3.0.0-3081220230817001(postcss@8.4.41)(vite@4.1.4)(vue@3.4.31)
-      '@dcloudio/uni-mp-weixin': 3.0.0-3081220230817001(postcss@8.4.41)(vue@3.4.31)
-      colord: 2.9.3
-      dayjs: 1.11.11
-      pinia: 2.0.23(typescript@4.9.5)(vue@3.4.31)
-      vue: 3.4.31(typescript@4.9.5)
-    transitivePeerDependencies:
-      - '@dcloudio/types'
-      - '@vue/composition-api'
-      - bufferutil
-      - postcss
-      - supports-color
-      - ts-node
-      - typescript
-      - utf-8-validate
-      - vite
-    dev: false
 
   /@nodelib/fs.scandir@2.1.5:
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}

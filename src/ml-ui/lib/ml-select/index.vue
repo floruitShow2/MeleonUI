@@ -189,16 +189,20 @@
   const options = computed(() => {
     return Array.from(optionsMap.value.values())
   })
-  watch(modelOptions, (newVal) => {
-    newVal.forEach((item) => {
-      addOption(item)
-    })
-  }, { deep: true, immediate: true })
+  watch(
+    modelOptions,
+    (newVal) => {
+      newVal.forEach((item) => {
+        addOption(item)
+      })
+    },
+    { deep: true, immediate: true }
+  )
   const addOption = (option: OptionProps) => {
     optionsMap.value.set(option.value, option)
     initSelectedList(modelValue.value)
   }
-  
+
   const selectOption = (option: OptionProps) => {
     const findIdx = selectedList.value.findIndex(
       (item) => item.value === option.value

@@ -90,14 +90,8 @@
       default: false
     }
   })
-  const {
-    modelValue,
-    defaultValue,
-    size,
-    readonly,
-    maxTagCount,
-    tagType
-  } = toRefs(props)
+  const { modelValue, defaultValue, size, readonly, maxTagCount, tagType } =
+    toRefs(props)
   const emit = defineEmits([
     'update:modelValue',
     'focus',

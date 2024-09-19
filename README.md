@@ -54,9 +54,6 @@ export function createApp() {
     app
   }
 }
-```
-
-```ts
 // meleon-ui.ts
 import type { App, Plugin } from 'vue'
 import MlButton from './ml-button'
@@ -102,11 +99,11 @@ export default { install }
 ```json
 // page.json
 {
-	"easycom": {
-		"custom": {
-			"^ml-(.*)": "@meleon/uni-ui/lib/ml-$1/index.vue"
-		}
-	}
+  "easycom": {
+    "custom": {
+      "^ml-(.*)": "@meleon/uni-ui/lib/ml-$1/index.vue"
+    }
+  }
 }
 ```
 
@@ -117,25 +114,22 @@ MeleonUI 为用户提供了自定义主题的方法，可以通过向 `ml-config
 ```html
 <!-- template -->
 <ml-config-provider :themes="themes">
-	<!-- 消息提示 -->
-	<ml-message ref="messageRef" />
-	<!-- 导航栏 -->
-	<ml-navigator
-		:title="$t('home.navigation.title')"
-		title-color="#FFFFFF"
-		background="#7A98B3"
-	></ml-navigator>
-	<ml-button
-		type="primary"
-		@click="onNavigate('/pages/componentList/index')"
-	>
-		{{ $t('home.actions.start') }}
-		<ml-icon icon="ml-arrow-right--line" color="#FFFFFF" />
-	</ml-button>
+  <!-- 消息提示 -->
+  <ml-message ref="messageRef" />
+  <!-- 导航栏 -->
+  <ml-navigator
+    :title="$t('home.navigation.title')"
+    title-color="#FFFFFF"
+    background="#7A98B3"
+  ></ml-navigator>
+  <ml-button
+    type="primary"
+    @click="onNavigate('/pages/componentList/index')"
+  >
+    {{ $t('home.actions.start') }}
+    <ml-icon icon="ml-arrow-right--line" color="#FFFFFF" />
+  </ml-button>
 </ml-config-provider>
-```
-
-```ts
 // script
 import type { ConfigProviderProps } from '@meleon/uni-ui'
 
@@ -157,7 +151,7 @@ export type ColorType = 'primary' | 'info' | 'success' | 'warning' | 'danger'
 
 ```json
 {
-	"types": ["@dcloudio/types", "@meleon/uni-ui"]
+  "types": ["@dcloudio/types", "@meleon/uni-ui"]
 }
 ```
 
@@ -170,7 +164,7 @@ export type ColorType = 'primary' | 'info' | 'success' | 'warning' | 'danger'
     - 使用 terser 压缩代码，大幅降低组件库构建到小程序后的体积
     - `@meleon/uni-ui`小程序主包的构建体积从优化前的 **2.2MB** 降低到现在的 **958KB**
     - **注：**如果准备将 `1.1` 版本升级到 `1.2`版本，最好检查下之前对组件库内部方法、类型的引用路径是否存在问题，避免出现 bug
-
+  - feat: 调整 `ml-form` 组件，添加下拉选框、多选、日期选择器、开关等表单项
 - 1.1.13
   - feat: 新增 `ml-form` 组件【暂时仅支持 input 组件作为表单项】
   - feat: 新增 `ml-transition` 组件
@@ -226,7 +220,7 @@ export type ColorType = 'primary' | 'info' | 'success' | 'warning' | 'danger'
 <ml-avatar :size="28" shape="circle">Meleon</ml-avatar>
 <!-- 插入图片 -->
 <ml-avatar shape="circle">
-	<image src="@/assets/home/avatar.png" mode="widthFix" />
+  <image src="@/assets/home/avatar.png" mode="widthFix" />
 </ml-avatar>
 ```
 
@@ -272,35 +266,35 @@ export type ColorType = 'primary' | 'info' | 'success' | 'warning' | 'danger'
 
 ```html
 <ml-button
-	type="primary"
-	size="mini"
-	status="success"
+  type="primary"
+  size="mini"
+  status="success"
 >
     Primary
 </ml-button>
 
 <ml-button
-	type="secondary"
-	size="mini"
-	shape="round"
-	status="success"
+  type="secondary"
+  size="mini"
+  shape="round"
+  status="success"
 >
     Secondary
 </ml-button>
 
 <ml-button
-	type="outline"
-	size="mini"
-	status="success"
+  type="outline"
+  size="mini"
+  status="success"
 >
     Outline
 </ml-button>
 
 <ml-button
-	type="text"
-	size="mini"
-	status="success"
-	@click="handleClick"
+  type="text"
+  size="mini"
+  status="success"
+  @click="handleClick"
 >
     Text
 </ml-button>
@@ -363,10 +357,10 @@ export type ColorType = 'primary' | 'info' | 'success' | 'warning' | 'danger'
         style="width: 100%"
     >
         <template #rightIcon>
-        	<ml-icon name="ml-arrow-right--line" color="var(--info-color-7)"></ml-icon>
+          <ml-icon name="ml-arrow-right--line" color="var(--info-color-7)"></ml-icon>
         </template>
         <template #value>
-        	<text style="font-size: 14px; color: var(--info-color-7)">通过插槽展示内容</text>
+          <text style="font-size: 14px; color: var(--info-color-7)">通过插槽展示内容</text>
         </template>
     </ml-cell>
 </ml-cell-group>
@@ -450,10 +444,10 @@ export type ColorType = 'primary' | 'info' | 'success' | 'warning' | 'danger'
 
 ```html
 <ml-checkbox-group
-	v-model:checked-list="checked3"
-	mode="multi"
-	:max="3"
-	:min="1"
+  v-model:checked-list="checked3"
+  mode="multi"
+  :max="3"
+  :min="1"
 >
     <ml-checkbox value="A">RadioA</ml-checkbox>
     <ml-checkbox value="B">RadioB</ml-checkbox>
@@ -492,13 +486,10 @@ export type ColorType = 'primary' | 'info' | 'success' | 'warning' | 'danger'
     <ml-button type="warning"></ml-button>
     <ml-button type="danger"></ml-button>
 </ml-config-provider>
-```
-
-```ts
 import type { ConfigProviderProps } from '~/lib/ml-config-provider/index.interface'
 
 const themes: ConfigProviderProps['themes'] = {
-	primary: '#D74B4B'
+  primary: '#D74B4B'
 }
 ```
 
@@ -521,7 +512,7 @@ const themes: ConfigProviderProps['themes'] = {
     :value-style="{ color: '#0fbf60' }"
 >
     <template #suffix>
-    	<text>%</text>
+      <text>%</text>
     </template>
 </ml-count-to>
 ```
@@ -572,9 +563,6 @@ const themes: ConfigProviderProps['themes'] = {
         ></ml-cell>
     </template>
 </ml-datetime-picker>
-```
-
-```ts
 const value = ref(new Date())
 
 const isDateDisabled = (current: Date) => {
@@ -614,9 +602,9 @@ const handleValueChange = (value: DatetimePickerProps['modelValue']) => {
 
 ```html
 <ml-drawer
-	v-model:visible="modelVisible"
-	:placement="placement"
-	:has-nav="hasNav"
+  v-model:visible="modelVisible"
+  :placement="placement"
+  :has-nav="hasNav"
 >
     <template #title>自定义标题</template>
     <text>
@@ -665,9 +653,6 @@ const handleValueChange = (value: DatetimePickerProps['modelValue']) => {
 
 ```html
 <ml-icon :name="icon" :size="24" color="#808080" />
-```
-
-```ts
 export default {
   id: '4118979',
   name: 'MeleonUI',
@@ -989,9 +974,6 @@ export default {
         />
     </template>
 </ml-list>
-```
-
-```ts
 import type { ListInstance, MessageInstance } from '@meleon/uni-ui'
 
 const mockData = ref(
@@ -1043,7 +1025,7 @@ const handleLoad = () => {
 }
 
 onMounted(() => {
-	if (listRef.value) listRef.value.scrollIntoView('id-10')
+  if (listRef.value) listRef.value.scrollIntoView('id-10')
 })
 ```
 
@@ -1066,9 +1048,6 @@ onMounted(() => {
         ></ml-cell>
     </template>
 </ml-list>
-```
-
-```js
 const mockVirtualData = ref(
     new Array(100).fill(0).map((_, index) => {
         return {
@@ -1163,17 +1142,17 @@ const mockVirtualData = ref(
 
 ```html
 <ml-table
-	:data="tableData"
-	size="mini"
-	stripe
-	border
-	:height="200"
-	:loading="false"
-	:refresher-enabled="true"
-	:refresher-interval="2000"
-	style="width: 100%"
-	@row-click="onRowClick"
-	@cell-click="onCellClick"
+  :data="tableData"
+  size="mini"
+  stripe
+  border
+  :height="200"
+  :loading="false"
+  :refresher-enabled="true"
+  :refresher-interval="2000"
+  style="width: 100%"
+  @row-click="onRowClick"
+  @cell-click="onCellClick"
 >
     <template #cell="{ column, row }">
         <block v-if="column.property === 'gender'">
@@ -1202,9 +1181,6 @@ const mockVirtualData = ref(
 
 ```html
 <ml-message ref="messageRef" />
-```
-
-```ts
 import type { MessageInstance, MessageOptions } from '@meleon/uni-ui'
 
 const messageRef = ref<MessageInstance>()
@@ -1224,11 +1200,11 @@ const showMessage = (type: MessageOptions['type']) => {
 
 ```html
 <ml-navigator
-	title="ml-navigator"
-	title-color="#FFFFFF"
-	has-back
-	icon-color="#FFFFFF"
-	background="#7A98B3"
+  title="ml-navigator"
+  title-color="#FFFFFF"
+  has-back
+  icon-color="#FFFFFF"
+  background="#7A98B3"
 />
 ```
 
@@ -1245,7 +1221,9 @@ const showMessage = (type: MessageOptions['type']) => {
 | iconStyle  | Object                     | {}                     | 图标样式                         |
 | tools      | Array<NavigatorToolEntity> | []                     | 图标列表                         |
 
-`NavigatorToolEntity`
+```
+NavigatorToolEntity
+```
 
 | prop  | type                | desc                                         |
 | ----- | ------------------- | -------------------------------------------- |
@@ -1270,13 +1248,13 @@ const showMessage = (type: MessageOptions['type']) => {
 <ml-timeline :reverse="reverseCheckedList[0] === 'reverse'">
     <ml-timeline-item>
         <template #label>
-        	<text>2023-09-08</text>
+          <text>2023-09-08</text>
         </template>
         <view>The first milestone content</view>
     </ml-timeline-item>
     <ml-timeline-item>
         <template #label>
-        	<text>2023-09-09</text>
+          <text>2023-09-09</text>
         </template>
         <view>
             <view>The second milestone</view>
@@ -1286,7 +1264,7 @@ const showMessage = (type: MessageOptions['type']) => {
     </ml-timeline-item>
     <ml-timeline-item>
         <template #label>
-        	<text> 2023-09-25 </text>
+          <text> 2023-09-25 </text>
         </template>
         <view>The third milestone </view>
     </ml-timeline-item>
@@ -1317,9 +1295,9 @@ const showMessage = (type: MessageOptions['type']) => {
 <ml-progress :percent="percent" status="success" />
 
 <ml-progress :percent="templateMap[0].percent">
-	<template #text="{ percent, decimal }">
-		<text>进度 {{ (percent * 100).toFixed(decimal) }}%</text>
-	</template>
+  <template #text="{ percent, decimal }">
+    <text>进度 {{ (percent * 100).toFixed(decimal) }}%</text>
+  </template>
 </ml-progress>
 
 <ml-progress :percent="percent" type="circle" :size="curSize" status="primary" />
@@ -1364,20 +1342,20 @@ const showMessage = (type: MessageOptions['type']) => {
 
 ```html
 <ml-tree
-	class="tree-wrapper"
-	ref="treeRef"
-	v-model:expanded-keys="expandedKeys"
-	v-model:checked-keys="checkedKeys"
-	v-model:selected-keys="selectedKeys"
-	v-model:indeterminate-keys="indeterminateKeys"
-	:data="treeData"
-	checkable
-	selectable
-	multiple
-	:auto-expand-parent="false"
-	@check="handleCheck"
-	@select="handleSelect"
-	@expand="handleExpand"
+  class="tree-wrapper"
+  ref="treeRef"
+  v-model:expanded-keys="expandedKeys"
+  v-model:checked-keys="checkedKeys"
+  v-model:selected-keys="selectedKeys"
+  v-model:indeterminate-keys="indeterminateKeys"
+  :data="treeData"
+  checkable
+  selectable
+  multiple
+  :auto-expand-parent="false"
+  @check="handleCheck"
+  @select="handleSelect"
+  @expand="handleExpand"
 ></ml-tree>
 
 <view class="btn-list">
@@ -1399,9 +1377,6 @@ const showMessage = (type: MessageOptions['type']) => {
 
     <ml-button type="primary" @click="handleSelectNode"> Select Root </ml-button>
 </view>
-```
-
-```ts
   import type {
     TreeDataEntity,
     TreeCheckPayload,
@@ -1574,17 +1549,17 @@ const showMessage = (type: MessageOptions['type']) => {
         @delete="handleDelete"
     >
         <template #trigger>
-        	<ml-button type="primary">选择文件</ml-button>
+          <ml-button type="primary">选择文件</ml-button>
         </template>
     </ml-uploader>
 
-	<ml-button
-		type="primary"
-		status="success"
-		@click="handleSubmit"
-	>
+  <ml-button
+    type="primary"
+    status="success"
+    @click="handleSubmit"
+  >
         上传
-	</ml-button>
+  </ml-button>
 </template>
 
 <script lang="ts" setup>
@@ -1592,18 +1567,18 @@ const showMessage = (type: MessageOptions['type']) => {
     
     const fileList = ref<FileItem[]>([])
     const handleDelete = () => {
-		console.log('a', fileList.value)
-	}
+    console.log('a', fileList.value)
+  }
 
-	const handleOnChange = (files: FileItem[]) => {
-		console.log('a', files)
-	}
+  const handleOnChange = (files: FileItem[]) => {
+    console.log('a', files)
+  }
 
-	const uploadRef = ref<UploaderInstance>()
-	const handleSubmit = () => {
-		if (!uploadRef.value) return
-		uploadRef.value.submit()
-	}
+  const uploadRef = ref<UploaderInstance>()
+  const handleSubmit = () => {
+    if (!uploadRef.value) return
+    uploadRef.value.submit()
+  }
 </script>
 ```
 
@@ -1628,7 +1603,9 @@ const showMessage = (type: MessageOptions['type']) => {
 
 ###### Types
 
-`FileItem`
+```
+FileItem
+```
 
 | prop      | desc           |
 | --------- | -------------- |
@@ -1636,7 +1613,9 @@ const showMessage = (type: MessageOptions['type']) => {
 | id        | 图片id         |
 | deletable | 是否可以被删除 |
 
-`UploaderSourceTypeEnum`
+```
+UploaderSourceTypeEnum
+```
 
 | enum   | desc   |
 | ------ | ------ |
@@ -1657,4 +1636,3 @@ const showMessage = (type: MessageOptions['type']) => {
 | ---------- | ------------------------------------ | -------------------------- |
 | submit     | () => void                           | 手动上传当前展示的所有文件 |
 | updateFile | (id: string, file: FileItem) => void | 指定id，更新文件对象       |
-

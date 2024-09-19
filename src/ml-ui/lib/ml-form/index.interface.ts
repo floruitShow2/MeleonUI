@@ -1,4 +1,5 @@
 import type { FormItemEntity } from '../ml-form-item'
+import type { ValidateTrigger } from '../ml-form-item/index.interface'
 
 export type ValidateStatus = 'success' | 'warning' | 'error' | 'validating'
 
@@ -12,9 +13,31 @@ export interface FieldRule {
    */
   message?: string
   /**
+   * @description 校验长度
+   */
+  length?: number
+  /**
+   * @description 最小长度
+   */
+  minLength?: number
+  /**
+   * @description 最大长度
+   */
+  maxLength?: number
+  /**
    * @description 校验类型
    */
   type?: 'string' | 'array'
+  /**
+   * @description 校验时机
+   */
+  trigger?: ValidateTrigger | ValidateTrigger[]
+  /**
+   * @description 自定义校验器
+   * @param value
+   * @param callback
+   * @returns
+   */
   validator?: (value: any, callback: (error?: string) => void) => void
 }
 

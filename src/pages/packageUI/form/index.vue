@@ -27,29 +27,67 @@
               style="width: 100%"
               @submit="onSubmit"
             >
+              <!-- 用户名 -->
               <ml-form-item
                 field="username"
                 extra="Please enter username"
                 label="Username"
-                :rules="[{ required: true, message: 'Please enter username' }]"
+                :rules="[
+                  {
+                    required: true,
+                    message: 'Please enter username',
+                    trigger: 'blur'
+                  }
+                ]"
               >
                 <ml-input v-model:model-value="formState.username"></ml-input>
               </ml-form-item>
+              <!-- 密码 -->
               <ml-form-item field="password" label="Password">
                 <ml-input
                   v-model:model-value="formState.password"
                   type="password"
                 ></ml-input>
               </ml-form-item>
+              <!-- 部门 -->
+              <ml-form-item field="section" label="Section">
+                <ml-select v-model:model-value="formState.section">
+                  <ml-option value="section one">Section One</ml-option>
+                  <ml-option value="section two">Section Two</ml-option>
+                  <ml-option value="section three">Section Three</ml-option>
+                </ml-select>
+              </ml-form-item>
+              <!-- 选项 -->
+              <ml-form-item field="options" label="Options">
+                <ml-checkbox-group
+                  v-model:checked-list="formState.options"
+                  direction="horizontal"
+                >
+                  <ml-checkbox value="A">RadioA</ml-checkbox>
+                  <ml-checkbox value="B">RadioB</ml-checkbox>
+                  <ml-checkbox value="C">RadioC</ml-checkbox>
+                  <ml-checkbox value="D">RadioD</ml-checkbox>
+                  <ml-checkbox value="E">RadioE</ml-checkbox>
+                </ml-checkbox-group>
+              </ml-form-item>
+              <!-- 时间 -->
+              <ml-form-item field="date" label="Date">
+                <ml-datetime-picker v-model="formState.date" mode="month" />
+              </ml-form-item>
+              <!-- 开关 -->
+              <ml-form-item field="switch" label="Switch">
+                <ml-switch v-model="formState.switch" type="circle"></ml-switch>
+              </ml-form-item>
+              <!-- 提交 -->
               <ml-form-item field="submit" label="Submit"> </ml-form-item>
-            </ml-form>
-
-            <view class="form-container-btns">
-              <ml-button type="primary" @click="onClear('username')"
-                >clear username</ml-button
+              <!-- 重置 -->
+              <ml-cell
+                label="Reset"
+                :type="CellTypeEnum.BUTTON"
+                @btn-click="() => onClear()"
               >
-              <ml-button type="primary" @click="onClear()">clear all</ml-button>
-            </view>
+              </ml-cell>
+            </ml-form>
           </view>
         </template>
       </CodeBlock>
@@ -61,8 +99,13 @@
   import { ref, computed } from 'vue'
   import { useAppStore } from '@/store'
   import CodeBlock from '@/components/CodeBlock/index.vue'
-  import type { MessageInstance, FormInstance } from '@meleon/uni-ui/lib'
-  import type { FieldRule, FormEmitsPayload } from '@meleon/uni-ui/lib'
+  import type {
+    MessageInstance,
+    FormInstance,
+    FieldRule,
+    FormEmitsPayload
+  } from '@meleon/uni-ui/lib'
+  import { CellTypeEnum } from '@meleon/uni-ui/lib'
   import { isUndefined } from '@meleon/uni-ui/utils'
 
   const appStore = useAppStore()
@@ -80,15 +123,20 @@
   const formRef = ref<FormInstance>()
   const formState = ref({
     username: '',
-    password: ''
+    password: '',
+    section: '',
+    options: [],
+    date: new Date(),
+    switch: undefined
   })
   const rules = ref<Record<string, FieldRule[]>>({
-    username: [{ required: true, message: 'Please enter username' }],
+    username: [
+      { required: true, message: 'Please enter username【global rules】' }
+    ],
     password: [
       { required: true, message: 'Please enter password' },
       {
         validator: (value, cb) => {
-          console.log('password', value)
           if (value.length < 6) {
             cb('the length of password must be greater than 6')
           } else {
@@ -96,6 +144,27 @@
           }
         }
       }
+    ],
+    section: [
+      { required: true, message: 'Please enter section', trigger: 'change' }
+    ],
+    option: [
+      { required: true, message: 'Please select options', type: 'array', trigger: 'change' }
+    ],
+    date: [
+      { required: true, message: 'Please select date', trigger: 'change' },
+      {
+        validator: (value, cb) => {
+          if (new Date(value).getTime() < new Date('2025-09-15').getTime()) {
+            cb('the date must be greater than 2025-09-15')
+          } else {
+            cb()
+          }
+        }
+      }
+    ],
+    switch: [
+      { required: true, message: 'Please select switch', trigger: 'change' }
     ]
   })
   const onSubmit: FormEmitsPayload['submit'] = async (result) => {

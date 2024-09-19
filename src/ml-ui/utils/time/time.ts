@@ -1,5 +1,5 @@
 /**
- * @description 将 格式化字符串 转换为 列
+ * @description 将 格式化字符串 转换为 时间选择器的列
  * @param format
  * @returns
  */

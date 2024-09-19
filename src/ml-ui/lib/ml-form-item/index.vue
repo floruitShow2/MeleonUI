@@ -48,7 +48,7 @@
   const props = defineProps({
     field: {
       type: String,
-      required: true
+      default: ''
     },
     label: {
       type: String,
@@ -105,6 +105,7 @@
     return getValueByPath(formCtx?.model, field.value)
   })
 
+  // 合并的规则
   const mergedRules = computed(() => {
     const baseRules = ([] as FieldRule[]).concat(
       localRules.value.length
@@ -229,7 +230,14 @@
   })
 
   const validateTriggers = computed(() => {
-    return ([] as ValidateTrigger[]).concat(validateTrigger.value)
+    const result = mergedRules.value
+      .map((item) => item.trigger)
+      .filter((item) => !!item)
+      .flat() as ValidateTrigger[]
+
+    return ([] as ValidateTrigger[])
+      .concat(validateTrigger.value)
+      .concat(result)
   })
   const eventsHanlder = computed<FormItemEventHandler>(() => {
     return validateTriggers.value.reduce((event, trigger) => {
@@ -239,8 +247,18 @@
             validateField()
           }
           return event
+        case 'focus':
+          event.onFocus = () => {
+            validateField()
+          }
+          return event
         case 'blur':
           event.onBlur = () => {
+            validateField()
+          }
+          return event
+        case 'input':
+          event.onInput = () => {
             validateField()
           }
           return event

@@ -7,6 +7,7 @@
 <script setup lang="ts">
   import { ref, toRefs, computed, provide, reactive } from 'vue'
   import type { PropType } from 'vue'
+  import { useFormItem } from '@meleon/uni-ui/hooks'
   import { useDeepClone, cs } from '@meleon/uni-ui/utils'
   import { checkboxGroupInjectionKey } from './context'
   import type { CheckboxGroupProps } from './index.interface'
@@ -35,7 +36,9 @@
   })
   const { checkedList, min, max, mode, direction } = toRefs(props)
 
-  const emit = defineEmits(['update:checkedList'])
+  const emit = defineEmits(['update:checkedList', 'change'])
+
+  const { eventsHanlders } = useFormItem({})
 
   const prefix = ref('ml-checkbox-group')
   const className = computed(() => {
@@ -74,6 +77,8 @@
       updateDisabledList(list)
     }
     emit('update:checkedList', list)
+    emit('change', list)
+    eventsHanlders.value.onChange?.()
   }
 
   provide(

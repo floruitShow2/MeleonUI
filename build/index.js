@@ -62,8 +62,8 @@ async function minifyJsFiles(directory) {
     const fullPath = path.join(directory, file)
 
     if (file === 'node_modules') {
-      console.log(`Skipping node_modules: ${fullPath}`);
-      continue;
+      console.log(`Skipping node_modules: ${fullPath}`)
+      continue
     }
 
     if (fs.lstatSync(fullPath).isDirectory()) {
@@ -87,7 +87,7 @@ if (isPackagePathExist) {
 
 function startPublish(resourcePath) {
   exec(
-    `cd ${resourcePath} && npm install && npm run build && npm publish --access public`,
+    `cd ${resourcePath} && pnpm install && pnpm run build`,
     async (err, stdout, stderr) => {
       if (err) {
         console.log('执行错误：', err)
@@ -99,6 +99,15 @@ function startPublish(resourcePath) {
       removeTypescriptFiles(resourcePath)
       // await mergeDtsFiles(resourcePath, path.join(resourcePath, 'index.d.ts'))
       await minifyJsFiles(resourcePath)
+      
+      exec(`cd ${resourcePath} && npm publish --access public`, (err, stdout, stderr) => {
+        if (err) {
+          console.log('执行错误：', err)
+          return
+        }
+        console.log('执行结果：', stdout || '无')
+        console.log('错误信息：', stderr || '无')
+      })
     }
   )
 }

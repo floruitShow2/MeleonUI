@@ -45,7 +45,7 @@
       default: false
     }
   })
-  const { label, value, disabled, isExtra } = toRefs(props)
+  const { label, value: modelValue, disabled, isExtra } = toRefs(props)
   // const emit = defineEmits([])
   const { themeColors } = useTheme()
 
@@ -59,7 +59,7 @@
   const isOptionActive = computed(() => {
     return (
       globalCtxWithDefaults.value.selectedOptions.findIndex(
-        (item) => item.value === value.value
+        (item) => item.value === modelValue.value
       ) !== -1
     )
   })
@@ -67,8 +67,9 @@
   // OptionProps 从 props 中收集的参数信息
   const optionProps = computed(() => {
     return {
-      label: label.value,
-      value: value.value,
+      // label 没传就默认用 modelValue
+      label: label.value || modelValue.value,
+      value: modelValue.value,
       disabled: disabled.value,
       isExtra: isExtra.value
     } as OptionProps
@@ -87,7 +88,7 @@
       optionRefWidth: globalCtx ? globalCtx.getTriggerRect().width : 100,
       selectedOptions: globalCtx ? globalCtx.getSelectedList() : [],
       isHidden: globalCtx
-        ? globalCtx.getHiddenList().includes(value.value)
+        ? globalCtx.getHiddenList().includes(modelValue.value)
         : false
     }
   })

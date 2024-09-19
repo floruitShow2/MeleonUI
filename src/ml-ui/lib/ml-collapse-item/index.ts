@@ -1,8 +1,8 @@
 import type { App } from 'vue'
-import _Cell from './index.vue'
+import _CollapseItem from './index.vue'
 
 const install = (app: App) => {
-  app.component('MlCell', _Cell)
+  app.component('MlCollapseItem', _CollapseItem)
 }
 
 export type CollapseItemInstance = typeof import('./index.vue').default

@@ -2,7 +2,7 @@ import type { App } from 'vue'
 import _FormItem from './index.vue'
 
 const install = (app: App) => {
-  app.component('MlCell', _FormItem)
+  app.component('MlFormItem', _FormItem)
 }
 
 export type FormItemInstance = typeof import('./index.vue').default

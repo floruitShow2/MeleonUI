@@ -13,7 +13,7 @@
 <script setup lang="ts">
   import { ref, toRefs, computed } from 'vue'
   import type { PropType } from 'vue'
-  import { useTheme } from '@meleon/uni-ui/hooks'
+  import { useFormItem, useTheme } from '@meleon/uni-ui/hooks'
   import { cs } from '@meleon/uni-ui/utils'
   import type { SwitchProps } from './index.interface'
 
@@ -43,16 +43,11 @@
       default: () => true
     }
   })
-  const {
-    modelValue,
-    type,
-    checkedColor,
-    uncheckedColor,
-    disabled,
-    beforeSwitch
-  } = toRefs(props)
+  const { modelValue, type, checkedColor, uncheckedColor, beforeSwitch } =
+    toRefs(props)
 
   const emit = defineEmits(['update:modelValue', 'change'])
+  const { eventsHanlders, disabled } = useFormItem({ disabled: props.disabled })
 
   const { themeColors } = useTheme()
 
@@ -71,11 +66,12 @@
     }
   })
 
-  const handleClick = async () => {
+  const handleClick = async (e: MouseEvent) => {
     if (disabled.value) return
     if (!(await beforeSwitch.value(!modelValue.value))) return
     emit('update:modelValue', !modelValue.value)
     emit('change', !modelValue.value)
+    eventsHanlders.value.onChange?.(e)
   }
 </script>
 

@@ -71,7 +71,15 @@ const formLang: MeleonLocale.FormLang = {
       boolean: '#{field} 不是合法的布尔类型',
       array: '#{field} 不是合法的数组类型',
       object: '#{field} 不是合法的对象类型'
-    }
+    },
+    array: {
+      length: '`#{field}` 个数不等于 #{length}',
+      minLength: '`#{field}` 个数最少为 #{minLength}',
+      maxLength: '`#{field}` 个数最多为 #{maxLength}',
+      includes: '#{field} 不包含 #{includes}',
+      deepEqual: '#{field} 不等于 #{deepEqual}',
+      empty: '`#{field}` 不是空数组',
+    },
   }
 }
 

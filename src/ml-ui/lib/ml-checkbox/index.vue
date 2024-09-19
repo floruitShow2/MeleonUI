@@ -18,7 +18,7 @@
     getCurrentInstance
   } from 'vue'
   import type { PropType } from 'vue'
-  import { useTheme } from '@meleon/uni-ui/hooks'
+  import { useFormItem, useTheme } from '@meleon/uni-ui/hooks'
   import { cs } from '@meleon/uni-ui/utils'
   import { checkboxGroupInjectionKey } from '../ml-checkbox-group/context'
   import type { CheckboxProps } from './index.interface'
@@ -48,7 +48,6 @@
   const {
     checked,
     indeterminate,
-    disabled,
     size,
     value: modelValue
   } = toRefs(props)
@@ -58,6 +57,7 @@
   const prefix = ref('ml-checkbox')
 
   const { themeColors } = useTheme()
+  const { eventsHanlders, disabled } = useFormItem({ disabled: props.disabled })
   const { slots } = getCurrentInstance()!
 
   const globalCtx = inject(checkboxGroupInjectionKey, null)
@@ -92,6 +92,7 @@
       globalCtx.updateCheckedList(modelValue.value)
     } else {
       emit('update:checked', !checked.value)
+      eventsHanlders.value.onChange?.()
     }
   }
   const handleLabelClick = () => {
@@ -100,6 +101,7 @@
       globalCtx.updateCheckedList(modelValue.value)
     } else {
       emit('update:checked', !checked.value)
+      eventsHanlders.value.onChange?.()
     }
   }
 </script>

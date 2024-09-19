@@ -1,9 +1,11 @@
 <template>
   <view :class="className" :style="themeColors">
     <view :class="`${prefix}--trigger`" @click="openPicker">
-      <slot name="trigger" />
+      <slot name="trigger">
+        <MlInput readonly :model-value="triggerValue" />
+      </slot>
     </view>
-    <Drawer
+    <MlDrawer
       v-model:visible="showPicker"
       placement="bottom"
       :height="500"
@@ -53,7 +55,7 @@
           @select="onDateSelect"
         />
       </template>
-    </Drawer>
+    </MlDrawer>
   </view>
 </template>
 
@@ -66,10 +68,17 @@
     useTheme,
     useState,
     usePickerTransform,
-    usePickerState
+    usePickerState,
+    useFormItem
   } from '@meleon/uni-ui/hooks'
-  import { cs, getReturnValue, isDateValueChange } from '@meleon/uni-ui/utils'
-  import Drawer from '../ml-drawer/index.vue'
+  import {
+    cs,
+    getReturnValue,
+    isDateValueChange,
+    convertDayjs2FormatValue
+  } from '@meleon/uni-ui/utils'
+  import MlInput from '../ml-input/index.vue'
+  import MlDrawer from '../ml-drawer/index.vue'
   import DatePickerHeader from './components/header.vue'
   import DateYearPanel from './components/yearPanel.vue'
   import DateMonthPanel from './components/monthPanel.vue'
@@ -102,6 +111,10 @@
       type: String as PropType<DatetimePickerProps['mode']>,
       default: 'month'
     },
+    disabled: {
+      type: Boolean,
+      default: false
+    },
     format: {
       type: String,
       default: 'YYYY-MM-DD'
@@ -130,6 +143,7 @@
   ])
 
   const { themeColors } = useTheme()
+  const { eventsHanlders, disabled } = useFormItem({ disabled: props.disabled })
 
   // locale 转换方法注入
   const datePickerT = usePickerTransform(reactive({ locale }))
@@ -153,6 +167,13 @@
   const panelValue = computed(() => {
     return processValue.value ?? selectedValue.value
   })
+  const triggerValue = computed(() => {
+    if (panelValue.value) {
+      return convertDayjs2FormatValue(panelValue.value, format.value)
+    } else {
+      return ''
+    }
+  })
 
   /**
    * @description 选中事件，仅修改面板展示的时间数据，不触发双向绑定更新
@@ -165,6 +186,7 @@
     if (isDateValueChange(value, selectedValue.value)) {
       emit('update:modelValue', returnValue)
       emit('change', returnValue)
+      eventsHanlders.value.onChange?.()
     }
   }
   /**

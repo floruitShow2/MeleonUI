@@ -72,7 +72,15 @@ const formLang: MeleonLocale.FormLang = {
       array: defaultTypeTemplate,
       object: defaultTypeTemplate,
       boolean: defaultTypeTemplate
-    }
+    },
+    array: {
+      length: '#{field} must be exactly #{length} in length',
+      minLength: '#{field} cannot be less than #{minLength} in length',
+      maxLength: '#{field} cannot be greater than #{maxLength} in length',
+      includes: '#{field} is not includes #{includes}',
+      deepEqual: '#{field} is not deep equal with #{deepEqual}',
+      empty: '#{field} is not an empty array',
+  },
   }
 }
 
