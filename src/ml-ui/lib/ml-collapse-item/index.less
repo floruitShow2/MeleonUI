@@ -1,0 +1,43 @@
+@prefix: ~'.ml-collapse-item';
+
+@{prefix} {
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  overflow: hidden;
+  &-header {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 6px 12px;
+    gap: 0 4px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    font-size: 14px;
+    font-weight: normal;
+    color: var(--info-color-8);
+    border-bottom: solid 1px var(--info-color-2);
+    &--no-bordered {
+      border-bottom: none;
+    }
+    &--disabled {
+      color: var(--info-color-3);
+    }
+  }
+  &-content {
+    box-sizing: border-box;
+    width: 100%;
+    height: 0;
+    padding: 0 12px 0 36px;
+    background-color: var(--info-color-1);
+    overflow: hidden;
+    transition: all 0.3s ease;
+    &--active {
+      height: auto;
+      padding: 6px 12px 6px 32px;
+    }
+  }
+}

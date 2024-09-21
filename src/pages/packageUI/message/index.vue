@@ -134,7 +134,7 @@
 <script setup lang="ts">
   import { ref, computed } from 'vue'
   import { useAppStore } from '@/store'
-  import type { MessageInstance, MessageOptions } from '@/ml-ui'
+  import type { MessageInstance, MessageOptions } from '@/ml-ui/lib'
   import CodeBlock from '@/components/CodeBlock/index.vue'
 
   const appStore = useAppStore()

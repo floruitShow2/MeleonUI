@@ -185,6 +185,12 @@
 					"style": {
 						"navigationStyle": "custom"
 					}
+				},
+				{
+					"path": "collapse/index",
+					"style": {
+						"navigationStyle": "custom"
+					}
 				}
 			]
 		}

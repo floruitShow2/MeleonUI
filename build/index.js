@@ -2,21 +2,9 @@ const fs = require('fs')
 const path = require('path')
 const { minify } = require('terser')
 
-const { copyPackage } = require('./copyPackage')
-const { rootPath, componentPath, packagePath } = require('./dirname')
+const { copyPackage, copyREADME, copyComponents } = require('./copy')
+const { packagePath } = require('./dirname')
 const { exec } = require('child_process')
-
-copyPackage()
-
-// 拷贝 README 文件
-const readmePath = path.join(rootPath, 'README.md')
-const isReadmeExist = fs.existsSync(readmePath)
-if (isReadmeExist) {
-  fs.copyFileSync(
-    path.join(rootPath, 'README.md'),
-    path.join(packagePath, 'README.md')
-  )
-}
 
 // 移除上次打包时的文件
 function removeDirectories(dir, index = 0) {
@@ -35,7 +23,6 @@ function removeDirectories(dir, index = 0) {
   }
 }
 
-// 优化
 // 移除编译后，多余的 ts 文件
 function removeTypescriptFiles(directory) {
   fs.readdirSync(directory).forEach((file) => {
@@ -80,11 +67,7 @@ async function minifyJsFiles(directory) {
   }
 }
 
-const isPackagePathExist = fs.existsSync(packagePath)
-if (isPackagePathExist) {
-  removeDirectories(packagePath)
-}
-
+// 执行 build 和 publish 步骤
 function startPublish(resourcePath) {
   exec(
     `cd ${resourcePath} && pnpm install && pnpm run build`,
@@ -97,47 +80,32 @@ function startPublish(resourcePath) {
       console.log('错误信息：', stderr || '无')
 
       removeTypescriptFiles(resourcePath)
-      // await mergeDtsFiles(resourcePath, path.join(resourcePath, 'index.d.ts'))
       await minifyJsFiles(resourcePath)
-      
-      exec(`cd ${resourcePath} && npm publish --access public`, (err, stdout, stderr) => {
-        if (err) {
-          console.log('执行错误：', err)
-          return
+
+      exec(
+        `cd ${resourcePath} && npm publish --access public`,
+        (err, stdout, stderr) => {
+          if (err) {
+            console.log('执行错误：', err)
+            return
+          }
+          console.log('执行结果：', stdout || '无')
+          console.log('错误信息：', stderr || '无')
         }
-        console.log('执行结果：', stdout || '无')
-        console.log('错误信息：', stderr || '无')
-      })
+      )
     }
   )
 }
 
-function copyDirectory(originPath, targetPath) {
-  const isDirectory = fs.statSync(originPath).isDirectory()
-  if (isDirectory) {
-    fs.mkdirSync(targetPath)
-    const files = fs.readdirSync(originPath)
-    files.forEach((file) => {
-      const filePath = path.join(originPath, file)
-      const targetFilePath = path.join(targetPath, file)
-      copyDirectory(filePath, targetFilePath)
-      if (file.indexOf('ml-') !== -1) {
-        console.log(file + ' 组件同步成功')
-      }
-    })
-  } else {
-    fs.copyFileSync(originPath, targetPath)
-  }
+// 移除上次打包的结果
+const isPackagePathExist = fs.existsSync(packagePath)
+if (isPackagePathExist) {
+  removeDirectories(packagePath)
 }
 
-const components = fs.readdirSync(componentPath)
-components
-  .reduce((acc, cur) => {
-    const componentItemPath = path.join(componentPath, cur)
-    copyDirectory(componentItemPath, path.join(packagePath, cur))
-    return acc
-  }, Promise.resolve([]))
-  .then(() => {
-    console.log('所有组件已同步成功')
-    startPublish('src/packages')
-  })
+// 复制根目录里的 package.json 和 README.md
+copyPackage()
+copyREADME()
+copyComponents().then(() => {
+  startPublish('src/packages')
+})

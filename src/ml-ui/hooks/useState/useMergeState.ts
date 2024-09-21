@@ -1,4 +1,4 @@
-import { ref, toRefs, computed, watch } from 'vue'
+import { toRefs, computed, watch } from 'vue'
 import type { Ref, ComputedRef } from 'vue'
 import { isUndefined } from '@meleon/uni-ui/utils'
 import useState from './useState'
@@ -11,13 +11,17 @@ export default function useMergeState<T, E = T | undefined>(
   const [localValue, setLocalValue] = useState(
     !isUndefined(value.value) ? value.value : defaultValue
   )
-  watch(value, (newVal) => {
-    isUndefined(newVal) && setLocalValue(undefined)
-  })
-
-  const mergeValue = computed(() =>
-    !isUndefined(value.value) ? value.value : localValue.value
+  watch(
+    value,
+    (newVal) => {
+      isUndefined(newVal) && setLocalValue(undefined)
+    },
+    { immediate: true }
   )
+
+  const mergeValue = computed(() => {
+    return !isUndefined(value.value) ? value.value : localValue.value
+  })
 
   return [mergeValue, setLocalValue, localValue]
 }

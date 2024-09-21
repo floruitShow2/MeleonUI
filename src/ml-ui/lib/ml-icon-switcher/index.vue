@@ -40,9 +40,13 @@
     color: {
       type: String,
       default: 'var(--info-color-7)'
+    },
+    disabled: {
+      type: Boolean,
+      default: false
     }
   })
-  const { prevIcon, nextIcon, defaultSwitched, loading, size } = toRefs(props)
+  const { prevIcon, nextIcon, defaultSwitched, loading, size, disabled } = toRefs(props)
 
   const emit = defineEmits(['change'])
 
@@ -78,7 +82,7 @@
   )
 
   const handleStartSwitch = () => {
-    if (loading.value || !nextIcon.value) return
+    if (loading.value || !nextIcon.value || disabled.value) return
     isSwitched.value = !isSwitched.value
     emit('change', isSwitched.value)
   }

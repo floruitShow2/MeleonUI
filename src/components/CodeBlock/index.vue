@@ -1,6 +1,7 @@
 <template>
   <!--components/CodeBlock/index.wxml-->
   <view class="code-block">
+    <ml-message ref="messageRef" />
     <view class="code-block-title">
       <slot name="title" />
     </view>
@@ -38,6 +39,7 @@
 
 <script setup lang="ts">
   import { ref, toRefs } from 'vue'
+  import type { MessageInstance, MessageOptions } from '@/ml-ui/lib'
 
   const props = defineProps({
     code: {
@@ -47,8 +49,17 @@
   })
   const { code } = toRefs(props)
 
+  const messageRef = ref<MessageInstance>()
+
   const showCode = ref(false)
   const onCodeClick = () => {
+    if (!code.value) {
+      messageRef.value?.primary({
+        content: '抱歉，该示例尚未提供代码',
+        duration: 2000
+      })
+      return
+    }
     showCode.value = !showCode.value
   }
   const onCopy = () => {

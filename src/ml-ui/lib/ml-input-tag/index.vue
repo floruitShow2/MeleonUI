@@ -153,7 +153,6 @@
         result.push({
           ...raw
         })
-        console.log(maxTagCount.value, result)
         return result
       }
     }

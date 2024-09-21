@@ -78,8 +78,8 @@ const formLang: MeleonLocale.FormLang = {
       maxLength: '`#{field}` 个数最多为 #{maxLength}',
       includes: '#{field} 不包含 #{includes}',
       deepEqual: '#{field} 不等于 #{deepEqual}',
-      empty: '`#{field}` 不是空数组',
-    },
+      empty: '`#{field}` 不是空数组'
+    }
   }
 }
 

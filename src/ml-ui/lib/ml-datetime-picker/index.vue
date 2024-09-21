@@ -2,7 +2,11 @@
   <view :class="className" :style="themeColors">
     <view :class="`${prefix}--trigger`" @click="openPicker">
       <slot name="trigger">
-        <MlInput readonly :model-value="triggerValue" />
+        <MlInput readonly :model-value="triggerValue">
+          <template #suffix>
+            <MlIcon name="ml-calendar" />
+          </template>
+        </MlInput>
       </slot>
     </view>
     <MlDrawer
@@ -77,6 +81,7 @@
     isDateValueChange,
     convertDayjs2FormatValue
   } from '@meleon/uni-ui/utils'
+  import MlIcon from '../ml-icon/index.vue'
   import MlInput from '../ml-input/index.vue'
   import MlDrawer from '../ml-drawer/index.vue'
   import DatePickerHeader from './components/header.vue'

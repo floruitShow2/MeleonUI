@@ -6,6 +6,27 @@ export default {
   description: '',
   glyphs: [
     {
+      icon_id: '5388001',
+      name: '时间_o',
+      font_class: 'time',
+      unicode: 'ebb1',
+      unicode_decimal: 60337
+    },
+    {
+      icon_id: '5388002',
+      name: '日期_o',
+      font_class: 'date',
+      unicode: 'ebb2',
+      unicode_decimal: 60338
+    },
+    {
+      icon_id: '5388004',
+      name: '日历_o',
+      font_class: 'calendar',
+      unicode: 'ebb3',
+      unicode_decimal: 60339
+    },
+    {
       icon_id: '5387920',
       name: '箭头_列表向左_o',
       font_class: 'arrow-left',

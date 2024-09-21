@@ -116,13 +116,6 @@
   const checked3 = ref<string[]>(['A', 'B'])
   // 垂直选项组
   const checked4 = ref<string[]>(['A', 'B'])
-  watch(
-    checked2,
-    (newVal) => {
-      console.log('z', newVal)
-    },
-    { deep: true }
-  )
 
   const templateMap = ref([
     {

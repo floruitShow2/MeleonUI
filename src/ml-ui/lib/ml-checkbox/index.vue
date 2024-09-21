@@ -45,12 +45,7 @@
       default: ''
     }
   })
-  const {
-    checked,
-    indeterminate,
-    size,
-    value: modelValue
-  } = toRefs(props)
+  const { checked, indeterminate, size, value: modelValue } = toRefs(props)
 
   const emit = defineEmits(['update:checked'])
 

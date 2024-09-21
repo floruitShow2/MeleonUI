@@ -149,7 +149,12 @@
       { required: true, message: 'Please enter section', trigger: 'change' }
     ],
     option: [
-      { required: true, message: 'Please select options', type: 'array', trigger: 'change' }
+      {
+        required: true,
+        message: 'Please select options',
+        type: 'array',
+        trigger: 'change'
+      }
     ],
     date: [
       { required: true, message: 'Please select date', trigger: 'change' },

@@ -54,16 +54,15 @@
     { name: '按钮 ml-button', path: '/pages/packageUI/button/index' },
     { name: '单元格 ml-cell', path: '/pages/packageUI/cell/index' },
     { name: '复选框 ml-checkbox', path: '/pages/packageUI/checkbox/index' },
+    { name: '折叠面板 ml-collapse', path: '/pages/packageUI/collapse/index', isNew: true },
     {
       name: '全局配置 ml-config-provider',
-      path: '/pages/packageUI/configProvider/index',
-      isNew: true
+      path: '/pages/packageUI/configProvider/index'
     },
     { name: '计数 ml-count-to', path: '/pages/packageUI/countTo/index' },
     {
       name: '时间选择器 ml-datetime-picker',
-      path: '/pages/packageUI/dateTimePicker/index',
-      isNew: true
+      path: '/pages/packageUI/dateTimePicker/index'
     },
     { name: '抽屉 ml-drawer', path: '/pages/packageUI/drawer/index' },
     { name: '表单 ml-form', path: '/pages/packageUI/form/index', isNew: true },
@@ -86,8 +85,7 @@
     { name: '时间线 ml-timeline', path: '/pages/packageUI/timeline/index' },
     {
       name: '过渡 ml-transition',
-      path: '/pages/packageUI/transition/index',
-      isNew: true
+      path: '/pages/packageUI/transition/index'
     },
     { name: '树 ml-tree', path: '/pages/packageUI/tree/index' },
     { name: '图片上传 ml-uploder', path: '/pages/packageUI/uploader/index' }

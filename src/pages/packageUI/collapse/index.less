@@ -1,9 +1,12 @@
 @import '@/styles/layout.less';
 @import '@/styles/theme.less';
-.button-view {
-  &-wrapper {
+.collapse-view {
+  .view-wrapper {
     box-sizing: border-box;
     padding: 10px;
     overflow: auto;
+  }
+  ::-webkit-scrollbar {
+    width: 0 !important;
   }
 }

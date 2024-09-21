@@ -79,8 +79,8 @@ const formLang: MeleonLocale.FormLang = {
       maxLength: '#{field} cannot be greater than #{maxLength} in length',
       includes: '#{field} is not includes #{includes}',
       deepEqual: '#{field} is not deep equal with #{deepEqual}',
-      empty: '#{field} is not an empty array',
-  },
+      empty: '#{field} is not an empty array'
+    }
   }
 }
 

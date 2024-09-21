@@ -71,7 +71,7 @@
     if (!(await beforeSwitch.value(!modelValue.value))) return
     emit('update:modelValue', !modelValue.value)
     emit('change', !modelValue.value)
-    eventsHanlders.value.onChange?.(e)
+    eventsHanlders.value?.onChange?.(e)
   }
 </script>
 

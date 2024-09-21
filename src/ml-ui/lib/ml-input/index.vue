@@ -314,7 +314,6 @@
     changeFocusStyle,
     toggleActive(active: boolean) {
       isActive.value = active
-      console.log(isActive)
     },
     blur: onInputBlur
   })
